@@ -1,7 +1,7 @@
 import {createStore, applyMiddleware} from "redux";
 
-import rootReducer from "./root-reducer";
-import loggerMiddleware from "./middlewares/logger-middleware";
+import rootReducer from "../state-management/root-reducer";
+import loggerMiddleware from "../state-management/middlewares/logger-middleware";
 
 const createLivepollStore = () => {
   let middlewares = [];
