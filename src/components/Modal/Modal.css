@@ -1,0 +1,13 @@
+.modal-container{
+  position: fixed;
+  top: 50vh;
+  left: 50vw;
+  transform: translateX(-50%) translateY(-50%);
+  box-shadow: 0 0 10px lightgrey;
+  background-color: white;
+}
+.modal-close-btn{
+  float: right;
+  color: red;
+  font-weight: bolder;
+}
