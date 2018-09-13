@@ -8,13 +8,10 @@ import registerServiceWorker from './registerServiceWorker';
 import createLivepollStore from "./init/state-management";
 import initFirebase from "./init/firebase";
 
-const initApp = () => {
-  initFirebase();
-};
-
-initApp();
-
+// Initialization code
+initFirebase();
 const store = createLivepollStore();
+
 ReactDOM.render(
   <Provider store={store}>
     <App/>
