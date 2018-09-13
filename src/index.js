@@ -5,15 +5,16 @@ import {Provider} from 'react-redux';
 import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
-import createLivepollStore from "./init/state-management";
+import getLivepollStore from "./init/state-management";
 import initFirebase from "./init/firebase";
+import initAuth from "./init/auth";
 
 // Initialization code
 initFirebase();
-const store = createLivepollStore();
+initAuth();
 
 ReactDOM.render(
-  <Provider store={store}>
+  <Provider store={getLivepollStore()}>
     <App/>
   </Provider>
   , document.getElementById('root')

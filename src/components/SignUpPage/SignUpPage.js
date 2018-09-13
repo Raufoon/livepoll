@@ -1,8 +1,15 @@
 import React from 'react';
+import {connect} from 'react-redux';
 
 import './SignUpPage.css';
+import {actionSigninRequest} from "../../state-management/actions/auth-actions";
+import {SIGNIN_METHODS} from "../../constants/auth-constants";
 
-const SignUpPage = () => {
+const SignUpPage = (props) => {
+  const signinWithGoogle = () => {
+    props.dispatch(actionSigninRequest(SIGNIN_METHODS.GOOGLE))
+  };
+
   return (
     <div className='signup-page'>
       <form className='signup-page-content'>
@@ -17,12 +24,16 @@ const SignUpPage = () => {
                autoComplete='on'/><br/>
         <button className='webapp-ep-input'>Log In</button>
         <div>
-          <button className='webapp-shortcut-signin-btn'>Google</button>
-          <button className='webapp-shortcut-signin-btn'>Facebook</button>
+          <input className='webapp-shortcut-signin-btn'
+                 type='button'
+                 value='Google'
+                 onClick={signinWithGoogle}/>
+          <input className='webapp-shortcut-signin-btn'
+                 type='button'
+                 value='Facebook'/>
         </div>
       </form>
     </div>
   )
 };
-
-export default SignUpPage;
+export default connect()(SignUpPage);

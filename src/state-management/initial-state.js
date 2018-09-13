@@ -1,9 +1,6 @@
 const initialState = {
   auth: {
-    signin: {
-      method: undefined,
-      detail: {}
-    }
+    currentUser: undefined
   }
 };
 
