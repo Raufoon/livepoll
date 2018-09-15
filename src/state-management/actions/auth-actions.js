@@ -1,13 +1,7 @@
-import {signInWithGoogle, signOut} from "../../util/auth";
+import {signIn, signOut} from "../../util/auth/auth";
 
-export const actionSigninRequest = (method) => dispatch => {
-  switch (method) {
-    case 'GOOGLE':
-      signInWithGoogle();
-      break;
-
-    default:
-  }
+export const actionSigninRequest = () => dispatch => {
+  signIn();
 };
 
 export const ACTION_SIGNIN_SUCCESS = 'ACTION_SIGNIN_SUCCESS';
