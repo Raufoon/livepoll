@@ -1,9 +1,20 @@
+import firebase from 'firebase/app'
+import 'firebase/auth';
 import getLivepollStore from "./state-management";
 import {actionSigninSuccess, actionSignoutSuccess} from "../state-management/actions/auth-actions";
-import {initAuth0} from "../util/auth/auth0";
+
+export const initAuthStateListener = () => {
+  firebase.auth().onAuthStateChanged(currentUser => {
+    if (currentUser) {
+      getLivepollStore().dispatch(actionSigninSuccess(currentUser))
+    } else {
+      getLivepollStore().dispatch(actionSignoutSuccess())
+    }
+  });
+};
 
 const initAuth = () => {
-  initAuth0();
+  initAuthStateListener();
 };
 
 export default initAuth
