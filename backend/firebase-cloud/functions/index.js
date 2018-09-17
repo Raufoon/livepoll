@@ -1,13 +1,11 @@
 const functions = require('firebase-functions');
+const express = require('express');
+const { ApolloServer } = require('apollo-server-express');
 
-const setupGraphQLServer = require('./graphql/server');
+const typeDefs = require('./graphql/schema');
+const resolvers = require('./graphql/resolver');
 
-// // Create and Deploy Your First Cloud Functions
-// // https://firebase.google.com/docs/functions/write-firebase-functions
-//
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-//  response.send("Hello from Firebase!");
-// });
-
-const graphQLServer = setupGraphQLServer();
-exports.graphqlApi = functions.https.onRequest(graphQLServer);
+const server = new ApolloServer({ typeDefs, resolvers });
+const app = express();
+server.applyMiddleware({ app });
+exports.graphqlApi = functions.https.onRequest(app);
