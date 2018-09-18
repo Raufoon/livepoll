@@ -13,13 +13,14 @@ const resolvers = {
     users: () => DB.readList('/users'),
   },
   Mutation: {
-    createUser: (_, { name, dob }) => {
+    createUser: (_, { authToken, name, dob }) => {
       const id = uuidv1();
-      return DB.write(`/users/${id}`, {
-        id,
-        name,
-        dob
-      });
+      return DB.write(`/token-userid-map/${authToken}`, id)
+        .then(_ => DB.write(`/users/${id}`, {
+          id,
+          name,
+          dob
+        }));
     }
   }
 };
