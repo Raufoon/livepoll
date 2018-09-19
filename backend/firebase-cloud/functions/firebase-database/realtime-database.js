@@ -36,5 +36,5 @@ const DB = {
       .remove();
   }
 };
-
+DB.init();
 module.exports = DB;
