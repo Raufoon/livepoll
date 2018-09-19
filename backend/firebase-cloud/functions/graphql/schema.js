@@ -1,14 +1,18 @@
 const { gql } = require('apollo-server-express');
-const dataDefSchema = require('./shared/data-def-schema');
 
-const typeDefs = gql`
-  ${dataDefSchema}
+const schema = `
+  type User {
+    id: ID!
+    name: String
+    dob: String
+  }
   type Query {
     user(id: ID!): User
     users: [User]!
   }
-  type Mutation {
-    createUser(id: ID!, name: String, dob: String): User
-  }
 `;
+
+const typeDefs = gql`${schema}`;
+
 module.exports = typeDefs;
+module.exports.schema = schema;

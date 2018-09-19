@@ -1,11 +1,8 @@
 const { gql } = require('apollo-server-express');
-const dataDefSchema = require('../graphql/shared/data-def-schema');
+const {schema} = require('../graphql/schema');
+
 const typeDefs = gql`
-  ${dataDefSchema}
-  type Query {
-    user(id: ID!): User
-    users: [User]!
-  }
+  ${schema}
   type Mutation {
     createUser(id: ID!, name: String, dob: String): User
   }
