@@ -15,7 +15,7 @@ class App extends Component {
     }
     return (
       <div>
-        {!this.props.loggedInUserData && <ClickModalOpener ModalComponent={CreateProfileForm}>Complete your profile</ClickModalOpener>}
+        {!this.props.loggedInUserData.name && <ClickModalOpener ModalComponent={CreateProfileForm}>Complete your profile</ClickModalOpener>}
         <Switch>
           <Route exact path='/' component={HomePage}/>
           <Route exact path='/profile' component={_=>"profile"}/>

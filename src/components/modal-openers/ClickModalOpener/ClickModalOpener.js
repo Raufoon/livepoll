@@ -44,7 +44,7 @@ class ClickModalOpener extends React.Component {
 }
 
 ClickModalOpener.propTypes = {
-  ModalComponent: PropTypes.func.required,
+  ModalComponent: PropTypes.func,
   onModalResult: PropTypes.func
 };
 

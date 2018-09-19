@@ -9,11 +9,16 @@ export const requestUserDataById = (id) => graphqlRequest(`
   }
 `);
 
-// export const requestCreateUser = (id, info) => graphqlSecureRequest(`
-//   mutation {
-//     createUser(id: "${id}" ${!!info.name && ',name: "' + info.name} ${!!info.dob && '",dob: ' + info.dob}) {
-//       name,
-//       dob
-//     }
-//   }
-// `);
+export const requestCreateUser = (id, info = {}) => graphqlSecureRequest(`
+  mutation {
+    user: createUser(
+      id: "${id}",
+      name: "${info.name}",
+      dob: "${info.dob}",
+    ) {
+      id,
+      name,
+      dob
+    }
+  }
+`);
