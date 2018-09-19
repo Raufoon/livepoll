@@ -1,7 +1,7 @@
-import {graphqlRequest} from "./graphql-api/requests";
+import {graphqlRequest, graphqlSecureRequest} from "./graphql-api/requests";
 
 export const fetchAllUsernames = () => {
-  return graphqlRequest(`
+  return graphqlSecureRequest(`
     {
       users {
         name
