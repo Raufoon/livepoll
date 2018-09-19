@@ -40,7 +40,7 @@ class Modal extends React.Component {
 }
 
 Modal.propTypes = {
-  onClose: PropTypes.func.required
+  onClose: PropTypes.func.isRequired
 };
 
 export default Modal;

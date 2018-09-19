@@ -28,7 +28,7 @@ class ClickModalOpener extends React.Component {
     const ModalComponent = this.props.ModalComponent;
 
     return this.state.showModal ? (
-      <Modal onClose={this.closeModal}>
+      <Modal onClose={this.closeModal} settings={this.props.modalOptions}>
         <ModalComponent onResult={this.onModalResult}/>
       </Modal>
     ):(
@@ -44,8 +44,9 @@ class ClickModalOpener extends React.Component {
 }
 
 ClickModalOpener.propTypes = {
-  ModalComponent: PropTypes.func,
-  onModalResult: PropTypes.func
+  ModalComponent: PropTypes.func.isRequired,
+  onModalResult: PropTypes.func,
+  modalOptions: PropTypes.object,
 };
 
 export default ClickModalOpener
