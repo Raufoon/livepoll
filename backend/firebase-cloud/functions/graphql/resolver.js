@@ -1,11 +1,7 @@
 const DB = require('../firebase-database/realtime-database');
-const uuidv1 = require('uuid/v1');
+const commonResolvers = require('./shared/common-resolvers');
 
-const resolvers = {
-  User: {
-    name: obj => obj.name,
-    dob: obj => obj.dob,
-  },
+const resolvers = Object.assign({}, commonResolvers, {
   Query: {
     user: (_, { id }) => DB.read(`/users/${id}`),
     users: () => DB.readList('/users'),
@@ -19,6 +15,6 @@ const resolvers = {
       });
     }
   }
-};
+});
 
 module.exports = resolvers;

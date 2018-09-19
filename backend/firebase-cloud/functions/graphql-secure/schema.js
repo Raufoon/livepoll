@@ -1,10 +1,7 @@
 const { gql } = require('apollo-server-express');
+const dataDefSchema = require('../graphql/shared/data-def-schema');
 const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String
-    dob: String
-  }
+  ${dataDefSchema}
   type Query {
     user(id: ID!): User
     users: [User]!
