@@ -1,4 +1,4 @@
-import {signInWithGoogle, signOut} from "../../util/auth";
+import {signInWithGoogle, signOut} from "../../util/cloud/auth";
 
 export const actionSigninRequest = (method) => dispatch => {
   switch (method) {
