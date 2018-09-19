@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import PropTypes from 'prop-types';
 
 import './Modal.css';
 
@@ -21,11 +22,13 @@ class Modal extends React.Component {
   }
 
   render() {
+    const modalSettings = this.props.settings || {};
     return ReactDOM.createPortal(
       <div className='modal-container' style={{zIndex: this.zIndex}}>
-        <button className='modal-close-btn' onClick={this.props.onClose}>
-          X
-        </button>
+        {
+          !modalSettings.hideCloseButton
+          && <button className='modal-close-btn' onClick={this.props.onClose}>X</button>
+        }
         <br/>
         {
           this.props.children
@@ -35,5 +38,9 @@ class Modal extends React.Component {
     )
   }
 }
+
+Modal.propTypes = {
+  onClose: PropTypes.func.required
+};
 
 export default Modal;

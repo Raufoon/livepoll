@@ -1,6 +1,7 @@
 const initialState = {
   auth: {
-    currentUser: undefined
+    currentUser: undefined,
+    userData: undefined
   }
 };
 

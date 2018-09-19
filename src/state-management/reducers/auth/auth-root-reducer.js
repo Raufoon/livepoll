@@ -6,7 +6,7 @@ const authRootReducer = (state = initialState.auth, action) => {
   let newState;
   switch (action.type) {
     case ACTION_SIGNIN_SUCCESS:
-      newState = reduceSigninSuccess(state, action.currentUser);
+      newState = reduceSigninSuccess(state, action.currentUser, action.userData);
       break;
     case ACTION_SIGNOUT_SUCCESS:
       newState = reduceSignoutSuccess();

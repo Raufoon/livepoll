@@ -1,15 +1,11 @@
 import firebase from 'firebase/app'
 import 'firebase/auth';
-import getLivepollStore from "./state-management";
-import {actionSigninSuccess, actionSignoutSuccess} from "../state-management/actions/auth-actions";
+import {onUserSignedIn, onUserSignedout} from "../util/cloud/auth";
 
 export const initAuthStateListener = () => {
   firebase.auth().onAuthStateChanged(currentUser => {
-    if (currentUser) {
-      getLivepollStore().dispatch(actionSigninSuccess(currentUser))
-    } else {
-      getLivepollStore().dispatch(actionSignoutSuccess())
-    }
+    if (currentUser) onUserSignedIn(currentUser);
+    else onUserSignedout();
   });
 };
 

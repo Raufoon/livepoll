@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import Modal from "../../Modal/Modal";
 
 class ClickModalOpener extends React.Component {
@@ -30,14 +32,20 @@ class ClickModalOpener extends React.Component {
         <ModalComponent onResult={this.onModalResult}/>
       </Modal>
     ):(
-      <div
+      <button
         className={this.props.className}
         onClick={this.openModal}>
         {
           this.props.children
         }
-      </div>
+      </button>
     )
   }
 }
+
+ClickModalOpener.propTypes = {
+  ModalComponent: PropTypes.func.required,
+  onModalResult: PropTypes.func
+};
+
 export default ClickModalOpener
