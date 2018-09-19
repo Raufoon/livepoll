@@ -2,9 +2,6 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const DB = {
-  init() {
-    admin.initializeApp();
-  },
   read(path) {
     return admin.database()
       .ref(path)
@@ -36,5 +33,4 @@ const DB = {
       .remove();
   }
 };
-DB.init();
 module.exports = DB;
