@@ -1,18 +1,25 @@
 const { gql } = require('apollo-server-express');
 
-const schema = `
+const dataDefSchema = `
   type User {
     id: ID!
     name: String
     dob: String
   }
+`;
+
+const querySchema = `
   type Query {
     user(id: ID!): User
     users: [User]!
   }
 `;
 
-const typeDefs = gql`${schema}`;
+const typeDefs = gql`
+  ${dataDefSchema}
+  ${querySchema}
+`;
 
 module.exports = typeDefs;
-module.exports.schema = schema;
+module.exports.querySchema = querySchema;
+module.exports.dataDefSchema = dataDefSchema;
