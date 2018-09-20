@@ -1,24 +1,30 @@
 import {graphqlRequest, graphqlSecureRequest} from "./graphql-api/requests";
 
-export const requestUserDataById = (id) => graphqlRequest(`
-  {
-    user(id: "${id}") {
+const QUERY_USERDATA_BY_ID = `
+  query UserInfo($id: ID!) {
+    user(id: $id) {
       name,
       dob
     }
   }
-`);
+`;
+export const requestUserDataById = (id) => {
+  return graphqlRequest(QUERY_USERDATA_BY_ID, {id});
+};
 
-export const requestCreateUser = (id, info = {}) => graphqlSecureRequest(`
-  mutation {
-    user: createUser(
-      id: "${id}",
-      ${info.name ? 'name:"' + info.name + '",' : ''}
-      ${info.dob ? 'dob:"' + info.dob + '",' : ''}
-    ) {
+const MUTATION_CREATE_USER = `
+  mutation CreateUser (
+    $id: ID!,
+    $name: String,
+    $dob: String,
+  ) {
+    user: createUser(id: $id, name: $name, dob: $dob) {
       id,
       name,
-      dob
+      dob,
     }
   }
-`);
+`;
+export const requestCreateUser = (id, info = {}) => {
+  return graphqlSecureRequest(MUTATION_CREATE_USER, {id, ...info})
+};
