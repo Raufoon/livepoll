@@ -25,14 +25,14 @@ export const onUserSignedIn = (currentUser) => {
             user: {
               id: currentUser.uid
             }
-          }));
+          }))
+          .catch((err)=>alert('Failed to create user'));
       }
       return response;
     })
     .then(response => {
       getLivepollStore().dispatch(actionSigninSuccess(currentUser, response.user))
-    })
-    .catch((err)=>alert('Failed to create user'));
+    });
 };
 
 export const onUserSignedout = () => {
