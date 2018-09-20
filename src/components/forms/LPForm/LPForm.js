@@ -31,6 +31,7 @@ class LPForm extends React.Component {
   }
 
   onSubmit(event) {
+    event.preventDefault();
     this.props.onSubmit(this.state.fields);
   }
 
@@ -40,7 +41,7 @@ class LPForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
+      <form method={'post'} onSubmit={this.onSubmit}>
         <b>{this.props.title}</b>
         {
           React.Children.map(

@@ -13,8 +13,8 @@ export const requestCreateUser = (id, info = {}) => graphqlSecureRequest(`
   mutation {
     user: createUser(
       id: "${id}",
-      name: "${info.name}",
-      dob: "${info.dob}",
+      ${info.name ? 'name:"' + info.name + '",' : ''}
+      ${info.dob ? 'dob:"' + info.dob + '",' : ''}
     ) {
       id,
       name,

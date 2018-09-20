@@ -1,12 +1,16 @@
 import React from 'react'
+import {connect} from 'react-redux';
+
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
+import {requestCreateUser} from "../../../util/cloud/user";
 
-const CreateProfileForm = () => {
+const CreateProfileForm = (props) => {
   return (
-    <LPForm title={'Create your profile'} onSubmit={data => alert(JSON.stringify(data))}>
+    <LPForm title={'Create your profile'}
+            onSubmit={data => requestCreateUser(props.userId, data)}>
       <LPFormField
-        name={'fullName'}
+        name={'name'}
         placeholder={'Full Name'}
         type={'String'}
         validate={(value) => value.length > 5}
@@ -20,5 +24,7 @@ const CreateProfileForm = () => {
     </LPForm>
   )
 };
-
-export default CreateProfileForm
+const s2p = state => ({
+  userId: state.auth.userData.id
+});
+export default connect(s2p)(CreateProfileForm)
