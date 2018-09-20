@@ -1,7 +1,12 @@
 import React from 'react'
+import LPForm from "../LPForm/LPForm";
 
 const CreateProfileForm = () => {
-  return "create profile"
+  return (
+    <LPForm>
+
+    </LPForm>
+  )
 };
 
 export default CreateProfileForm
