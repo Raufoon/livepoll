@@ -1,4 +1,4 @@
-import {graphqlRequest, graphqlSecureRequest} from "./graphql-api/requests";
+import graphqlRequest from "./graphql-api/requests";
 
 const QUERY_USERDATA_BY_ID = `
   query UserInfo($id: ID!) {
@@ -26,5 +26,5 @@ const MUTATION_CREATE_USER = `
   }
 `;
 export const requestCreateUser = (id, info = {}) => {
-  return graphqlSecureRequest(MUTATION_CREATE_USER, {id, ...info})
+  return graphqlRequest(MUTATION_CREATE_USER, {id, ...info})
 };

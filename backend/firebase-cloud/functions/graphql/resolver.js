@@ -8,6 +8,15 @@ const resolvers = {
   Query: {
     user: (_, { id }) => DB.read(`/users/${id}`),
     users: () => DB.readList('/users'),
+  },
+  Mutation: {
+    createUser: (_, { id, name, dob }) => {
+      return DB.write(`/users/${id}`, {
+        id,
+        name,
+        dob
+      });
+    }
   }
 };
 
