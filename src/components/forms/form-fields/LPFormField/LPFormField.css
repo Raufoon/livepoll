@@ -1,0 +1,8 @@
+.form-field{
+  margin: 5px;
+}
+.form-field-input{
+  min-width: 100px;
+  border: 1px solid lightgrey;
+  min-height: 20px;
+}

@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './LPFormField.css'
+
 class LPFormField extends React.Component{
   constructor(props) {
     super(props);
@@ -27,13 +29,20 @@ class LPFormField extends React.Component{
 
   render() {
     return (
-      <div>
+      <div className={'form-field'}>
+        {
+          this.props.title && (
+            <label>{this.props.title}<br/></label>
+          )
+        }
         <input name={this.props.name}
+               className={'form-field-input'}
                placeholder={this.props.placeholder}
                type={this.props.type}
                defaultValue={this.props.defaultValue}
                value={this.props.value}
                onChange={this.onChange}/>
+        <br/>
         {this.state.error && <span>{this.state.error}</span>}
       </div>
     )
@@ -42,10 +51,11 @@ class LPFormField extends React.Component{
 
 LPFormField.propTypes = {
   name: PropTypes.string.isRequired,
-  placeholder: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  placeholder: PropTypes.string,
   type: PropTypes.string.isRequired,
-  onChange: PropTypes.func.isRequired,
-  onError: PropTypes.func.isRequired,
+  onChange: PropTypes.func,
+  onError: PropTypes.func,
   validate: PropTypes.func.isRequired,
   defaultValue: PropTypes.any,
   value: PropTypes.any,

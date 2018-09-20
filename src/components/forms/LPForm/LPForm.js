@@ -35,13 +35,13 @@ class LPForm extends React.Component {
   }
 
   shouldShowSubmit() {
-    return Object.values(this.state.fields).length > 0
-      && Object.values(this.state.errors).every(val => !!val);
+    return Object.values(this.state.fields).length === this.props.children.length;
   }
 
   render() {
     return (
       <form onSubmit={this.onSubmit}>
+        <b>{this.props.title}</b>
         {
           React.Children.map(
             this.props.children,
@@ -60,6 +60,7 @@ class LPForm extends React.Component {
 }
 
 LPForm.propTypes = {
+  title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired
 };
 
