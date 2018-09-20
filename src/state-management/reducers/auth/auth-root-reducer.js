@@ -1,6 +1,6 @@
 import initialState from "../../initial-state";
-import {ACTION_SIGNIN_SUCCESS, ACTION_SIGNOUT_SUCCESS} from "../../actions/auth-actions";
-import {reduceSigninSuccess, reduceSignoutSuccess} from "./auth-reducers";
+import {ACTION_AUTH_USERDATA_RECEIVED, ACTION_SIGNIN_SUCCESS, ACTION_SIGNOUT_SUCCESS} from "../../actions/auth-actions";
+import {reduceAuthUserDataReceived, reduceSigninSuccess, reduceSignoutSuccess} from "./auth-reducers";
 
 const authRootReducer = (state = initialState.auth, action) => {
   let newState;
@@ -10,6 +10,9 @@ const authRootReducer = (state = initialState.auth, action) => {
       break;
     case ACTION_SIGNOUT_SUCCESS:
       newState = reduceSignoutSuccess();
+      break;
+    case ACTION_AUTH_USERDATA_RECEIVED:
+      newState = reduceAuthUserDataReceived(state, action.userData);
       break;
     default:
       newState = state;

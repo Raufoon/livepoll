@@ -23,3 +23,9 @@ export const ACTION_SIGNOUT_SUCCESS = 'ACTION_SIGNOUT_SUCCESS';
 export const actionSignoutSuccess = () => ({
   type: ACTION_SIGNOUT_SUCCESS
 });
+
+export const ACTION_AUTH_USERDATA_RECEIVED = 'ACTION_AUTH_USERDATA_RECEIVED';
+export const actionAuthUserDataReceived = (userData) => ({
+  type: ACTION_AUTH_USERDATA_RECEIVED,
+  userData
+});

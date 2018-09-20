@@ -21,7 +21,7 @@ class ClickModalOpener extends React.Component {
 
   onModalResult(data) {
     this.closeModal();
-    this.props.onModalResult(data);
+    if (this.props.onModalResult) this.props.onModalResult(data);
   }
 
   render() {
@@ -29,7 +29,7 @@ class ClickModalOpener extends React.Component {
 
     return this.state.showModal ? (
       <Modal onClose={this.closeModal} settings={this.props.modalOptions}>
-        <ModalComponent onResult={this.onModalResult}/>
+        <ModalComponent onModalResult={this.onModalResult}/>
       </Modal>
     ):(
       <button
