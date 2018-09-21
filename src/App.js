@@ -6,7 +6,6 @@ import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import HomePage from "./components/HomePage/HomePage";
 import Appbar from "./components/Appbar/Appbar";
-import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
 
 class App extends Component {
   render() {
@@ -17,7 +16,6 @@ class App extends Component {
       <React.Fragment>
         <Appbar/>
         <Switch>
-          <Route exact path='/create' component={PollCreationForm}/>
           <Route component={HomePage}/>
         </Switch>
       </React.Fragment>
