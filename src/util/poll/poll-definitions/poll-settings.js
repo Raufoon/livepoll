@@ -17,7 +17,7 @@ class PollSettings {
   };
 
   static defaultPollSettings = {
-    endDatetime: undefined,
+    endDatetime: 'infinite',
     privacy: PollSettings.POLL_PRIVACY.PUBLIC,
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
     whoCanAddItem: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR,
