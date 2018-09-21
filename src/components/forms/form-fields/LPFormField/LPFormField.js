@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 import './LPFormField.css'
 
 class LPFormField extends React.Component{
+  static validators = {
+    checkNotNull: value => !!value,
+  };
+  static errorMsgs = {
+    shouldNotNull: 'cannot be empty'
+  };
+
   constructor(props) {
     super(props);
     this.state = {

@@ -62,7 +62,8 @@ class LPForm extends React.Component {
 
 LPForm.propTypes = {
   title: PropTypes.string.isRequired,
-  onSubmit: PropTypes.func.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  totalFields: PropTypes.number.isRequired,
 };
 
 export default LPForm;

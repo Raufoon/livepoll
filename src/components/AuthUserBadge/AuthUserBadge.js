@@ -8,6 +8,7 @@ const AuthUserBadge = props => {
   if (!props.loggedInUserData.name) {
     return (
       <ModalOpenerButton
+        className={`${props.className}`}
         modalOptions={{hideCloseButton: true}}
         ModalComponent={CreateProfileForm}>
         Complete your profile

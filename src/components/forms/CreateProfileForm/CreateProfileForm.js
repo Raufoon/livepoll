@@ -16,7 +16,7 @@ const CreateProfileForm = (props) => {
       })
   };
   return (
-    <LPForm title={'Create your profile'} onSubmit={onSubmit}>
+    <LPForm title={'Create your profile'} totalFields={2} onSubmit={onSubmit}>
       <LPFormField
         name={'name'}
         placeholder={'Full Name'}
@@ -27,8 +27,8 @@ const CreateProfileForm = (props) => {
         name={'dob'}
         title={'Date of birth'}
         type={'date'}
-        validate={(value) => !!value}
-        errorMsg={'cannot be empty'}/>
+        validate={LPFormField.validators.checkNotNull}
+        errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
     </LPForm>
   )
 };
