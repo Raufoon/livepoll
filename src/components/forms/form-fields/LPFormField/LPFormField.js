@@ -48,15 +48,20 @@ class LPFormField extends React.Component{
     this.onChange = this.onChange.bind(this);
 
     if (props.value) {
-      this.props.onChange({
+      props.onChange({
         target: {
           name: props.name,
           value: props.value
         }
       });
     }
+    if (props.validate && !props.validate(props.value)) {
+      props.onError({
+        target: {name: props.name}
+      });
+    }
     if (props.type === 'dropdown') {
-      this.props.onChange({
+      props.onChange({
         target: {
           name: props.name,
           value: props.dropdownOptions[0].value

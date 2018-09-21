@@ -16,7 +16,7 @@ const CreateProfileForm = (props) => {
       })
   };
   return (
-    <LPForm title={'Create your profile'} totalFields={2} onSubmit={onSubmit}>
+    <LPForm title={'Create your profile'} onSubmit={onSubmit}>
       <LPFormField
         name={'name'}
         placeholder={'Full Name'}

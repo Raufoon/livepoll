@@ -33,7 +33,7 @@ class PollCreationForm extends React.Component {
     return (
       <div>
         <div className='fl'>
-          <LPForm title={'Create a poll'} totalFields={7} onSubmit={this.createPoll}>
+          <LPForm title={'Create a poll'} onSubmit={this.createPoll}>
             {
               LPFormField.createRequiredField({
                 name: 'title',
@@ -72,10 +72,11 @@ class PollCreationForm extends React.Component {
             {
               LPFormField.createDropdownField({
                 name: 'voteType',
+                title: 'How to vote?',
                 dropdownOptions: [
-                  {label: 'Vote by tick', value: PollSettings.VOTE_TYPES.TICK_VOTE},
-                  {label: 'Vote by 0-10', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_10},
-                  {label: 'Vote by 0-100', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_100},
+                  {label: 'By tick', value: PollSettings.VOTE_TYPES.TICK_VOTE},
+                  {label: 'By 0-10', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_10},
+                  {label: 'By 0-100', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_100},
                 ]
               })
             }

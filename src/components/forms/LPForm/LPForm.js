@@ -16,10 +16,16 @@ class LPForm extends React.Component {
 
   onChange(event) {
     let newField = {};
+    let removedErrors = {};
+
     newField[event.target.name] = event.target.value;
+    removedErrors[event.target.name] = false;
 
     this.setState((oldState) => ({
-      ...oldState,
+      errors: {
+        ...oldState.errors,
+        ...removedErrors
+      },
       fields: {
         ...oldState.fields,
         ...newField
@@ -32,7 +38,13 @@ class LPForm extends React.Component {
       ...this.state.errors
     };
     newErrors[event.target.name] = true;
-    this.setState({errors: newErrors});
+    this.setState((oldState) => ({
+      ...oldState,
+      errors: {
+        ...oldState.errors,
+        ...newErrors
+      }
+    }))
   }
 
   onSubmit(event) {
@@ -41,7 +53,7 @@ class LPForm extends React.Component {
   }
 
   shouldShowSubmit() {
-    return Object.values(this.state.fields).length === this.props.totalFields;
+    return !Object.values(this.state.errors).some(flag => !!flag);
   }
 
   render() {
@@ -68,7 +80,6 @@ class LPForm extends React.Component {
 LPForm.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
-  totalFields: PropTypes.number.isRequired,
   submitButtonLabel: PropTypes.string,
 };
 
