@@ -1,3 +1,10 @@
 .App {
   text-align: center;
 }
+
+.fl{float: left}
+.fr{float: right}
+.tac{text-align: center}
+.mg5{margin: 5px}
+.w100{width: 100%}
+.h100{height: 100%}

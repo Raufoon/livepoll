@@ -5,8 +5,7 @@ import {Switch, Route} from 'react-router-dom';
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import HomePage from "./components/HomePage/HomePage";
-import CreateProfileForm from "./components/forms/CreateProfileForm/CreateProfileForm";
-import ClickModalOpener from "./components/modal-openers/ClickModalOpener/ClickModalOpener";
+import Appbar from "./components/Appbar/Appbar";
 
 class App extends Component {
   render() {
@@ -14,28 +13,17 @@ class App extends Component {
       return <SignUpPage />;
     }
     return (
-      <div>
-        {
-          !this.props.loggedInUserData.name
-          && (
-            <ClickModalOpener
-              modalOptions={{hideCloseButton: true}}
-              ModalComponent={CreateProfileForm}>
-              Complete your profile
-            </ClickModalOpener>
-          )
-        }
+      <React.Fragment>
+        <Appbar/>
         <Switch>
-          <Route exact path='/' component={HomePage}/>
-          <Route exact path='/profile' component={_=>"profile"}/>
+          <Route path='/' component={HomePage}/>
         </Switch>
-      </div>
+      </React.Fragment>
     )
   }
 }
 
 const s2p = state => ({
   isLoggedIn: !!state.auth.currentUser,
-  loggedInUserData: state.auth.userData
 });
 export default connect(s2p)(App);
