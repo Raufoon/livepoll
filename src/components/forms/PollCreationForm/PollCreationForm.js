@@ -4,40 +4,36 @@ import {connect} from 'react-redux'
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
-import Livepoll from "../../../util/poll/livepoll";
+import {requestPublishLivepoll} from "../../../util/cloud/livepoll";
 
 class PollCreationForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      livepoll: undefined
-    };
-    this.createPoll = this.createPoll.bind(this);
     this.publishPoll = this.publishPoll.bind(this);
   }
 
-  createPoll(data) {
+  publishPoll(data) {
     // converting the time to utc
     data.startDatetime = new Date(data.startDatetime).toISOString();
     data.endDatetime = !!data.endDatetime ? new Date(data.endDatetime).toISOString() : 'infinite';
 
-    this.setState({
-      livepoll: new Livepoll({
+    requestPublishLivepoll(
+      new PollSettings({
         ...data,
         creatorId: this.props.creatorId,
       })
+    ).then(response => {
+      console.log(response);
+      // close if we are in a modal
+      if (this.props.onModalResult) this.props.onModalResult();
     });
-  }
-
-  publishPoll() {
-
   }
 
   render() {
     return (
       <div>
         <div className='fl'>
-          <LPForm title={'Create a poll'} onSubmit={this.createPoll}>
+          <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
             {
               LPFormField.createRequiredField({
                 name: 'title',
@@ -88,7 +84,7 @@ class PollCreationForm extends React.Component {
             <br/>
             {
               LPFormField.createDropdownField({
-                name: 'format',
+                name: 'itemFormat',
                 title: 'Poll structure',
                 dropdownOptions: [
                   {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},

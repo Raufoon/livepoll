@@ -12,7 +12,9 @@ const Appbar = props => {
     <div className='app-bar'>
       <button className={'fr'} onClick={() => props.dispatch(actionSignoutRequest())}>Sign out</button>
       <AuthUserBadge className='fr'/>
-      <ModalOpenerButton ModalComponent={PollCreationForm}>Create a poll</ModalOpenerButton>
+      <ModalOpenerButton ModalComponent={PollCreationForm}>
+        Create a poll
+      </ModalOpenerButton>
     </div>
   )
 };
