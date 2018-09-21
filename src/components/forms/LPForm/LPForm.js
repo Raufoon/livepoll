@@ -15,11 +15,16 @@ class LPForm extends React.Component {
   }
 
   onChange(event) {
-    let newFields = {
-      ...this.state.fields
-    };
-    newFields[event.target.name] = event.target.value;
-    this.setState({fields: newFields});
+    let newField = {};
+    newField[event.target.name] = event.target.value;
+
+    this.setState((oldState) => ({
+      ...oldState,
+      fields: {
+        ...oldState.fields,
+        ...newField
+      }
+    }))
   }
 
   onError(event) {
@@ -53,7 +58,7 @@ class LPForm extends React.Component {
           )
         }
         {
-          this.shouldShowSubmit() && <input type='submit' value={'Submit'}/>
+          this.shouldShowSubmit() && <input type='submit' value={this.props.submitButtonLabel || 'Submit'}/>
         }
       </form>
     )
@@ -64,6 +69,7 @@ LPForm.propTypes = {
   title: PropTypes.string.isRequired,
   onSubmit: PropTypes.func.isRequired,
   totalFields: PropTypes.number.isRequired,
+  submitButtonLabel: PropTypes.string,
 };
 
 export default LPForm;

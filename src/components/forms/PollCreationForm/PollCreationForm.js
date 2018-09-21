@@ -4,83 +4,114 @@ import {connect} from 'react-redux'
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
-import {VOTE_TYPES} from "../../../util/poll/vote-definitions/vote-types";
+import Livepoll from "../../../util/poll/livepoll";
 
-const PollCreationForm = props => {
-  const onSubmit = (data) => {
-    data.creatorId = props.creatorId;
-  };
-  return (
-    <LPForm title={'Create a poll'} totalFields={3} onSubmit={onSubmit}>
-      <LPFormField
-        name={'title'}
-        type={'text'}
-        placeholder={'Give a nice title'}
-        validate={LPFormField.validators.checkNotNull}
-        errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
-      <br/>
+class PollCreationForm extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      livepoll: undefined
+    };
+    this.createPoll = this.createPoll.bind(this);
+    this.publishPoll = this.publishPoll.bind(this);
+  }
 
-      <LPFormField
-        name={'startDatetime'}
-        type={'datetime-local'}
-        title={'When will it begin?'}
-        validate={LPFormField.validators.checkNotNull}
-        errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
-      <br/>
+  createPoll(data) {
+    this.setState({
+      livepoll: new Livepoll({
+        ...data,
+        creatorId: this.props.creatorId,
+      })
+    });
+  }
 
-      <LPFormField
-        name={'endDatetime'}
-        type={'datetime-local'}
-        title={'When will it end?'}/>
-      <br/>
+  publishPoll() {
 
-      <LPFormField
-        name={'privacy'}
-        title={'Privacy'}
-        type={'dropdown'}
-        dropdownOptions={[
-          {label: 'Public', value: PollSettings.POLL_PRIVACY.PUBLIC},
-          {label: 'Link only', value: PollSettings.POLL_PRIVACY.PRIVATE},
-        ]}
-      />
-      <br/>
+  }
 
-      <LPFormField
-        name={'voteType'}
-        type={'dropdown'}
-        dropdownOptions={[
-          {label: 'Vote by tick', value: VOTE_TYPES.TICK_VOTE},
-          {label: 'Vote by 0-10', value: VOTE_TYPES.NUMBER_VOTE_0_10},
-          {label: 'Vote by 0-100', value: VOTE_TYPES.NUMBER_VOTE_0_100},
-        ]}
-      />
-      <br/>
+  render() {
+    return (
+      <div>
+        <div className='fl'>
+          <LPForm title={'Create a poll'} totalFields={7} onSubmit={this.createPoll}>
+            {
+              LPFormField.createRequiredField({
+                name: 'title',
+                type: 'text',
+                placeholder: 'Give a nice title',
+              })
+            }
+            <br/>
+            {
+              LPFormField.createRequiredField({
+                name: 'startDatetime',
+                type: 'datetime-local',
+                title: 'When will it begin?',
+              })
+            }
+            <br/>
+            {
+              LPFormField.createOptionalField({
+                name: 'endDatetime',
+                type: 'datetime-local',
+                title: 'When will it end?',
+              })
+            }
+            <br/>
+            {
+              LPFormField.createDropdownField({
+                name: 'privacy',
+                title: 'Privacy',
+                dropdownOptions: [
+                  {label: 'Public', value: PollSettings.POLL_PRIVACY.PUBLIC},
+                  {label: 'Link only', value: PollSettings.POLL_PRIVACY.PRIVATE},
+                ]
+              })
+            }
+            <br/>
+            {
+              LPFormField.createDropdownField({
+                name: 'voteType',
+                dropdownOptions: [
+                  {label: 'Vote by tick', value: PollSettings.VOTE_TYPES.TICK_VOTE},
+                  {label: 'Vote by 0-10', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_10},
+                  {label: 'Vote by 0-100', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_100},
+                ]
+              })
+            }
+            <br/>
+            {
+              LPFormField.createDropdownField({
+                name: 'format',
+                title: 'Poll structure',
+                dropdownOptions: [
+                  {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},
+                  {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
+                  {label: 'Text + Images', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGES},
+                  {label: 'Text + Video', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
+                ]
+              })
+            }
+            <br/>
+            {
+              LPFormField.createDropdownField({
+                name: 'whoCanAddItem',
+                title: 'Who can add item?',
+                dropdownOptions: [
+                  {label: 'Only owner', value: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR},
+                  {label: 'Anyone', value: PollSettings.WHO_CAN_ADD_ITEM.ANYONE},
+                ]
+              })
+            }
+          </LPForm>
+        </div>
+        <div className='fr'>
 
-      <LPFormField
-        name={'format'}
-        title={'Poll structure'}
-        type={'dropdown'}
-        dropdownOptions={[
-          {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},
-          {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
-          {label: 'Text + Images', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGES},
-          {label: 'Text + Video', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
-        ]}
-      />
-      <br/>
-
-      <LPFormField
-        name={'whoCanAddItem'}
-        title={'Who can add item?'}
-        type={'dropdown'}
-        dropdownOptions={[
-          {label: 'Only owner', value: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR},
-          {label: 'Anyone', value: PollSettings.WHO_CAN_ADD_ITEM.ANYONEA},
-        ]}
-      />
-    </LPForm>
-  )
-};
+        </div>
+      </div>
+    )
+  }
+}
 
 const s2p = state => ({
   creatorId: state.auth.userData.id

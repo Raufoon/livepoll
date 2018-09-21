@@ -7,9 +7,37 @@ class LPFormField extends React.Component{
   static validators = {
     checkNotNull: value => !!value,
   };
+
   static errorMsgs = {
     shouldNotNull: 'cannot be empty',
   };
+
+  static createRequiredField = options => (
+    <LPFormField
+      name={options.name}
+      type={options.type}
+      title={options.title}
+      placeholder={options.placeholder}
+      validate={LPFormField.validators.checkNotNull}
+      errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
+  );
+
+  static createOptionalField = options => (
+    <LPFormField
+      name={options.name}
+      type={options.type}
+      title={options.title}
+      placeholder={options.placeholder}/>
+  );
+
+  static createDropdownField = options => (
+    <LPFormField
+      name={options.name}
+      type={'dropdown'}
+      title={options.title}
+      dropdownOptions={options.dropdownOptions}
+      placeholder={options.placeholder}/>
+  );
 
   constructor(props) {
     super(props);
