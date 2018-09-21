@@ -1,17 +1,17 @@
 import React from 'react'
 import {connect} from 'react-redux'
 
-import ClickModalOpener from "../modal-openers/ClickModalOpener/ClickModalOpener";
+import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import CreateProfileForm from "../forms/CreateProfileForm/CreateProfileForm";
 
 const AuthUserBadge = props => {
   if (!props.loggedInUserData.name) {
     return (
-      <ClickModalOpener
+      <ModalOpenerButton
         modalOptions={{hideCloseButton: true}}
         ModalComponent={CreateProfileForm}>
         Complete your profile
-      </ClickModalOpener>
+      </ModalOpenerButton>
     )
   }
   return (
