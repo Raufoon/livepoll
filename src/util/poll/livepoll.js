@@ -5,6 +5,9 @@ class Livepoll {
     this.items = [];
     this.settings = new PollSettings(settings);
   }
+  setId(id) {
+    this.id = id;
+  }
 }
 
 export default Livepoll

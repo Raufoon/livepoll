@@ -47,10 +47,11 @@ class PollCreationForm extends React.Component {
             }
             <br/>
             {
-              LPFormField.createRequiredField({
+              LPFormField.createOptionalField({
                 name: 'startDatetime',
                 type: 'datetime-local',
                 title: 'When will it begin?',
+                value: new Date().toLocaleString()
               })
             }
             <br/>

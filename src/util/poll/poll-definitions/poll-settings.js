@@ -20,7 +20,7 @@ class PollSettings {
     endDatetime: 'infinite',
     privacy: PollSettings.POLL_PRIVACY.PUBLIC,
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
-    whoCanAddItem: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR,
+    whoCanAddItem: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR
   };
 
   static VOTE_TYPES = {
@@ -30,7 +30,7 @@ class PollSettings {
   };
 
   constructor(_settings) {
-    if (!_settings.startDatetime || !_settings.creatorId || !_settings.title) {
+    if (!_settings.creatorId || !_settings.title) {
       throw new Error('cannot create poll settings');
     }
 

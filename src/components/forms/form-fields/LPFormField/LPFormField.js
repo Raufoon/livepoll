@@ -17,6 +17,7 @@ class LPFormField extends React.Component{
       name={options.name}
       type={options.type}
       title={options.title}
+      defaultValue={options.defaultValue}
       placeholder={options.placeholder}
       validate={LPFormField.validators.checkNotNull}
       errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
@@ -26,8 +27,9 @@ class LPFormField extends React.Component{
     <LPFormField
       name={options.name}
       type={options.type}
-      title={options.title}
-      placeholder={options.placeholder}/>
+      title={options.title + ' (optional)'}
+      value={options.value}
+      placeholder={options.placeholder + ' (optional)'}/>
   );
 
   static createDropdownField = options => (
@@ -110,7 +112,7 @@ class LPFormField extends React.Component{
                    placeholder={this.props.placeholder}
                    type={this.props.type}
                    defaultValue={this.props.defaultValue}
-                   value={this.props.value}
+                   value={this.state.value}
                    onChange={this.onChange}/>
           )
         }
