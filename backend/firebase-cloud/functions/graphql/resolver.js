@@ -6,39 +6,21 @@ const resolvers = {
     name: obj => obj.name,
     dob: obj => obj.dob,
   },
-  PollPrivacy: {
-    public: 'pb',
-    private: 'pr',
-  },
-  PollItemFormat: {
-    text: 't',
-    textWithImage: 'ti',
-    textWithImages: 'ti8',
-    textWithVideo: 'tv',
-  },
-  VoteType: {
-    tickVote: 't',
-    numberVote010: 'n10',
-    numberVote0100: 'n100',
-  },
-  WhoCanAddItem: {
-    anyone: 'a',
-    onlyCreator: 'c',
-  },
+
   LivepollSettings: {
+    creatorId: obj => obj.creatorId,
     title: obj => obj.title,
     startDatetime: obj => obj.startDatetime,
     endDatetime: obj => obj.endDatetime,
     privacy: obj => obj.privacy,
     voteType: obj => obj.voteType,
-    format: obj => obj.format,
+    itemFormat: obj => obj.itemFormat,
     whoCanAddItem: obj => obj.whoCanAddItem,
   },
   Livepoll: {
     id: obj => obj.id,
     settings: obj => obj.settings,
   },
-
   Query: {
     user: (_, { id }) => DB.read(`/users/${id}`),
     users: () => DB.readList('/users'),

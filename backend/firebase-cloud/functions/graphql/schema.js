@@ -8,31 +8,42 @@ const typeDefs = gql`
   }
 
   enum PollPrivacy {
-    public
-    private
+    PUBLIC
+    PRIVATE
   }
   enum PollItemFormat {
-    text
-    textWithImage
-    textWithImages
-    textWithVideo
+    TEXT
+    TEXT_WITH_IMAGE
+    TEXT_WITH_IMAGES
+    TEXT_WITH_VIDEO
   }
   enum VoteType {
-    tickVote
-    numberVote010
-    numberVote0100
+    TICK
+    NUMBER10
+    NUMBER100
   }
   enum WhoCanAddItem {
-    anyone
-    onlyCreator
+    ANY
+    CREATOR
   }
-  type LivepollSettings {
+  input InputLivepollCreate {
+    creatorId: String!
     title: String!
     startDatetime: String!
     endDatetime: String!
     privacy: PollPrivacy!
     voteType: VoteType!
-    format: PollItemFormat!
+    itemFormat: PollItemFormat!
+    whoCanAddItem: WhoCanAddItem!
+  }
+  type LivepollSettings {
+    creatorId: String!
+    title: String!
+    startDatetime: String!
+    endDatetime: String!
+    privacy: PollPrivacy!
+    voteType: VoteType!
+    itemFormat: PollItemFormat!
     whoCanAddItem: WhoCanAddItem!
   }
   type Livepoll {
@@ -47,7 +58,7 @@ const typeDefs = gql`
 
   type Mutation {
     createUser(id: ID!, name: String, dob: String): User
-    publishLivepoll(settings: LivepollSettings!): Livepoll
+    publishLivepoll(settings: InputLivepollCreate!): Livepoll
   }
 `;
 
