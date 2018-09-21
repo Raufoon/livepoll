@@ -1,15 +1,20 @@
-import {POLL_ITEM_FORMAT_BASIC} from "./poll-item-format";
-
 class PollSettings {
   static POLL_PRIVACY = {
-    PUBLIC: 'PUBLIC',
-    PRIVATE: 'PRIVATE',
+    PUBLIC: 'pb',
+    PRIVATE: 'pr',
+  };
+
+  static POLL_ITEM_FORMAT = {
+    TEXT: 't',
+    TEXT_WITH_IMAGE: 'ti',
+    TEXT_WITH_IMAGES: 'ti*',
+    TEXT_WITH_VIDEO: 'tv',
   };
 
   static defaultPollSettings = {
-    endDatetime: '-',
+    endDatetime: undefined,
     privacy: PollSettings.POLL_PRIVACY.PUBLIC,
-    itemFormat: POLL_ITEM_FORMAT_BASIC,
+    itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
   };
 
   constructor(_settings) {

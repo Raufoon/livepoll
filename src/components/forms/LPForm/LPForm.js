@@ -36,7 +36,7 @@ class LPForm extends React.Component {
   }
 
   shouldShowSubmit() {
-    return Object.values(this.state.fields).length === this.props.children.length;
+    return Object.values(this.state.fields).length === this.props.totalFields;
   }
 
   render() {

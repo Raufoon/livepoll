@@ -1,3 +1,0 @@
-export const ITEM_CONTENT_STRING = 'String';
-
-export const POLL_ITEM_FORMAT_BASIC = [ITEM_CONTENT_STRING];
