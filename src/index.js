@@ -15,11 +15,11 @@ initFirebase();
 initAuth();
 
 ReactDOM.render(
-  <BrowserRouter>
-    <Provider store={getLivepollStore()}>
+  <Provider store={getLivepollStore()}>
+    <BrowserRouter>
       <App/>
-    </Provider>
-  </BrowserRouter>
+    </BrowserRouter>
+  </Provider>
   , document.getElementById('root')
 );
 

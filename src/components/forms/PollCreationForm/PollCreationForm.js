@@ -19,6 +19,7 @@ const PollCreationForm = props => {
         validate={LPFormField.validators.checkNotNull}
         errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
       <br/>
+
       <LPFormField
         name={'startDatetime'}
         type={'datetime-local'}
@@ -26,11 +27,13 @@ const PollCreationForm = props => {
         validate={LPFormField.validators.checkNotNull}
         errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
       <br/>
+
       <LPFormField
         name={'endDatetime'}
         type={'datetime-local'}
         title={'When will it end?'}/>
       <br/>
+
       <LPFormField
         name={'privacy'}
         title={'Privacy'}
@@ -41,6 +44,7 @@ const PollCreationForm = props => {
         ]}
       />
       <br/>
+
       <LPFormField
         name={'voteType'}
         type={'dropdown'}
@@ -51,6 +55,7 @@ const PollCreationForm = props => {
         ]}
       />
       <br/>
+
       <LPFormField
         name={'format'}
         title={'Poll structure'}
@@ -60,6 +65,17 @@ const PollCreationForm = props => {
           {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
           {label: 'Text + Images', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGES},
           {label: 'Text + Video', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
+        ]}
+      />
+      <br/>
+
+      <LPFormField
+        name={'whoCanAddItem'}
+        title={'Who can add item?'}
+        type={'dropdown'}
+        dropdownOptions={[
+          {label: 'Only owner', value: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR},
+          {label: 'Anyone', value: PollSettings.WHO_CAN_ADD_ITEM.ANYONEA},
         ]}
       />
     </LPForm>

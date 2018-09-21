@@ -1,19 +1,15 @@
 import {ITEM_CONTENT_STRING} from "./poll-item-format";
+import PollSettings from "./poll-settings";
 
-export const createPollItem = (format, data) => {
-  let contents = [];
-
-  for (let key in format) {
-    if (format.hasOwnProperty(key)) {
-      switch (key) {
-        case ITEM_CONTENT_STRING:
-          contents.push(data[key].toString());
-          break;
-      }
-    }
+export const createPollItem = (format, data, itemCreatorId) => {
+  switch (format) {
+    case PollSettings.POLL_ITEM_FORMAT.TEXT:
+      break;
+    default:
   }
   return {
-    contents,
+    content: {},
+    creatorId: itemCreatorId
     votes: []
   }
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, withRouter, Route} from 'react-router-dom';
 
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
@@ -17,8 +17,8 @@ class App extends Component {
       <React.Fragment>
         <Appbar/>
         <Switch>
-          <Route exact path='/' component={HomePage}/>
           <Route exact path='/create' component={PollCreationForm}/>
+          <Route component={HomePage}/>
         </Switch>
       </React.Fragment>
     )
@@ -28,4 +28,4 @@ class App extends Component {
 const s2p = state => ({
   isLoggedIn: !!state.auth.currentUser,
 });
-export default connect(s2p)(App);
+export default withRouter(connect(s2p)(App));
