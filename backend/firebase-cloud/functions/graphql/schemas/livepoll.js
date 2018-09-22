@@ -18,6 +18,7 @@ const definitions = `
     A # anyone
     C # only creator
   }
+  
   input InputLivepollCreate {
     creatorId: String!
     title: String!
@@ -28,6 +29,7 @@ const definitions = `
     itemFormat: PollItemFormat!
     whoCanAddItem: WhoCanAddItem!
   }
+  
   type LivepollSettings {
     creatorId: String!
     title: String!
@@ -38,9 +40,34 @@ const definitions = `
     itemFormat: PollItemFormat!
     whoCanAddItem: WhoCanAddItem!
   }
+  
+  interface LivepollItemContent {
+    text: String!
+  }
+  type TextContent implements LivepollItemContent {
+    text: String!
+  }
+  type TextImageContent implements LivepollItemContent {
+    text: String!
+    imgUrl: String!
+  }
+  type TextImageListContent implements LivepollItemContent {
+    text: String!
+    imgUrlList: [String]!
+  }
+  type TextVideoContent implements LivepollItemContent {
+    text: String!
+    youtubeUrl: String!
+  }
+  type LivepollItem {
+    id: String!
+    content: LivepollItemContent!
+  }
+  
   type Livepoll {
     id: ID!
     settings: LivepollSettings!
+    items: [LivepollItem]
   }
 `;
 
