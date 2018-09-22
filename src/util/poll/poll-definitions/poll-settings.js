@@ -1,19 +1,19 @@
 class PollSettings {
   static POLL_PRIVACY = {
-    PUBLIC: 'PUBLIC',
-    PRIVATE: 'PRIVATE',
+    PUBLIC: 'PB',
+    PRIVATE: 'PR',
   };
 
   static POLL_ITEM_FORMAT = {
-    TEXT: 'TEXT',
-    TEXT_WITH_IMAGE: 'TEXT_WITH_IMAGE',
-    TEXT_WITH_IMAGES: 'TEXT_WITH_IMAGES',
-    TEXT_WITH_VIDEO: 'TEXT_WITH_VIDEO',
+    TEXT: 'T',
+    TEXT_WITH_IMAGE: 'TI',
+    TEXT_WITH_IMAGES: 'TII',
+    TEXT_WITH_VIDEO: 'TV',
   };
 
   static WHO_CAN_ADD_ITEM = {
-    ANYONE: 'ANY',
-    ONLY_CREATOR: 'CREATOR'
+    ANYONE: 'A',
+    ONLY_CREATOR: 'C'
   };
 
   static defaultPollSettings = {
@@ -24,9 +24,9 @@ class PollSettings {
   };
 
   static VOTE_TYPES = {
-    TICK_VOTE: 'TICK',
-    NUMBER_VOTE_0_10: 'NUMBER10',
-    NUMBER_VOTE_0_100: 'NUMBER100',
+    TICK_VOTE: 'T',
+    NUMBER_VOTE_0_10: 'N10',
+    NUMBER_VOTE_0_100: 'N100',
   };
 
   constructor(_settings) {

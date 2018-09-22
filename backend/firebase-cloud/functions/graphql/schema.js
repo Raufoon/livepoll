@@ -8,23 +8,23 @@ const typeDefs = gql`
   }
 
   enum PollPrivacy {
-    PUBLIC
-    PRIVATE
+    PB
+    PR
   }
   enum PollItemFormat {
-    TEXT
-    TEXT_WITH_IMAGE
-    TEXT_WITH_IMAGES
-    TEXT_WITH_VIDEO
+    T
+    TI
+    TII
+    TV
   }
   enum VoteType {
-    TICK
-    NUMBER10
-    NUMBER100
+    T
+    N10
+    N100
   }
   enum WhoCanAddItem {
-    ANY
-    CREATOR
+    A
+    C
   }
   input InputLivepollCreate {
     creatorId: String!
