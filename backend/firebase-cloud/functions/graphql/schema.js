@@ -8,23 +8,23 @@ const typeDefs = gql`
   }
 
   enum PollPrivacy {
-    PB
-    PR
+    PB # public
+    PR # private
   }
   enum PollItemFormat {
-    T
-    TI
-    TII
-    TV
+    T # text only
+    TI # text with image
+    TII # text with multiple images
+    TV # text with video
   }
   enum VoteType {
-    T
-    N10
-    N100
+    T # vote by tick
+    N10 # vote by 0 to 10
+    N100 # vote by 0 to 100
   }
   enum WhoCanAddItem {
-    A
-    C
+    A # anyone
+    C # only creator
   }
   input InputLivepollCreate {
     creatorId: String!
@@ -54,6 +54,7 @@ const typeDefs = gql`
   type Query {
     user(id: ID!): User
     users: [User]!
+    livepoll(id: String!): Livepoll
   }
 
   type Mutation {

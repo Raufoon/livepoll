@@ -24,6 +24,7 @@ const resolvers = {
   Query: {
     user: (_, { id }) => DB.read(`/users/${id}`),
     users: () => DB.readList('/users'),
+    livepoll: (_, { id }) => DB.read(`/polls/${id}`),
   },
 
   Mutation: {
