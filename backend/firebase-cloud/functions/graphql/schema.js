@@ -1,65 +1,20 @@
 const { gql } = require('apollo-server-express');
 
-const typeDefs = gql`
-  type User {
-    id: ID!
-    name: String
-    dob: String
-  }
+const livepollSchema = require('./schemas/livepoll');
+const userSchema = require('./schemas/user');
 
-  enum PollPrivacy {
-    PB # public
-    PR # private
-  }
-  enum PollItemFormat {
-    T # text only
-    TI # text with image
-    TII # text with multiple images
-    TV # text with video
-  }
-  enum VoteType {
-    T # vote by tick
-    N10 # vote by 0 to 10
-    N100 # vote by 0 to 100
-  }
-  enum WhoCanAddItem {
-    A # anyone
-    C # only creator
-  }
-  input InputLivepollCreate {
-    creatorId: String!
-    title: String!
-    startDatetime: String!
-    endDatetime: String!
-    privacy: PollPrivacy!
-    voteType: VoteType!
-    itemFormat: PollItemFormat!
-    whoCanAddItem: WhoCanAddItem!
-  }
-  type LivepollSettings {
-    creatorId: String!
-    title: String!
-    startDatetime: String!
-    endDatetime: String!
-    privacy: PollPrivacy!
-    voteType: VoteType!
-    itemFormat: PollItemFormat!
-    whoCanAddItem: WhoCanAddItem!
-  }
-  type Livepoll {
-    id: ID!
-    settings: LivepollSettings!
-  }
+const typeDefs = gql`
+  ${userSchema.definitions}
+  ${livepollSchema.definitions}
 
   type Query {
-    user(id: ID!): User
-    users: [User]!
-    livepoll(id: String!): Livepoll
+    ${userSchema.queries}
+    ${livepollSchema.queries}
   }
 
   type Mutation {
-    createUser(id: ID!, name: String, dob: String): User
-    publishLivepoll(settings: InputLivepollCreate!): Livepoll
+    ${userSchema.mutations}
+    ${livepollSchema.mutations}
   }
 `;
 
