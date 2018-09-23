@@ -1,4 +1,4 @@
-import graphqlRequest from "./graphql-api/requests";
+import {graphqlRequest, graphqlSecureRequest} from "./graphql-api/requests";
 
 const MUTATION_PUBLISH_LIVEPOLL = `
   mutation PublishLivepoll ($settings: InputLivepollCreate!) {
@@ -8,7 +8,7 @@ const MUTATION_PUBLISH_LIVEPOLL = `
   }
 `;
 export const requestPublishLivepoll = livepollSettings => {
-  return graphqlRequest(MUTATION_PUBLISH_LIVEPOLL, {settings: livepollSettings});
+  return graphqlSecureRequest(MUTATION_PUBLISH_LIVEPOLL, {settings: livepollSettings});
 };
 
 const QUERY_POLL_INFO = `
@@ -43,7 +43,7 @@ const MUTATION_ADD_POLL_ITEM = `
   }
 `;
 export const requestAddPollitem = (pollId, content) => {
-  return graphqlRequest(MUTATION_ADD_POLL_ITEM, {
+  return graphqlSecureRequest(MUTATION_ADD_POLL_ITEM, {
     pollId,
     content
   })

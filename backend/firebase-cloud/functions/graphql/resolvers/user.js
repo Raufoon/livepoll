@@ -1,5 +1,5 @@
 const DB = require("../../firebase-database/realtime-database");
-const uuidv1 = require('uuid/v1');
+const {verifyIdToken} = require('./util');
 
 const definitions = {
   User: {
@@ -14,12 +14,13 @@ const queries = {
 };
 
 const mutations = {
-  createUser: (_, { id, name, dob }) => {
-    return DB.write(`/users/${id}`, {
-      id,
-      name,
-      dob
-    });
+  createUser: (_, { id, name, dob }, context) => {
+    return verifyIdToken(context.idToken, id)
+      .then(() => DB.write(`/users/${id}`, {
+        id,
+        name,
+        dob
+      }));
   },
 };
 

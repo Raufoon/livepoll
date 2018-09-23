@@ -1,5 +1,3 @@
-const DB = require('../firebase-database/realtime-database');
-
 const userResolvers = require('./resolvers/user');
 const livepollResolvers = require('./resolvers/livepoll');
 

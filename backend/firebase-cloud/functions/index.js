@@ -12,7 +12,10 @@ app.use(cors);
 
 const server = new ApolloServer({
   typeDefs: require('./graphql/schema'),
-  resolvers: require('./graphql/resolver')
+  resolvers: require('./graphql/resolver'),
+  context: ({req}) => ({
+    idToken: req.headers.authorization
+  })
 });
 server.applyMiddleware({ app });
 exports.graphqlApi = functions.https.onRequest(app);
