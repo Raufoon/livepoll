@@ -10,7 +10,10 @@ export const reduceFetchPollInfoSuccess = (state, livepoll) => {
 
 export const reduceRequestAddItemSuccess = (state, pollId, newItem) => {
   let newState = {...state};
-  if (!newState[pollId].items) newState[pollId].items = {};
+  newState[pollId] = {...newState[pollId]};
+
+  if (!newState[pollId].items)
+    newState[pollId].items = {};
   newState[pollId].items[newItem.id] = newItem;
   return newState;
 };
