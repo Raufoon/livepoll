@@ -1,6 +1,4 @@
 const DB = require("../../firebase-database/realtime-database");
-const {verifyIdToken} = require('./util');
-const uuidv1 = require('uuid/v1');
 
 const definitions = {
   LivepollSettings: {
@@ -66,17 +64,7 @@ const queries = {
 };
 
 const mutations = {
-
-  publishLivepoll: (_, { settings }, context) => {
-    const newPollId = uuidv1();
-    return verifyIdToken(context.idToken, settings.creatorId)
-      .then(
-        () => DB.write(`/polls/${newPollId}`, {
-          id: newPollId,
-          settings
-        })
-      );
-  },
+  publishLivepoll: require('./livepoll/poll').publishLivepoll,
   addItem: require('./livepoll/poll-items').addItem
 };
 

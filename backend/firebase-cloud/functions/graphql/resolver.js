@@ -1,5 +1,5 @@
-const userResolvers = require('./resolvers/user');
-const livepollResolvers = require('./resolvers/livepoll');
+const userResolvers = require('./resolvers/user-resolvers');
+const livepollResolvers = require('./resolvers/livepoll-resolvers');
 
 const resolvers = Object.assign(
   {},

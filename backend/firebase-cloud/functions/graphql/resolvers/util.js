@@ -2,7 +2,7 @@ const admin = require('firebase-admin');
 
 const checkIdTokenExists = idToken => new Promise(
   (resolve, reject) => {
-    if (!idToken) reject('No authorization token received!');
+    if (!idToken) reject('You are not authorized to do this');
     resolve();
   }
 );
@@ -21,7 +21,7 @@ const verifyIdToken =
       .then(
         uid => {
           if (uid === id) return Promise.resolve(id);
-          return Promise.reject('idToken validation failed');
+          return Promise.reject('You are not authorized to do this -_-');
         }
       );
 
