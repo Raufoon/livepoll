@@ -1,4 +1,4 @@
-const definitions = `
+const enums = `
   enum PollPrivacy {
     PB # public
     PR # private
@@ -18,7 +18,9 @@ const definitions = `
     A # anyone
     C # only creator
   }
-  
+`;
+
+const inputs = `
   input InputLivepollCreate {
     creatorId: String!
     title: String!
@@ -29,18 +31,15 @@ const definitions = `
     itemFormat: PollItemFormat!
     whoCanAddItem: WhoCanAddItem!
   }
-  
-  type LivepollSettings {
-    creatorId: String!
-    title: String!
-    startDatetime: String!
-    endDatetime: String!
-    privacy: PollPrivacy!
-    voteType: VoteType!
-    itemFormat: PollItemFormat!
-    whoCanAddItem: WhoCanAddItem!
+  input InputLivepollItemContent {
+    text: String!
+    imgUrl: String
+    imgUrlList: [String]
+    youtubeUrl: String
   }
-  
+`;
+
+const livepollItemDef = `
   interface LivepollItemContent {
     text: String!
   }
@@ -64,13 +63,22 @@ const definitions = `
     creatorId: String
     content: LivepollItemContent!
   }
-  input InputLivepollItemContent {
-    text: String!
-    imgUrl: String
-    imgUrlList: [String]
-    youtubeUrl: String
+`;
+
+const definitions = `
+  ${enums}
+  ${inputs}  
+  type LivepollSettings {
+    creatorId: String!
+    title: String!
+    startDatetime: String!
+    endDatetime: String!
+    privacy: PollPrivacy!
+    voteType: VoteType!
+    itemFormat: PollItemFormat!
+    whoCanAddItem: WhoCanAddItem!
   }
-  
+  ${livepollItemDef}  
   type Livepoll {
     id: ID!
     settings: LivepollSettings!

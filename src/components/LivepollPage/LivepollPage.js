@@ -25,7 +25,12 @@ const LivepollPage = props => {
 
   return (
     <div>
-      Poll:
+      Poll Settings:
+      <br/>
+      {
+        JSON.stringify(props.livepoll.settings)
+      }
+      <br/><br/>
       {
         showAddItemButton &&
         <ModalOpenerButton
@@ -38,9 +43,10 @@ const LivepollPage = props => {
           Add an item
         </ModalOpenerButton>
       }
-      <br/>
+      <br/><br/>
+      Items:<br/>
       {
-        JSON.stringify(props.livepoll)
+        JSON.stringify(props.livepoll.items)
       }
       <br/>
     </div>

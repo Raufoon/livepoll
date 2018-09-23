@@ -38,7 +38,12 @@ const MUTATION_ADD_POLL_ITEM = `
     $content: InputLivepollItemContent! 
   ) {
     item: addItem(pollId: $pollId, content: $content) {
-      id
+      id,
+      content{
+        ... on TextContent{
+          text
+        }
+      }
     }
   }
 `;

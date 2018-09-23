@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {requestAddPollitem} from "../../../util/cloud/livepoll";
+import {actionRequestAddItem} from "../../../state-management/actions/livepoll-actions";
 
 const CreateItemForm = props => {
   const onSubmit = (data) => {
-    requestAddPollitem(props.pollId, data).then((response) => {
-      // props.dispatch() refresh the item list
-      if (props.onModalResult) props.onModalResult();
-    });
+    props.dispatch(actionRequestAddItem(props.pollId, data))
+      .then(() => {
+        if (props.onModalResult) props.onModalResult();
+      });
   };
 
   return (
