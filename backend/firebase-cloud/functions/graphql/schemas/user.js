@@ -12,7 +12,7 @@ const queries = `
 `;
 
 const mutations = `
-  createUser(id: ID!, nae: String, dob: String): User
+  createUser(id: ID!, name: String, dob: String): User
 `;
 
 module.exports = {
