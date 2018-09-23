@@ -1,3 +1,5 @@
+const DB = require("../../firebase-database/realtime-database");
+
 const definitions = {
   LivepollSettings: {
     creatorId: obj => obj.creatorId,

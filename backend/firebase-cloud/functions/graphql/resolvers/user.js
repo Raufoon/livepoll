@@ -1,3 +1,5 @@
+const DB = require("../../firebase-database/realtime-database");
+
 const definitions = {
   User: {
     name: obj => obj.name,
