@@ -8,6 +8,8 @@ admin.initializeApp();
 
 /*** SERVER for Queries ***/
 const app = express();
+app.use(cors);
+
 const server = new ApolloServer({
   typeDefs: require('./graphql/schema'),
   resolvers: require('./graphql/resolver')

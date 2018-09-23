@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types'
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
@@ -21,7 +22,7 @@ const CreateProfileForm = (props) => {
         name={'name'}
         placeholder={'Full Name'}
         type={'String'}
-        validate={(value) => value.length > 5}
+        validate={(value) => !!value && value.length > 5}
         errorMsg={'Name must have at least 6 letters'}/>
       <LPFormField
         name={'dob'}
@@ -32,7 +33,13 @@ const CreateProfileForm = (props) => {
     </LPForm>
   )
 };
+
 const s2p = state => ({
   userId: state.auth.userData.id
 });
+
+CreateProfileForm.propTypes = {
+  userId: PropTypes.string.isRequired,
+};
+
 export default connect(s2p)(CreateProfileForm)

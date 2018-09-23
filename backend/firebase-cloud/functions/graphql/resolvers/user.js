@@ -1,4 +1,5 @@
 const DB = require("../../firebase-database/realtime-database");
+const uuidv1 = require('uuid/v1');
 
 const definitions = {
   User: {

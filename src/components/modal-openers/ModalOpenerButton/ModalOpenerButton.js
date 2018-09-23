@@ -29,7 +29,7 @@ class ModalOpenerButton extends React.Component {
 
     return this.state.showModal ? (
       <Modal onClose={this.closeModal} settings={this.props.modalOptions}>
-        <ModalComponent onModalResult={this.onModalResult}/>
+        <ModalComponent onModalResult={this.onModalResult} {...this.props.childProps}/>
       </Modal>
     ):(
       <button
@@ -47,6 +47,7 @@ ModalOpenerButton.propTypes = {
   ModalComponent: PropTypes.func.isRequired,
   onModalResult: PropTypes.func,
   modalOptions: PropTypes.object,
+  childProps: PropTypes.object,
 };
 
 export default ModalOpenerButton

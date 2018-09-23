@@ -31,3 +31,20 @@ const QUERY_POLL_INFO = `
 export const requestPollInfo = pollId => {
   return graphqlRequest(QUERY_POLL_INFO, {id: pollId});
 };
+
+const MUTATION_ADD_POLL_ITEM = `
+  mutation AddPollItem (
+    $pollId: String!,
+    $content: InputLivepollItemContent! 
+  ) {
+    item: addItem(pollId: $pollId, content: $content) {
+      id
+    }
+  }
+`;
+export const requestAddPollitem = (pollId, content) => {
+  return graphqlRequest(MUTATION_ADD_POLL_ITEM, {
+    pollId,
+    content
+  })
+};

@@ -6,6 +6,8 @@ const graphqlRequest = (graphqlQuery, variables) => {
   return axios.post(SERVER_GRAPHQL, {
     query: graphqlQuery,
     variables
-  }).then(response => response.data.data);
+  }).then(response => {
+    return response.data.data;
+  });
 };
 export default graphqlRequest;

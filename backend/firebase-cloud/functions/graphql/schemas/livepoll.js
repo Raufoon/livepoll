@@ -63,6 +63,12 @@ const definitions = `
     id: String!
     content: LivepollItemContent!
   }
+  input InputLivepollItemContent {
+    text: String!
+    imgUrl: String
+    imgUrlList: [String]
+    youtubeUrl: String
+  }
   
   type Livepoll {
     id: ID!
@@ -77,6 +83,7 @@ const queries = `
 
 const mutations = `
   publishLivepoll(settings: InputLivepollCreate!): Livepoll
+  addItem(pollId: String!, content: InputLivepollItemContent!): LivepollItem
 `;
 
 module.exports = {
