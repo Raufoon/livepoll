@@ -61,6 +61,7 @@ const definitions = `
   }
   type LivepollItem {
     id: String!
+    creatorId: String
     content: LivepollItemContent!
   }
   input InputLivepollItemContent {

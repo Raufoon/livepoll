@@ -22,6 +22,7 @@ const definitions = {
 
   LivepollItem: {
     id: obj => obj.id,
+    creatorId: obj => obj.creatorId,
     content: obj => obj.content,
   },
 
@@ -76,44 +77,7 @@ const mutations = {
         })
       );
   },
-
-  addItem: (_, { pollId, content }, context) => {
-    return DB.read(`/polls/${pollId}/settings/whoCanAddItem`)
-      .then(
-        (whoCanAdd) => {
-          if (whoCanAdd === 'A') return Promise.resolve(1);
-          if (whoCanAdd === 'C') {
-            return DB.read(`/polls/${pollId}/settings/creatorId`)
-              .then(creatorId => verifyIdToken(context.idToken, creatorId))
-          }
-        }
-      )
-      .then(
-        () => DB.read(`/polls/${pollId}/settings/itemFormat`)
-          .then(
-            (pollItemFormat) => {
-              switch (pollItemFormat) {
-                case 'T':
-                  if (Object.values(content).length === 1 && typeof content.text === 'string') {
-                    return Promise.resolve(1);
-                  }
-                  break;
-                default:
-              }
-              return Promise.reject(500);
-            }
-          )
-          .then(
-            () => {
-              const itemId = uuidv1();
-              return DB.write(`/polls/${pollId}/items/${itemId}`, {
-                id: itemId,
-                content,
-              });
-            }
-          )
-      );
-  }
+  addItem: require('./livepoll/poll-items').addItem
 };
 
 module.exports = {
