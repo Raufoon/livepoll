@@ -22,7 +22,7 @@ const LivepollItemsLoader = props => {
       getStateData={getStateData}
       requestData={requestData}
       getChildProps={getChildProps}
-      limit={50}/>
+      limit={4}/>
   )
 };
 

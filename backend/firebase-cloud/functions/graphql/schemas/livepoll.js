@@ -88,7 +88,7 @@ const definitions = `
 
 const queries = `
   livepoll(id: String!): Livepoll
-  getFirstNItems(pollId: String!, limit: Int!, startItemId: String): [LivepollItem]
+  getFirstNItems(pollId: String!, limit: Int!, lastItemId: String): [LivepollItem]
 `;
 
 const mutations = `

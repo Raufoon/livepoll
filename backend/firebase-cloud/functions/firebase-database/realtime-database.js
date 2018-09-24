@@ -8,6 +8,24 @@ const DB = {
       .once('value')
       .then(snap=>snap.val());
   },
+  readWithinRange(path, limit, lastItemId) {
+    let promise = admin.database()
+      .ref(path)
+      .orderByKey();
+
+    if (lastItemId) {
+      promise = promise.startAt(lastItemId)
+    }
+    return promise
+      .limitToFirst(lastItemId ? limit + 1: limit)
+      .once('value')
+      .then(snap => Object.values(snap.val()))
+      .then(_items => {
+        let items = _items;
+        if (lastItemId) items.shift();
+        return items;
+      });
+  },
   readList(path) {
     return admin.database()
       .ref(path)

@@ -58,9 +58,9 @@ const QUERY_GET_FIRST_N_ITEMS = `
   query GetFirstNItems (
     $pollId: String!,
     $limit: Int!,
-    $startItemId: String
+    $lastItemId: String
   ) {
-    items: getFirstNItems (pollId: $pollId, limit: $limit, startItemId: $startItemId) {
+    items: getFirstNItems (pollId: $pollId, limit: $limit, lastItemId: $lastItemId) {
       id,
       content {
         text
@@ -68,8 +68,8 @@ const QUERY_GET_FIRST_N_ITEMS = `
     }
   }
 `;
-export const requestFirstNItems = (pollId, limit, startItemId) => graphqlRequest(QUERY_GET_FIRST_N_ITEMS, {
+export const requestFirstNItems = (pollId, limit, lastItemId) => graphqlRequest(QUERY_GET_FIRST_N_ITEMS, {
   pollId,
   limit,
-  startItemId
+  lastItemId
 });

@@ -4,7 +4,7 @@ import './LivepollItemCard.css'
 
 const LivepollitemCard = props => (
   <div className='livepoll-item-card'>
-    <h3>{props.item.content.text}</h3>
+    <br/><label>{props.item.content.text}</label><br/><br/>
   </div>
 );
 

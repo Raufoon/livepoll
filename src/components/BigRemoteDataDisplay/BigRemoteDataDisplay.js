@@ -2,15 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 class BigRemoteDataDisplay extends React.Component {
+  constructor(props) {
+    super(props);
+    this.loadMore = this.loadMore.bind(this);
+  }
+
+  loadMore() {
+    let itemKeys = Object.keys(this.props.getStateData());
+    this.props.requestData(this.props.limit, itemKeys[itemKeys.length - 1]);
+  }
+
   componentDidMount() {
     if (Object.keys(this.props.getStateData()).length === 0)
-      this.props.requestData(this.props.limit, '0')
+      this.props.requestData(this.props.limit)
   }
 
   render() {
-    if (Object.keys(this.props.getStateData()).length === 0) return "loading..";
     const ChildComponent = this.props.childComponent;
-    return <ChildComponent {...this.props.getChildProps()}/>;
+    return (
+      <React.Fragment>
+        <ChildComponent {...this.props.getChildProps()}/>
+        <button onClick={this.loadMore}>Load more</button>
+      </React.Fragment>
+    );
   }
 }
 

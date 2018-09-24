@@ -56,6 +56,6 @@ module.exports.addItem = (_, { pollId, content }, context) => {
     );
 };
 
-module.exports.getFirstNItems = (_, { pollId, limit, startItemId }) => {
-  return DB.read(`/polls/${pollId}/items`).then(data => Object.values(data));
+module.exports.getFirstNItems = (_, { pollId, limit, lastItemId }) => {
+  return DB.readWithinRange(`/polls/${pollId}/items`, limit, lastItemId);
 };
