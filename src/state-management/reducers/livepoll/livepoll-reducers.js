@@ -1,19 +1,10 @@
-export const reduceFetchPollInfoSuccess = (state, livepoll) => {
-  let newState = {...state};
-  if (!newState[livepoll.id]) {
-    newState[livepoll.id] = livepoll;
-  } else {
-    newState[livepoll.id] = Object.assign({}, newState[livepoll.id], livepoll);
-  }
-  return newState;
+export const reduceFetchPollInfoSuccess = (pollState, livepoll) => {
+  return {...pollState, ...livepoll};
 };
 
-export const reduceRequestAddItemSuccess = (state, pollId, newItem) => {
-  let newState = {...state};
-  newState[pollId] = {...newState[pollId]};
-
-  if (!newState[pollId].items)
-    newState[pollId].items = {};
-  newState[pollId].items[newItem.id] = newItem;
+export const reduceRequestAddItemSuccess = (pollState, newItem) => {
+  let newState = {...pollState};
+  newState.items = {...newState.items};
+  newState.items[newItem.id] = newItem;
   return newState;
 };
