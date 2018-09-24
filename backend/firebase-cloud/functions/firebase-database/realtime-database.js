@@ -31,6 +31,9 @@ const DB = {
     return admin.database()
       .ref(path)
       .remove();
+  },
+  getPushKey() {
+    return admin.database().ref().push().key;
   }
 };
 module.exports = DB;

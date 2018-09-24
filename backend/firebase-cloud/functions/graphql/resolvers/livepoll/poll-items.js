@@ -44,7 +44,7 @@ module.exports.addItem = (_, { pollId, content }, context) => {
         .then(
           // write to database
           (args) => {
-            const itemId = uuidv1();
+            const itemId = DB.getPushKey();
             const newItem = {
               id: itemId,
               content,
