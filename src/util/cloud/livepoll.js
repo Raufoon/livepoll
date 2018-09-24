@@ -53,3 +53,23 @@ export const requestAddPollitem = (pollId, content) => {
     content
   })
 };
+
+const QUERY_GET_FIRST_N_ITEMS = `
+  query GetFirstNItems (
+    $pollId: String!,
+    $limit: Int!,
+    $startItemId: String
+  ) {
+    items: getFirstNItems (pollId: $pollId, limit: $limit, startItemId: $startItemId) {
+      id,
+      content {
+        text
+      }
+    }
+  }
+`;
+export const requestFirstNItems = (pollId, limit, startItemId) => graphqlRequest(QUERY_GET_FIRST_N_ITEMS, {
+  pollId,
+  limit,
+  startItemId
+});

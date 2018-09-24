@@ -8,3 +8,11 @@ export const reduceRequestAddItemSuccess = (pollState, newItem) => {
   newState.items[newItem.id] = newItem;
   return newState;
 };
+
+export const reduceRequestFirstNItemsSuccess = (pollState, newItems) => {
+  let newState = {...pollState};
+  newState.items = {...newState.items};
+  for (let i=0; i<newItems.length; i++)
+    newState.items[newItems[i].id] = newItems[i];
+  return newState;
+};
