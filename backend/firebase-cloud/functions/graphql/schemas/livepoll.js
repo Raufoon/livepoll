@@ -17,7 +17,7 @@ const inputs = `
     creatorId: String!
     title: String!
     startDatetime: String!
-    endDatetime: String!
+    endDatetime: String
     isPrivate: Boolean
     voteType: VoteType!
     itemFormat: PollItemFormat!
@@ -64,7 +64,7 @@ const definitions = `
     creatorId: String!
     title: String!
     startDatetime: String!
-    endDatetime: String!
+    endDatetime: String
     isPrivate: Boolean
     voteType: VoteType!
     itemFormat: PollItemFormat!

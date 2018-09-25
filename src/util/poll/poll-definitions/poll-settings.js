@@ -7,7 +7,6 @@ class PollSettings {
   };
 
   static defaultPollSettings = {
-    endDatetime: 'infinite',
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
   };
 
