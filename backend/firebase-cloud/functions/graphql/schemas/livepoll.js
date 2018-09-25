@@ -5,11 +5,6 @@ const enums = `
     TII # text with multiple images
     TV # text with video
   }
-  enum VoteType {
-    T # vote by tick
-    N10 # vote by 0 to 10
-    N100 # vote by 0 to 100
-  }
 `;
 
 const inputs = `
@@ -19,7 +14,6 @@ const inputs = `
     startDatetime: String!
     endDatetime: String
     isPrivate: Boolean
-    voteType: VoteType!
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
   }
@@ -66,7 +60,6 @@ const definitions = `
     startDatetime: String!
     endDatetime: String
     isPrivate: Boolean
-    voteType: VoteType!
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
   }

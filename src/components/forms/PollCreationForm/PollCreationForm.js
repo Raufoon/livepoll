@@ -67,18 +67,6 @@ class PollCreationForm extends React.Component {
         <br/>
         {
           LPFormField.createDropdownField({
-            name: 'voteType',
-            title: 'How to vote?',
-            dropdownOptions: [
-              {label: 'By tick', value: PollSettings.VOTE_TYPES.TICK_VOTE},
-              {label: 'By 0-10', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_10},
-              {label: 'By 0-100', value: PollSettings.VOTE_TYPES.NUMBER_VOTE_0_100},
-            ]
-          })
-        }
-        <br/>
-        {
-          LPFormField.createDropdownField({
             name: 'itemFormat',
             title: 'Poll structure',
             dropdownOptions: [

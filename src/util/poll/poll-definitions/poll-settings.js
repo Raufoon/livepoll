@@ -10,12 +10,6 @@ class PollSettings {
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
   };
 
-  static VOTE_TYPES = {
-    TICK_VOTE: 'T',
-    NUMBER_VOTE_0_10: 'N10',
-    NUMBER_VOTE_0_100: 'N100',
-  };
-
   constructor(_settings) {
     if (!_settings.creatorId || !_settings.title) {
       throw new Error('cannot create poll settings');

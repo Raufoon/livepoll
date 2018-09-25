@@ -7,7 +7,6 @@ const definitions = {
     startDatetime: obj => obj.startDatetime,
     endDatetime: obj => obj.endDatetime,
     isPrivate: obj => obj.isPrivate,
-    voteType: obj => obj.voteType,
     itemFormat: obj => obj.itemFormat,
     othersCanAdd: obj => obj.othersCanAdd,
   },

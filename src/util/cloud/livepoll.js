@@ -21,7 +21,6 @@ const QUERY_POLL_INFO = `
         startDatetime,
         endDatetime,
         isPrivate,
-        voteType,
         itemFormat,
         othersCanAdd
       }
