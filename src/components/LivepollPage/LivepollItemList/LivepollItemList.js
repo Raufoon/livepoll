@@ -1,11 +1,18 @@
 import React from "react";
-import LivepollitemCard from "../LivepollItemCard/LivepollItemCard";
 
 const LivepollItemList = props => {
   return (
     <React.Fragment>
       {
-        Object.values(props.items || {}).map(item => <LivepollitemCard  key={item.id} item={item}/>)
+        Object.values(props.items || {}).map(item => (
+          <div key={item.id}>
+            <br/>
+            <b>{item.content.text}</b><br/>
+            <span>{item.voteCount} votes</span><br/>
+            {props.showVoteButton && <button>vote</button>}
+            <br/>
+          </div>
+        ))
       }
     </React.Fragment>
   )

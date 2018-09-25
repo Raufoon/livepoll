@@ -32,7 +32,8 @@ const LivepollPage = props => {
         getChildProps={
           () => ({
             items: props.livepoll.items,
-            pollId: props.livepoll.id
+            pollId: props.livepoll.id,
+            showVoteButton: true
           })
         }
         limit={50}/>
