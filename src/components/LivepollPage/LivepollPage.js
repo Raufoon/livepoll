@@ -3,9 +3,10 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {actionFetchPollInfo} from "../../state-management/actions/livepoll-actions";
+import {actionFetchPollInfo, actionRequestFirstNItems} from "../../state-management/actions/livepoll-actions";
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
-import LivepollItemsLoader from "./LivepollItemsLoader/LivepollItemsLoader";
+import LivepollItemList from "./LivepollItemList/LivepollItemList";
+import BigRemoteDataDisplay from "../BigRemoteDataDisplay/BigRemoteDataDisplay";
 
 const LivepollPage = props => {
   const pid = props.match.params.id;
@@ -19,7 +20,22 @@ const LivepollPage = props => {
     <div>
       <LivepollInfoCard livepoll={props.livepoll} />
       <br/><br/>
-      <LivepollItemsLoader livepoll={props.livepoll}/>
+      <BigRemoteDataDisplay
+        childComponent={LivepollItemList}
+        getStateData={
+          () => props.livepoll.items || {}
+        }
+        requestData={
+          (limit, startItemId) =>
+            props.dispatch(actionRequestFirstNItems(props.livepoll.id, limit, startItemId))
+        }
+        getChildProps={
+          () => ({
+            items: props.livepoll.items,
+            pollId: props.livepoll.id
+          })
+        }
+        limit={50}/>
     </div>
   )
 };
