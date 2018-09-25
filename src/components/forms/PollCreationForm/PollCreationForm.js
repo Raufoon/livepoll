@@ -16,7 +16,7 @@ class PollCreationForm extends React.Component {
   publishPoll(data) {
     // converting the time to utc
     data.startDatetime = new Date(data.startDatetime).toISOString();
-    data.endDatetime = !!data.endDatetime ? new Date(data.endDatetime).toISOString() : 'infinite';
+    data.endDatetime = !!data.endDatetime ? new Date(data.endDatetime).toISOString() : undefined;
 
     requestPublishLivepoll(
       new PollSettings({
