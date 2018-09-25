@@ -1,8 +1,4 @@
 const enums = `
-  enum PollPrivacy {
-    PB # public
-    PR # private
-  }
   enum PollItemFormat {
     T # text only
     TI # text with image
@@ -22,7 +18,7 @@ const inputs = `
     title: String!
     startDatetime: String!
     endDatetime: String!
-    privacy: PollPrivacy!
+    isPrivate: Boolean
     voteType: VoteType!
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
@@ -69,7 +65,7 @@ const definitions = `
     title: String!
     startDatetime: String!
     endDatetime: String!
-    privacy: PollPrivacy!
+    isPrivate: Boolean
     voteType: VoteType!
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean

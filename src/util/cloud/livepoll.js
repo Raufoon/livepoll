@@ -20,7 +20,7 @@ const QUERY_POLL_INFO = `
         title,
         startDatetime,
         endDatetime,
-        privacy,
+        isPrivate,
         voteType,
         itemFormat,
         othersCanAdd

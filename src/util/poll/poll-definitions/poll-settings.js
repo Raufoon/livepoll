@@ -1,9 +1,4 @@
 class PollSettings {
-  static POLL_PRIVACY = {
-    PUBLIC: 'PB',
-    PRIVATE: 'PR',
-  };
-
   static POLL_ITEM_FORMAT = {
     TEXT: 'T',
     TEXT_WITH_IMAGE: 'TI',
@@ -13,7 +8,6 @@ class PollSettings {
 
   static defaultPollSettings = {
     endDatetime: 'infinite',
-    privacy: PollSettings.POLL_PRIVACY.PUBLIC,
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
   };
 

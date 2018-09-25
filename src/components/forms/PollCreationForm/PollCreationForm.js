@@ -58,13 +58,10 @@ class PollCreationForm extends React.Component {
         }
         <br/>
         {
-          LPFormField.createDropdownField({
-            name: 'privacy',
-            title: 'Privacy',
-            dropdownOptions: [
-              {label: 'Public', value: PollSettings.POLL_PRIVACY.PUBLIC},
-              {label: 'Link only', value: PollSettings.POLL_PRIVACY.PRIVATE},
-            ]
+          LPFormField.createOptionalField({
+            name: 'isPrivate',
+            type: 'checkbox',
+            placeholder: 'the poll is private (link only)'
           })
         }
         <br/>
