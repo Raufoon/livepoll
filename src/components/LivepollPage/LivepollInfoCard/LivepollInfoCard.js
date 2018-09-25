@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
-import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 import ModalOpenerButton from "../../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import CreateItemForm from "../../forms/CreateItemForm/CreateItemForm";
 

@@ -10,7 +10,7 @@ export const graphqlRequest = (graphqlQuery, variables) => {
       query: graphqlQuery,
       variables
     }).then(response => {
-      if (response.data.errors) return Promise.reject(0);
+      if (response.data.errors) return Promise.reject(response.data.errors);
       return response.data.data;
     });
 };
@@ -32,7 +32,7 @@ export const graphqlSecureRequest = (graphqlQuery, variables) => {
       );
     })
     .then(response => {
-      if (response.data.errors) return Promise.reject(0);
+      if (response.data.errors) return Promise.reject(response.data.errors);
       return response.data.data;
     });
 };

@@ -19,9 +19,10 @@ const DB = {
     return promise
       .limitToFirst(lastItemId ? limit + 1: limit)
       .once('value')
-      .then(snap => Object.values(snap.val()))
+      .then(snap => Object.values(snap.val() || {}))
       .then(_items => {
         let items = _items;
+        if (!items || items.length === 0) return [];
         if (lastItemId) items.shift();
         return items;
       });

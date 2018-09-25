@@ -17,8 +17,8 @@ class LPFormField extends React.Component{
       name={options.name}
       type={options.type}
       defaultValue={options.defaultValue}
-      title={options.title ? options.title + ' (optional)' : undefined}
-      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}
+      title={options.title ? options.title: undefined}
+      placeholder={options.placeholder ? options.placeholder: undefined}
       validate={LPFormField.validators.checkNotNull}
       errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
   );
