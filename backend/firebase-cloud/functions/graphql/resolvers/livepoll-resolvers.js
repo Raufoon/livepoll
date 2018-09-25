@@ -21,6 +21,8 @@ const definitions = {
     id: obj => obj.id,
     creatorId: obj => obj.creatorId,
     content: obj => obj.content,
+    voteCount: obj => obj.voteCount,
+    voterIds: obj => obj.voterIds,
   },
 
   LivepollItemContent: {

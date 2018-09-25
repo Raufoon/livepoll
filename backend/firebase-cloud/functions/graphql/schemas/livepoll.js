@@ -48,6 +48,8 @@ const livepollItemDef = `
     id: String!
     creatorId: String
     content: LivepollItemContent!
+    voteCount: Int!
+    voterIds: [String]!
   }
 `;
 

@@ -1,6 +1,5 @@
 const DB = require("../../../firebase-database/realtime-database");
 const {verifyIdToken, decodeIdToken} = require('../util');
-const uuidv1 = require('uuid/v1');
 
 module.exports.addItem = (_, { pollId, content }, context) => {
   return DB.read(`/polls/${pollId}/settings/othersCanAdd`)
@@ -48,6 +47,8 @@ module.exports.addItem = (_, { pollId, content }, context) => {
             const newItem = {
               id: itemId,
               content,
+              voteCount: 0,
+              voterIds: [],
             };
             if (args.creatorId) newItem.creatorId = args.creatorId;
             return DB.write(`/polls/${pollId}/items/${itemId}`, newItem);
