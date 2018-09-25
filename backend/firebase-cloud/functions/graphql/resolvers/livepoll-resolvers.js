@@ -23,7 +23,7 @@ const definitions = {
     creatorId: obj => obj.creatorId,
     content: obj => obj.content,
     voteCount: obj => obj.voteCount,
-    voterIds: obj => obj.voterIds,
+    voterIds: obj => Object.keys(obj.voterIds || {}),
   },
 
   LivepollItemContent: {
@@ -68,7 +68,8 @@ const queries = {
 
 const mutations = {
   publishLivepoll: require('./livepoll/poll').publishLivepoll,
-  addItem: require('./livepoll/poll-items').addItem
+  addItem: require('./livepoll/poll-items').addItem,
+  vote: require('./livepoll/poll').vote,
 };
 
 module.exports = {

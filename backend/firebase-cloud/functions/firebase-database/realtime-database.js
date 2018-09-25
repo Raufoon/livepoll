@@ -2,6 +2,12 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const DB = {
+  exists(path) {
+    return admin.database()
+      .ref(path)
+      .once('value')
+      .then(snap=>snap.exists());
+  },
   read(path) {
     return admin.database()
       .ref(path)

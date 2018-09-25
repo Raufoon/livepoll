@@ -33,7 +33,7 @@ const LivepollPage = props => {
           () => ({
             items: props.livepoll.items,
             pollId: props.livepoll.id,
-            showVoteButton: true
+            showVoteButton: true,
           })
         }
         limit={50}/>

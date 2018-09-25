@@ -3,6 +3,7 @@ const definitions = `
     id: ID!
     name: String
     dob: String
+    votedPolls: [String]
   }
 `;
 

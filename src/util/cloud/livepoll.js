@@ -48,8 +48,7 @@ const MUTATION_ADD_POLL_ITEM = `
 `;
 export const requestAddPollitem = (pollId, content) => {
   return graphqlSecureRequest(MUTATION_ADD_POLL_ITEM, {
-    pollId,
-    content
+    pollId, content
   })
 };
 
@@ -70,7 +69,17 @@ const QUERY_GET_FIRST_N_ITEMS = `
   }
 `;
 export const requestFirstNItems = (pollId, limit, lastItemId) => graphqlRequest(QUERY_GET_FIRST_N_ITEMS, {
-  pollId,
-  limit,
-  lastItemId
+  pollId, limit, lastItemId
+});
+
+const MUTATION_GIVE_VOTE = `
+  mutation GiveVote(
+    $pollId: String!,
+    $itemId: String!
+  ) {
+    voteCount: vote(pollId: $pollId, itemId: $itemId)
+  }
+`;
+export const requestGiveVote = (pollId, itemId) => graphqlSecureRequest(MUTATION_GIVE_VOTE, {
+  pollId, itemId
 });
