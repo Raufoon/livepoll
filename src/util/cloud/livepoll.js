@@ -63,7 +63,9 @@ const QUERY_GET_FIRST_N_ITEMS = `
       id,
       content {
         text
-      }
+      },
+      voteCount,
+      voterIds
     }
   }
 `;

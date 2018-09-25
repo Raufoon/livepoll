@@ -9,6 +9,7 @@ const definitions = {
     isPrivate: obj => obj.isPrivate,
     itemFormat: obj => obj.itemFormat,
     othersCanAdd: obj => obj.othersCanAdd,
+    hideVoters: obj => obj.hideVoters,
   },
 
   Livepoll: {

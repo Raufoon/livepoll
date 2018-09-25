@@ -16,6 +16,7 @@ const inputs = `
     isPrivate: Boolean
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
+    hideVoters: Boolean
   }
   input InputLivepollItemContent {
     text: String!
@@ -64,6 +65,7 @@ const definitions = `
     isPrivate: Boolean
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
+    hideVoters: Boolean
   }
   ${livepollItemDef}  
   type Livepoll {

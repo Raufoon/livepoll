@@ -85,6 +85,14 @@ class PollCreationForm extends React.Component {
             type: 'checkbox'
           })
         }
+        <br/>
+        {
+          LPFormField.createOptionalField({
+            name: 'hideVoters',
+            placeholder: 'Hide voter list',
+            type: 'checkbox'
+          })
+        }
       </LPForm>
     )
   }
