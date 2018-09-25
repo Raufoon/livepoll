@@ -17,8 +17,10 @@ class LPForm extends React.Component {
   onChange(event) {
     let newField = {};
     let removedErrors = {};
+    let value = event.target.value;
+    if (event.target.type === 'checkbox') value = event.target.checked;
 
-    newField[event.target.name] = event.target.value;
+    newField[event.target.name] = value;
     removedErrors[event.target.name] = false;
 
     this.setState((oldState) => ({

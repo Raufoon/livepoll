@@ -14,10 +14,6 @@ const enums = `
     N10 # vote by 0 to 10
     N100 # vote by 0 to 100
   }
-  enum WhoCanAddItem {
-    A # anyone
-    C # only creator
-  }
 `;
 
 const inputs = `
@@ -29,7 +25,7 @@ const inputs = `
     privacy: PollPrivacy!
     voteType: VoteType!
     itemFormat: PollItemFormat!
-    whoCanAddItem: WhoCanAddItem!
+    othersCanAdd: Boolean
   }
   input InputLivepollItemContent {
     text: String!
@@ -76,7 +72,7 @@ const definitions = `
     privacy: PollPrivacy!
     voteType: VoteType!
     itemFormat: PollItemFormat!
-    whoCanAddItem: WhoCanAddItem!
+    othersCanAdd: Boolean
   }
   ${livepollItemDef}  
   type Livepoll {

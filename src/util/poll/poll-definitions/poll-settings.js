@@ -11,16 +11,10 @@ class PollSettings {
     TEXT_WITH_VIDEO: 'TV',
   };
 
-  static WHO_CAN_ADD_ITEM = {
-    ANYONE: 'A',
-    ONLY_CREATOR: 'C'
-  };
-
   static defaultPollSettings = {
     endDatetime: 'infinite',
     privacy: PollSettings.POLL_PRIVACY.PUBLIC,
     itemFormat: PollSettings.POLL_ITEM_FORMAT.TEXT,
-    whoCanAddItem: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR
   };
 
   static VOTE_TYPES = {

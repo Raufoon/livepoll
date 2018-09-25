@@ -94,13 +94,10 @@ class PollCreationForm extends React.Component {
         }
         <br/>
         {
-          LPFormField.createDropdownField({
-            name: 'whoCanAddItem',
-            title: 'Who can add item?',
-            dropdownOptions: [
-              {label: 'Only owner', value: PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR},
-              {label: 'Anyone', value: PollSettings.WHO_CAN_ADD_ITEM.ANYONE},
-            ]
+          LPFormField.createOptionalField({
+            name: 'othersCanAdd',
+            placeholder: 'Allow others to add?',
+            type: 'checkbox'
           })
         }
       </LPForm>

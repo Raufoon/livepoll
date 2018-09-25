@@ -3,27 +3,27 @@ const {verifyIdToken, decodeIdToken} = require('../util');
 const uuidv1 = require('uuid/v1');
 
 module.exports.addItem = (_, { pollId, content }, context) => {
-  return DB.read(`/polls/${pollId}/settings/whoCanAddItem`)
+  return DB.read(`/polls/${pollId}/settings/othersCanAdd`)
     .then(
       // if only creator can add, verify the creator
-      (whoCanAdd) => {
-        if (whoCanAdd === 'A') return Promise.resolve(whoCanAdd);
-        if (whoCanAdd === 'C') {
+      (othersCanAdd) => {
+        if (othersCanAdd) return Promise.resolve(othersCanAdd);
+        if (!othersCanAdd) {
           return DB.read(`/polls/${pollId}/settings/creatorId`)
             .then(creatorId => verifyIdToken(context.idToken, creatorId))
-            .then(() => whoCanAdd)
+            .then(() => othersCanAdd)
         }
       }
     )
     .then(
       // check if the item format is correct
-      (whoCanAdd) => DB.read(`/polls/${pollId}/settings/itemFormat`)
+      (othersCanAdd) => DB.read(`/polls/${pollId}/settings/itemFormat`)
         .then(
           (pollItemFormat) => {
             switch (pollItemFormat) {
               case 'T':
                 if (Object.values(content).length === 1 && typeof content.text === 'string') {
-                  return Promise.resolve(whoCanAdd);
+                  return Promise.resolve(othersCanAdd);
                 }
                 break;
               default:
@@ -33,8 +33,8 @@ module.exports.addItem = (_, { pollId, content }, context) => {
         )
         .then(
           // if anyone can add item, find the item creator id
-          (whoCanAdd) => {
-            if (whoCanAdd === 'A') {
+          (othersCanAdd) => {
+            if (othersCanAdd) {
               return decodeIdToken(context.idToken)
                 .then(authUid => ({creatorId: authUid}));
             }

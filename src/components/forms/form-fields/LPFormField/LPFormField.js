@@ -16,9 +16,9 @@ class LPFormField extends React.Component{
     <LPFormField
       name={options.name}
       type={options.type}
-      title={options.title}
       defaultValue={options.defaultValue}
-      placeholder={options.placeholder}
+      title={options.title ? options.title + ' (optional)' : undefined}
+      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}
       validate={LPFormField.validators.checkNotNull}
       errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
   );
@@ -27,18 +27,18 @@ class LPFormField extends React.Component{
     <LPFormField
       name={options.name}
       type={options.type}
-      title={options.title + ' (optional)'}
+      title={options.title ? options.title + ' (optional)' : undefined}
       value={options.value}
-      placeholder={options.placeholder + ' (optional)'}/>
+      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}/>
   );
 
   static createDropdownField = options => (
     <LPFormField
       name={options.name}
       type={'dropdown'}
-      title={options.title}
-      dropdownOptions={options.dropdownOptions}
-      placeholder={options.placeholder}/>
+      title={options.title ? options.title + ' (optional)' : undefined}
+      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}
+      dropdownOptions={options.dropdownOptions}/>
   );
 
   constructor(props) {
@@ -73,7 +73,9 @@ class LPFormField extends React.Component{
   }
 
   onChange(event) {
-    if (!this.props.validate || this.props.validate(event.target.value)) {
+    let value = event.target.value;
+    if (event.target.type === 'checkbox') value = event.target.checked;
+    if (!this.props.validate || this.props.validate(value)) {
       this.props.onChange(event);
       this.setState({
         error: undefined
@@ -87,6 +89,43 @@ class LPFormField extends React.Component{
   }
 
   render() {
+    let inputComponent;
+
+    if (this.props.type === 'dropdown') {
+      inputComponent = (
+        <select name={this.props.name}
+                defaultValue={this.props.dropdownOptions[0]}
+                onChange={this.onChange}
+                className={'form-field-input'}>
+          {
+            this.props.dropdownOptions.map(option => (
+              <option key={option.value} value={option.value}>{option.label}</option>
+            ))
+          }
+        </select>
+      )
+    } else if (this.props.type === 'checkbox') {
+      inputComponent = (
+        <React.Fragment>
+          <input name={this.props.name}
+                 type={'checkbox'}
+                 defaultValue={false}
+                 value={this.state.value}
+                 onChange={this.onChange}/>
+          {this.props.placeholder}
+        </React.Fragment>
+      )
+    } else {
+      inputComponent = (
+        <input name={this.props.name}
+               className={'form-field-input'}
+               placeholder={this.props.placeholder}
+               type={this.props.type}
+               defaultValue={this.props.defaultValue}
+               value={this.state.value}
+               onChange={this.onChange}/>
+      )
+    }
     return (
       <div className={'form-field'}>
         {
@@ -94,28 +133,7 @@ class LPFormField extends React.Component{
             <label>{this.props.title}<br/></label>
           )
         }
-        {
-          this.props.type === 'dropdown' ? (
-            <select name={this.props.name}
-                    defaultValue={this.props.dropdownOptions[0]}
-                    onChange={this.onChange}
-                    className={'form-field-input'}>
-              {
-                this.props.dropdownOptions.map(option => (
-                  <option key={option.value} value={option.value}>{option.label}</option>
-                ))
-              }
-            </select>
-          ): (
-            <input name={this.props.name}
-                   className={'form-field-input'}
-                   placeholder={this.props.placeholder}
-                   type={this.props.type}
-                   defaultValue={this.props.defaultValue}
-                   value={this.state.value}
-                   onChange={this.onChange}/>
-          )
-        }
+        {inputComponent}
         <br/>
         {this.state.error && <span>{this.state.error}</span>}
       </div>

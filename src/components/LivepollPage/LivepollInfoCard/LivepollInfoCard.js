@@ -9,10 +9,7 @@ import CreateItemForm from "../../forms/CreateItemForm/CreateItemForm";
 const LivepollInfoCard = props => {
   const settings = props.livepoll.settings;
 
-  const showAddItemButton = settings.whoCanAddItem === PollSettings.WHO_CAN_ADD_ITEM.ANYONE
-    || (settings.whoCanAddItem === PollSettings.WHO_CAN_ADD_ITEM.ONLY_CREATOR
-      && settings.creatorId === props.authUserId
-    );
+  const showAddItemButton = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
 
   return (
     <div>
@@ -22,7 +19,7 @@ const LivepollInfoCard = props => {
       <span>Starts at {props.livepoll.settings.startDatetime}</span><br/>
       <span>{props.livepoll.settings.endDatetime === 'infinite' ? 'Never ends' : `Ends at ${props.livepoll.settings.endDatetime}`}</span><br/>
       <span>{props.livepoll.settings.privacy === 'pr'?'Private poll' : 'Public poll'}</span><br/>
-      <span>{props.livepoll.settings.whoCanAddItem === 'A'?'Anyone ' : 'Only creator '}can add item</span><br/>
+      <span>{props.livepoll.settings.othersCanAdd?'Anyone ' : 'Only creator '}can add item</span><br/>
       <span>Item format: {props.livepoll.settings.itemFormat}</span><br/>
       <span>Vote by {props.livepoll.settings.voteType === 'T' ? 'tick':'number'}</span><br/>
 

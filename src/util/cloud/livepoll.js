@@ -23,7 +23,7 @@ const QUERY_POLL_INFO = `
         privacy,
         voteType,
         itemFormat,
-        whoCanAddItem
+        othersCanAdd
       }
     }
   }
