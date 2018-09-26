@@ -12,25 +12,46 @@ module.exports.publishLivepoll = (_, { settings }, context) => {
     );
 };
 
+// target: ensure if they are transaction
 module.exports.vote = (_, { pollId, itemId }, context) => {
-  let itemPath = `polls/${pollId}/items/${itemId}`,
-    authUserId;
-  return decodeIdToken(context.idToken)
-    .then(userId => {
-      authUserId = userId;
-      return DB.exists(`users/${authUserId}/votedPolls/${pollId}`);
+  let authUserId;
+  let lastVotedItemId;
+
+  // check if user already voted
+  return decodeIdToken(context.idToken).then(decodedUid => {
+    authUserId = decodedUid;
+    return DB.read(`users/${authUserId}/votedPolls/${pollId}`);
+  })
+    .then(_lastVotedItemId => {
+      // fetch the votecount of the item and previously voted item (if any)
+      let fetchVoteCountPromiseList = [
+        DB.read(`polls/${pollId}/items/${itemId}/voteCount`)
+      ];
+
+      if (_lastVotedItemId) {
+        lastVotedItemId = _lastVotedItemId;
+        fetchVoteCountPromiseList.push(
+          DB.read(`polls/${pollId}/items/${lastVotedItemId}/voteCount`)
+        );
+      }
+      return Promise.all(fetchVoteCountPromiseList);
     })
-    .then(isAlreadyVoted => {
-      if (isAlreadyVoted) return Promise.reject('You already voted');
-      return Promise.resolve(true);
+    .then(voteCountList => {
+      // cancel the vote of previously voted item and vote the new item
+      let dbWritePromises = [
+        DB.write(`polls/${pollId}/items/${itemId}/voteCount`, voteCountList[0] + 1),
+        DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true),
+        DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId)
+      ];
+      if (lastVotedItemId) {
+        dbWritePromises.push(
+          DB.write(`polls/${pollId}/items/${lastVotedItemId}/voteCount`, voteCountList[1] - 1)
+        );
+        dbWritePromises.push(
+          DB.remove(`polls/${pollId}/items/${lastVotedItemId}/voterIds/${authUserId}`)
+        );
+      }
+      // in the end, return the vote count of the new item
+      return Promise.all(dbWritePromises).then(() => voteCountList[0] + 1);
     })
-    .then(() => DB.read(`${itemPath}/voteCount`))
-    .then(voteCount => {
-      return Promise.all([
-        DB.write(`${itemPath}/voteCount`, voteCount + 1),
-        DB.write(`users/${authUserId}/votedPolls/${pollId}`, true),
-        DB.write(`${itemPath}/voterIds/${authUserId}`, true),
-      ])
-        .then(() => DB.read(`${itemPath}/voteCount`))
-    });
 };

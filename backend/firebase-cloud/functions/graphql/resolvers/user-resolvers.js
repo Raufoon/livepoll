@@ -5,13 +5,14 @@ const definitions = {
   User: {
     name: obj => obj.name,
     dob: obj => obj.dob,
-    votedPolls: obj => obj.votedPolls,
+    votedPolls: obj => Object.keys(obj.votedPolls || {}),
   },
 };
 
 const queries = {
   user: (_, { id }) => DB.read(`/users/${id}`),
   users: () => DB.readList('/users'),
+  haveIVoted: require('./user/user').haveIVoted,
 };
 
 const mutations = {

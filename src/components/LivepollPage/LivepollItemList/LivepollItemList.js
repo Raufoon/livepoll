@@ -1,6 +1,4 @@
 import React from "react";
-import {requestGiveVote} from "../../../util/cloud/livepoll";
-
 const LivepollItemList = props => {
   return (
     <React.Fragment>
@@ -10,7 +8,7 @@ const LivepollItemList = props => {
             <br/>
             <b>{item.content.text}</b><br/>
             <span>{item.voteCount} votes</span><br/>
-            {props.showVoteButton && <button onClick={() => {requestGiveVote(props.pollId, item.id)}}>vote</button>}
+            <button onClick={() => {props.vote(item.id)}}>vote</button>
             <br/>
             <br/>
           </div>

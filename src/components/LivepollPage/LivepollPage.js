@@ -3,7 +3,12 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {actionFetchPollInfo, actionRequestFirstNItems} from "../../state-management/actions/livepoll-actions";
+import {
+  actionFetchPollInfo,
+  actionGiveVote,
+  actionRequestFirstNItems
+} from "../../state-management/actions/livepoll-actions";
+
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import BigRemoteDataDisplay from "../BigRemoteDataDisplay/BigRemoteDataDisplay";
@@ -20,6 +25,7 @@ const LivepollPage = props => {
     <div>
       <LivepollInfoCard livepoll={props.livepoll} />
       <br/><br/>
+
       <BigRemoteDataDisplay
         childComponent={LivepollItemList}
         getStateData={
@@ -32,8 +38,9 @@ const LivepollPage = props => {
         getChildProps={
           () => ({
             items: props.livepoll.items,
-            pollId: props.livepoll.id,
-            showVoteButton: true,
+            vote: (itemId) => {
+              props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
+            }
           })
         }
         limit={50}/>
@@ -42,7 +49,8 @@ const LivepollPage = props => {
 };
 
 const s2p = (state, ownProps) => ({
-  livepoll: state.polls[ownProps.match.params.id]
+  livepoll: state.polls[ownProps.match.params.id],
+  lastVotedItemId: undefined
 });
 
 LivepollPage.propTypes = {

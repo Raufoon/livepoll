@@ -1,11 +1,11 @@
 import {
-  ACTION_FETCH_POLL_INFO_SUCCESS,
+  ACTION_FETCH_POLL_INFO_SUCCESS, ACTION_GIVE_VOTE_SUCCESS,
   ACTION_REQUEST_ADD_ITEM_SUCCESS,
   ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS
 } from "../../actions/livepoll-actions";
 import initialState from "../../initial-state";
 import {
-  reduceFetchPollInfoSuccess,
+  reduceFetchPollInfoSuccess, reduceGiveVoteSuccess,
   reduceRequestAddItemSuccess,
   reduceRequestFirstNItemsSuccess
 } from "./livepoll-reducers";
@@ -27,6 +27,11 @@ const livepollRootReducer = (state = initialState.polls, action) => {
     case ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS:
       newState[action.pollId]
         = reduceRequestFirstNItemsSuccess(newState[action.pollId], action.items);
+      return newState;
+
+    case ACTION_GIVE_VOTE_SUCCESS:
+      newState[action.pollId]
+        = reduceGiveVoteSuccess(newState[action.pollId], action.itemId, action.lastVotedItemId);
       return newState;
 
     default:

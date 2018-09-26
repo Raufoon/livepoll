@@ -10,6 +10,7 @@ const definitions = `
 const queries = `
   user(id: ID!): User
   users: [User]!
+  haveIVoted(pollId: String!): String
 `;
 
 const mutations = `

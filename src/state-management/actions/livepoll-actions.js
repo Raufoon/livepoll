@@ -1,4 +1,4 @@
-import {requestAddPollitem, requestFirstNItems, requestPollInfo} from "../../util/cloud/livepoll";
+import {requestAddPollitem, requestFirstNItems, requestGiveVote, requestPollInfo} from "../../util/cloud/livepoll";
 
 export const actionFetchPollInfo = (id) => dispatch => {
   return requestPollInfo(id)
@@ -35,4 +35,16 @@ export const actionRequestFirstNItemsSuccess = (pollId, items) => ({
   type: ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS,
   pollId,
   items
+});
+
+export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
+  return requestGiveVote(pollId, itemId)
+    .then(response =>
+      dispatch(actionGiveVoteSuccess(pollId, itemId, lastVotedItemId)));
+};
+
+export const ACTION_GIVE_VOTE_SUCCESS = 'ACTION_GIVE_VOTE_SUCCESS';
+export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
+  type:ACTION_GIVE_VOTE_SUCCESS,
+  pollId, itemId, lastVotedItemId
 });

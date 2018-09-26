@@ -16,3 +16,12 @@ export const reduceRequestFirstNItemsSuccess = (pollState, newItems) => {
     newState.items[newItems[i].id] = newItems[i];
   return newState;
 };
+
+export const reduceGiveVoteSuccess = (pollState, itemId, lastVotedItemId) => {
+  let newPollState = {...pollState};
+  newPollState.items[itemId].voteCount++;
+  if (lastVotedItemId) {
+    newPollState.items[lastVotedItemId].voteCount++;
+  }
+  return newItemState;
+};
