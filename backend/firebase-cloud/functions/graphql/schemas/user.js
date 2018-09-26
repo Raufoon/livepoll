@@ -1,8 +1,16 @@
 const definitions = `
+  input InputBasicInfo{
+    name: String!
+    dob: String!
+  }
+  type BasicInfo {
+    name: String!
+    dob: String!
+  }
+
   type User {
     id: ID!
-    name: String
-    dob: String
+    basicInfo: BasicInfo
     votedPolls: [String]
   }
 `;
@@ -14,7 +22,8 @@ const queries = `
 `;
 
 const mutations = `
-  createUser(id: ID!, name: String, dob: String): User
+  createUser: User
+  updateProfileBasicInfo(newBasicInfo: InputBasicInfo): BasicInfo
 `;
 
 module.exports = {

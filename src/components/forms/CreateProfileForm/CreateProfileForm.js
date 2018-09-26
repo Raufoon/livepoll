@@ -4,17 +4,14 @@ import PropTypes from 'prop-types'
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {requestCreateUser} from "../../../util/cloud/user";
-import {actionAuthUserDataReceived} from "../../../state-management/actions/auth-actions";
+import {
+  actionRequestUpdateBasicInfo
+} from "../../../state-management/actions/my-profile-actions";
 
 const CreateProfileForm = (props) => {
   const onSubmit = data => {
-    requestCreateUser(props.userId, data)
-      .then((response) => {
-        // if opened from modal
-        if (props.onModalResult) props.onModalResult();
-        props.dispatch(actionAuthUserDataReceived(response.user));
-      })
+    props.dispatch(actionRequestUpdateBasicInfo(data));
+    if (props.onModalResult) props.onModalResult();
   };
   return (
     <LPForm title={'Create your profile'} onSubmit={onSubmit}>
@@ -35,7 +32,7 @@ const CreateProfileForm = (props) => {
 };
 
 const s2p = state => ({
-  userId: state.auth.userData.id
+  userId: state.auth.currentUser.uid
 });
 
 CreateProfileForm.propTypes = {

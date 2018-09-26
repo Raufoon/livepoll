@@ -24,6 +24,6 @@ const AuthUserBadge = props => {
   )
 };
 const s2p = state => ({
-  loggedInUserData: state.auth.userData
+  loggedInUserData: state.myProfile.basicInfo || {}
 });
 export default connect(s2p)(AuthUserBadge);

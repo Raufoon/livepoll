@@ -1,7 +1,10 @@
 const initialState = {
   auth: {
-    currentUser: undefined,
-    userData: undefined
+    currentUser: undefined
+  },
+  myProfile: {
+    basicInfo: undefined,
+    votedPolls: undefined,
   },
   polls: {
 

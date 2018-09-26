@@ -1,10 +1,12 @@
 const DB = require("../../firebase-database/realtime-database");
-const {verifyIdToken} = require('./util');
 
 const definitions = {
-  User: {
+  BasicInfo: {
     name: obj => obj.name,
     dob: obj => obj.dob,
+  },
+  User: {
+    basicInfo: obj => obj.basicInfo,
     votedPolls: obj => Object.keys(obj.votedPolls || {}),
   },
 };
@@ -16,14 +18,8 @@ const queries = {
 };
 
 const mutations = {
-  createUser: (_, { id, name, dob }, context) => {
-    return verifyIdToken(context.idToken, id)
-      .then(() => DB.write(`/users/${id}`, {
-        id,
-        name,
-        dob
-      }));
-  },
+  createUser: require('./user/user').createUser,
+  updateProfileBasicInfo: require('./user/user').updateProfileBasicInfo,
 };
 
 module.exports = {

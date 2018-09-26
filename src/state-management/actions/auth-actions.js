@@ -11,10 +11,9 @@ export const actionSigninRequest = (method) => dispatch => {
 };
 
 export const ACTION_SIGNIN_SUCCESS = 'ACTION_SIGNIN_SUCCESS';
-export const actionSigninSuccess = (currentUser, userData) => ({
+export const actionSigninSuccess = (currentUser) => ({
   type: ACTION_SIGNIN_SUCCESS,
-  currentUser,
-  userData
+  currentUser
 });
 
 export const actionSignoutRequest = () => dispatch => signOut();
@@ -22,10 +21,4 @@ export const actionSignoutRequest = () => dispatch => signOut();
 export const ACTION_SIGNOUT_SUCCESS = 'ACTION_SIGNOUT_SUCCESS';
 export const actionSignoutSuccess = () => ({
   type: ACTION_SIGNOUT_SUCCESS
-});
-
-export const ACTION_AUTH_USERDATA_RECEIVED = 'ACTION_AUTH_USERDATA_RECEIVED';
-export const actionAuthUserDataReceived = (userData) => ({
-  type: ACTION_AUTH_USERDATA_RECEIVED,
-  userData
 });

@@ -3,6 +3,7 @@ import 'firebase/auth';
 import getLivepollStore from "../../init/state-management";
 import {actionSigninSuccess, actionSignoutSuccess} from "../../state-management/actions/auth-actions";
 import {requestCreateUser, requestUserDataById} from "./user";
+import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/actions/my-profile-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
@@ -20,7 +21,7 @@ export const onUserSignedIn = (currentUser) => {
   requestUserDataById(currentUser.uid)
     .then(response => {
       if (!response.user) {
-        return requestCreateUser(currentUser.uid)
+        return requestCreateUser()
           .then(() => ({
             user: {
               id: currentUser.uid
@@ -31,7 +32,8 @@ export const onUserSignedIn = (currentUser) => {
       return response;
     })
     .then(response => {
-      getLivepollStore().dispatch(actionSigninSuccess(currentUser, response.user))
+      getLivepollStore().dispatch(actionSigninSuccess(currentUser));
+      getLivepollStore().dispatch(actionMyProfileBasicInfoUpdateSuccess(response.user.basicInfo))
     });
 };
 
