@@ -38,7 +38,7 @@ const LivepollInfoCard = props => {
   )
 };
 const s2p = state => ({
-  authUserId: state.auth.userData.id,
+  authUserId: state.auth.currentUser.uid,
 });
 
 LivepollInfoCard.propTypes = {

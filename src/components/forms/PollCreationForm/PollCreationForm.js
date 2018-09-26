@@ -99,6 +99,6 @@ class PollCreationForm extends React.Component {
 }
 
 const s2p = state => ({
-  creatorId: state.auth.userData.id
+  creatorId: state.auth.currentUser.uid
 });
 export default withRouter(connect(s2p)(PollCreationForm))
