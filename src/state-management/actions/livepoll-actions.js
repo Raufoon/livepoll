@@ -1,4 +1,5 @@
 import {requestAddPollitem, requestFirstNItems, requestGiveVote, requestPollInfo} from "../../util/cloud/livepoll";
+import {actionAlreadyVotedPollFound} from "./my-profile-actions";
 
 export const actionFetchPollInfo = (id) => dispatch => {
   return requestPollInfo(id)
@@ -39,12 +40,14 @@ export const actionRequestFirstNItemsSuccess = (pollId, items) => ({
 
 export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
   return requestGiveVote(pollId, itemId)
-    .then(response =>
-      dispatch(actionGiveVoteSuccess(pollId, itemId, lastVotedItemId)));
+    .then(response => {
+      dispatch(actionGiveVoteSuccess(pollId, itemId, lastVotedItemId))
+      dispatch(actionAlreadyVotedPollFound(pollId, itemId))
+    });
 };
 
 export const ACTION_GIVE_VOTE_SUCCESS = 'ACTION_GIVE_VOTE_SUCCESS';
 export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
-  type:ACTION_GIVE_VOTE_SUCCESS,
+  type: ACTION_GIVE_VOTE_SUCCESS,
   pollId, itemId, lastVotedItemId
 });

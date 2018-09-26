@@ -21,7 +21,7 @@ export const reduceGiveVoteSuccess = (pollState, itemId, lastVotedItemId) => {
   let newPollState = {...pollState};
   newPollState.items[itemId].voteCount++;
   if (lastVotedItemId) {
-    newPollState.items[lastVotedItemId].voteCount++;
+    newPollState.items[lastVotedItemId].voteCount--;
   }
   return newPollState;
 };

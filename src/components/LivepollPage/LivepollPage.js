@@ -12,12 +12,14 @@ import {
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import BigRemoteDataDisplay from "../BigRemoteDataDisplay/BigRemoteDataDisplay";
+import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 
 const LivepollPage = props => {
   const pid = props.match.params.id;
 
   if (!props.livepoll) {
     props.dispatch(actionFetchPollInfo(pid));
+    props.dispatch(actionRequestCheckAlreadyVotedPoll(pid));
     return "loading..."
   }
 
@@ -50,7 +52,7 @@ const LivepollPage = props => {
 
 const s2p = (state, ownProps) => ({
   livepoll: state.polls[ownProps.match.params.id],
-  lastVotedItemId: undefined
+  lastVotedItemId: state.myProfile.votedPolls[ownProps.match.params.id]
 });
 
 LivepollPage.propTypes = {

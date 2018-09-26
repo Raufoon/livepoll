@@ -4,7 +4,7 @@ const initialState = {
   },
   myProfile: {
     basicInfo: undefined,
-    votedPolls: undefined,
+    votedPolls: {},
   },
   polls: {
 

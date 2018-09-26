@@ -42,7 +42,8 @@ const MUTATION_ADD_POLL_ITEM = `
         ... on TextContent{
           text
         }
-      }
+      },
+      voteCount
     }
   }
 `;

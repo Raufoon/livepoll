@@ -1,4 +1,4 @@
-import {requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
+import {requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
 
 export const actionRequestUpdateBasicInfo = data => dispatch => {
   return requestUpdateMyProfileBasicInfo(data)
@@ -9,4 +9,21 @@ export const ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS = 'ACTION_MY_PROFILE_BA
 export const actionMyProfileBasicInfoUpdateSuccess = (basicInfo) => ({
   type: ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS,
   basicInfo
+});
+
+export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
+  return requestCheckHaveIVoted(pollId)
+    .then(response => {
+      if (!response.votedItemId) return;
+      return dispatch(actionAlreadyVotedPollFound(
+        pollId,
+        response.votedItemId
+      ))
+    })
+};
+
+export const ACTION_ALREADY_VOTED_POLL_FOUND = 'ACTION_ALREADY_VOTED_POLL_FOUND';
+export const actionAlreadyVotedPollFound = (pollId, votedItemId) => ({
+  type: ACTION_ALREADY_VOTED_POLL_FOUND,
+  votedItemId, pollId
 });
