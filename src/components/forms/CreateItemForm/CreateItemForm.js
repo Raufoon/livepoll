@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import {actionRequestAddItem} from "../../../state-management/actions/livepoll-actions";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const CreateItemForm = props => {
   const onSubmit = (data) => {
@@ -16,11 +17,12 @@ const CreateItemForm = props => {
 
   return (
     <LPForm title={'Create an item'} submitButtonLabel={'Add item'} onSubmit={onSubmit}>
+      <Typography variant="subheading" gutterBottom>Create an item</Typography>
       {
         LPFormField.createRequiredField({
           name: 'text',
           type: 'text',
-          placeholder: 'text',
+          label: 'Enter a text',
         })
       }
     </LPForm>

@@ -22,7 +22,7 @@ class BigRemoteDataDisplay extends React.Component {
     return (
       <React.Fragment>
         <ChildComponent {...this.props.getChildProps()}/>
-        <button onClick={this.loadMore}>Load more</button>
+        {/*<button onClick={this.loadMore}>Load more</button>*/}
       </React.Fragment>
     );
   }

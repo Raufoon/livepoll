@@ -12,7 +12,6 @@ import MenuIcon from '@material-ui/icons/Menu';
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import HomePage from "./components/HomePage/HomePage";
-import Appbar from "./components/Appbar/Appbar";
 import LivepollPage from "./components/LivepollPage/LivepollPage";
 import {actionSignoutRequest} from "./state-management/actions/auth-actions";
 import AuthUserBadge from "./components/AuthUserBadge/AuthUserBadge";
@@ -37,11 +36,12 @@ class App extends Component {
             <Button onClick={() => this.props.dispatch(actionSignoutRequest())}>Sign out</Button>
           </Toolbar>
         </AppBar>
-
-        <Switch>
-          <Route path={'/poll/:id'} component={LivepollPage}/>
-          <Route component={HomePage}/>
-        </Switch>
+        <div className='app-content'>
+          <Switch>
+            <Route path={'/poll/:id'} component={LivepollPage}/>
+            <Route component={HomePage}/>
+          </Switch>
+        </div>
       </React.Fragment>
     )
   }

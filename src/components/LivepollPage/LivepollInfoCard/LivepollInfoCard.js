@@ -1,31 +1,67 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
+import dateFormat from 'dateformat';
+import Typography from "@material-ui/core/Typography/Typography";
+import Badge from '@material-ui/core/Badge';
 
+import './LivepollInfoCard.css'
 import ModalOpenerButton from "../../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import CreateItemForm from "../../forms/CreateItemForm/CreateItemForm";
 
 const LivepollInfoCard = props => {
   const settings = props.livepoll.settings;
-
-  const showAddItemButton = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
+  const start = new Date(props.livepoll.settings.startDatetime);
+  const end = new Date(props.livepoll.settings.endDatetime);
+  const now = new Date();
+  const endTimeExists = !!props.livepoll.settings.endDatetime;
+  const shouldDisplayLive = !endTimeExists ||(endTimeExists && now < end);
+  const showAddItemButton = settings.othersCanAdd
+    || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
 
   return (
     <div>
-      <h2>{props.livepoll.settings.title}</h2>
-
-      <span>Created by {props.livepoll.settings.creatorId}</span><br/>
-      <span>Starts at {props.livepoll.settings.startDatetime}</span><br/>
-      <span>{props.livepoll.settings.endDatetime? 'Never ends' : `Ends at ${props.livepoll.settings.endDatetime}`}</span><br/>
-      <span>{props.livepoll.settings.isPrivate?'Private poll' : 'Public poll'}</span><br/>
-      <span>{props.livepoll.settings.othersCanAdd?'Anyone ' : 'Only creator '}can add item</span><br/>
-      <span>Item format: {props.livepoll.settings.itemFormat}</span><br/>
-      <span>Voter list {props.livepoll.settings.hideVoters ? 'hidden':'visible'}</span><br/>
-
+      {
+        shouldDisplayLive && (
+          <Badge color="default"
+                 badgeContent={shouldDisplayLive ? 'LIVE':''}
+                 classes={{
+                   badge: 'poll-live-indicator blink'
+                 }}>
+            <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
+          </Badge>
+        )
+      }
+      {
+        !shouldDisplayLive && (
+          <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
+        )
+      }
+      <Typography variant="body1">Created by {props.livepoll.settings.creatorId}</Typography>
+      {
+        start >= now &&
+        <Typography variant="body1">
+          Will start on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
+        </Typography>
+      }
+      {
+        start < now &&
+        <Typography variant="body1">
+          Started on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
+        </Typography>
+      }
+      {
+        props.livepoll.settings.endDatetime &&
+        <Typography variant="body1">Will end on {dateFormat(end, 'mmm dd, yyyy')}</Typography>
+      }
+      <br/>
       {
         showAddItemButton &&
         <ModalOpenerButton
           ModalComponent={CreateItemForm}
+          buttonProps={{
+            variant: 'contained', size: "small"
+          }}
           childProps={{
             pollId: props.livepoll.id,
             format: props.livepoll.settings.itemFormat,

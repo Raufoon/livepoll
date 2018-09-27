@@ -1,6 +1,7 @@
-.App {
+.app-content{
+  margin-left: 25px;
+  margin-top: 25px;
 }
-
 .fl{float: left}
 .fr{float: right}
 .tac{text-align: center}

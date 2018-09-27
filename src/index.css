@@ -13,3 +13,17 @@ body {
   height: 100%;
   background-color: #f5f5f5;
 }
+.blink {
+  animation: blink-animation 3s steps(5, start) infinite;
+  -webkit-animation: blink-animation 3s steps(5, start) infinite;
+}
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
