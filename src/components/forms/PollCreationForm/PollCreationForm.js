@@ -2,12 +2,14 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 
+import './PollCreationForm.css'
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 import {requestPublishLivepoll} from "../../../util/cloud/livepoll";
-import Typography from "@material-ui/core/Typography/Typography";
 import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
+import LPCheckboxInput from "../form-fields/LPCheckboxInput/LPCheckboxInput";
+import LPDropdownInput from "../form-fields/LPDropdownInput/LPDropdownInput";
 
 class PollCreationForm extends React.Component {
   constructor(props) {
@@ -36,9 +38,11 @@ class PollCreationForm extends React.Component {
       <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
         {
           LPFormField.createRequiredField({
+            className: 'w100',
             name: 'title',
             type: 'text',
             label: 'Give a nice title',
+            defaultValue: '',
           })
         }
         <br/>
@@ -46,19 +50,12 @@ class PollCreationForm extends React.Component {
                      label={'When will it begin?'}
                      defaultValue={new Date()}/>
         <br/>
-        <LPDateInput name={'endDatetime'} label={'When will it end?'}/>
+        <LPDateInput name={'endDatetime'} label={'When will it end?'} defaultValue={''}/>
+        <LPCheckboxInput name={'isPrivate'} label={'This poll is private'}/>
         {
-          LPFormField.createOptionalField({
-            name: 'isPrivate',
-            type: 'checkbox',
-            label: 'This poll is private'
-          })
-        }
-        <Typography variant="subheading" gutterBottom>Poll Format</Typography>
-        {
-          LPFormField.createDropdownField({
+          LPDropdownInput.createDropdownField({
             name: 'itemFormat',
-            label: 'Poll structure',
+            label: 'Poll format',
             dropdownOptions: [
               {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},
               {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
@@ -66,21 +63,9 @@ class PollCreationForm extends React.Component {
               {label: 'Text + Video', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
             ]
           })
-        }
-        {
-          LPFormField.createOptionalField({
-            name: 'othersCanAdd',
-            label: 'Allow others to add',
-            type: 'checkbox'
-          })
-        }
-        {
-          LPFormField.createOptionalField({
-            name: 'hideVoters',
-            label: 'Hide voter list',
-            type: 'checkbox'
-          })
-        }
+        }<br/>
+        <LPCheckboxInput name={'othersCanAdd'} label={'Allow others to add'}/>
+        <LPCheckboxInput name={'hideVoters'} label={'Hide voter list'}/>
       </LPForm>
     )
   }

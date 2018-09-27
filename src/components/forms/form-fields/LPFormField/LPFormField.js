@@ -34,30 +34,19 @@ class LPFormField extends React.Component {
       value={options.value}/>
   );
 
-  static createDropdownField = options => (
-    <LPFormField
-      className = {options.className}
-      name={options.name}
-      type={'dropdown'}
-      label={options.label}
-      dropdownOptions={options.dropdownOptions}/>
-  );
-
   constructor(props) {
     super(props);
     this.state = {
-      value: props.value,
+      value: props.value || props.defaultValue,
       error: false
     };
     this.onChange = this.onChange.bind(this);
-    if (props.value) {
-      props.onChange({
-        target: {
-          name: props.name,
-          value: props.value
-        }
-      });
-    }
+    props.onChange({
+      target: {
+        name: props.name,
+        value: props.value || props.defaultValue
+      }
+    });
     if (props.validate && !props.validate(props.value)) {
       props.onError({ target: {name: props.name} });
     }
@@ -90,39 +79,8 @@ class LPFormField extends React.Component {
   }
 
   render() {
-    let inputComponent;
-
-    if (this.props.type === 'dropdown') {
-      inputComponent = (
-        <select name={this.props.name}
-                defaultValue={this.props.dropdownOptions[0]}
-                onChange={this.onChange}
-                className={'form-field-input'}>
-          {
-            this.props.dropdownOptions.map(option => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))
-          }
-        </select>
-      )
-    } else if (this.props.type === 'checkbox') {
-      inputComponent = (
-        <FormControlLabel
-          name={this.props.name}
-          control={
-            <Switch
-              checked={this.state.value}
-              onChange={this.onChange}
-              value={this.state.value}
-            />
-          }
-          label={this.props.label}
-        />
-      );
-    } else {
-      inputComponent = (
+    return (
+      <div>
         <TextField
           error={!!this.state.error}
           label={this.props.label}
@@ -130,13 +88,7 @@ class LPFormField extends React.Component {
           name={this.props.name}
           type={this.props.type}
           value={this.state.value}
-          onChange={this.onChange}
-          defaultValue={this.props.defaultValue}/>
-      )
-    }
-    return (
-      <div className={`form-field ${this.props.className}`}>
-        {inputComponent}
+          onChange={this.onChange}/>
         <br/>
         {this.state.error && <span className={'error-span'}>{this.state.error}</span>}
       </div>
