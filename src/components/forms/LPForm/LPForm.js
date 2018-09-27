@@ -60,8 +60,8 @@ class LPForm extends React.Component {
 
   render() {
     return (
-      <form method={'post'} onSubmit={this.onSubmit}>
-        <b>{this.props.title}</b>
+      <form className={this.props.className} method={'post'} onSubmit={this.onSubmit}>
+        {this.props.title && <b>{this.props.title}</b>}
         {
           React.Children.map(
             this.props.children,
@@ -72,7 +72,8 @@ class LPForm extends React.Component {
           )
         }
         {
-          this.shouldShowSubmit() && <input type='submit' value={this.props.submitButtonLabel || 'Submit'}/>
+          this.shouldShowSubmit() &&
+          <input type='submit' value={this.props.submitButtonLabel || 'Submit'}/>
         }
       </form>
     )
@@ -80,7 +81,7 @@ class LPForm extends React.Component {
 }
 
 LPForm.propTypes = {
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   submitButtonLabel: PropTypes.string,
 };

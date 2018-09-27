@@ -7,12 +7,21 @@ import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/acti
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
-const signIn = (provider) => {
-  return firebase.auth().signInWithPopup(provider);
+export const signInWithGoogle = () => {
+  return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
 };
 
-export const signInWithGoogle = () => {
-  return signIn(new firebase.auth.GoogleAuthProvider());
+export const signInWithEmailPass = (email, pass) => {
+  return firebase.auth()
+    .createUserWithEmailAndPassword(email, pass)
+    .catch(error => {
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          return firebase.auth().signInWithEmailAndPassword(email, pass);
+        default:
+          return Promise.reject(error.code);
+      }
+    });
 };
 
 export const signOut = () => firebase.auth().signOut();

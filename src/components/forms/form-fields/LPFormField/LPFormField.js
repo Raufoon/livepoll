@@ -14,17 +14,19 @@ class LPFormField extends React.Component{
 
   static createRequiredField = options => (
     <LPFormField
+      className = {options.className}
       name={options.name}
       type={options.type}
       defaultValue={options.defaultValue}
       title={options.title ? options.title: undefined}
       placeholder={options.placeholder ? options.placeholder: undefined}
-      validate={LPFormField.validators.checkNotNull}
-      errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
+      validate={options.validate || LPFormField.validators.checkNotNull}
+      errorMsg={options.errorMsg || LPFormField.errorMsgs.shouldNotNull}/>
   );
 
   static createOptionalField = options => (
     <LPFormField
+      className = {options.className}
       name={options.name}
       type={options.type}
       title={options.title ? options.title + ' (optional)' : undefined}
@@ -34,6 +36,7 @@ class LPFormField extends React.Component{
 
   static createDropdownField = options => (
     <LPFormField
+      className = {options.className}
       name={options.name}
       type={'dropdown'}
       title={options.title ? options.title + ' (optional)' : undefined}
@@ -127,7 +130,7 @@ class LPFormField extends React.Component{
       )
     }
     return (
-      <div className={'form-field'}>
+      <div className={`form-field ${this.props.className}`}>
         {
           this.props.title && (
             <label>{this.props.title}<br/></label>

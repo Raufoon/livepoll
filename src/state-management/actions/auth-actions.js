@@ -1,9 +1,13 @@
-import {signInWithGoogle, signOut} from "../../util/cloud/auth";
+import {signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
 
-export const actionSigninRequest = (method) => dispatch => {
+export const actionSigninRequest = (method, data) => dispatch => {
   switch (method) {
     case 'GOOGLE':
       signInWithGoogle();
+      break;
+
+    case 'EMAIL_PASS':
+      signInWithEmailPass(data.email, data.password);
       break;
 
     default:
