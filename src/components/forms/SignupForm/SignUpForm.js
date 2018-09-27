@@ -1,5 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import Button from '@material-ui/core/Button';
+
+import './SignUpForm.css'
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import {actionSigninRequest} from "../../../state-management/actions/auth-actions";
@@ -15,8 +18,8 @@ const SignUpForm = (props) => {
   };
 
   return (
-    <div>
-      <LPForm submitButtonLabel={'Log In'} title={'Join livepoll'} onSubmit={signinWithEmailPass}>
+    <div className={'tac'}>
+      <LPForm submitButtonLabel={'Log In'} title={'Join our community'} onSubmit={signinWithEmailPass}>
         {
           LPFormField.createRequiredField({
             name: 'email',
@@ -35,11 +38,12 @@ const SignUpForm = (props) => {
         }
       </LPForm>
       <div>
-        <input type='button'
-               value='Google'
-               onClick={signinWithGoogle}/>
-        <input type='button'
-               value='Facebook'/>
+        <Button className='google-auth-btn' size="small" onClick={signinWithGoogle}>
+          Google
+        </Button>
+        <Button className='facebook-auth-btn' size="small">
+          Facebook
+        </Button>
       </div>
     </div>
   )

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
 
 import './Modal.css';
 
@@ -24,16 +25,19 @@ class Modal extends React.Component {
   render() {
     const modalSettings = this.props.settings || {};
     return ReactDOM.createPortal(
-      <div className='modal-container' style={{zIndex: this.zIndex}}>
+      <Paper className='modal-container' style={{zIndex: this.zIndex}}>
         {
           !modalSettings.hideCloseButton
-          && <button className='modal-close-btn' onClick={this.props.onClose}>X</button>
+          && (
+            <button className='modal-close-btn' onClick={this.props.onClose}>
+              X
+            </button>
+          )
         }
-        <br/>
-        {
-          this.props.children
-        }
-      </div>,
+        <div className='modal-content'>
+          { this.props.children }
+        </div>
+      </Paper>,
       this.modalDomParent
     )
   }

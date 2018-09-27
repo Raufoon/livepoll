@@ -6,8 +6,21 @@
   box-shadow: 0 0 10px lightgrey;
   background-color: white;
 }
+.modal-content{
+  margin: 15px;
+  margin-top: 20px;
+  position: relative;
+}
 .modal-close-btn{
-  float: right;
-  color: red;
+  position: absolute;
+  top: 0;
+  right: 0;
+  color: lightgrey;
+  background-color: transparent;
+  border: none;
   font-weight: bolder;
+  cursor: pointer;
+}
+.modal-close-btn:hover{
+  color: red;
 }

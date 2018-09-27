@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Button from '@material-ui/core/Button';
 
 import Modal from "../../Modal/Modal";
 
@@ -14,16 +15,13 @@ class ModalOpenerButton extends React.Component {
   openModal() {
     this.setState({showModal: true});
   }
-
   closeModal() {
     this.setState({showModal: false});
   }
-
   onModalResult(data) {
     this.closeModal();
     if (this.props.onModalResult) this.props.onModalResult(data);
   }
-
   render() {
     const ModalComponent = this.props.ModalComponent;
 
@@ -32,13 +30,13 @@ class ModalOpenerButton extends React.Component {
         <ModalComponent onModalResult={this.onModalResult} {...this.props.childProps}/>
       </Modal>
     ):(
-      <button
+      <Button
         className={this.props.className}
         onClick={this.openModal}>
         {
           this.props.children
         }
-      </button>
+      </Button>
     )
   }
 }
