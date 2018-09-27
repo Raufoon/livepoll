@@ -122,6 +122,7 @@ class LPFormField extends React.Component{
     } else {
       inputComponent = (
         <TextField
+          error={!!this.state.error}
           label={this.props.title || this.props.placeholder || this.props.label}
           className = {this.props.className}
           name={this.props.name}
@@ -140,7 +141,7 @@ class LPFormField extends React.Component{
         }
         {inputComponent}
         <br/>
-        {this.state.error && <span>{this.state.error}</span>}
+        {this.state.error && <span className={'error-span'}>{this.state.error}</span>}
       </div>
     )
   }

@@ -6,3 +6,7 @@
   border: 1px solid lightgrey;
   min-height: 20px;
 }
+.error-span{
+  color: crimson;
+  font-size: small;
+}

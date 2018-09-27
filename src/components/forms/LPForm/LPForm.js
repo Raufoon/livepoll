@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import Typography from "@material-ui/core/Typography/Typography";
 import Button from '@material-ui/core/Button';
 
 class LPForm extends React.Component {
@@ -59,9 +58,6 @@ class LPForm extends React.Component {
   render() {
     return (
       <form className={this.props.className} method={'post'} onSubmit={this.onSubmit}>
-        { this.props.title &&
-          <Typography variant="headline" gutterBottom>{this.props.title}</Typography>
-        }
         {
           React.Children.map(
             this.props.children,
@@ -84,7 +80,6 @@ class LPForm extends React.Component {
 }
 
 LPForm.propTypes = {
-  title: PropTypes.string,
   onSubmit: PropTypes.func.isRequired,
   submitButtonLabel: PropTypes.string,
 };

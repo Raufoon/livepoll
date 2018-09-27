@@ -7,6 +7,7 @@ import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import {actionSigninRequest} from "../../../state-management/actions/auth-actions";
 import {SIGNIN_METHODS} from "../../../constants/auth-constants";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const SignUpForm = (props) => {
   const signinWithGoogle = () => {
@@ -17,7 +18,8 @@ const SignUpForm = (props) => {
   };
   return (
     <div className={'tac'}>
-      <LPForm submitButtonLabel={'Log In'} title={'Join our community'} onSubmit={signinWithEmailPass}>
+      <Typography variant="headline" gutterBottom>Join our community</Typography>
+      <LPForm submitButtonLabel={'Log In'} onSubmit={signinWithEmailPass}>
         {
           LPFormField.createRequiredField({
             name: 'email',
@@ -37,13 +39,13 @@ const SignUpForm = (props) => {
       </LPForm>
       <br/>
       <div>
-        <Button onClick={signinWithGoogle}>
+        <Button onClick={signinWithGoogle} color={'primary'}>
           Google
         </Button>
 
         &nbsp;
 
-        <Button size="small">
+        <Button size="small" color={'primary'}>
           Facebook
         </Button>
       </div>
