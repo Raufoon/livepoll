@@ -12,11 +12,9 @@ const SignUpForm = (props) => {
   const signinWithGoogle = () => {
     props.dispatch(actionSigninRequest(SIGNIN_METHODS.GOOGLE))
   };
-
   const signinWithEmailPass = (data) => {
     props.dispatch(actionSigninRequest(SIGNIN_METHODS.EMAIL_PASS, data));
   };
-
   return (
     <div className={'tac'}>
       <LPForm submitButtonLabel={'Log In'} title={'Join our community'} onSubmit={signinWithEmailPass}>
@@ -37,11 +35,15 @@ const SignUpForm = (props) => {
           })
         }
       </LPForm>
+      <br/>
       <div>
-        <Button className='google-auth-btn' size="small" onClick={signinWithGoogle}>
+        <Button onClick={signinWithGoogle}>
           Google
         </Button>
-        <Button className='facebook-auth-btn' size="small">
+
+        &nbsp;
+
+        <Button size="small">
           Facebook
         </Button>
       </div>

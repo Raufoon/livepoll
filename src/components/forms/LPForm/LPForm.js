@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import Typography from "@material-ui/core/Typography/Typography";
+import Button from '@material-ui/core/Button';
 
 class LPForm extends React.Component {
   constructor(props) {
@@ -14,7 +15,6 @@ class LPForm extends React.Component {
     this.onSubmit = this.onSubmit.bind(this);
     this.shouldShowSubmit = this.shouldShowSubmit.bind(this);
   }
-
   onChange(event) {
     let newField = {};
     let removedErrors = {};
@@ -35,7 +35,6 @@ class LPForm extends React.Component {
       }
     }))
   }
-
   onError(event) {
     let newErrors = {
       ...this.state.errors
@@ -49,12 +48,10 @@ class LPForm extends React.Component {
       }
     }))
   }
-
   onSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.state.fields);
   }
-
   shouldShowSubmit() {
     return !Object.values(this.state.errors).some(flag => !!flag);
   }
@@ -62,8 +59,8 @@ class LPForm extends React.Component {
   render() {
     return (
       <form className={this.props.className} method={'post'} onSubmit={this.onSubmit}>
-        {
-          this.props.title && <Typography variant="headline" gutterBottom>{this.props.title}</Typography>
+        { this.props.title &&
+          <Typography variant="headline" gutterBottom>{this.props.title}</Typography>
         }
         {
           React.Children.map(
@@ -74,9 +71,12 @@ class LPForm extends React.Component {
             })
           )
         }
+        <br/>
         {
           this.shouldShowSubmit() &&
-          <input type='submit' value={this.props.submitButtonLabel || 'Submit'}/>
+          <Button type='submit' variant={"contained"} color="secondary" >
+            {this.props.submitButtonLabel || 'Submit'}
+          </Button>
         }
       </form>
     )

@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import TextField from '@material-ui/core/TextField';
 
 import './LPFormField.css'
 
@@ -120,13 +121,14 @@ class LPFormField extends React.Component{
       )
     } else {
       inputComponent = (
-        <input name={this.props.name}
-               className={'form-field-input'}
-               placeholder={this.props.placeholder}
-               type={this.props.type}
-               defaultValue={this.props.defaultValue}
-               value={this.state.value}
-               onChange={this.onChange}/>
+        <TextField
+          label={this.props.title || this.props.placeholder || this.props.label}
+          className = {this.props.className}
+          name={this.props.name}
+          type={this.props.type}
+          value={this.state.value}
+          onChange={this.onChange}
+          defaultValue={this.props.defaultValue}/>
       )
     }
     return (
