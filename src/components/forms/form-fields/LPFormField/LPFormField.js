@@ -1,38 +1,37 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import TextField from '@material-ui/core/TextField';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 import './LPFormField.css'
+import Typography from "@material-ui/core/Typography/Typography";
 
-class LPFormField extends React.Component{
+class LPFormField extends React.Component {
   static validators = {
     checkNotNull: value => !!value,
   };
-
   static errorMsgs = {
     shouldNotNull: 'cannot be empty',
   };
-
   static createRequiredField = options => (
     <LPFormField
       className = {options.className}
       name={options.name}
       type={options.type}
       defaultValue={options.defaultValue}
-      title={options.title ? options.title: undefined}
-      placeholder={options.placeholder ? options.placeholder: undefined}
+      label={options.label}
       validate={options.validate || LPFormField.validators.checkNotNull}
       errorMsg={options.errorMsg || LPFormField.errorMsgs.shouldNotNull}/>
   );
-
   static createOptionalField = options => (
     <LPFormField
       className = {options.className}
       name={options.name}
       type={options.type}
-      title={options.title ? options.title + ' (optional)' : undefined}
-      value={options.value}
-      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}/>
+      defaultValue={options.defaultValue}
+      label={options.label}
+      value={options.value}/>
   );
 
   static createDropdownField = options => (
@@ -40,8 +39,7 @@ class LPFormField extends React.Component{
       className = {options.className}
       name={options.name}
       type={'dropdown'}
-      title={options.title ? options.title + ' (optional)' : undefined}
-      placeholder={options.placeholder ? options.placeholder + ' (optional)' : undefined}
+      label={options.label}
       dropdownOptions={options.dropdownOptions}/>
   );
 
@@ -52,7 +50,6 @@ class LPFormField extends React.Component{
       error: false
     };
     this.onChange = this.onChange.bind(this);
-
     if (props.value) {
       props.onChange({
         target: {
@@ -62,9 +59,7 @@ class LPFormField extends React.Component{
       });
     }
     if (props.validate && !props.validate(props.value)) {
-      props.onError({
-        target: {name: props.name}
-      });
+      props.onError({ target: {name: props.name} });
     }
     if (props.type === 'dropdown') {
       props.onChange({
@@ -82,10 +77,12 @@ class LPFormField extends React.Component{
     if (!this.props.validate || this.props.validate(value)) {
       this.props.onChange(event);
       this.setState({
+        value: value,
         error: undefined
       })
     } else {
       this.setState({
+        value: value,
         error: this.props.errorMsg || ''
       });
       this.props.onError(event);
@@ -103,27 +100,32 @@ class LPFormField extends React.Component{
                 className={'form-field-input'}>
           {
             this.props.dropdownOptions.map(option => (
-              <option key={option.value} value={option.value}>{option.label}</option>
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
             ))
           }
         </select>
       )
     } else if (this.props.type === 'checkbox') {
       inputComponent = (
-        <React.Fragment>
-          <input name={this.props.name}
-                 type={'checkbox'}
-                 defaultValue={false}
-                 value={this.state.value}
-                 onChange={this.onChange}/>
-          {this.props.placeholder}
-        </React.Fragment>
-      )
+        <FormControlLabel
+          name={this.props.name}
+          control={
+            <Switch
+              checked={this.state.value}
+              onChange={this.onChange}
+              value={this.state.value}
+            />
+          }
+          label={this.props.label}
+        />
+      );
     } else {
       inputComponent = (
         <TextField
           error={!!this.state.error}
-          label={this.props.title || this.props.placeholder || this.props.label}
+          label={this.props.label}
           className = {this.props.className}
           name={this.props.name}
           type={this.props.type}
@@ -134,11 +136,6 @@ class LPFormField extends React.Component{
     }
     return (
       <div className={`form-field ${this.props.className}`}>
-        {
-          this.props.title && (
-            <label>{this.props.title}<br/></label>
-          )
-        }
         {inputComponent}
         <br/>
         {this.state.error && <span className={'error-span'}>{this.state.error}</span>}
@@ -151,7 +148,7 @@ LPFormField.propTypes = {
   name: PropTypes.string.isRequired,
   title: PropTypes.string,
   placeholder: PropTypes.string,
-  type: PropTypes.string.isRequired,
+  type: PropTypes.string,
   onChange: PropTypes.func,
   onError: PropTypes.func,
   validate: PropTypes.func,

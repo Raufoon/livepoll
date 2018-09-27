@@ -6,6 +6,8 @@ import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 import {requestPublishLivepoll} from "../../../util/cloud/livepoll";
+import Typography from "@material-ui/core/Typography/Typography";
+import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
 
 class PollCreationForm extends React.Component {
   constructor(props) {
@@ -36,39 +38,27 @@ class PollCreationForm extends React.Component {
           LPFormField.createRequiredField({
             name: 'title',
             type: 'text',
-            placeholder: 'Give a nice title',
+            label: 'Give a nice title',
           })
         }
         <br/>
-        {
-          LPFormField.createOptionalField({
-            name: 'startDatetime',
-            type: 'datetime-local',
-            title: 'When will it begin?',
-            value: new Date().toLocaleString()
-          })
-        }
+        <LPDateInput name={'startDatetime'}
+                     label={'When will it begin?'}
+                     defaultValue={new Date()}/>
         <br/>
-        {
-          LPFormField.createOptionalField({
-            name: 'endDatetime',
-            type: 'datetime-local',
-            title: 'When will it end?',
-          })
-        }
-        <br/>
+        <LPDateInput name={'endDatetime'} label={'When will it end?'}/>
         {
           LPFormField.createOptionalField({
             name: 'isPrivate',
             type: 'checkbox',
-            placeholder: 'the poll is private (link only)'
+            label: 'This poll is private'
           })
         }
-        <br/>
+        <Typography variant="subheading" gutterBottom>Poll Format</Typography>
         {
           LPFormField.createDropdownField({
             name: 'itemFormat',
-            title: 'Poll structure',
+            label: 'Poll structure',
             dropdownOptions: [
               {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},
               {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
@@ -77,19 +67,17 @@ class PollCreationForm extends React.Component {
             ]
           })
         }
-        <br/>
         {
           LPFormField.createOptionalField({
             name: 'othersCanAdd',
-            placeholder: 'Allow others to add?',
+            label: 'Allow others to add',
             type: 'checkbox'
           })
         }
-        <br/>
         {
           LPFormField.createOptionalField({
             name: 'hideVoters',
-            placeholder: 'Hide voter list',
+            label: 'Hide voter list',
             type: 'checkbox'
           })
         }
