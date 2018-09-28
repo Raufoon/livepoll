@@ -2,6 +2,10 @@
   margin-left: 25px;
   margin-top: 25px;
 }
+.app-title{
+  text-decoration: none;
+  color: inherit;
+}
 .fl{float: left}
 .fr{float: right}
 .tac{text-align: center}

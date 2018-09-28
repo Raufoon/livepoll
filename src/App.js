@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import {Switch, withRouter, Route} from 'react-router-dom';
+import {Switch, withRouter, Route, Link} from 'react-router-dom';
 
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,11 +25,12 @@ class App extends Component {
     }
     return (
       <React.Fragment>
-
         <AppBar position="static" color={'default'}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-            <Typography variant="title" color="inherit">Livepoll</Typography>
+            <Typography variant="title" color="inherit">
+              <Link className={'app-title'} to={'/'}>Livepoll</Link>
+            </Typography>
             <div style={{flexGrow: 0.3}}/>
             <ModalOpenerButton ModalComponent={PollCreationForm} buttonProps={{color: 'primary'}}>Create a poll</ModalOpenerButton>
             <div style={{flexGrow: 0.7}}/>
