@@ -4,54 +4,65 @@ const DB = require("../../../firebase-database/realtime-database");
 module.exports.publishLivepoll = (_, { settings }, context) => {
   const newPollId = DB.getPushKey();
   return verifyIdToken(context.idToken, settings.creatorId)
-    .then(
-      () => DB.write(`/polls/${newPollId}`, {
-        id: newPollId,
-        settings
-      })
-    );
+    .then(() => DB.write(`/users/${settings.creatorId}/mypolls/${newPollId}`, true))
+    .then(() => DB.write(`/polls/${newPollId}`, {
+      id: newPollId,
+      settings
+    }));
 };
 
 // target: ensure if they are transaction
-module.exports.vote = (_, { pollId, itemId }, context) => {
+module.exports.vote = (_, { pollId, votedItemId }, context) => {
   let authUserId;
-  let lastVotedItemId;
 
-  // check if user already voted
-  return decodeIdToken(context.idToken).then(decodedUid => {
+  let fetchLastVotedItemId = () => decodeIdToken(context.idToken).then(decodedUid => {
     authUserId = decodedUid;
     return DB.read(`users/${authUserId}/votedPolls/${pollId}`);
-  })
-    .then(_lastVotedItemId => {
-      // fetch the votecount of the item and previously voted item (if any)
-      let fetchVoteCountPromiseList = [
-        DB.read(`polls/${pollId}/items/${itemId}/voteCount`)
-      ];
+  });
 
-      if (_lastVotedItemId) {
-        lastVotedItemId = _lastVotedItemId;
-        fetchVoteCountPromiseList.push(
-          DB.read(`polls/${pollId}/items/${lastVotedItemId}/voteCount`)
-        );
+  let cancelVote = (itemId) => new Promise((resolve, reject) => {
+    let onSuccess = () => {
+      Promise.all([
+        DB.remove(`users/${authUserId}/votedPolls/${pollId}`),
+        DB.remove(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`)
+      ]).then(resolve).catch(reject);
+    };
+    let onError = reject;
+
+    DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+      return voteCount - 1;
+    }, onSuccess, onError);
+  });
+
+  let doVote = (itemId) => new Promise((resolve, reject) => {
+    let onSuccess = () => {
+      Promise.all([
+        DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId),
+        DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true)
+      ]).then(resolve).catch(reject);
+    };
+    let onError = reject;
+
+    DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+      return voteCount + 1;
+    }, onSuccess, onError);
+  });
+
+  return fetchLastVotedItemId()
+    .then(lastVotedItemId => {
+      if (!lastVotedItemId) {
+        // first vote
+        return doVote(votedItemId);
+      } else if (lastVotedItemId === votedItemId) {
+        // cancel vote
+        return cancelVote(votedItemId);
+      } else {
+        // change vote
+        return Promise.all([
+          cancelVote(lastVotedItemId),
+          doVote(votedItemId)
+        ]);
       }
-      return Promise.all(fetchVoteCountPromiseList);
-    })
-    .then(voteCountList => {
-      // cancel the vote of previously voted item and vote the new item
-      let dbWritePromises = [
-        DB.write(`polls/${pollId}/items/${itemId}/voteCount`, voteCountList[0] + 1),
-        DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true),
-        DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId)
-      ];
-      if (lastVotedItemId) {
-        dbWritePromises.push(
-          DB.write(`polls/${pollId}/items/${lastVotedItemId}/voteCount`, voteCountList[1] - 1)
-        );
-        dbWritePromises.push(
-          DB.remove(`polls/${pollId}/items/${lastVotedItemId}/voterIds/${authUserId}`)
-        );
-      }
-      // in the end, return the vote count of the new item
-      return Promise.all(dbWritePromises).then(() => voteCountList[0] + 1);
-    })
+    });
+
 };

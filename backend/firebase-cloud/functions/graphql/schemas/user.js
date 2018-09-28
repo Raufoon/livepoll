@@ -12,6 +12,7 @@ const definitions = `
     id: ID!
     basicInfo: BasicInfo
     votedPolls: [String]
+    myPolls: [String]
   }
 `;
 

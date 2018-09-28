@@ -8,6 +8,7 @@ const definitions = {
   User: {
     basicInfo: obj => obj.basicInfo,
     votedPolls: obj => Object.keys(obj.votedPolls || {}),
+    myPolls: obj => Object.keys(obj.myPolls || {}),
   },
 };
 
