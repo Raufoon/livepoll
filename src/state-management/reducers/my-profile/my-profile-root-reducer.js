@@ -13,6 +13,7 @@ const myProfileRootReducer = (state = initialState.myProfile, action) => {
     case ACTION_ALREADY_VOTED_POLL_FOUND:
       newState = {...state};
       if (action.lastVotedItemId && action.lastVotedItemId === action.votedItemId) {
+        newState.votedPolls = {...newState.votedPolls};
         delete newState.votedPolls[action.pollId];
       } else {
         newState.votedPolls[action.pollId] = action.votedItemId;

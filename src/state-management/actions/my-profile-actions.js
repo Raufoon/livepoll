@@ -23,7 +23,7 @@ export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
 };
 
 export const ACTION_ALREADY_VOTED_POLL_FOUND = 'ACTION_ALREADY_VOTED_POLL_FOUND';
-export const actionAlreadyVotedPollFound = (pollId, votedItemId) => ({
+export const actionAlreadyVotedPollFound = (pollId, votedItemId, lastVotedItemId) => ({
   type: ACTION_ALREADY_VOTED_POLL_FOUND,
-  votedItemId, pollId
+  votedItemId, pollId, lastVotedItemId
 });
