@@ -7,6 +7,7 @@ import LPFormField from "../form-fields/LPFormField/LPFormField";
 import {
   actionRequestUpdateBasicInfo
 } from "../../../state-management/actions/my-profile-actions";
+import Typography from "@material-ui/core/Typography/Typography";
 
 const CreateProfileForm = (props) => {
   const onSubmit = data => {
@@ -15,18 +16,25 @@ const CreateProfileForm = (props) => {
   };
   return (
     <LPForm title={'Create your profile'} onSubmit={onSubmit}>
-      <LPFormField
-        name={'name'}
-        placeholder={'Full Name'}
-        type={'String'}
-        validate={(value) => !!value && value.length > 5}
-        errorMsg={'Name must have at least 6 letters'}/>
-      <LPFormField
-        name={'dob'}
-        title={'Date of birth'}
-        type={'date'}
-        validate={LPFormField.validators.checkNotNull}
-        errorMsg={LPFormField.errorMsgs.shouldNotNull}/>
+      <Typography variant="subheading" gutterBottom>Create your profile</Typography>
+      {
+        LPFormField.createRequiredField({
+          name: 'name',
+          label: 'Full Name',
+          type: 'text',
+          validate: (value) => !!value && value.length > 5,
+          errorMsg: 'Name must have at least 6 letters'
+        })
+      }
+      <br/>
+      {
+        LPFormField.createRequiredField({
+          name: 'dob',
+          label: 'When is your birthday?',
+          type: 'date',
+          defaultValue: '1990-01-01'
+        })
+      }
     </LPForm>
   )
 };
