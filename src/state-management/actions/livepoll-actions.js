@@ -42,7 +42,7 @@ export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
   return requestGiveVote(pollId, itemId)
     .then(response => {
       dispatch(actionGiveVoteSuccess(pollId, itemId, lastVotedItemId))
-      dispatch(actionAlreadyVotedPollFound(pollId, itemId))
+      dispatch(actionAlreadyVotedPollFound(pollId, itemId, lastVotedItemId))
     });
 };
 
