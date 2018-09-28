@@ -55,7 +55,7 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
       } else {
         return Promise.all([
           decreaseVote(lastVotedItemId).then(() => unsaveVote(lastVotedItemId)),
-          increaseVote(votedItemId).then(() => saveVote(lastVotedItemId))
+          increaseVote(votedItemId).then(() => saveVote(votedItemId))
         ]);
       }
     })
