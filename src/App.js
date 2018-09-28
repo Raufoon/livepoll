@@ -25,6 +25,7 @@ class App extends Component {
     }
     return (
       <React.Fragment>
+
         <AppBar position="static" color={'default'}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
@@ -36,12 +37,15 @@ class App extends Component {
             <Button onClick={() => this.props.dispatch(actionSignoutRequest())}>Sign out</Button>
           </Toolbar>
         </AppBar>
+
         <div className='app-content'>
           <Switch>
             <Route path={'/poll/:id'} component={LivepollPage}/>
             <Route component={HomePage}/>
           </Switch>
         </div>
+
+        <br/><br/><br/><br/><br/>
       </React.Fragment>
     )
   }
