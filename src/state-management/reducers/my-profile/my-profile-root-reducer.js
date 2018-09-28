@@ -3,6 +3,7 @@ import {
   ACTION_ALREADY_VOTED_POLL_FOUND,
   ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS
 } from "../../actions/my-profile-actions";
+import {ACTION_SIGNOUT_SUCCESS} from "../../actions/auth-actions";
 
 const myProfileRootReducer = (state = initialState.myProfile, action) => {
   let newState;
@@ -19,6 +20,10 @@ const myProfileRootReducer = (state = initialState.myProfile, action) => {
         newState.votedPolls[action.pollId] = action.votedItemId;
       }
       return newState;
+
+    case ACTION_SIGNOUT_SUCCESS:
+      return {...initialState.myProfile};
+
     default:
       return state;
   }

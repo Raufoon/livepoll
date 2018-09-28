@@ -46,7 +46,8 @@ const LivepollPage = props => {
           vote: (itemId) => {
             props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
           },
-          itemFormat: props.livepoll.settings.itemFormat
+          itemFormat: props.livepoll.settings.itemFormat,
+          lastVotedItemId: props.lastVotedItemId
         })}
         limit={50}/>
 

@@ -11,7 +11,9 @@ const TextItem = props => (
     <CardHeader
       avatar={<Avatar>{props.index}</Avatar>}
       action={
-        <Button onClick={props.vote} color={'primary'}>Vote</Button>
+        <Button onClick={props.vote}
+                color={props.isAlreadyVoted ? 'secondary':'primary'}>
+          {props.isAlreadyVoted ? 'Unvote':'Vote'}</Button>
       }
       title={props.item.content.text}
       titleTypographyProps={{
