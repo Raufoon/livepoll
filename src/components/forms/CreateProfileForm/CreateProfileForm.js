@@ -32,7 +32,7 @@ const CreateProfileForm = (props) => {
           name: 'dob',
           label: 'When is your birthday?',
           type: 'date',
-          defaultValue: '1990-01-01'
+          value: '1990-01-01'
         })
       }
     </LPForm>

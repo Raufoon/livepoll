@@ -22,7 +22,10 @@ const myProfileRootReducer = (state = initialState.myProfile, action) => {
       return newState;
 
     case ACTION_SIGNOUT_SUCCESS:
-      return {...initialState.myProfile};
+      newState = {...state};
+      newState.votedPolls = {};
+      newState.basicInfo = {};
+      return newState;
 
     default:
       return state;

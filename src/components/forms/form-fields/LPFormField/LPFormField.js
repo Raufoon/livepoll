@@ -17,6 +17,7 @@ class LPFormField extends React.Component {
       name={options.name}
       type={options.type}
       defaultValue={options.defaultValue}
+      value={options.value}
       label={options.label}
       validate={options.validate || LPFormField.validators.checkNotNull}
       errorMsg={options.errorMsg || LPFormField.errorMsgs.shouldNotNull}/>
