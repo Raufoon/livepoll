@@ -20,49 +20,44 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
     return DB.read(`users/${authUserId}/votedPolls/${pollId}`);
   });
 
-  let cancelVote = (itemId) => new Promise((resolve, reject) => {
-    let onSuccess = () => {
-      Promise.all([
-        DB.remove(`users/${authUserId}/votedPolls/${pollId}`),
-        DB.remove(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`)
-      ]).then(resolve).catch(reject);
-    };
-    let onError = reject;
-
-    DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
-      return voteCount - 1;
-    }, onSuccess, onError);
+  let decreaseVote = itemId => DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+    if (voteCount !== null) {
+      return voteCount - 1
+    }
+    return voteCount;
   });
 
-  let doVote = (itemId) => new Promise((resolve, reject) => {
-    let onSuccess = () => {
-      Promise.all([
-        DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId),
-        DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true)
-      ]).then(resolve).catch(reject);
-    };
-    let onError = reject;
-
-    DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
-      return voteCount + 1;
-    }, onSuccess, onError);
+  let increaseVote = itemId => DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+    if (voteCount !== null) {
+      return voteCount + 1
+    }
+    return voteCount;
   });
+
+  let unsaveVote = (itemId) => Promise.all([
+    DB.remove(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`)
+  ]);
+
+  let saveVote = (itemId) => Promise.all([
+    DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId),
+    DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true)
+  ]);
 
   return fetchLastVotedItemId()
     .then(lastVotedItemId => {
       if (!lastVotedItemId) {
-        // first vote
-        return doVote(votedItemId);
+        return increaseVote(votedItemId)
+          .then(() => saveVote(votedItemId));
       } else if (lastVotedItemId === votedItemId) {
-        // cancel vote
-        return cancelVote(votedItemId);
+        return decreaseVote(votedItemId)
+          .then(() => DB.remove(`users/${authUserId}/votedPolls/${pollId}`))
+          .then(() => unsaveVote(votedItemId));
       } else {
-        // change vote
         return Promise.all([
-          cancelVote(lastVotedItemId),
-          doVote(votedItemId)
+          decreaseVote(lastVotedItemId).then(() => unsaveVote(lastVotedItemId)),
+          increaseVote(votedItemId).then(() => saveVote(lastVotedItemId))
         ]);
       }
-    });
-
+    })
+    .then(() => DB.read(`polls/${pollId}/items/${votedItemId}/voteCount`));
 };

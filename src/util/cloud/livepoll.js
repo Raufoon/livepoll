@@ -76,11 +76,11 @@ export const requestFirstNItems = (pollId, limit, lastItemId) => graphqlRequest(
 const MUTATION_GIVE_VOTE = `
   mutation GiveVote(
     $pollId: String!,
-    $itemId: String!
+    $votedItemId: String!
   ) {
-    voteCount: vote(pollId: $pollId, itemId: $itemId)
+    voteCount: vote(pollId: $pollId, votedItemId: $votedItemId)
   }
 `;
-export const requestGiveVote = (pollId, itemId) => graphqlSecureRequest(MUTATION_GIVE_VOTE, {
-  pollId, itemId
+export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUTATION_GIVE_VOTE, {
+  pollId, votedItemId
 });

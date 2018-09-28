@@ -60,17 +60,11 @@ const DB = {
   getPushKey() {
     return admin.database().ref().push().key;
   },
-  doTransaction(path, callBack, onSuccess, onError, onAbort) {
-    return admin.database().ref(path)
-      .transaction(callBack, (error, committed, snapshot) => {
-        if (error) {
-          if (onError) onError();
-        } else if (!committed) {
-          if (onAbort) onAbort()
-        } else {
-          if (onSuccess) onSuccess();
-        }
-      })
+  doTransaction(path, update) {
+    return admin
+      .database()
+      .ref(path)
+      .transaction(update);
   }
 };
 module.exports = DB;

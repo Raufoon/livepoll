@@ -83,7 +83,7 @@ const queries = `
 const mutations = `
   publishLivepoll(settings: InputLivepollCreate!): Livepoll
   addItem(pollId: String!, content: InputLivepollItemContent!): LivepollItem
-  vote(pollId: String!, itemId: String!): Int!
+  vote(pollId: String!, votedItemId: String!): Int!
 `;
 
 module.exports = {
