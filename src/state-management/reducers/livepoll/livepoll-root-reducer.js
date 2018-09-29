@@ -9,6 +9,7 @@ import {
   reduceRequestAddItemSuccess,
   reduceRequestFirstNItemsSuccess
 } from "./livepoll-reducers";
+import {ACTION_SIGNOUT_SUCCESS} from "../../actions/auth-actions";
 
 const livepollRootReducer = (state = initialState.polls, action) => {
   let newState = {...state};
@@ -32,6 +33,9 @@ const livepollRootReducer = (state = initialState.polls, action) => {
     case ACTION_GIVE_VOTE_SUCCESS:
       newState[action.pollId]
         = reduceGiveVoteSuccess(newState[action.pollId], action.itemId, action.lastVotedItemId);
+      return newState;
+    case ACTION_SIGNOUT_SUCCESS:
+      newState = {...initialState.polls};
       return newState;
 
     default:
