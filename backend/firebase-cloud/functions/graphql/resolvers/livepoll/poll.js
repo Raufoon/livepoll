@@ -11,9 +11,27 @@ module.exports.publishLivepoll = (_, { settings }, context) => {
     }));
 };
 
-// target: ensure if they are transaction
 module.exports.vote = (_, { pollId, votedItemId }, context) => {
   let authUserId;
+
+  let isPollLive = () => {
+    return Promise.all([
+      DB.read(`polls/${pollId}/settings/startDatetime`),
+      DB.read(`polls/${pollId}/settings/endDatetime`),
+    ]).then(dates => {
+      const startDatetime = dates[0];
+      const endDatetime = dates[1];
+      const start = new Date(startDatetime);
+      const end = new Date(endDatetime);
+      const now = new Date();
+      const endTimeExists = !!endDatetime;
+      const willStartOnFuture = now < start;
+      const hasEnded = endTimeExists && now >= end;
+      const isLive = !(willStartOnFuture || hasEnded);
+      if (isLive) return Promise.resolve('LIVE');
+      return Promise.reject('Poll is not live');
+    })
+  };
 
   let fetchLastVotedItemId = () => decodeIdToken(context.idToken).then(decodedUid => {
     authUserId = decodedUid;
@@ -43,7 +61,8 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
     DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true)
   ]);
 
-  return fetchLastVotedItemId()
+  return isPollLive()
+    .then(fetchLastVotedItemId)
     .then(lastVotedItemId => {
       if (!lastVotedItemId) {
         return increaseVote(votedItemId)
