@@ -6,8 +6,11 @@ const initialState = {
     basicInfo: undefined,
     votedPolls: {},
   },
-  polls: {
-
+  polls: {},
+  toast: {
+    newToast: {
+      key: 0
+    }
   }
 };
 

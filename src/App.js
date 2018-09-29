@@ -17,6 +17,7 @@ import {actionSignoutRequest} from "./state-management/actions/auth-actions";
 import AuthUserBadge from "./components/AuthUserBadge/AuthUserBadge";
 import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
+import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 
 class App extends Component {
   render() {
@@ -46,6 +47,7 @@ class App extends Component {
           </Switch>
         </div>
 
+        <ToastDisplayer/>
         <br/><br/><br/><br/><br/>
       </React.Fragment>
     )
