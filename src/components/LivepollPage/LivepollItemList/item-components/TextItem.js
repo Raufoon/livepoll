@@ -4,6 +4,8 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 
+import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
+
 import './TextItem.css'
 
 const TextItem = props => {
@@ -13,7 +15,7 @@ const TextItem = props => {
       <CardHeader
         avatar={
           isFirstItem ? (
-            <Avatar className={'avatar-first-item'} src={'https://mbtskoudsalg.com/images/1st-place-trophy-png-3.png'}>
+            <Avatar className={'avatar-first-item'} src={FIRST_TROPHY_IMG_URL}>
               {props.index}
             </Avatar>
           ):(
