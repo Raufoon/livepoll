@@ -23,6 +23,8 @@ const LivepollItemList = props => {
               index={index + 1}
               item={item}
               isAlreadyVoted={props.lastVotedItemId === item.id}
+              voteDisabled={props.voteDisabled}
+              hideVotes={props.willStartOnFuture}
               vote={()=>{props.vote(item.id)}}/>)
       }
     </React.Fragment>

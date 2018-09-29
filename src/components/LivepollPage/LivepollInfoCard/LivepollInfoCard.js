@@ -9,17 +9,14 @@ const LivepollInfoCard = props => {
   const settings = props.livepoll.settings;
   const start = new Date(settings.startDatetime);
   const end = new Date(settings.endDatetime);
-  const now = new Date();
-  const endTimeExists = !!settings.endDatetime;
-  const shouldDisplayLive = !endTimeExists ||(endTimeExists && now < end);
 
   return (
     <div>
       <Badge
         color="default"
-        badgeContent={shouldDisplayLive ? 'LIVE':''}
+        badgeContent={props.isLive ? 'LIVE':''}
         classes={{
-          badge: shouldDisplayLive ? 'poll-live-indicator blink' : ''
+          badge: props.isLive ? 'poll-live-indicator blink' : ''
         }}>
         <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
       </Badge>
@@ -27,12 +24,14 @@ const LivepollInfoCard = props => {
       <Typography variant="body1">Created by {props.livepoll.settings.creatorId}</Typography>
 
       <Typography variant="body1">
-        {start >= now ? 'Will start' : 'Started'} on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
+        {props.willStartOnFuture ? 'Will start' : 'Started'} on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
       </Typography>
 
       {
         props.livepoll.settings.endDatetime &&
-        <Typography variant="body1">Will end on {dateFormat(end, 'mmm dd, yyyy')}</Typography>
+        <Typography variant="body1">
+          {props.hasEnded ? 'Ended' : 'Will end'} on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
+        </Typography>
       }
     </div>
   )

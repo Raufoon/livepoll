@@ -11,15 +11,19 @@ const TextItem = props => (
     <CardHeader
       avatar={<Avatar>{props.index}</Avatar>}
       action={
-        <Button onClick={props.vote}
-                color={props.isAlreadyVoted ? 'secondary':'primary'}>
-          {props.isAlreadyVoted ? 'Unvote':'Vote'}</Button>
+        !props.voteDisabled && (
+          <Button
+            onClick={props.vote}
+            color={props.isAlreadyVoted ? 'secondary':'primary'}>
+            {props.isAlreadyVoted ? 'Unvote':'Vote'}
+          </Button>
+        )
       }
       title={props.item.content.text}
       titleTypographyProps={{
         variant: 'title'
       }}
-      subheader={`${props.item.voteCount} votes`}
+      subheader={props.hideVotes ? false: `${props.item.voteCount} votes`}
     />
   </Card>
 );

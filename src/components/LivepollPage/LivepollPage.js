@@ -26,12 +26,25 @@ const LivepollPage = props => {
   }
 
   const settings = props.livepoll.settings;
-  const showAddItemButton
+  const start = new Date(settings.startDatetime);
+  const end = new Date(settings.endDatetime);
+  const now = new Date();
+  const endTimeExists = !!settings.endDatetime;
+  const willStartOnFuture = now < start;
+  const hasEnded = endTimeExists && now >= end;
+  const isLive = !(willStartOnFuture || hasEnded);
+  const canIAdd
     = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
+  const showAddItemButton = canIAdd && !hasEnded;
 
   return (
     <div>
-      <LivepollInfoCard livepoll={props.livepoll} />
+      <LivepollInfoCard
+        livepoll={props.livepoll}
+        isLive={isLive}
+        willStartOnFuture={willStartOnFuture}
+        hasEnded={hasEnded}
+      />
 
       <br/><br/>
 
@@ -47,7 +60,9 @@ const LivepollPage = props => {
             props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
           },
           itemFormat: props.livepoll.settings.itemFormat,
-          lastVotedItemId: props.lastVotedItemId
+          lastVotedItemId: props.lastVotedItemId,
+          voteDisabled: !isLive,
+          willStartOnFuture: willStartOnFuture
         })}
         limit={50}/>
 
