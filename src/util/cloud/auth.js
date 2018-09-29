@@ -4,6 +4,7 @@ import getLivepollStore from "../../init/state-management";
 import {actionSigninSuccess, actionSignoutSuccess} from "../../state-management/actions/auth-actions";
 import {requestCreateUser, requestUserDataById} from "./user";
 import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/actions/my-profile-actions";
+import {actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
@@ -42,6 +43,7 @@ export const onUserSignedIn = (currentUser) => {
     })
     .then(response => {
       getLivepollStore().dispatch(actionSigninSuccess(currentUser));
+      getLivepollStore().dispatch(actionMakeSuccessToast('Successfully logged in'));
       getLivepollStore().dispatch(actionMyProfileBasicInfoUpdateSuccess(response.user.basicInfo))
     });
 };
