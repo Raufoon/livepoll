@@ -60,3 +60,7 @@ module.exports.addItem = (_, { pollId, content }, context) => {
 module.exports.getFirstNItems = (_, { pollId, limit, lastItemId }) => {
   return DB.readWithinRange(`/polls/${pollId}/items`, limit, lastItemId);
 };
+
+module.exports.getTopItems = (_, { pollId, howMany }) => {
+  return DB.sortAndRead(`/polls/${pollId}/items`, 'voteCount', howMany);
+};

@@ -53,13 +53,12 @@ export const requestAddPollitem = (pollId, content) => {
   })
 };
 
-const QUERY_GET_FIRST_N_ITEMS = `
+const QUERY_TOP_ITEMS = `
   query GetFirstNItems (
     $pollId: String!,
-    $limit: Int!,
-    $lastItemId: String
+    $howMany: Int!
   ) {
-    items: getFirstNItems (pollId: $pollId, limit: $limit, lastItemId: $lastItemId) {
+    items: getTopItems (pollId: $pollId, howMany: $howMany) {
       id,
       content {
         text
@@ -69,8 +68,8 @@ const QUERY_GET_FIRST_N_ITEMS = `
     }
   }
 `;
-export const requestFirstNItems = (pollId, limit, lastItemId) => graphqlRequest(QUERY_GET_FIRST_N_ITEMS, {
-  pollId, limit, lastItemId
+export const requestTopItems = (pollId, howMany) => graphqlRequest(QUERY_TOP_ITEMS, {
+  pollId, howMany
 });
 
 const MUTATION_GIVE_VOTE = `

@@ -14,6 +14,14 @@ const DB = {
       .once('value')
       .then(snap=>snap.val());
   },
+  sortAndRead(path, sortKey, howMany) {
+    return admin.database()
+      .ref(path)
+      .orderByChild(sortKey)
+      .limitToLast(howMany)
+      .once('value')
+      .then(snap=>Object.values(snap.val() || {}));
+  },
   readWithinRange(path, limit, lastItemId) {
     let promise = admin.database()
       .ref(path)

@@ -1,4 +1,9 @@
-import {requestAddPollitem, requestFirstNItems, requestGiveVote, requestPollInfo} from "../../util/cloud/livepoll";
+import {
+  requestAddPollitem,
+  requestGiveVote,
+  requestPollInfo,
+  requestTopItems
+} from "../../util/cloud/livepoll";
 import {actionAlreadyVotedPollFound} from "./my-profile-actions";
 
 export const actionFetchPollInfo = (id) => dispatch => {
@@ -26,14 +31,14 @@ export const actionRequestAddItemSuccess = (pollId, newItem) => ({
   newItem
 });
 
-export const actionRequestFirstNItems = (pollId, limit, startItemId) => dispatch => {
-  return requestFirstNItems(pollId, limit, startItemId)
-    .then(response => dispatch(actionRequestFirstNItemsSuccess(pollId, response.items)))
+export const actionRequestTopItems = (pollId, howMany) => dispatch => {
+  return requestTopItems(pollId, howMany)
+    .then(response => dispatch(actionRequestTopItemsSuccess(pollId, response.items)))
 };
 
-export const ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS = 'ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS';
-export const actionRequestFirstNItemsSuccess = (pollId, items) => ({
-  type: ACTION_REQUEST_FIRST_N_ITEMS_SUCCESS,
+export const ACTION_REQUEST_TOP_ITEMS_SUCCESS = 'ACTION_REQUEST_TOP_ITEMS_SUCCESS';
+export const actionRequestTopItemsSuccess = (pollId, items) => ({
+  type: ACTION_REQUEST_TOP_ITEMS_SUCCESS,
   pollId,
   items
 });

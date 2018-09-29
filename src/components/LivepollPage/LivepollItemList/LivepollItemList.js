@@ -16,7 +16,7 @@ const LivepollItemList = props => {
   return (
     <React.Fragment>
       {
-        Object.values(props.items || {})
+        props.items
           .map((item, index) =>
             <ItemComponent
               key={item.id}

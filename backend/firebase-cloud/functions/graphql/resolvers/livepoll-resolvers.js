@@ -64,6 +64,7 @@ const definitions = {
 const queries = {
   livepoll: (_, { id }) => DB.read(`/polls/${id}`),
   getFirstNItems: require('./livepoll/poll-items').getFirstNItems,
+  getTopItems: require('./livepoll/poll-items').getTopItems,
 };
 
 const mutations = {

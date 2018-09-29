@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import {
   actionFetchPollInfo,
   actionGiveVote,
-  actionRequestFirstNItems
+  actionRequestTopItems
 } from "../../state-management/actions/livepoll-actions";
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
@@ -52,13 +52,16 @@ const LivepollPage = props => {
         childComponent={LivepollItemList}
         getStateData={() => props.livepoll.items || {}}
         requestData={(limit, startItemId) =>
-          props.dispatch(actionRequestFirstNItems(props.livepoll.id, limit, startItemId))
+          props.dispatch(actionRequestTopItems(props.livepoll.id, limit))
         }
         getChildProps={()=>({
-          items: props.livepoll.items,
+          items: Object.values(props.livepoll.items || {})
+            .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1),
+
           vote: (itemId) => {
             props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
           },
+
           itemFormat: props.livepoll.settings.itemFormat,
           lastVotedItemId: props.lastVotedItemId,
           voteDisabled: !isLive,
