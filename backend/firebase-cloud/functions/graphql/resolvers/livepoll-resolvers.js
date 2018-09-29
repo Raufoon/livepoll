@@ -62,7 +62,7 @@ const definitions = {
 };
 
 const queries = {
-  livepoll: (_, { id }) => DB.read(`/polls/${id}`),
+  livepoll: require('./livepoll/poll').getLivepoll,
   getFirstNItems: require('./livepoll/poll-items').getFirstNItems,
   getTopItems: require('./livepoll/poll-items').getTopItems,
 };
