@@ -3,10 +3,16 @@
   margin-bottom: 10px;
 }
 @media (orientation: portrait) {
-  .text-item{
-    margin-bottom: 10px;
+  .text-item-resp{
+    max-width: 100vw;
   }
 }
 .text-item-serial{
   margin-right: 20px;
+}
+.avatar-first-item{
+  border-radius: 0 !important;
+  border: none !important;
+  width: 100px !important;
+  height: 100px !important;
 }

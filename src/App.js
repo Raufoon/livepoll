@@ -32,7 +32,7 @@ class App extends Component {
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
             <div style={{flexGrow: 0.3}}/>
-            <ModalOpenerButton ModalComponent={PollCreationForm} buttonProps={{color: 'primary'}}>Create a poll</ModalOpenerButton>
+            <ModalOpenerButton ModalComponent={PollCreationForm} buttonProps={{color: 'default'}}>Create a poll</ModalOpenerButton>
             <div style={{flexGrow: 0.7}}/>
             <AuthUserBadge/>
             <Button onClick={() => this.props.dispatch(actionSignoutRequest())}>Sign out</Button>
