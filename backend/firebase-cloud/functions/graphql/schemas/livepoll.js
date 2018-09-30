@@ -16,7 +16,7 @@ const inputs = `
     isPrivate: Boolean
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
-    hideVoters: Boolean
+    showVoters: Boolean
   }
   input InputLivepollItemContent {
     text: String!

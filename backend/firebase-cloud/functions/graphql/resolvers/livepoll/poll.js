@@ -2,15 +2,7 @@ const {verifyIdToken, decodeIdToken} = require('../util');
 const DB = require("../../../firebase-database/realtime-database");
 
 module.exports.getLivepoll = (_, { id }) => {
-  return DB.read(`/polls/${id}`)
-    .then(poll => {
-      return DB.read(`/users/${poll.settings.creatorId}/basicInfo/name`)
-        .then(name => {
-          let updatedPollInfo = poll;
-          updatedPollInfo.settings.creatorId = name;
-          return updatedPollInfo;
-        });
-    })
+  return DB.read(`/polls/${id}`);
 };
 
 module.exports.publishLivepoll = (_, { settings }, context) => {

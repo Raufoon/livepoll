@@ -24,11 +24,7 @@ const LivepollInfoCard = props => {
       </Badge>
 
       <Typography variant="body1">
-        Created by&nbsp;
-        <Chip
-          avatar={<Avatar>{props.livepoll.settings.creatorId[0]}</Avatar>}
-          label={props.livepoll.settings.creatorId}
-        />
+        Created by {props.livepoll.settings.creatorId}
       </Typography>
 
       <Typography variant="body1">
