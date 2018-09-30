@@ -14,32 +14,17 @@ const DB = {
       .once('value')
       .then(snap=>snap.val());
   },
-  sortAndRead(path, sortKey, howMany) {
-    return admin.database()
-      .ref(path)
-      .orderByChild(sortKey)
-      .limitToLast(howMany)
-      .once('value')
-      .then(snap=>Object.values(snap.val() || {}));
-  },
-  readWithinRange(path, limit, lastItemId) {
-    let promise = admin.database()
-      .ref(path)
-      .orderByKey();
-
-    if (lastItemId) {
-      promise = promise.startAt(lastItemId)
+  readWithinRange(path, startAt, howMany, sortKey) {
+    let promise = admin.database().ref(path);
+    if (sortKey) {
+      promise = promise.orderByChild(sortKey)
+    } else {
+      promise = promise.orderByKey();
     }
-    return promise
-      .limitToFirst(lastItemId ? limit + 1: limit)
+    return promise.startAt(startAt)
+      .limitToFirst(howMany)
       .once('value')
-      .then(snap => Object.values(snap.val() || {}))
-      .then(_items => {
-        let items = _items;
-        if (!items || items.length === 0) return [];
-        if (lastItemId) items.shift();
-        return items;
-      });
+      .then(snap => Object.values(snap.val() || {}));
   },
   readList(path) {
     return admin.database()
