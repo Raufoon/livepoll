@@ -66,13 +66,13 @@ module.exports.getTopItems = (_, { pollId, startAt, howMany }) => {
 };
 
 module.exports.getRecentPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany);
+  return DB.readWithinRange('/polls', startAt, howMany, 'id');
 };
 
 module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany);
+  return DB.readWithinRange('/polls', startAt, howMany, 'id');
 };
 
 module.exports.getTrendingPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany);
+  return DB.readWithinRange('/polls', startAt, howMany, 'id');
 };
