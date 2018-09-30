@@ -2,7 +2,6 @@ import {requestPopularPolls, requestRecentPolls, requestTrendingPolls} from "../
 
 export const actionFetchHome = () => dispatch => {
   dispatch(actionFetchPopularPolls(0, 5));
-  dispatch(actionFetchRecentPolls(0, 5));
   dispatch(actionFetchTrendingPolls(0, 5));
 };
 

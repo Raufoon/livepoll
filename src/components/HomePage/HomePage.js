@@ -4,7 +4,6 @@ import Grid from '@material-ui/core/Grid';
 
 import {actionFetchHome} from "../../state-management/actions/home-actions";
 import TrendingPollsSlider from "./TrendingPollsSlider/TrendingPollsSlider";
-import Typography from "@material-ui/core/Typography/Typography";
 import MostPopularPollsCard from "./MostPopularPollsCard/MostPopularPollsCard";
 
 class HomePage extends React.Component {
@@ -16,13 +15,8 @@ class HomePage extends React.Component {
     return (
       <div>
         <Grid container alignItems="flex-start" spacing={16}>
-          <Grid container alignItems="flex-start" spacing={16} item xs={8}>
-            <Grid item xs={12}>
-              <TrendingPollsSlider polls={Object.values(this.props.trendingPolls)}/>
-            </Grid>
-            <Grid item xs={12}>
-              <Typography gutterBottom variant="display1">Recent</Typography>
-            </Grid>
+          <Grid item xs={8}>
+            <TrendingPollsSlider polls={Object.values(this.props.trendingPolls)}/>
           </Grid>
           <Grid item xs={4}>
             <MostPopularPollsCard polls={Object.values(this.props.popularPolls)}/>
