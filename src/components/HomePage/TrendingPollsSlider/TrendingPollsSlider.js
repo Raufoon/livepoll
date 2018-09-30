@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
@@ -43,6 +44,7 @@ function TrendingPollsSlider(props) {
             <GridListTile key={poll.id}  className={classes.tile}>
               <GridListTileBar
                 title={poll.settings.title}
+                onClick={()=>props.history.push('/poll/' + poll.id)}
                 classes={{
                   root: classes.titleBar,
                   title: classes.title,
@@ -56,4 +58,4 @@ function TrendingPollsSlider(props) {
   );
 }
 
-export default withStyles(styles)(TrendingPollsSlider)
+export default withRouter(withStyles(styles)(TrendingPollsSlider))
