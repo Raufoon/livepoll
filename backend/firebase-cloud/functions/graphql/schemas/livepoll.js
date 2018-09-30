@@ -65,7 +65,7 @@ const definitions = `
     isPrivate: Boolean
     itemFormat: PollItemFormat!
     othersCanAdd: Boolean
-    hideVoters: Boolean
+    showVoters: Boolean
   }
   ${livepollItemDef}  
   type Livepoll {

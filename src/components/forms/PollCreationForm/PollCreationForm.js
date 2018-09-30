@@ -65,7 +65,7 @@ class PollCreationForm extends React.Component {
           })
         }<br/>
         <LPCheckboxInput name={'othersCanAdd'} label={'Allow others to add'}/>
-        <LPCheckboxInput name={'hideVoters'} label={'Hide voter list'}/>
+        <LPCheckboxInput name={'showVoters'} label={'Show voter list'}/>
       </LPForm>
     )
   }
