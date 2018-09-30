@@ -3,7 +3,10 @@ import {graphqlRequest} from "./graphql-api/requests";
 const QUERY_POPULAR_POLLS = `
   query GetMostPopularPolls($startAt: Int!, $howMany: Int!) {
     popularPolls: getMostPopularPolls(startAt: $startAt, howMany: $howMany) {
-      id
+      id,
+      settings {
+        title
+      }
     }
   }
 `;
@@ -28,7 +31,10 @@ export const requestTrendingPolls = (startAt, howMany) => {
 const QUERY_RECENT_POLLS = `
   query GetRecentPolls($startAt: Int!, $howMany: Int!) {
     recentPolls: getRecentPolls(startAt: $startAt, howMany: $howMany) {
-      id
+      id,
+      settings {
+        title
+      }
     }
   }
 `;
