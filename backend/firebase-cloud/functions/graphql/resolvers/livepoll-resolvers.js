@@ -64,9 +64,9 @@ const definitions = {
 const queries = {
   livepoll: require('./livepoll/poll').getLivepoll,
   getTopItems: require('./livepoll/poll-items').getTopItems,
-  getTrendingPolls: ()=>{},
-  getMostPopularPolls: ()=>{},
-  getRecentPolls: ()=>{},
+  getTrendingPolls: require('./livepoll/poll-items').getTrendingPolls,
+  getMostPopularPolls: require('./livepoll/poll-items').getMostPopularPolls,
+  getRecentPolls: require('./livepoll/poll-items').getRecentPolls,
 };
 
 const mutations = {

@@ -4,7 +4,7 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 
-import {actionFetchHome} from "../../state-management/actions/home-reducer";
+import {actionFetchHome} from "../../state-management/actions/home-actions";
 
 class HomePage extends React.Component {
   componentDidMount() {

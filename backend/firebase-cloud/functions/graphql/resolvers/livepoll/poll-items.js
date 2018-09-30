@@ -73,6 +73,6 @@ module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {
   return DB.readWithinRange('/polls', startAt, howMany);
 };
 
-module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {
+module.exports.getTrendingPolls = (_, {startAt, howMany}) => {
   return DB.readWithinRange('/polls', startAt, howMany);
 };
