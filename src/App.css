@@ -1,6 +1,5 @@
 .app-content{
-  margin-left: 25px;
-  margin-top: 25px;
+  max-width: 100vw;
 }
 .app-title{
   text-decoration: none;

@@ -50,9 +50,8 @@ const LivepollPage = props => {
 
       <BigRemoteDataDisplay
         childComponent={LivepollItemList}
-        getStateData={() => props.livepoll.items || {}}
-        requestData={(limit, startItemId) =>
-          props.dispatch(actionRequestTopItems(props.livepoll.id, limit))
+        requestData={(startAt, limit) =>
+          props.dispatch(actionRequestTopItems(props.livepoll.id, startAt, limit))
         }
         getChildProps={()=>({
           items: Object.values(props.livepoll.items || {})
@@ -67,6 +66,7 @@ const LivepollPage = props => {
           voteDisabled: !isLive,
           willStartOnFuture: willStartOnFuture
         })}
+        totalFetched={Object.keys(props.livepoll.items || {}).length}
         limit={50}/>
 
       <br/>

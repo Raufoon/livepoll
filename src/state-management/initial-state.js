@@ -11,6 +11,11 @@ const initialState = {
     newToast: {
       key: 0
     }
+  },
+  homePage: {
+    trendingPolls: [],
+    popularPolls: [],
+    recentPolls: []
   }
 };
 

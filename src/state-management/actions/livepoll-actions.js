@@ -37,8 +37,8 @@ export const actionRequestAddItemSuccess = (pollId, newItem) => ({
   newItem
 });
 
-export const actionRequestTopItems = (pollId, howMany) => dispatch => {
-  return requestTopItems(pollId, howMany)
+export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
+  return requestTopItems(pollId, startAt, howMany)
     .then(response => dispatch(actionRequestTopItemsSuccess(pollId, response.items)))
 };
 

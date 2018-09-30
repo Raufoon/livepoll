@@ -40,6 +40,8 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
+        <br/>
+
         <div className='app-content'>
           <Switch>
             <Route path={'/poll/:id'} component={LivepollPage}/>

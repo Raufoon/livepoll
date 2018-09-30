@@ -8,13 +8,11 @@ class BigRemoteDataDisplay extends React.Component {
   }
 
   loadMore() {
-    let itemKeys = Object.keys(this.props.getStateData());
-    this.props.requestData(this.props.limit, itemKeys[itemKeys.length - 1]);
+    this.props.requestData(this.props.totalFetched, this.props.limit);
   }
 
   componentDidMount() {
-    if (Object.keys(this.props.getStateData()).length === 0)
-      this.props.requestData(this.props.limit)
+    this.loadMore();
   }
 
   render() {
@@ -32,7 +30,6 @@ BigRemoteDataDisplay.propTypes = {
   childComponent: PropTypes.func.isRequired,
   getChildProps: PropTypes.func.isRequired,
   requestData: PropTypes.func.isRequired,
-  getStateData: PropTypes.func.isRequired,
   limit: PropTypes.number.isRequired
 };
 
