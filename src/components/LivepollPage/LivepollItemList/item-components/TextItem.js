@@ -9,12 +9,11 @@ import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import './TextItem.css'
 
 const TextItem = props => {
-  const isFirstItem = props.item.voteCount > 0 && props.index === 1;
   return (
     <Card className={`text-item text-item-resp`}>
       <CardHeader
         avatar={
-          isFirstItem ? (
+          props.isFirst ? (
             <Avatar className={'avatar-first-item'} src={FIRST_TROPHY_IMG_URL}>
               {props.index}
             </Avatar>
@@ -35,11 +34,11 @@ const TextItem = props => {
         }
         title={props.item.content.text}
         titleTypographyProps={{
-          variant: isFirstItem ? 'display1' : 'headline'
+          variant: props.isFirst ? 'display1' : 'headline'
         }}
         subheader={props.hideVotes ? false: `${props.item.voteCount} votes`}
         subheaderTypographyProps={{
-          variant: isFirstItem ? 'subheading' : 'caption'
+          variant: props.isFirst ? 'subheading' : 'caption'
         }}
       />
     </Card>
