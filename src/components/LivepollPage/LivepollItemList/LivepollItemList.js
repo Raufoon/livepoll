@@ -21,7 +21,7 @@ const LivepollItemList = props => {
             <ItemComponent
               key={item.id}
               index={index + 1}
-              isFirst={item.voteCount === props.items[0].voteCount}
+              isFirst={item.voteCount !== 0 && item.voteCount === props.items[0].voteCount}
               item={item}
               isAlreadyVoted={props.lastVotedItemId === item.id}
               voteDisabled={props.voteDisabled}
