@@ -23,6 +23,12 @@ const LivepollInfoCard = props => {
         <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
       </Badge>
 
+      {
+        props.livepoll.settings.isPrivate && (
+          <Typography color={'secondary'} variant="button">Private poll - share by link</Typography>
+        )
+      }
+
       <Typography variant="body1">
         Created by {props.livepoll.settings.creatorId}
       </Typography>
