@@ -28,7 +28,7 @@ const homeReducer = (state = initialState.homePage, action) => {
     case ACTION_FETCH_TRENDING_POLLS_SUCCESS:
       return {
         ...state,
-        recentPolls: {
+        trendingPolls: {
           ...state.trendingPolls,
           ...action.trendingPolls,
         }

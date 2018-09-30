@@ -14,7 +14,10 @@ export const requestPopularPolls = (startAt, howMany) => {
 const QUERY_TRENDING_POLLS = `
   query GetTrendingPolls($startAt: Int!, $howMany: Int!) {
     trendingPolls: getTrendingPolls(startAt: $startAt, howMany: $howMany) {
-      id
+      id,
+      settings {
+        title
+      }
     }
   }
 `;

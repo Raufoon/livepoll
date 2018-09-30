@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Paper from '@material-ui/core/Paper';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 
 import {actionFetchHome} from "../../state-management/actions/home-actions";
+import TrendingPollsSlider from "./TrendingPolls/TrendingPollsSlider";
+import Typography from "@material-ui/core/Typography/Typography";
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -16,17 +17,20 @@ class HomePage extends React.Component {
       <div>
         <Grid container alignItems="flex-start" spacing={16}>
           <Grid item xs={8}>
-            <Paper>xs=3</Paper>
+            <TrendingPollsSlider polls={Object.values(this.props.trendingPolls)}/>
           </Grid>
           <Grid item xs={4}>
             <Paper>xs=3</Paper>
           </Grid>
           <Grid item xs={8}>
-            <Paper>xs=3</Paper>
+            <Typography gutterBottom variant="display1">Recent</Typography>
           </Grid>
         </Grid>
       </div>
     )
   }
 }
-export default connect()(HomePage)
+const s2p = state => ({
+  trendingPolls: state.homePage.trendingPolls
+});
+export default connect(s2p)(HomePage)
