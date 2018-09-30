@@ -1,7 +1,7 @@
 import initialState from "../initial-state";
 import {ACTION_SIGNIN_SUCCESS, ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
-const authRootReducer = (state = initialState.auth, action) => {
+const authReducer = (state = initialState.auth, action) => {
   switch (action.type) {
     case ACTION_SIGNIN_SUCCESS:
       return {
@@ -19,4 +19,4 @@ const authRootReducer = (state = initialState.auth, action) => {
   }
 };
 
-export default authRootReducer
+export default authReducer

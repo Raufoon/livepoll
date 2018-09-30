@@ -5,7 +5,7 @@ import {
 } from "../actions/my-profile-actions";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
-const myProfileRootReducer = (state = initialState.myProfile, action) => {
+const myProfileReducer = (state = initialState.myProfile, action) => {
   let newState;
 
   switch (action.type) {
@@ -42,4 +42,4 @@ const myProfileRootReducer = (state = initialState.myProfile, action) => {
   }
 };
 
-export default myProfileRootReducer
+export default myProfileReducer

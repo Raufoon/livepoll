@@ -25,7 +25,7 @@ export const actionRequestAddItem = (pollId, data) => dispatch => {
   dispatch(actionMakeWarningToast('Adding a new item...'));
   return requestAddPollitem(pollId, data)
     .then(response => {
-      dispatch(actionMakeWarningToast('Item successfully added'));
+      dispatch(actionMakeSuccessToast('Item successfully added'));
       dispatch(actionRequestAddItemSuccess(pollId, response.item))
     })
 };
