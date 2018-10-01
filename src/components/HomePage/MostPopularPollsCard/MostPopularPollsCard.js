@@ -1,73 +1,40 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import GridListTile from '@material-ui/core/GridListTile';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
-import ListSubheader from '@material-ui/core/ListSubheader';
-import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import Avatar from '@material-ui/core/Avatar';
+import ImageIcon from '@material-ui/icons/Image';
+import WorkIcon from '@material-ui/icons/Work';
+import BeachAccessIcon from '@material-ui/icons/BeachAccess';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'hidden',
+    width: '100%',
+    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
-  gridList: {
-    width: 500,
-    // Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
-    transform: 'translateZ(0)',
-  },
-  titleBar: {
-    backgroundColor: 'lightgray',
-    opacity: '0.5'
-  },
-  title: {
-    color: 'black'
-  },
-  icon: {
-    color: 'black'
-  },
-  content: {
-    display: 'block'
-  }
 });
 
 function MostPopularPollsCard(props) {
   const { classes } = props;
-
   return (
-    <Paper className={classes.root}>
-      <GridList cellHeight={100} spacing={1} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Most Popular Polls</ListSubheader>
-        </GridListTile>
+    <div className={classes.root}>
+      <List>
         {
-          props.polls.map(poll => (
-            <GridListTile key={poll.id} cols={2} rows={1}>
-              <div className={classes.content}/>
-              <GridListTileBar
-                title={poll.settings.title}
-                titlePosition="top"
-                actionIcon={
-                  <IconButton className={classes.icon}>
-                    <StarBorderIcon />
-                  </IconButton>
-                }
-                actionPosition="left"
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-              />
-            </GridListTile>
+          props.polls.map((poll, index) => (
+            <ListItem key={poll.id}>
+              <Avatar>
+                {index + 1}
+              </Avatar>
+              <ListItemText primary={poll.settings.title}
+                            secondary={`${poll.items[0].content.text} (${poll.items[0].voteCount} votes)`} />
+            </ListItem>
           ))
         }
-      </GridList>
-    </Paper>
+      </List>
+    </div>
   );
 }
 

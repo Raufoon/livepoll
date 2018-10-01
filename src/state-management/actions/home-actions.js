@@ -1,22 +1,9 @@
-import {requestPopularPolls, requestRecentPolls, requestTrendingPolls} from "../../util/cloud/home";
+import {requestPopularPolls, requestTrendingPolls} from "../../util/cloud/home";
 
 export const actionFetchHome = () => dispatch => {
-  dispatch(actionFetchPopularPolls(0, 5));
-  dispatch(actionFetchTrendingPolls(0, 5));
+  dispatch(actionFetchPopularPolls(0, 6));
+  dispatch(actionFetchTrendingPolls(0, 6));
 };
-
-
-export const actionFetchRecentPolls = (startAt, howMany) => dispatch => {
-  return requestRecentPolls(startAt, howMany)
-    .then(response => {
-      dispatch(actionFetchRecentPollsSuccess(response.recentPolls));
-    });
-};
-export const ACTION_FETCH_RECENT_POLLS_SUCCESS = 'ACTION_FETCH_RECENT_POLLS_SUCCESS';
-export const actionFetchRecentPollsSuccess = recentPolls => ({
-  type: ACTION_FETCH_RECENT_POLLS_SUCCESS,
-  recentPolls
-});
 
 
 export const actionFetchPopularPolls = (startAt, howMany) => dispatch => {

@@ -71,7 +71,7 @@ const definitions = `
   type Livepoll {
     id: ID!
     settings: LivepollSettings!
-    items(id: String): [LivepollItem]!
+    items(id: String, startAt: Int, howMany: Int): [LivepollItem]!
   }
 `;
 

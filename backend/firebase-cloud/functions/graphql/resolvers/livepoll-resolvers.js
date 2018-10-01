@@ -15,9 +15,14 @@ const definitions = {
   Livepoll: {
     id: obj => obj.id,
     settings: obj => obj.settings,
-    items: (obj, {id}) => {
+    items: (obj, {id, startAt, howMany}) => {
       let items = Object.values(obj.items || {});
-      if (id) items = items.filter(item => item.id === id);
+      if (id) {
+        items = items.filter(item => item.id === id);
+      } else if (startAt !== undefined || howMany !== undefined) {
+        items = items.sort((a, b) => a.voteCount > b.voteCount ? -1 : 1);
+        items = items.slice(startAt, howMany);
+      }
       return items;
     }
   },

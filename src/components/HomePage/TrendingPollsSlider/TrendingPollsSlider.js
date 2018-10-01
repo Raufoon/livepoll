@@ -6,6 +6,7 @@ import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import ListSubheader from '@material-ui/core/ListSubheader';
 import Paper from '@material-ui/core/Paper';
+import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = theme => ({
   root: {
@@ -22,8 +23,12 @@ const styles = theme => ({
     backgroundColor: 'lightgray',
     opacity: '0.5',
   },
+  content: {
+    margin: '15px',
+    color: 'gray'
+  },
   title: {
-    color: 'black',
+    color: 'black'
   },
   tile: {
     border: '1px solid lightgray',
@@ -42,6 +47,10 @@ function TrendingPollsSlider(props) {
         {
           props.polls.map(poll => (
             <GridListTile key={poll.id}  className={classes.tile}>
+              <Typography variant="headline" className={classes.content}>{poll.items[0].content.text}</Typography>
+              <Typography variant="body1" className={classes.content}>
+                {poll.items[0].voteCount} votes
+              </Typography>
               <GridListTileBar
                 title={poll.settings.title}
                 onClick={()=>props.history.push('/poll/' + poll.id)}
