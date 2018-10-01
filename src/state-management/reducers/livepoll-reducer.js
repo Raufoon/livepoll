@@ -1,5 +1,5 @@
 import {
-  ACTION_FETCH_POLL_INFO_SUCCESS,
+  ACTION_FETCH_POLL_INFO_SUCCESS, ACTION_FETCH_VOTER_LIST_SUCCESS,
   ACTION_GIVE_VOTE_SUCCESS,
   ACTION_REQUEST_ADD_ITEM_SUCCESS,
   ACTION_REQUEST_TOP_ITEMS_SUCCESS
@@ -60,6 +60,24 @@ const livepollReducer = (state = initialState.polls, action) => {
       }
       newState[action.pollId].items[action.itemId].voteCount++;
       return newState;
+
+    case ACTION_FETCH_VOTER_LIST_SUCCESS:
+      return {
+        ...state,
+        [action.pollId]: {
+          ...state[action.pollId],
+          items: {
+            ...state[action.pollId].items,
+            [action.itemId]: {
+              ...state[action.pollId].items[action.itemId],
+              voterIds: [
+                ...(state[action.pollId].items[action.itemId].voterIds || {}),
+                ...action.voterList
+              ]
+            }
+          }
+        }
+      };
 
     case ACTION_SIGNOUT_SUCCESS:
       newState = {...initialState.polls};

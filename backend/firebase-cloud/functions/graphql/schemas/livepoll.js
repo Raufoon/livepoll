@@ -50,7 +50,7 @@ const livepollItemDef = `
     creatorId: String
     content: LivepollItemContent!
     voteCount: Int!
-    voterIds: [String]
+    voterIds: [String]!
   }
 `;
 

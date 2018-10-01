@@ -85,15 +85,20 @@ export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUT
   pollId, votedItemId
 });
 
-// TODO: delete me
 export const requestVoterList = (pollId, itemId, startAt, howMany) => {
   return graphqlRequest(`
   query getPollInfo {
     livepoll(id: "${pollId}") {
-      items{
+      items(id: "${itemId}"){
         voterIds
       }
     }
   }
-  `);
+  `).then(response => {
+    const items = response.livepoll.items;
+    if (items) {
+      return items[0].voterIds;
+    }
+    return Promise.reject('Not Found');
+  });
 };

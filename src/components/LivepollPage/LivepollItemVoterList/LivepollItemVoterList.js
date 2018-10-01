@@ -20,12 +20,14 @@ const LivepollItemVoterList = props => (
           Members Who Voted
         </Typography>
       </ListItem>
-      {[0, 1, 2, 3].map(value => (
-        <ListItem key={value} dense button>
-          <Avatar>X</Avatar>
-          <ListItemText primary={`Line item ${value + 1}`} />
-        </ListItem>
-      ))}
+      {
+        props.voterList.map(voter => (
+          <ListItem key={voter} dense button>
+            <Avatar>{voter[0]}</Avatar>
+            <ListItemText primary={voter} />
+          </ListItem>
+        ))
+      }
     </List>
   </BigRemoteDataDisplay>
 );

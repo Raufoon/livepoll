@@ -20,7 +20,8 @@ const TextItem = props => {
           ModalComponent={LivepollItemVoterList}
           childProps={{
             pollId: props.pollId,
-            itemId: props.item.id
+            itemId: props.item.id,
+            voterList: props.item.voterIds || [],
           }}
           OpenerComponent={Typography}
           dontHideOpener={true}
@@ -77,6 +78,7 @@ TextItem.propTypes = {
   item: PropTypes.object,
   pollId: PropTypes.string,
   index: PropTypes.number,
+  voterList: PropTypes.array,
 };
 
 export default TextItem

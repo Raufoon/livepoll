@@ -71,4 +71,13 @@ export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
 
 export const actionFetchVoterList = (pollId, itemId, startAt, howMany) => dispatch => {
   requestVoterList(pollId, itemId, startAt, howMany)
+    .then(voterList => {
+      dispatch(actionFetchVoterListSuccess(pollId, itemId, voterList));
+    })
 };
+
+export const ACTION_FETCH_VOTER_LIST_SUCCESS = 'ACTION_FETCH_VOTER_LIST_SUCCESS';
+export const actionFetchVoterListSuccess = (pollId, itemId, voterList) => ({
+  type: ACTION_FETCH_VOTER_LIST_SUCCESS,
+  pollId, itemId, voterList
+});
