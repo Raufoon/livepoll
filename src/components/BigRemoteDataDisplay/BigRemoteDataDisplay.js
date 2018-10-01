@@ -8,7 +8,7 @@ class BigRemoteDataDisplay extends React.Component {
   }
 
   loadMore() {
-    this.props.requestData(this.props.totalFetched, this.props.limit);
+    this.props.doRequest(this.props.totalFetched, this.props.limit);
   }
 
   componentDidMount() {
@@ -16,21 +16,18 @@ class BigRemoteDataDisplay extends React.Component {
   }
 
   render() {
-    const ChildComponent = this.props.childComponent;
     return (
       <React.Fragment>
-        <ChildComponent {...this.props.getChildProps()}/>
-        {/*<button onClick={this.loadMore}>Load more</button>*/}
+        {this.props.children}
       </React.Fragment>
     );
   }
 }
 
 BigRemoteDataDisplay.propTypes = {
-  childComponent: PropTypes.func.isRequired,
-  getChildProps: PropTypes.func.isRequired,
-  requestData: PropTypes.func.isRequired,
-  limit: PropTypes.number.isRequired
+  doRequest: PropTypes.func.isRequired,
+  limit: PropTypes.number.isRequired,
+  totalFetched: PropTypes.number.isRequired,
 };
 
 export default BigRemoteDataDisplay

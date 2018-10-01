@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button';
@@ -17,6 +18,10 @@ const TextItem = props => {
       VoteCounter = (
         <ModalOpenerButton
           ModalComponent={LivepollItemVoterList}
+          childProps={{
+            pollId: props.pollId,
+            itemId: props.item.id
+          }}
           OpenerComponent={Typography}
           dontHideOpener={true}
           openerComponentProps={{variant: 'body1'}}
@@ -62,6 +67,16 @@ const TextItem = props => {
       />
     </Card>
   )
+};
+
+TextItem.propTypes = {
+  isFirst: PropTypes.bool,
+  isAlreadyVoted: PropTypes.bool,
+  voteDisabled: PropTypes.bool,
+  vote: PropTypes.func,
+  item: PropTypes.object,
+  pollId: PropTypes.string,
+  index: PropTypes.number,
 };
 
 export default TextItem

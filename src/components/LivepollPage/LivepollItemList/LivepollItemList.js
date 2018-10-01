@@ -1,12 +1,15 @@
 import React from "react";
+import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 import TextItem from "./item-components/TextItem";
+import {actionGiveVote, actionRequestTopItems} from "../../../state-management/actions/livepoll-actions";
+import BigRemoteDataDisplay from "../../BigRemoteDataDisplay/BigRemoteDataDisplay";
 
 const LivepollItemList = props => {
   let ItemComponent;
-  switch (props.pollSettings.itemFormat) {
+  switch (props.livepoll.settings.itemFormat) {
     case PollSettings.POLL_ITEM_FORMAT.TEXT:
       ItemComponent = TextItem;
       break;
@@ -15,7 +18,12 @@ const LivepollItemList = props => {
   }
 
   return (
-    <React.Fragment>
+    <BigRemoteDataDisplay
+      doRequest={(startAt, limit) =>
+        props.dispatch(actionRequestTopItems(props.livepoll.id, startAt, limit))
+      }
+      totalFetched={Object.keys(props.livepoll.items || {}).length}
+      limit={50}>
       {
         props.items
           .map((item, index) =>
@@ -24,23 +32,23 @@ const LivepollItemList = props => {
               index={index + 1}
               isFirst={item.voteCount !== 0 && item.voteCount === props.items[0].voteCount}
               item={item}
-              showVoters={props.pollSettings.showVoters}
+              pollId={props.livepoll.id}
+              showVoters={props.livepoll.settings.showVoters}
               isAlreadyVoted={props.lastVotedItemId === item.id}
               voteDisabled={props.voteDisabled}
               hideVotes={props.willStartOnFuture}
-              vote={()=>{props.vote(item.id)}}/>)
+              vote={()=> props.dispatch(actionGiveVote(props.livepoll.id, item.id, props.lastVotedItemId))}/>)
       }
-    </React.Fragment>
-  )
+    </BigRemoteDataDisplay>
+  );
 };
 
 LivepollItemList.propTypes = {
   items: PropTypes.array.isRequired,
-  pollSettings: PropTypes.object.isRequired,
+  livepoll: PropTypes.object,
   lastVotedItemId: PropTypes.string,
   willStartOnFuture: PropTypes.bool,
   voteDisabled: PropTypes.bool,
-  vote: PropTypes.func,
 };
 
-export default LivepollItemList
+export default connect()(LivepollItemList)

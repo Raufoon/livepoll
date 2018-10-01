@@ -65,8 +65,7 @@ const QUERY_TOP_ITEMS = `
       content {
         text
       },
-      voteCount,
-      voterIds
+      voteCount
     }
   }
 `;
@@ -85,3 +84,16 @@ const MUTATION_GIVE_VOTE = `
 export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUTATION_GIVE_VOTE, {
   pollId, votedItemId
 });
+
+// TODO: delete me
+export const requestVoterList = (pollId, itemId, startAt, howMany) => {
+  return graphqlRequest(`
+  query getPollInfo {
+    livepoll(id: "${pollId}") {
+      items{
+        voterIds
+      }
+    }
+  }
+  `);
+};

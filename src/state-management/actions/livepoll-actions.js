@@ -2,7 +2,7 @@ import {
   requestAddPollitem,
   requestGiveVote,
   requestPollInfo,
-  requestTopItems
+  requestTopItems, requestVoterList
 } from "../../util/cloud/livepoll";
 import {actionAlreadyVotedPollFound} from "./my-profile-actions";
 import {actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
@@ -68,3 +68,7 @@ export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
   type: ACTION_GIVE_VOTE_SUCCESS,
   pollId, itemId, lastVotedItemId
 });
+
+export const actionFetchVoterList = (pollId, itemId, startAt, howMany) => dispatch => {
+  requestVoterList(pollId, itemId, startAt, howMany)
+};

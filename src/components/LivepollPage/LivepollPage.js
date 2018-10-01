@@ -3,14 +3,9 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-import {
-  actionFetchPollInfo,
-  actionGiveVote,
-  actionRequestTopItems
-} from "../../state-management/actions/livepoll-actions";
+import {actionFetchPollInfo} from "../../state-management/actions/livepoll-actions";
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
-import BigRemoteDataDisplay from "../BigRemoteDataDisplay/BigRemoteDataDisplay";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import CreateItemForm from "../forms/CreateItemForm/CreateItemForm";
@@ -48,25 +43,15 @@ const LivepollPage = props => {
 
       <br/><br/>
 
-      <BigRemoteDataDisplay
-        childComponent={LivepollItemList}
-        requestData={(startAt, limit) =>
-          props.dispatch(actionRequestTopItems(props.livepoll.id, startAt, limit))
+      <LivepollItemList
+        items={
+          Object.values(props.livepoll.items || {})
+            .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
         }
-        getChildProps={()=>({
-          items: Object.values(props.livepoll.items || {})
-            .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1),
-
-          vote: (itemId) => {
-            props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
-          },
-          pollSettings: props.livepoll.settings,
-          lastVotedItemId: props.lastVotedItemId,
-          voteDisabled: !isLive,
-          willStartOnFuture: willStartOnFuture
-        })}
-        totalFetched={Object.keys(props.livepoll.items || {}).length}
-        limit={50}/>
+        lastVotedItemId={props.lastVotedItemId}
+        voteDisabled={!isLive}
+        willStartOnFuture={willStartOnFuture}
+        livepoll={props.livepoll}/>
 
       <br/>
       {

@@ -46,7 +46,7 @@ const livepollItemDef = `
     youtubeUrl: String!
   }
   type LivepollItem {
-    id: String!
+    id: ID!
     creatorId: String
     content: LivepollItemContent!
     voteCount: Int!
