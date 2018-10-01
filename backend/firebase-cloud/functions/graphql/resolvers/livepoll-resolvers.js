@@ -15,7 +15,11 @@ const definitions = {
   Livepoll: {
     id: obj => obj.id,
     settings: obj => obj.settings,
-    items: obj => obj.items,
+    items: (obj, {id}) => {
+      let items = Object.values(obj.items || {});
+      if (id) items = items.filter(item => item.id === id);
+      return items;
+    }
   },
 
   LivepollItem: {
