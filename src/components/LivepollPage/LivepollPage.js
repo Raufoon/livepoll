@@ -60,8 +60,7 @@ const LivepollPage = props => {
           vote: (itemId) => {
             props.dispatch(actionGiveVote(props.livepoll.id, itemId, props.lastVotedItemId))
           },
-
-          itemFormat: props.livepoll.settings.itemFormat,
+          pollSettings: props.livepoll.settings,
           lastVotedItemId: props.lastVotedItemId,
           voteDisabled: !isLive,
           willStartOnFuture: willStartOnFuture
@@ -95,6 +94,8 @@ const s2p = (state, ownProps) => ({
 
 LivepollPage.propTypes = {
   livepoll: PropTypes.object,
+  lastVotedItemId: PropTypes.string,
+  authUserId: PropTypes.string,
 };
 
 export default connect(s2p)(withRouter(LivepollPage))

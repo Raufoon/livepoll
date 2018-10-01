@@ -4,6 +4,10 @@ import Button from '@material-ui/core/Button';
 
 import Modal from "../../Modal/Modal";
 
+const openerDefaultStyle = {
+  cursor: 'pointer'
+};
+
 class ModalOpenerButton extends React.Component {
   constructor(props) {
     super(props);
@@ -24,21 +28,31 @@ class ModalOpenerButton extends React.Component {
   }
   render() {
     const ModalComponent = this.props.ModalComponent;
-
-    return this.state.showModal ? (
-      <Modal onClose={this.closeModal} settings={this.props.modalOptions}>
-        <ModalComponent onModalResult={this.onModalResult} {...this.props.childProps}/>
-      </Modal>
-    ):(
-      <Button
-        className={this.props.className}
-        {...this.props.buttonProps}
-        onClick={this.openModal}>
+    const Opener = this.props.OpenerComponent || Button;
+    return (
+      <React.Fragment>
         {
-          this.props.children
+          this.state.showModal && (
+            <Modal onClose={this.closeModal} settings={this.props.modalOptions}>
+              <ModalComponent onModalResult={this.onModalResult} {...this.props.childProps}/>
+            </Modal>
+          )
         }
-      </Button>
-    )
+        {
+          (this.props.dontHideOpener || !this.state.showModal) && (
+            <Opener
+              className={this.props.className}
+              style={openerDefaultStyle}
+              {...this.props.openerComponentProps}
+              onClick={this.openModal}>
+              {
+                this.props.children
+              }
+            </Opener>
+          )
+        }
+      </React.Fragment>
+    );
   }
 }
 

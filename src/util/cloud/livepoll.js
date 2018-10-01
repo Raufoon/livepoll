@@ -22,7 +22,8 @@ const QUERY_POLL_INFO = `
         endDatetime,
         isPrivate,
         itemFormat,
-        othersCanAdd
+        othersCanAdd,
+        showVoters
       }
     }
   }

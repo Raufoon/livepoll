@@ -2,6 +2,7 @@ import React from "react";
 import dateFormat from 'dateformat';
 import Typography from "@material-ui/core/Typography/Typography";
 import Badge from '@material-ui/core/Badge';
+import PropTypes from 'prop-types';
 
 import './LivepollInfoCard.css'
 
@@ -43,6 +44,13 @@ const LivepollInfoCard = props => {
       }
     </div>
   )
+};
+
+LivepollInfoCard.propTypes = {
+  hasEnded: PropTypes.bool,
+  isLive: PropTypes.bool,
+  willStartOnFuture: PropTypes.bool,
+  livepoll: PropTypes.object,
 };
 
 export default LivepollInfoCard
