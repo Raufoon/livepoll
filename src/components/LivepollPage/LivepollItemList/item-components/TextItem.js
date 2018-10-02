@@ -5,6 +5,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 import Typography from "@material-ui/core/Typography/Typography";
+import StarIcon from '@material-ui/icons/StarBorder';
 
 import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import './TextItem.css'
@@ -53,7 +54,7 @@ const TextItem = props => {
             <Button
               onClick={props.vote}
               color={props.isAlreadyVoted ? 'secondary':'default'}>
-              {props.isAlreadyVoted ? 'Unvote':'Vote'}
+              <StarIcon/>&nbsp;&nbsp;{props.isAlreadyVoted ? 'Unvote':'Vote'}
             </Button>
           )
         }

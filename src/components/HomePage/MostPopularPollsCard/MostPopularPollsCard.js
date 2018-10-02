@@ -1,4 +1,5 @@
 import React from 'react';
+import {withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -13,6 +14,9 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: theme.palette.background.paper,
   },
+  avatar: {
+    cursor: 'pointer'
+  }
 });
 
 const listItemPrimaryText = {
@@ -44,7 +48,7 @@ function MostPopularPollsCard(props) {
                 )
               }
               <ListItem>
-                <Avatar>
+                <Avatar className={classes.avatar} onClick={()=>props.history.push('/poll/' + poll.id)}>
                   {index + 1}
                 </Avatar>
                 <ListItemText
@@ -61,4 +65,4 @@ function MostPopularPollsCard(props) {
   );
 }
 
-export default withStyles(styles)(MostPopularPollsCard)
+export default withRouter(withStyles(styles)(MostPopularPollsCard))

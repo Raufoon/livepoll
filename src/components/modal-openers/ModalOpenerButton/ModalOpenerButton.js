@@ -29,6 +29,7 @@ class ModalOpenerButton extends React.Component {
   render() {
     const ModalComponent = this.props.ModalComponent;
     const Opener = this.props.OpenerComponent || Button;
+    const OpenerIcon = this.props.OpenerIcon;
     return (
       <React.Fragment>
         {
@@ -46,6 +47,10 @@ class ModalOpenerButton extends React.Component {
               {...this.props.openerComponentProps}
               onClick={this.openModal}>
               {
+                this.props.OpenerIcon && <OpenerIcon/>
+              }
+              &nbsp;
+              {
                 this.props.children
               }
             </Opener>
@@ -61,6 +66,7 @@ ModalOpenerButton.propTypes = {
   onModalResult: PropTypes.func,
   modalOptions: PropTypes.object,
   childProps: PropTypes.object,
+  OpenerIcon: PropTypes.func
 };
 
 export default ModalOpenerButton

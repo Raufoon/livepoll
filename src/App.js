@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Switch, withRouter, Route, Link} from 'react-router-dom';
-
+import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -33,7 +33,10 @@ class App extends Component {
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
             <div style={{flexGrow: 0.3}}/>
-            <ModalOpenerButton ModalComponent={PollCreationForm} buttonProps={{color: 'default'}}>Create a poll</ModalOpenerButton>
+            <ModalOpenerButton
+              ModalComponent={PollCreationForm}
+              OpenerIcon={CreateIcon}
+              buttonProps={{color: 'default'}}>Create a poll</ModalOpenerButton>
             <div style={{flexGrow: 0.7}}/>
             <AuthUserBadge/>
             <Button onClick={() => this.props.dispatch(actionSignoutRequest())}>Sign out</Button>

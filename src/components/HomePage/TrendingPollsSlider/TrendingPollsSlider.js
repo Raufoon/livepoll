@@ -21,6 +21,7 @@ const styles = theme => ({
   titleBar: {
     backgroundColor: 'lightgray',
     opacity: '0.5',
+    cursor: 'pointer'
   },
   content: {
     margin: '15px'
