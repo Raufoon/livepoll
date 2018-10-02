@@ -78,10 +78,8 @@ const definitions = `
 const queries = `
   livepoll(id: String!): Livepoll
   getTopItems(pollId: String!, startAt: Int!, howMany: Int!): [LivepollItem]
-
   getTrendingPolls(startAt: Int!, howMany: Int!): [Livepoll]
   getMostPopularPolls(startAt: Int!, howMany: Int!): [Livepoll]
-  getRecentPolls(startAt: Int!, howMany: Int!): [Livepoll]
 `;
 
 const mutations = `
