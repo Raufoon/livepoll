@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
-import ListSubheader from '@material-ui/core/ListSubheader';
 import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography/Typography";
 
@@ -42,7 +41,12 @@ function TrendingPollsSlider(props) {
     <Paper className={classes.root}>
       <GridList cellHeight={150} className={classes.gridList}>
         <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
-          <ListSubheader component="div">Trending Now</ListSubheader>
+          <Typography variant="headline" gutterBottom>
+            Trending Now
+          </Typography>
+        </GridListTile>
+        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+          <br/>
         </GridListTile>
         {
           props.polls.map(poll => (
