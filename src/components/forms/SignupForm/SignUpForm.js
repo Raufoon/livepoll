@@ -39,13 +39,13 @@ const SignUpForm = (props) => {
       </LPForm>
       <br/>
       <div>
-        <Button onClick={signinWithGoogle} color={'primary'}>
+        <Button onClick={signinWithGoogle}>
           Google
         </Button>
 
         &nbsp;
 
-        <Button size="small" color={'primary'}>
+        <Button size="small">
           Facebook
         </Button>
       </div>

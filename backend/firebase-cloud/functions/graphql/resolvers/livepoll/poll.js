@@ -8,7 +8,7 @@ module.exports.getLivepoll = (_, { id }) => {
 module.exports.publishLivepoll = (_, { settings }, context) => {
   const newPollId = DB.getPushKey();
   return verifyIdToken(context.idToken, settings.creatorId)
-    .then(() => DB.write(`/users/${settings.creatorId}/mypolls/${newPollId}`, true))
+    .then(() => DB.write(`/myPolls/${settings.creatorId}/${newPollId}`, true))
     .then(() => DB.write(`/polls/${newPollId}`, {
       id: newPollId,
       settings
@@ -39,17 +39,17 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
 
   let fetchLastVotedItemId = () => decodeIdToken(context.idToken).then(decodedUid => {
     authUserId = decodedUid;
-    return DB.read(`users/${authUserId}/votedPolls/${pollId}`);
+    return DB.read(`/myVotedPolls/${authUserId}/${pollId}`);
   });
 
-  let decreaseVote = itemId => DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+  let decreaseVote = itemId => DB.doTransaction(`itemList/${pollId}/${itemId}/voteCount`, voteCount => {
     if (voteCount !== null) {
       return voteCount - 1
     }
     return voteCount;
   });
 
-  let increaseVote = itemId => DB.doTransaction(`polls/${pollId}/items/${itemId}/voteCount`, voteCount => {
+  let increaseVote = itemId => DB.doTransaction(`itemList/${pollId}/${itemId}/voteCount`, voteCount => {
     if (voteCount !== null) {
       return voteCount + 1
     }
@@ -61,7 +61,7 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
   ]);
 
   let saveVote = (itemId) => Promise.all([
-    DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId),
+    DB.write(`myVotedPolls/${authUserId}/${pollId}`, itemId),
     DB.write(`voterList/${itemId}/${authUserId}`, true)
   ]);
 
@@ -73,7 +73,7 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
           .then(() => saveVote(votedItemId));
       } else if (lastVotedItemId === votedItemId) {
         return decreaseVote(votedItemId)
-          .then(() => DB.remove(`users/${authUserId}/votedPolls/${pollId}`))
+          .then(() => DB.remove(`myVotedPolls/${authUserId}/${pollId}`))
           .then(() => unsaveVote(votedItemId));
       } else {
         return Promise.all([
@@ -82,7 +82,7 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
         ]);
       }
     })
-    .then(() => DB.read(`polls/${pollId}/items/${votedItemId}/voteCount`));
+    .then(() => DB.read(`itemList/${pollId}/${votedItemId}/voteCount`));
 };
 
 module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {

@@ -7,8 +7,12 @@ const definitions = {
   },
   User: {
     basicInfo: obj => obj.basicInfo,
-    votedPolls: obj => Object.keys(obj.votedPolls || {}),
-    myPolls: obj => Object.keys(obj.myPolls || {}),
+    votedPolls: user => {
+      return DB.read(`myVotedPolls/${user.id}`).then(val => Object.keys(val));
+    },
+    myPolls: user => {
+      return DB.read(`myPolls/${user.id}`).then(val => Object.keys(val));
+    },
   },
 };
 

@@ -11,8 +11,8 @@ const definitions = `
   type User {
     id: ID!
     basicInfo: BasicInfo
-    votedPolls: [String]
-    myPolls: [String]
+    votedPolls: [String]!
+    myPolls: [String]!
   }
 `;
 

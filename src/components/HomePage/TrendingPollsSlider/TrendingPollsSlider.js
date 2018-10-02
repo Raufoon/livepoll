@@ -39,12 +39,12 @@ function TrendingPollsSlider(props) {
   return (
     <Paper className={classes.root}>
       <GridList cellHeight={150} className={classes.gridList}>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+        <GridListTile cols={2} style={{ height: 'auto' }}>
           <Typography variant="headline" gutterBottom>
             Trending Now
           </Typography>
         </GridListTile>
-        <GridListTile key="Subheader" cols={2} style={{ height: 'auto' }}>
+        <GridListTile cols={2} style={{ height: 'auto' }}>
           <br/>
         </GridListTile>
         {
