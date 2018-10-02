@@ -51,7 +51,7 @@ module.exports.addItem = (_, { pollId, content }, context) => {
               voterIds: [],
             };
             if (args.creatorId) newItem.creatorId = args.creatorId;
-            return DB.write(`/polls/${pollId}/items/${itemId}`, newItem);
+            return DB.write(`/itemList/${pollId}/${itemId}`, newItem);
           }
         )
     );
