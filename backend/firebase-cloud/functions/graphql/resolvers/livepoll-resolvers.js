@@ -23,7 +23,7 @@ const definitions = {
     creatorId: obj => obj.creatorId,
     content: obj => obj.content,
     voteCount: obj => obj.voteCount,
-    voterIds: item => DB.read(`voterList/${item.id}`).then(voters => Object.values(voters || {})),
+    voterIds: item => DB.read(`voterList/${item.id}`).then(voters => Object.keys(voters || {})),
   },
 
   LivepollItemContent: {
