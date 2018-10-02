@@ -72,8 +72,10 @@ export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
 });
 
 export const actionFetchVoterList = (pollId, itemId, startAt, howMany) => dispatch => {
+  dispatch(actionMakeWarningToast('Fetching the voter list'));
   requestVoterList(pollId, itemId, startAt, howMany)
     .then(voterList => {
+      dispatch(actionMakeSuccessToast('Voter list loaded'));
       dispatch(actionFetchVoterListSuccess(pollId, itemId, voterList));
     })
 };

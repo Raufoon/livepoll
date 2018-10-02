@@ -1,4 +1,5 @@
 import {graphqlRequest, graphqlSecureRequest} from "./graphql-api/requests";
+import {requestUsernamesByIds} from "./user";
 
 const MUTATION_PUBLISH_LIVEPOLL = `
   mutation PublishLivepoll ($settings: InputLivepollCreate!) {
@@ -99,7 +100,7 @@ export const requestVoterList = (pollId, itemId, startAt, howMany) => {
   `).then(response => {
     const items = response.livepoll.items;
     if (items) {
-      return items[0].voterIds;
+      return requestUsernamesByIds(items[0].voterIds).then(response => response.users);
     }
     return Promise.reject('Not Found');
   });

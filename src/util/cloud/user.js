@@ -47,3 +47,17 @@ const QUERY_CHECK_IF_ALREADY_VOTED = `
 export const requestCheckHaveIVoted = (pollId) => {
   return graphqlSecureRequest(QUERY_CHECK_IF_ALREADY_VOTED, {pollId})
 };
+
+const QUERY_GET_USERNAMES_BY_IDS = `
+  query GetUsernamesByIds ($idList: [String]!) {
+    users(idList: $idList) {
+      id,
+      basicInfo{
+        name
+      }
+    }
+  }
+`;
+export const requestUsernamesByIds = (idList) => {
+  return graphqlRequest(QUERY_GET_USERNAMES_BY_IDS, {idList})
+};

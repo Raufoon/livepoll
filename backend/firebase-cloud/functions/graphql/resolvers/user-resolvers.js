@@ -18,7 +18,20 @@ const definitions = {
 
 const queries = {
   user: (_, { id }) => DB.read(`/users/${id}`),
-  users: () => DB.readList('/users'),
+  users: (parent, {idList}) => {
+    return DB.read('/users')
+      .then(response => {
+        let userList = [];
+        if (idList) {
+          for (let i=0; i<idList.length; i++) {
+            userList.push(response[idList[i]])
+          }
+        } else {
+          userList = Object.values(response);
+        }
+        return userList;
+      });
+  },
   haveIVoted: require('./user/user').haveIVoted,
 };
 

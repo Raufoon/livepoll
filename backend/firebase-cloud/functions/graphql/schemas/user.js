@@ -18,7 +18,7 @@ const definitions = `
 
 const queries = `
   user(id: ID!): User
-  users: [User]!
+  users(idList: [String]): [User]!
   haveIVoted(pollId: String!): String
 `;
 

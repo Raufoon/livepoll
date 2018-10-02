@@ -22,9 +22,9 @@ const LivepollItemVoterList = props => (
       </ListItem>
       {
         props.voterList.map(voter => (
-          <ListItem key={voter} dense button>
-            <Avatar>{voter[0]}</Avatar>
-            <ListItemText primary={voter} />
+          <ListItem key={voter.id} dense button>
+            <Avatar>{voter.basicInfo.name[0]}</Avatar>
+            <ListItemText primary={voter.basicInfo.name} />
           </ListItem>
         ))
       }
