@@ -3,6 +3,8 @@ import dateFormat from 'dateformat';
 import Typography from "@material-ui/core/Typography/Typography";
 import Badge from '@material-ui/core/Badge';
 import PropTypes from 'prop-types';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
 
 import './LivepollInfoCard.css'
 
@@ -29,7 +31,11 @@ const LivepollInfoCard = props => {
       }
 
       <Typography variant="body1">
-        Created by {props.livepoll.settings.creatorId}
+        Created by&nbsp;&nbsp;&nbsp;
+        <Chip
+          avatar={<Avatar variant="outlined">{props.livepoll.settings.creatorName[0]}</Avatar>}
+          label={props.livepoll.settings.creatorName}
+        />
       </Typography>
 
       <Typography variant="body1">

@@ -30,7 +30,17 @@ const QUERY_POLL_INFO = `
   }
 `;
 export const requestPollInfo = pollId => {
-  return graphqlRequest(QUERY_POLL_INFO, {id: pollId});
+  return graphqlRequest(QUERY_POLL_INFO, {id: pollId})
+    .then(response => {
+      let livepoll = response.livepoll;
+      return requestUsernamesByIds([response.livepoll.settings.creatorId])
+        .then(response => {
+          livepoll.settings.creatorName = response.users[0].basicInfo.name;
+          return {
+            livepoll
+          }
+        })
+    });
 };
 
 const MUTATION_ADD_POLL_ITEM = `
