@@ -25,19 +25,21 @@ class Modal extends React.Component {
   render() {
     const modalSettings = this.props.settings || {};
     return ReactDOM.createPortal(
-      <Paper className='modal-container' style={{zIndex: this.zIndex}}>
-        {
-          !modalSettings.hideCloseButton
-          && (
-            <button className='modal-close-btn' onClick={this.props.onClose}>
-              X
-            </button>
-          )
-        }
-        <div className='modal-content'>
-          { this.props.children }
-        </div>
-      </Paper>,
+      <div className={'modal-overlay'} style={{zIndex: this.zIndex}}>
+        <Paper className='modal-container'>
+          {
+            !modalSettings.hideCloseButton
+            && (
+              <button className='modal-close-btn' onClick={this.props.onClose}>
+                X
+              </button>
+            )
+          }
+          <div className='modal-content'>
+            { this.props.children }
+          </div>
+        </Paper>
+      </div>,
       this.modalDomParent
     )
   }
