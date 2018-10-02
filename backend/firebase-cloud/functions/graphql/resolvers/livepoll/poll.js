@@ -57,12 +57,12 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
   });
 
   let unsaveVote = (itemId) => Promise.all([
-    DB.remove(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`)
+    DB.remove(`voterList/${itemId}/${authUserId}`)
   ]);
 
   let saveVote = (itemId) => Promise.all([
     DB.write(`users/${authUserId}/votedPolls/${pollId}`, itemId),
-    DB.write(`polls/${pollId}/items/${itemId}/voterIds/${authUserId}`, true)
+    DB.write(`voterList/${itemId}/${authUserId}`, true)
   ]);
 
   return isPollLive()

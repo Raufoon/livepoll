@@ -23,8 +23,7 @@ const styles = theme => ({
     opacity: '0.5',
   },
   content: {
-    margin: '15px',
-    color: 'gray'
+    margin: '15px'
   },
   title: {
     color: 'black'
