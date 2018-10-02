@@ -2,12 +2,6 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const DB = {
-  exists(path) {
-    return admin.database()
-      .ref(path)
-      .once('value')
-      .then(snap=>snap.exists());
-  },
   read(path) {
     return admin.database()
       .ref(path)
@@ -21,9 +15,13 @@ const DB = {
     } else {
       promise = promise.orderByKey();
     }
-    return promise.startAt(startAt)
-      .limitToFirst(howMany)
-      .once('value')
+    promise = promise.startAt(startAt);
+    if (sortKey) {
+      promise = promise.limitToLast(howMany)
+    } else {
+      promise = promise.limitToFirst(howMany);
+    }
+    return promise.once('value')
       .then(snap => Object.values(snap.val() || {}));
   },
   readList(path) {

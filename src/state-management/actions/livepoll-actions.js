@@ -39,7 +39,9 @@ export const actionRequestAddItemSuccess = (pollId, newItem) => ({
 
 export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
   return requestTopItems(pollId, startAt, howMany)
-    .then(response => dispatch(actionRequestTopItemsSuccess(pollId, response.items)))
+    .then(response => {
+      dispatch(actionRequestTopItemsSuccess(pollId, response.livepoll.items))
+    });
 };
 
 export const ACTION_REQUEST_TOP_ITEMS_SUCCESS = 'ACTION_REQUEST_TOP_ITEMS_SUCCESS';

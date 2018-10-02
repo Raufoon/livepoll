@@ -1,8 +1,8 @@
 import {requestPopularPolls, requestTrendingPolls} from "../../util/cloud/home";
 
 export const actionFetchHome = () => dispatch => {
-  dispatch(actionFetchPopularPolls(0, 6));
-  dispatch(actionFetchTrendingPolls(0, 6));
+  dispatch(actionFetchPopularPolls(0, 10));
+  dispatch(actionFetchTrendingPolls(0, 10));
 };
 
 

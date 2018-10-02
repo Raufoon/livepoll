@@ -84,3 +84,11 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
     })
     .then(() => DB.read(`polls/${pollId}/items/${votedItemId}/voteCount`));
 };
+
+module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {
+  return DB.readWithinRange('/polls', startAt, howMany, 'id');
+};
+
+module.exports.getTrendingPolls = (_, {startAt, howMany}) => {
+  return DB.readWithinRange('/polls', startAt, howMany, 'id');
+};

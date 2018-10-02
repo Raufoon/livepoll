@@ -57,18 +57,10 @@ module.exports.addItem = (_, { pollId, content }, context) => {
     );
 };
 
-module.exports.getTopItems = (_, { pollId, startAt, howMany }) => {
-  return DB.readWithinRange(`/polls/${pollId}/items`, startAt, howMany, 'voteCount');
-};
-
-module.exports.getRecentPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany, 'id');
-};
-
-module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany, 'id');
-};
-
-module.exports.getTrendingPolls = (_, {startAt, howMany}) => {
-  return DB.readWithinRange('/polls', startAt, howMany, 'id');
+module.exports.items = (livepoll, {id, startAt, howMany}) => {
+  if (id) {
+    return DB.read(`/itemList/${livepoll.id}/${id}`).then(item => [item]);
+  } else if (startAt !== undefined || howMany !== undefined) {
+    return DB.readWithinRange(`/itemList/${livepoll.id}`, startAt, howMany, 'voteCount');
+  }
 };

@@ -55,17 +55,19 @@ export const requestAddPollitem = (pollId, content) => {
 };
 
 const QUERY_TOP_ITEMS = `
-  query GetFirstNItems (
+  query GetTopItems (
     $pollId: String!,
     $startAt: Int!,
     $howMany: Int!
   ) {
-    items: getTopItems (pollId: $pollId, startAt: $startAt, howMany: $howMany) {
-      id,
-      content {
-        text
-      },
-      voteCount
+    livepoll(id: $pollId) {
+      items(startAt: $startAt, howMany: $howMany) {
+        id,
+        content {
+          text
+        },
+        voteCount
+      }
     }
   }
 `;
