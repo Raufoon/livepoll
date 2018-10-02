@@ -15,6 +15,14 @@ const styles = theme => ({
   },
 });
 
+const listItemPrimaryText = {
+  variant: 'subheading',
+  gutterBottom: true
+};
+const listItemSecondaryText = {
+  gutterBottom: true
+};
+
 function MostPopularPollsCard(props) {
   const { classes } = props;
   return (
@@ -39,8 +47,11 @@ function MostPopularPollsCard(props) {
                 <Avatar>
                   {index + 1}
                 </Avatar>
-                <ListItemText primary={poll.settings.title}
-                              secondary={`${poll.items[0].content.text} (${poll.items[0].voteCount} votes)`} />
+                <ListItemText
+                  primary={poll.settings.title}
+                  primaryTypographyProps={listItemPrimaryText}
+                  secondaryTypographyProps={listItemSecondaryText}
+                  secondary={`${poll.items[0].content.text} (${poll.items[0].voteCount} votes)`} />
               </ListItem>
             </React.Fragment>
           ))
