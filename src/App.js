@@ -19,12 +19,14 @@ import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/Moda
 import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 
 class App extends Component {
   render() {
     if (!this.props.isLoggedIn) {
       return <SignUpPage />;
     }
+    const doSignOut = () => this.props.dispatch(actionSignoutRequest());
     return (
       <React.Fragment>
         <AppBar position="fixed" color={'default'}>
@@ -37,10 +39,13 @@ class App extends Component {
             <ModalOpenerButton
               ModalComponent={PollCreationForm}
               OpenerIcon={CreateIcon}
-              buttonProps={{color: 'default'}}>Create a poll</ModalOpenerButton>
+              openerComponentProps={{color: 'primary'}}>Create a poll</ModalOpenerButton>
             <div style={{flexGrow: 0.7}}/>
             <AuthUserBadge/>
-            <Button onClick={() => this.props.dispatch(actionSignoutRequest())}>Sign out</Button>
+            &nbsp;&nbsp;
+            <Button size="small" color="secondary" onClick={doSignOut}>
+              <SignoutIcon/>&nbsp;&nbsp;Sign out
+            </Button>
           </Toolbar>
         </AppBar>
 

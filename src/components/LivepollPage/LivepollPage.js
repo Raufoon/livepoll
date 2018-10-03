@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import './LivepollPage.css'
 import {actionFetchPollInfo} from "../../state-management/actions/livepoll-actions";
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
@@ -57,9 +58,11 @@ const LivepollPage = props => {
       {
         showAddItemButton &&
         <ModalOpenerButton
+          className={'add-item-button'}
           ModalComponent={CreateItemForm}
-          buttonProps={{
-            variant: 'contained', size: "small"
+          openerComponentProps={{
+            variant: 'extendedFab', size: "small",
+            color: 'primary'
           }}
           childProps={{
             pollId: props.livepoll.id,
