@@ -18,6 +18,7 @@ import AuthUserBadge from "./components/AuthUserBadge/AuthUserBadge";
 import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
 
 class App extends Component {
   render() {
@@ -26,7 +27,7 @@ class App extends Component {
     }
     return (
       <React.Fragment>
-        <AppBar position="static" color={'default'}>
+        <AppBar position="fixed" color={'default'}>
           <Toolbar>
             <IconButton color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
             <Typography variant="title" color="inherit">
@@ -43,11 +44,16 @@ class App extends Component {
           </Toolbar>
         </AppBar>
 
+        <AppBar position="static" color={'default'} className={'hidden-app-bar'}>
+          <Toolbar/>
+        </AppBar>
+
         <br/>
 
         <div className='app-content'>
           <Switch>
             <Route path={'/poll/:id'} component={LivepollPage}/>
+            <Route path={'/me'} component={ProfilePage}/>
             <Route component={HomePage}/>
           </Switch>
         </div>

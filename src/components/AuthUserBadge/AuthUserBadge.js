@@ -1,5 +1,6 @@
 import React from 'react'
 import {connect} from 'react-redux'
+import {withRouter} from 'react-router-dom'
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 
@@ -17,16 +18,17 @@ const AuthUserBadge = props => {
       </ModalOpenerButton>
     )
   }
+  const goToProfile = () => props.history.push('/me');
   return (
     <Chip
       className={props.className}
       avatar={<Avatar>{props.loggedInUserData.name[0]}</Avatar>}
       label={props.loggedInUserData.name}
-      onClick={() => {}}
+      onClick={goToProfile}
     />
   );
 };
 const s2p = state => ({
   loggedInUserData: state.myProfile.basicInfo || {}
 });
-export default connect(s2p)(AuthUserBadge);
+export default withRouter((connect(s2p)(AuthUserBadge)));

@@ -11,3 +11,6 @@
 .mg5{margin: 5px}
 .w100{width: 100%}
 .h100{height: 100%}
+.hidden-app-bar{
+  visibility: hidden;
+}
