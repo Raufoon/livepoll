@@ -14,6 +14,7 @@ import LivepollItemVoterList from "../../LivepollItemVoterList/LivepollItemVoter
 
 const TextItem = props => {
   let VoteCounter = false;
+
   if (!props.hideVotes) {
     if (props.showVoters) {
       VoteCounter = (
@@ -35,6 +36,7 @@ const TextItem = props => {
       VoteCounter = `${props.item.voteCount} votes`;
     }
   }
+
   return (
     <Card className={`text-item text-item-resp`}>
       <CardHeader

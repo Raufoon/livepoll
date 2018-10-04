@@ -21,7 +21,7 @@ const LivepollPage = props => {
     return "loading..."
   }
 
-  const settings = props.livepoll.settings;
+  const settings = livepoll.settings;
   const start = new Date(settings.startDatetime);
   const end = new Date(settings.endDatetime);
   const now = new Date();
@@ -29,8 +29,7 @@ const LivepollPage = props => {
   const willStartOnFuture = now < start;
   const hasEnded = endTimeExists && now >= end;
   const isLive = !(willStartOnFuture || hasEnded);
-  const canIAdd
-    = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
+  const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
   const showAddItemButton = canIAdd && !hasEnded;
 
   return (

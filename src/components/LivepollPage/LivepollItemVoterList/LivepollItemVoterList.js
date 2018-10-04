@@ -11,14 +11,15 @@ import {actionFetchVoterList} from "../../../state-management/actions/livepoll-a
 
 const LivepollItemVoterList = props => (
   <BigRemoteDataDisplay
-    doRequest={(startAt, limit) => props.dispatch(actionFetchVoterList(props.pollId, props.itemId, startAt, limit))}
+    doRequest={
+      (startAt, limit) =>
+        props.dispatch(actionFetchVoterList(props.pollId, props.itemId, startAt, limit))
+    }
     limit={5}
     totalFetched={props.voters ? props.voters.length: 0}>
     <List>
       <ListItem dense button>
-        <Typography variant="headline" gutterBottom>
-          Members Who Voted
-        </Typography>
+        <Typography variant="headline" gutterBottom>Members Who Voted</Typography>
       </ListItem>
       {
         props.voterList.map(voter => (

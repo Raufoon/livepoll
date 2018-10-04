@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
@@ -33,6 +34,9 @@ const styles = theme => ({
     border: '1px solid lightgray',
   }
 });
+const autoHeight = {
+  height: 'auto'
+};
 
 function TrendingPollsSlider(props) {
   const { classes } = props;
@@ -40,21 +44,17 @@ function TrendingPollsSlider(props) {
   return (
     <Paper className={classes.root}>
       <GridList cellHeight={150} className={classes.gridList}>
-        <GridListTile cols={2} style={{ height: 'auto' }}>
-          <Typography variant="headline" gutterBottom>
-            Trending Now
-          </Typography>
+        <GridListTile cols={2} style={autoHeight}>
+          <Typography variant="headline" gutterBottom>Trending Now</Typography>
         </GridListTile>
-        <GridListTile cols={2} style={{ height: 'auto' }}>
-          <br/>
-        </GridListTile>
+
+        <GridListTile cols={2} style={autoHeight}><br/></GridListTile>
+
         {
           props.polls.map(poll => (
             <GridListTile key={poll.id}  className={classes.tile}>
               <Typography variant="headline" className={classes.content}>{poll.items[0].content.text}</Typography>
-              <Typography variant="body1" className={classes.content}>
-                {poll.items[0].voteCount} votes
-              </Typography>
+              <Typography variant="body1" className={classes.content}>{poll.items[0].voteCount} votes</Typography>
               <GridListTileBar
                 title={poll.settings.title}
                 onClick={()=>props.history.push('/poll/' + poll.id)}
@@ -71,4 +71,12 @@ function TrendingPollsSlider(props) {
   );
 }
 
-export default withRouter(withStyles(styles)(TrendingPollsSlider))
+TrendingPollsSlider.propTypes = {
+  polls: PropTypes.array
+};
+
+export default withRouter(
+  withStyles(styles)(
+    TrendingPollsSlider
+  )
+)

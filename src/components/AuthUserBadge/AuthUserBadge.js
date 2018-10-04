@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Chip from '@material-ui/core/Chip';
@@ -18,6 +19,7 @@ const AuthUserBadge = props => {
       </ModalOpenerButton>
     )
   }
+
   const goToProfile = () => props.history.push('/me');
   return (
     <Chip
@@ -28,7 +30,17 @@ const AuthUserBadge = props => {
     />
   );
 };
+
 const s2p = state => ({
   loggedInUserData: state.myProfile.basicInfo || {}
 });
-export default withRouter((connect(s2p)(AuthUserBadge)));
+
+AuthUserBadge.propTypes = {
+  loggedInUserData: PropTypes.object
+};
+
+export default withRouter(
+  connect(s2p)(
+    AuthUserBadge
+  )
+);

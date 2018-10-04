@@ -21,7 +21,7 @@ const MUTATION_CREATE_USER = `
     }
   }
 `;
-export const requestCreateUser = () => {
+export const requestCreateUserWithOnlyId = () => {
   return graphqlSecureRequest(MUTATION_CREATE_USER)
 };
 

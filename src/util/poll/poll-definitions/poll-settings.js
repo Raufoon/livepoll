@@ -15,7 +15,7 @@ class PollSettings {
       throw new Error('cannot create poll settings');
     }
 
-    let settings = Object.assign({}, PollSettings.defaultPollSettings, _settings);
+    let settings = {...PollSettings.defaultPollSettings, ..._settings};
     for (let key in settings) {
       if (settings.hasOwnProperty(key)) {
         this[key] = settings[key];

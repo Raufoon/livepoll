@@ -9,12 +9,13 @@ import BigRemoteDataDisplay from "../../BigRemoteDataDisplay/BigRemoteDataDispla
 
 const LivepollItemList = props => {
   let ItemComponent;
+
   switch (props.livepoll.settings.itemFormat) {
     case PollSettings.POLL_ITEM_FORMAT.TEXT:
       ItemComponent = TextItem;
       break;
+
     default:
-      break;
   }
 
   return (
@@ -37,7 +38,8 @@ const LivepollItemList = props => {
               isAlreadyVoted={props.lastVotedItemId === item.id}
               voteDisabled={props.voteDisabled}
               hideVotes={props.willStartOnFuture}
-              vote={()=> props.dispatch(actionGiveVote(props.livepoll.id, item.id, props.lastVotedItemId))}/>)
+              vote={()=> props.dispatch(actionGiveVote(props.livepoll.id, item.id, props.lastVotedItemId))}/>
+          )
       }
     </BigRemoteDataDisplay>
   );

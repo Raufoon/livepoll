@@ -10,12 +10,15 @@ import {actionSigninRequest} from "../../../state-management/actions/auth-action
 import {SIGNIN_METHODS} from "../../../constants/auth-constants";
 
 const SignUpForm = (props) => {
+
   const signinWithGoogle = () => {
     props.dispatch(actionSigninRequest(SIGNIN_METHODS.GOOGLE))
   };
+
   const signinWithEmailPass = (data) => {
     props.dispatch(actionSigninRequest(SIGNIN_METHODS.EMAIL_PASS, data));
   };
+
   return (
     <div className={'tac'}>
       <Typography variant="headline" gutterBottom>Join our community</Typography>
@@ -39,17 +42,12 @@ const SignUpForm = (props) => {
       </LPForm>
       <br/>
       <div>
-        <Button onClick={signinWithGoogle}>
-          Google
-        </Button>
-
+        <Button onClick={signinWithGoogle}>Google</Button>
         &nbsp;
-
-        <Button size="small">
-          Facebook
-        </Button>
+        <Button size="small">Facebook</Button>
       </div>
     </div>
   )
 };
+
 export default connect()(SignUpForm);

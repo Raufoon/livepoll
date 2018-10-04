@@ -3,26 +3,29 @@ import {getLoggedInUser} from "../auth";
 
 const SERVER_GRAPHQL = 'https://us-central1-lllivepolll.cloudfunctions.net/graphqlApi/graphql';
 
-export const graphqlRequest = (graphqlQuery, variables) => {
+export const graphqlRequest = (graphqlQueryString, variables) => {
   return axios.post(
     SERVER_GRAPHQL,
     {
-      query: graphqlQuery,
+      query: graphqlQueryString,
       variables
-    }).then(response => {
-      if (response.data.errors) return Promise.reject(response.data.errors);
+    })
+    .then(response => {
+      if (response.data.errors) {
+        return Promise.reject(response.data.errors);
+      }
       return response.data.data;
     });
 };
 
-export const graphqlSecureRequest = (graphqlQuery, variables) => {
+export const graphqlSecureRequest = (graphqlQueryString, variables) => {
   return getLoggedInUser()
     .getIdToken()
-    .then((idToken) => {
+    .then(idToken => {
       return axios.post(
         SERVER_GRAPHQL,
         {
-          query: graphqlQuery,
+          query: graphqlQueryString,
           variables
         }, {
           headers: {

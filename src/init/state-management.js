@@ -6,6 +6,7 @@ import loggerMiddleware from "../state-management/middlewares/logger-middleware"
 
 const createLivepollStore = () => {
   let middlewares = [thunkMiddleware];
+
   if (process.env.NODE_ENV === 'development') {
     middlewares.push(loggerMiddleware);
   }

@@ -45,17 +45,12 @@ class ModalOpenerButton extends React.Component {
               className={this.props.className}
               style={openerDefaultStyle}
               {...this.props.openerComponentProps}
-              onClick={this.openModal}>
-              {
-                this.props.OpenerIcon && <OpenerIcon/>
-              }
-              {
-                this.props.OpenerIcon && <span>&nbsp;&nbsp;</span>
-              }
+              onClick={this.openModal}
+            >
+              { this.props.OpenerIcon && <OpenerIcon/> }
+              { this.props.OpenerIcon && <span>&nbsp;&nbsp;</span> }
               &nbsp;
-              {
-                this.props.children
-              }
+              { this.props.children }
             </Opener>
           )
         }

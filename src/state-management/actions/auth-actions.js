@@ -1,11 +1,11 @@
 import {signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
+import {actionMakeWarningToast} from "./toast-actions";
 
 export const actionSigninRequest = (method, data) => dispatch => {
   switch (method) {
     case 'GOOGLE':
       signInWithGoogle();
       break;
-
     case 'EMAIL_PASS':
       signInWithEmailPass(data.email, data.password);
       break;
@@ -20,7 +20,10 @@ export const actionSigninSuccess = (currentUser) => ({
   currentUser
 });
 
-export const actionSignoutRequest = () => dispatch => signOut();
+export const actionSignoutRequest = () => dispatch => {
+  dispatch(actionMakeWarningToast('Signing Out...'));
+  signOut();
+};
 
 export const ACTION_SIGNOUT_SUCCESS = 'ACTION_SIGNOUT_SUCCESS';
 export const actionSignoutSuccess = () => ({

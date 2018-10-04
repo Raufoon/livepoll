@@ -2,16 +2,19 @@ import firebase from 'firebase/app';
 import 'firebase/auth';
 import getLivepollStore from "../../init/state-management";
 import {actionSigninSuccess, actionSignoutSuccess} from "../../state-management/actions/auth-actions";
-import {requestCreateUser, requestUserDataById} from "./user";
+import {requestCreateUserWithOnlyId, requestUserDataById} from "./user";
 import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/actions/my-profile-actions";
-import {actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
+import {actionMakeErrorToast, actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
 export const signInWithGoogle = () => {
-  return firebase.auth().signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  return firebase.auth().signInWithPopup(
+    new firebase.auth.GoogleAuthProvider()
+  );
 };
 
+// I haven't added email verification yet since I needed to create some fake profiles first
 export const signInWithEmailPass = (email, pass) => {
   return firebase.auth()
     .createUserWithEmailAndPassword(email, pass)
@@ -19,6 +22,7 @@ export const signInWithEmailPass = (email, pass) => {
       switch (error.code) {
         case 'auth/email-already-in-use':
           return firebase.auth().signInWithEmailAndPassword(email, pass);
+
         default:
           return Promise.reject(error.code);
       }
@@ -31,13 +35,16 @@ export const onUserSignedIn = (currentUser) => {
   requestUserDataById(currentUser.uid)
     .then(response => {
       if (!response.user) {
-        return requestCreateUser()
+        return requestCreateUserWithOnlyId()
           .then(() => ({
             user: {
               id: currentUser.uid
             }
           }))
-          .catch((err)=>alert('Failed to create user'));
+          .catch(() => {
+            getLivepollStore().dispatch(actionMakeErrorToast('Failed To Create User'));
+            return Promise.reject('Failed to create user');
+          });
       }
       return response;
     })

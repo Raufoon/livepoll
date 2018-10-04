@@ -5,7 +5,7 @@ import {
   requestTopItems, requestVoterList
 } from "../../util/cloud/livepoll";
 import {actionAlreadyVotedPollFound} from "./my-profile-actions";
-import {actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
+import {actionMakeInfoToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
 
 export const actionFetchPollInfo = (id) => dispatch => {
   dispatch(actionMakeWarningToast('Fetching poll info...'));
@@ -38,6 +38,7 @@ export const actionRequestAddItemSuccess = (pollId, newItem) => ({
 });
 
 export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
+  dispatch(actionMakeInfoToast('Loading the top items...'));
   return requestTopItems(pollId, startAt, howMany)
     .then(response => {
       dispatch(actionRequestTopItemsSuccess(pollId, response.livepoll.items))

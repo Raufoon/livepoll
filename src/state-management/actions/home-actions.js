@@ -1,6 +1,8 @@
 import {requestPopularPolls, requestTrendingPolls} from "../../util/cloud/home";
+import {actionMakeInfoToast} from "./toast-actions";
 
 export const actionFetchHome = () => dispatch => {
+  dispatch(actionMakeInfoToast('Fetching polls...'));
   dispatch(actionFetchPopularPolls(0, 10));
   dispatch(actionFetchTrendingPolls(0, 10));
 };

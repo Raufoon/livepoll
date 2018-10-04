@@ -29,6 +29,7 @@ class PollCreationForm extends React.Component {
       })
     ).then(response => {
       this.props.history.push('/poll/' + response.livepoll.id);
+
       if (this.props.onModalResult) this.props.onModalResult();
     });
   }
@@ -74,4 +75,9 @@ class PollCreationForm extends React.Component {
 const s2p = state => ({
   creatorId: state.auth.currentUser.uid
 });
-export default withRouter(connect(s2p)(PollCreationForm))
+
+export default withRouter(
+  connect(s2p)(
+    PollCreationForm
+  )
+)

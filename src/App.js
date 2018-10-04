@@ -21,11 +21,18 @@ import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 
+const styles = {
+  flexGrow3: {flexGrow: 0.3},
+  flexGrow7: {flexGrow: 0.7},
+  pollCreateButton: {color: 'primary'}
+};
+
 class App extends Component {
   render() {
     if (!this.props.isLoggedIn) {
       return <SignUpPage />;
     }
+
     const doSignOut = () => this.props.dispatch(actionSignoutRequest());
     return (
       <React.Fragment>
@@ -35,12 +42,12 @@ class App extends Component {
             <Typography variant="title" color="inherit">
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
-            <div style={{flexGrow: 0.3}}/>
+            <div style={styles.flexGrow3}/>
             <ModalOpenerButton
               ModalComponent={PollCreationForm}
               OpenerIcon={CreateIcon}
-              openerComponentProps={{color: 'primary'}}>Create a poll</ModalOpenerButton>
-            <div style={{flexGrow: 0.7}}/>
+              openerComponentProps={styles.pollCreateButton}>Create a poll</ModalOpenerButton>
+            <div style={styles.flexGrow7}/>
             <AuthUserBadge/>
             &nbsp;&nbsp;
             <Button size="small" color="secondary" onClick={doSignOut}>
@@ -48,7 +55,6 @@ class App extends Component {
             </Button>
           </Toolbar>
         </AppBar>
-
         <AppBar position="static" color={'default'} className={'hidden-app-bar'}>
           <Toolbar/>
         </AppBar>

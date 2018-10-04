@@ -13,7 +13,9 @@ const SignUpPage = (props) => {
         <br/>
         <ModalOpenerButton
           className={'join-button'}
-          ModalComponent={SignUpForm}>Join Us</ModalOpenerButton>
+          ModalComponent={SignUpForm}>
+          Join Us
+        </ModalOpenerButton>
       </div>
     </div>
   )

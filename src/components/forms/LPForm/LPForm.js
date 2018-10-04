@@ -18,11 +18,12 @@ class LPForm extends React.Component {
     let newField = {};
     let removedErrors = {};
     let value = event.target.value;
-    if (event.target.type === 'checkbox') value = event.target.checked;
 
+    if (event.target.type === 'checkbox') {
+      value = event.target.checked;
+    }
     newField[event.target.name] = value;
     removedErrors[event.target.name] = false;
-
     this.setState((oldState) => ({
       errors: {
         ...oldState.errors,
@@ -34,10 +35,12 @@ class LPForm extends React.Component {
       }
     }))
   }
+
   onError(event) {
     let newErrors = {
       ...this.state.errors
     };
+
     newErrors[event.target.name] = true;
     this.setState((oldState) => ({
       ...oldState,
@@ -47,10 +50,12 @@ class LPForm extends React.Component {
       }
     }))
   }
+
   onSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.state.fields);
   }
+
   shouldShowSubmit() {
     return !Object.values(this.state.errors).some(flag => !!flag);
   }

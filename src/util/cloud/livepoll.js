@@ -9,7 +9,9 @@ const MUTATION_PUBLISH_LIVEPOLL = `
   }
 `;
 export const requestPublishLivepoll = livepollSettings => {
-  return graphqlSecureRequest(MUTATION_PUBLISH_LIVEPOLL, {settings: livepollSettings});
+  return graphqlSecureRequest(MUTATION_PUBLISH_LIVEPOLL, {
+    settings: livepollSettings
+  });
 };
 
 const QUERY_POLL_INFO = `
@@ -30,12 +32,14 @@ const QUERY_POLL_INFO = `
   }
 `;
 export const requestPollInfo = pollId => {
-  return graphqlRequest(QUERY_POLL_INFO, {id: pollId})
-    .then(response => {
-      let livepoll = response.livepoll;
-      return requestUsernamesByIds([response.livepoll.settings.creatorId])
-        .then(response => {
-          livepoll.settings.creatorName = response.users[0].basicInfo.name;
+  return graphqlRequest(QUERY_POLL_INFO, {
+    id: pollId
+  })
+    .then(response1 => {
+      let livepoll = response1.livepoll;
+      return requestUsernamesByIds([livepoll.settings.creatorId])
+        .then(response2 => {
+          livepoll.settings.creatorName = response2.users[0].basicInfo.name;
           return {
             livepoll
           }
@@ -98,20 +102,24 @@ export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUT
   pollId, votedItemId
 });
 
-export const requestVoterList = (pollId, itemId, startAt, howMany) => {
-  return graphqlRequest(`
-  query getPollInfo {
-    livepoll(id: "${pollId}") {
-      items(id: "${itemId}"){
+const QUERY_VOTER_LIST = `
+  query GetVoterList($pollId: String!, $itemId: String!, $startAt: String, $howMany: String) {
+    livepoll(id: $pollId) {
+      items (id: $itemId) {
         voterIds
       }
     }
   }
-  `).then(response => {
-    const items = response.livepoll.items;
-    if (items) {
-      return requestUsernamesByIds(items[0].voterIds).then(response => response.users);
-    }
-    return Promise.reject('Not Found');
-  });
+`;
+export const requestVoterList = (pollId, itemId, startAt, howMany) => {
+  return graphqlRequest(QUERY_VOTER_LIST, {
+    pollId, itemId, startAt, howMany
+  })
+    .then(response => {
+      const items = response.livepoll.items;
+      if (items) {
+        return requestUsernamesByIds(items[0].voterIds).then(response => response.users);
+      }
+      return Promise.reject('Not Found');
+    });
 };

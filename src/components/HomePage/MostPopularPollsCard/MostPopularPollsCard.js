@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import {withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -18,7 +19,6 @@ const styles = theme => ({
     cursor: 'pointer'
   }
 });
-
 const listItemPrimaryText = {
   variant: 'subheading',
   gutterBottom: true
@@ -33,24 +33,15 @@ function MostPopularPollsCard(props) {
     <Paper className={classes.root}>
       <List>
         <ListItem>
-          <Typography variant="headline" gutterBottom>
-            Most Popular Ever
-          </Typography>
+          <Typography variant="headline" gutterBottom>Most Popular Ever</Typography>
         </ListItem>
         {
           props.polls.map((poll, index) => (
             <React.Fragment key={poll.id}>
-              {
-                index > 0 && (
-                  <li>
-                    <Divider inset/>
-                  </li>
-                )
-              }
+              { index > 0 && <li><Divider inset/></li> }
+
               <ListItem>
-                <Avatar className={classes.avatar} onClick={()=>props.history.push('/poll/' + poll.id)}>
-                  {index + 1}
-                </Avatar>
+                <Avatar className={classes.avatar} onClick={()=>props.history.push('/poll/' + poll.id)}>{index + 1}</Avatar>
                 <ListItemText
                   primary={poll.settings.title}
                   primaryTypographyProps={listItemPrimaryText}
@@ -65,4 +56,12 @@ function MostPopularPollsCard(props) {
   );
 }
 
-export default withRouter(withStyles(styles)(MostPopularPollsCard))
+MostPopularPollsCard.propTypes = {
+  polls: PropTypes.array
+};
+
+export default withRouter(
+  withStyles(styles)(
+    MostPopularPollsCard
+  )
+)

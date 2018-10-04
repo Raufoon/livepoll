@@ -17,7 +17,9 @@ const QUERY_POPULAR_POLLS = `
   }
 `;
 export const requestPopularPolls = (startAt, howMany) => {
-  return graphqlRequest(QUERY_POPULAR_POLLS, {startAt, howMany});
+  return graphqlRequest(QUERY_POPULAR_POLLS, {
+    startAt, howMany
+  });
 };
 
 const QUERY_TRENDING_POLLS = `
@@ -37,5 +39,7 @@ const QUERY_TRENDING_POLLS = `
   }
 `;
 export const requestTrendingPolls = (startAt, howMany) => {
-  return graphqlRequest(QUERY_TRENDING_POLLS, {startAt, howMany});
+  return graphqlRequest(QUERY_TRENDING_POLLS, {
+    startAt, howMany
+  });
 };

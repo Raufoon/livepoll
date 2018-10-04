@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import Grid from '@material-ui/core/Grid';
 
@@ -26,8 +27,15 @@ class HomePage extends React.Component {
     )
   }
 }
+
 const s2p = state => ({
   trendingPolls: state.homePage.trendingPolls,
   popularPolls: state.homePage.popularPolls,
 });
+
+HomePage.propTypes = {
+  trendingPolls: PropTypes.object,
+  popukarPolls: PropTypes.object,
+};
+
 export default connect(s2p)(HomePage)
