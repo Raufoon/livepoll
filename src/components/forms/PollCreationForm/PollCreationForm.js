@@ -10,6 +10,7 @@ import {requestPublishLivepoll} from "../../../util/cloud/livepoll";
 import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
 import LPCheckboxInput from "../form-fields/LPCheckboxInput/LPCheckboxInput";
 import LPDropdownInput from "../form-fields/LPDropdownInput/LPDropdownInput";
+import {actionMakeErrorToast} from "../../../state-management/actions/toast-actions";
 
 class PollCreationForm extends React.Component {
   constructor(props) {
@@ -21,6 +22,13 @@ class PollCreationForm extends React.Component {
     // converting the time to utc
     data.startDatetime = new Date(data.startDatetime).toISOString();
     data.endDatetime = !!data.endDatetime ? new Date(data.endDatetime).toISOString() : undefined;
+
+    if (data.endDatetime) {
+      if (new Date(data.endDatetime) - new Date(data.startDatetime) < 2*60*60*1000) {
+        this.props.dispatch(actionMakeErrorToast('Poll should last at least 2 hours'));
+        return;
+      }
+    }
 
     requestPublishLivepoll(
       new PollSettings({
