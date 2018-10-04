@@ -5,6 +5,7 @@ import Badge from '@material-ui/core/Badge';
 import PropTypes from 'prop-types';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
+import MediaQuery from 'react-responsive';
 
 import './LivepollInfoCard.css'
 
@@ -21,7 +22,12 @@ const LivepollInfoCard = props => {
         classes={{
           badge: props.isLive ? 'poll-live-indicator blink' : ''
         }}>
-        <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
+        <MediaQuery orientation={'landscape'}>
+          <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
+        </MediaQuery>
+        <MediaQuery orientation={'portrait'}>
+          <Typography variant="display1" gutterBottom>{props.livepoll.settings.title}</Typography>
+        </MediaQuery>
       </Badge>
 
       {

@@ -52,7 +52,7 @@ function TrendingPollsSlider(props) {
 
         {
           props.polls.map(poll => (
-            <GridListTile key={poll.id}  className={classes.tile}>
+            <GridListTile cols={props.columnWidth} key={poll.id}  className={classes.tile}>
               <Typography variant="headline" className={classes.content}>{poll.items[0].content.text}</Typography>
               <Typography variant="body1" className={classes.content}>{poll.items[0].voteCount} votes</Typography>
               <GridListTileBar

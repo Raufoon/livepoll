@@ -1,4 +1,6 @@
 import React from 'react'
+import CardActions from '@material-ui/core/CardActions';
+import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader'
@@ -53,11 +55,15 @@ const TextItem = props => {
         }
         action={
           !props.voteDisabled && (
-            <Button
-              onClick={props.vote}
-              color={props.isAlreadyVoted ? 'secondary':'default'}>
-              <StarIcon/>&nbsp;&nbsp;{props.isAlreadyVoted ? 'Unvote':'Vote'}
-            </Button>
+            <MediaQuery orientation={'landscape'}>
+              <Button
+                onClick={props.vote}
+                color={props.isAlreadyVoted ? 'secondary':'default'}>
+                <StarIcon/>
+                &nbsp;&nbsp;
+                {props.isAlreadyVoted ? 'Unvote':'Vote'}
+              </Button>
+            </MediaQuery>
           )
         }
         title={props.item.content.text}
@@ -69,6 +75,17 @@ const TextItem = props => {
           variant: props.isFirst ? 'subheading' : 'caption'
         }}
       />
+      <CardActions>
+        <MediaQuery orientation={'portrait'}>
+          <Button
+            onClick={props.vote}
+            color={props.isAlreadyVoted ? 'secondary':'default'}>
+            <StarIcon/>
+            &nbsp;&nbsp;
+            {props.isAlreadyVoted ? 'Unvote':'Vote'}
+          </Button>
+        </MediaQuery>
+      </CardActions>
     </Card>
   )
 };

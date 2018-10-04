@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import MediaQuery from 'react-responsive';
 import {connect} from 'react-redux';
 import {Switch, withRouter, Route, Link} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/CreateSharp';
@@ -42,17 +43,24 @@ class App extends Component {
             <Typography variant="title" color="inherit">
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
-            <div style={styles.flexGrow3}/>
-            <ModalOpenerButton
-              ModalComponent={PollCreationForm}
-              OpenerIcon={CreateIcon}
-              openerComponentProps={styles.pollCreateButton}>Create a poll</ModalOpenerButton>
+
+            <MediaQuery orientation="landscape">
+              <div style={styles.flexGrow3}/>
+              <ModalOpenerButton
+                ModalComponent={PollCreationForm}
+                OpenerIcon={CreateIcon}
+                openerComponentProps={styles.pollCreateButton}>Create a poll</ModalOpenerButton>
+            </MediaQuery>
+
             <div style={styles.flexGrow7}/>
+
             <AuthUserBadge/>
-            &nbsp;&nbsp;
-            <Button size="small" color="secondary" onClick={doSignOut}>
-              <SignoutIcon/>&nbsp;&nbsp;Sign out
-            </Button>
+            <MediaQuery orientation="landscape">
+              &nbsp;&nbsp;
+              <Button size="small" color="secondary" onClick={doSignOut}>
+                <SignoutIcon/>&nbsp;&nbsp;Sign out
+              </Button>
+            </MediaQuery>
           </Toolbar>
         </AppBar>
         <AppBar position="static" color={'default'} className={'hidden-app-bar'}>
