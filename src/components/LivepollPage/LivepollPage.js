@@ -12,11 +12,32 @@ import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerBut
 import CreateItemForm from "../forms/CreateItemForm/CreateItemForm";
 
 class LivepollPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: []
+    }
+  }
+
   componentDidMount() {
     const pid = this.props.match.params.id;
     if (!this.props.livepoll) {
       this.props.dispatch(actionFetchPollInfo(pid));
       this.props.dispatch(actionRequestCheckAlreadyVotedPoll(pid));
+    } else {
+      this.setState({
+        items: Object.values(this.props.livepoll.items || {})
+          .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
+      })
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.livepoll !== this.props.livepoll) {
+      this.setState({
+        items: Object.values(this.props.livepoll.items || {})
+          .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
+      })
     }
   }
 
@@ -54,10 +75,7 @@ class LivepollPage extends React.Component {
         <br/><br/>
 
         <LivepollItemList
-          items={
-            Object.values(this.props.livepoll.items || {})
-              .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
-          }
+          items={this.state.items}
           lastVotedItemId={this.props.lastVotedItemId}
           voteDisabled={!isLive}
           willStartOnFuture={willStartOnFuture}

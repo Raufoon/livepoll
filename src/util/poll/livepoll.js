@@ -6,8 +6,4 @@ class Livepoll {
   }
 }
 
-export const initRealtimeUpdate = (pollId) => {
-
-};
-
 export default Livepoll
