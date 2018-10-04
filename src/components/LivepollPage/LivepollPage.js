@@ -11,67 +11,78 @@ import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions
 import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import CreateItemForm from "../forms/CreateItemForm/CreateItemForm";
 
-const LivepollPage = props => {
-  const pid = props.match.params.id;
-  const livepoll = props.livepoll;
-
-  if (!livepoll) {
-    props.dispatch(actionFetchPollInfo(pid));
-    props.dispatch(actionRequestCheckAlreadyVotedPoll(pid));
-    return "loading..."
+class LivepollPage extends React.Component {
+  componentDidMount() {
+    const pid = this.props.match.params.id;
+    if (!this.props.livepoll) {
+      this.props.dispatch(actionFetchPollInfo(pid));
+      this.props.dispatch(actionRequestCheckAlreadyVotedPoll(pid));
+    }
   }
 
-  const settings = livepoll.settings;
-  const start = new Date(settings.startDatetime);
-  const end = new Date(settings.endDatetime);
-  const now = new Date();
-  const endTimeExists = !!settings.endDatetime;
-  const willStartOnFuture = now < start;
-  const hasEnded = endTimeExists && now >= end;
-  const isLive = !(willStartOnFuture || hasEnded);
-  const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === props.authUserId);
-  const showAddItemButton = canIAdd && !hasEnded;
+  render () {
+    const livepoll = this.props.livepoll;
 
-  return (
-    <div>
-      <LivepollInfoCard
-        livepoll={props.livepoll}
-        isLive={isLive}
-        willStartOnFuture={willStartOnFuture}
-        hasEnded={hasEnded}
-      />
+    if (!livepoll) {
+      return "loading..."
+    }
 
-      <br/><br/>
+    const settings = livepoll.settings;
+    const start = new Date(settings.startDatetime);
+    const end = new Date(settings.endDatetime);
+    const now = new Date();
+    const endTimeExists = !!settings.endDatetime;
+    const willStartOnFuture = now < start;
+    const hasEnded = endTimeExists && now >= end;
+    const isLive = !(willStartOnFuture || hasEnded);
+    const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === this.props.authUserId);
+    const showAddItemButton = canIAdd && !hasEnded;
 
-      <LivepollItemList
-        items={
-          Object.values(props.livepoll.items || {})
-            .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
+    if (isLive) {
+
+    }
+
+    return (
+      <div>
+        <LivepollInfoCard
+          livepoll={this.props.livepoll}
+          isLive={isLive}
+          willStartOnFuture={willStartOnFuture}
+          hasEnded={hasEnded}
+        />
+
+        <br/><br/>
+
+        <LivepollItemList
+          items={
+            Object.values(this.props.livepoll.items || {})
+              .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
+          }
+          lastVotedItemId={this.props.lastVotedItemId}
+          voteDisabled={!isLive}
+          willStartOnFuture={willStartOnFuture}
+          livepoll={this.props.livepoll}/>
+
+        <br/>
+        {
+          showAddItemButton &&
+          <ModalOpenerButton
+            className={'add-item-button'}
+            ModalComponent={CreateItemForm}
+            openerComponentProps={{
+              variant: 'extendedFab', size: "small",
+              color: 'primary'
+            }}
+            childProps={{
+              pollId: this.props.livepoll.id,
+              format: this.props.livepoll.settings.itemFormat,
+            }}
+          >Add an item</ModalOpenerButton>
         }
-        lastVotedItemId={props.lastVotedItemId}
-        voteDisabled={!isLive}
-        willStartOnFuture={willStartOnFuture}
-        livepoll={props.livepoll}/>
-
-      <br/>
-      {
-        showAddItemButton &&
-        <ModalOpenerButton
-          className={'add-item-button'}
-          ModalComponent={CreateItemForm}
-          openerComponentProps={{
-            variant: 'extendedFab', size: "small",
-            color: 'primary'
-          }}
-          childProps={{
-            pollId: props.livepoll.id,
-            format: props.livepoll.settings.itemFormat,
-          }}
-        >Add an item</ModalOpenerButton>
-      }
-    </div>
-  )
-};
+      </div>
+    )
+  }
+}
 
 const s2p = (state, ownProps) => ({
   livepoll: state.polls[ownProps.match.params.id],
