@@ -9,19 +9,19 @@ const homeReducer = (state = initialState.homePage, action) => {
     case ACTION_FETCH_POPULAR_POLLS_SUCCESS:
       return {
         ...state,
-        popularPolls: {
+        popularPolls: Object.values({
           ...state.popularPolls,
           ...action.popularPolls,
-        }
+        })
       };
 
     case ACTION_FETCH_TRENDING_POLLS_SUCCESS:
       return {
         ...state,
-        trendingPolls: {
+        trendingPolls: Object.values({
           ...state.trendingPolls,
           ...action.trendingPolls,
-        }
+        })
       };
 
     default:

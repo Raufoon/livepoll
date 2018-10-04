@@ -17,10 +17,10 @@ class HomePage extends React.Component {
       <div>
         <Grid container alignItems="flex-start" spacing={16}>
           <Grid item xs={8}>
-            <TrendingPollsSlider polls={Object.values(this.props.trendingPolls)}/>
+            <TrendingPollsSlider polls={this.props.trendingPolls}/>
           </Grid>
           <Grid item xs={4}>
-            <MostPopularPollsCard polls={Object.values(this.props.popularPolls)}/>
+            <MostPopularPollsCard polls={this.props.popularPolls}/>
           </Grid>
         </Grid>
       </div>
@@ -34,8 +34,8 @@ const s2p = state => ({
 });
 
 HomePage.propTypes = {
-  trendingPolls: PropTypes.object,
-  popukarPolls: PropTypes.object,
+  trendingPolls: PropTypes.array,
+  popularPolls: PropTypes.array,
 };
 
 export default connect(s2p)(HomePage)
