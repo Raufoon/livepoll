@@ -1,6 +1,6 @@
 import {
   ACTION_FETCH_POLL_INFO_SUCCESS, ACTION_FETCH_VOTER_LIST_SUCCESS,
-  ACTION_GIVE_VOTE_SUCCESS,
+  ACTION_GIVE_VOTE_SUCCESS, ACTION_POLL_REALTIME_UPDATE,
   ACTION_REQUEST_ADD_ITEM_SUCCESS,
   ACTION_REQUEST_TOP_ITEMS_SUCCESS
 } from "../actions/livepoll-actions";
@@ -47,19 +47,19 @@ const livepollReducer = (state = initialState.polls, action) => {
       });
       return newState;
 
-    case ACTION_GIVE_VOTE_SUCCESS:
-      newState = {
-        ...state,
-        [action.pollId]: {
-          ...state[action.pollId]
-        }
-      };
-      if (action.lastVotedItemId) {
-        newState[action.pollId].items[action.lastVotedItemId].voteCount--;
-        if (action.lastVotedItemId === action.itemId) return newState;
-      }
-      newState[action.pollId].items[action.itemId].voteCount++;
-      return newState;
+    // case ACTION_GIVE_VOTE_SUCCESS:
+    //   newState = {
+    //     ...state,
+    //     [action.pollId]: {
+    //       ...state[action.pollId]
+    //     }
+    //   };
+    //   if (action.lastVotedItemId) {
+    //     newState[action.pollId].items[action.lastVotedItemId].voteCount--;
+    //     if (action.lastVotedItemId === action.itemId) return newState;
+    //   }
+    //   newState[action.pollId].items[action.itemId].voteCount++;
+    //   return newState;
 
     case ACTION_FETCH_VOTER_LIST_SUCCESS:
       return {
@@ -74,6 +74,21 @@ const livepollReducer = (state = initialState.polls, action) => {
                 ...(state[action.pollId].items[action.itemId].voterIds || {}),
                 ...action.voterList
               })
+            }
+          }
+        }
+      };
+
+    case ACTION_POLL_REALTIME_UPDATE:
+      return {
+        ...state,
+        [action.pollId]: {
+          ...state[action.pollId],
+          items: {
+            ...state[action.pollId].items,
+            [action.itemId]: {
+              ...state[action.pollId].items[action.itemId],
+              voteCount: action.voteCount
             }
           }
         }

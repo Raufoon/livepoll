@@ -86,3 +86,9 @@ export const actionFetchVoterListSuccess = (pollId, itemId, voterList) => ({
   type: ACTION_FETCH_VOTER_LIST_SUCCESS,
   pollId, itemId, voterList
 });
+
+export const ACTION_POLL_REALTIME_UPDATE = 'ACTION_POLL_REALTIME_UPDATE';
+export const actionPollRealtimeUpdate = (pollId, itemId, voteCount) => ({
+  type: ACTION_POLL_REALTIME_UPDATE,
+  pollId, itemId, voteCount
+});

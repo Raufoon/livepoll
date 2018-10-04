@@ -103,7 +103,7 @@ export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUT
 });
 
 const QUERY_VOTER_LIST = `
-  query GetVoterList($pollId: String!, $itemId: String!, $startAt: String, $howMany: String) {
+  query GetVoterList($pollId: String!, $itemId: String!) {
     livepoll(id: $pollId) {
       items (id: $itemId) {
         voterIds
@@ -113,7 +113,7 @@ const QUERY_VOTER_LIST = `
 `;
 export const requestVoterList = (pollId, itemId, startAt, howMany) => {
   return graphqlRequest(QUERY_VOTER_LIST, {
-    pollId, itemId, startAt, howMany
+    pollId, itemId
   })
     .then(response => {
       const items = response.livepoll.items;
