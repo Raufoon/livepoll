@@ -23,9 +23,12 @@ import ProfilePage from "./components/ProfilePage/ProfilePage";
 import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 
 const styles = {
-  flexGrow3: {flexGrow: 0.3},
-  flexGrow7: {flexGrow: 0.7},
-  pollCreateButton: {color: 'primary'}
+  flexGrow10: {flexGrow: 1},
+  pollCreateButton: {color: 'primary'},
+  pollCreateButtonFloating: {
+    color: 'secondary',
+    variant: 'extendedFab'
+  }
 };
 
 class App extends Component {
@@ -44,15 +47,7 @@ class App extends Component {
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
 
-            <MediaQuery orientation="landscape">
-              <div style={styles.flexGrow3}/>
-              <ModalOpenerButton
-                ModalComponent={PollCreationForm}
-                OpenerIcon={CreateIcon}
-                openerComponentProps={styles.pollCreateButton}>Create a poll</ModalOpenerButton>
-            </MediaQuery>
-
-            <div style={styles.flexGrow7}/>
+            <div style={styles.flexGrow10}/>
 
             <AuthUserBadge/>
             <MediaQuery orientation="landscape">
@@ -76,6 +71,14 @@ class App extends Component {
             <Route component={HomePage}/>
           </Switch>
         </div>
+
+        <ModalOpenerButton
+          className={'poll-create-float-btn'}
+          ModalComponent={PollCreationForm}
+          OpenerIcon={CreateIcon}
+          openerComponentProps={styles.pollCreateButtonFloating}>
+          Create a poll
+        </ModalOpenerButton>
 
         <ToastDisplayer/>
         <br/><br/><br/><br/><br/>

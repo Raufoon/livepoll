@@ -2,6 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
+import AddItemIcon from '@material-ui/icons/AddToHomeScreen';
 
 import './LivepollPage.css'
 import {
@@ -107,6 +108,22 @@ class LivepollPage extends React.Component {
           willStartOnFuture={willStartOnFuture}
           hasEnded={hasEnded}
         />
+        <br/>
+        {
+          showAddItemButton &&
+          <ModalOpenerButton
+            ModalComponent={CreateItemForm}
+            OpenerIcon={AddItemIcon}
+            openerComponentProps={{
+              size: "small",
+              color: 'primary'
+            }}
+            childProps={{
+              pollId: this.props.livepoll.id,
+              format: this.props.livepoll.settings.itemFormat,
+            }}
+          >New item</ModalOpenerButton>
+        }
 
         <br/><br/>
 
@@ -116,23 +133,6 @@ class LivepollPage extends React.Component {
           voteDisabled={!isLive}
           willStartOnFuture={willStartOnFuture}
           livepoll={this.props.livepoll}/>
-
-        <br/>
-        {
-          showAddItemButton &&
-          <ModalOpenerButton
-            className={'add-item-button'}
-            ModalComponent={CreateItemForm}
-            openerComponentProps={{
-              variant: 'extendedFab', size: "small",
-              color: 'primary'
-            }}
-            childProps={{
-              pollId: this.props.livepoll.id,
-              format: this.props.livepoll.settings.itemFormat,
-            }}
-          >Add an item</ModalOpenerButton>
-        }
       </div>
     )
   }

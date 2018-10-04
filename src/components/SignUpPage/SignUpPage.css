@@ -9,3 +9,7 @@
   left: 50vw;
   transform: translateY(-50%) translateX(-50%);
 }
+
+.app-big-title{
+  font-family: 'Nova Flat' !important;
+}

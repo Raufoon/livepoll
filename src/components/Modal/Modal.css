@@ -13,6 +13,11 @@
   box-shadow: 0 0 10px lightgrey;
   background-color: white;
 }
+@media (orientation: portrait) {
+  .modal-container-resp{
+    width: 90vw;
+  }
+}
 .modal-content{
   margin: 20px;
   margin-top: 25px;

@@ -14,3 +14,8 @@
 .hidden-app-bar{
   visibility: hidden;
 }
+.poll-create-float-btn{
+  position: fixed !important;
+  bottom: 20px !important;
+  right: 20px !important;;
+}

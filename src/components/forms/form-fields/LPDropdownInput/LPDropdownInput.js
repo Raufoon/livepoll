@@ -36,7 +36,6 @@ class LPDropdownInput extends LPFormField {
 
 LPDropdownInput.propTypes = {
   name: PropTypes.string.isRequired,
-  dropdownOptions: PropTypes.object,
 };
 
 export default LPDropdownInput

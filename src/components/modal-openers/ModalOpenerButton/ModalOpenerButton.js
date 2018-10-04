@@ -48,8 +48,7 @@ class ModalOpenerButton extends React.Component {
               onClick={this.openModal}
             >
               { this.props.OpenerIcon && <OpenerIcon/> }
-              { this.props.OpenerIcon && <span>&nbsp;&nbsp;</span> }
-              &nbsp;
+              { this.props.OpenerIcon && this.props.children && <span>&nbsp;&nbsp;</span> }
               { this.props.children }
             </Opener>
           )

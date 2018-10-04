@@ -27,7 +27,7 @@ class Modal extends React.Component {
 
     return ReactDOM.createPortal(
       <div className={'modal-overlay'}>
-        <Paper className='modal-container' style={{zIndex: this.zIndex}}>
+        <Paper className='modal-container modal-container-resp' style={{zIndex: this.zIndex}}>
           {
             !modalSettings.hideCloseButton && (
               <button className='modal-close-btn' onClick={this.props.onClose}>X</button>
