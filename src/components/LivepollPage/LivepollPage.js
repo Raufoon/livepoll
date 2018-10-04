@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import './LivepollPage.css'
-import {actionFetchPollInfo} from "../../state-management/actions/livepoll-actions";
+import {actionFetchPollInfo, actionRequestTopItems} from "../../state-management/actions/livepoll-actions";
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
@@ -16,7 +16,7 @@ class LivepollPage extends React.Component {
     super(props);
     this.state = {
       items: []
-    }
+    };
   }
 
   componentDidMount() {
@@ -30,6 +30,13 @@ class LivepollPage extends React.Component {
           .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
       })
     }
+    this.refreshInterval = setInterval(() => {
+      props.dispatch(actionRequestTopItems(this.props.livepoll.id, 0, this.state.items.length));
+    }, 300000)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.refreshInterval);
   }
 
   componentDidUpdate(prevProps) {
