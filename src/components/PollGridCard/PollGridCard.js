@@ -1,12 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {withRouter} from 'react-router-dom'
+import {Link, withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 import GridListTileBar from '@material-ui/core/GridListTileBar';
 import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography/Typography";
+import Button from "@material-ui/core/Button/Button";
+import MoreIcon from '@material-ui/icons/MoreHoriz';
 
 const styles = theme => ({
   root: {
@@ -15,6 +17,7 @@ const styles = theme => ({
     justifyContent: 'space-around',
     padding: '20px',
     backgroundColor: theme.palette.background.paper,
+    margin: 'auto'
   },
   gridList: {
     width: '100%',
@@ -32,6 +35,9 @@ const styles = theme => ({
   },
   tile: {
     border: '1px solid lightgray',
+  },
+  moreButton: {
+    marginTop: 15
   }
 });
 const autoHeight = {
@@ -67,12 +73,21 @@ function PollGridCard(props) {
           ))
         }
       </GridList>
+      <Button
+        className={classes.moreButton}
+        color={'primary'}
+        to={props.moreLink}
+        component={Link}>
+        <MoreIcon/>
+        &nbsp;&nbsp;View More
+      </Button>
     </Paper>
   );
 }
 
 PollGridCard.propTypes = {
-  polls: PropTypes.array
+  polls: PropTypes.array,
+  moreLink: PropTypes.string,
 };
 
 export default withRouter(

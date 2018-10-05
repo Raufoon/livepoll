@@ -19,10 +19,10 @@ class HomePage extends React.Component {
         <MediaQuery orientation="landscape">
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={8}>
-              <TrendingPollsSlider columnWidth={1} polls={this.props.trendingPolls}/>
+              <TrendingPollsSlider moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
             </Grid>
             <Grid item xs={4}>
-              <MostPopularPollsCard polls={this.props.popularPolls}/>
+              <MostPopularPollsCard moreLink={'/popular'} polls={this.props.popularPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>
@@ -30,7 +30,7 @@ class HomePage extends React.Component {
         <MediaQuery orientation="portrait">
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={12}>
-              <TrendingPollsSlider columnWidth={2} polls={this.props.trendingPolls}/>
+              <TrendingPollsSlider moreLink={'/trending'} columnWidth={2} polls={this.props.trendingPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>

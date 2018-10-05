@@ -8,6 +8,9 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
+import Button from '@material-ui/core/Button';
+import MoreIcon from '@material-ui/icons/MoreHoriz';
+import { Link } from 'react-router-dom'
 import Typography from "@material-ui/core/Typography/Typography";
 
 const styles = theme => ({
@@ -17,6 +20,9 @@ const styles = theme => ({
   },
   avatar: {
     cursor: 'pointer'
+  },
+  moreButton: {
+    margin: '0 auto'
   }
 });
 const listItemPrimaryText = {
@@ -51,13 +57,24 @@ function PollListCard(props) {
             </React.Fragment>
           ))
         }
+        <ListItem>
+          <Button
+            className={classes.moreButton}
+            color={'primary'}
+            to={props.moreLink}
+            component={Link}>
+            <MoreIcon/>
+            &nbsp;&nbsp;View More
+          </Button>
+        </ListItem>
       </List>
     </Paper>
   );
 }
 
 PollListCard.propTypes = {
-  polls: PropTypes.array
+  polls: PropTypes.array,
+  moreLink: PropTypes.string,
 };
 
 export default withRouter(
