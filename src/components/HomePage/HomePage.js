@@ -10,7 +10,9 @@ import MostPopularPollsCard from "../PollListCard/PollListCard";
 
 class HomePage extends React.Component {
   componentDidMount() {
-    this.props.dispatch(actionFetchHome());
+    if (this.props.trendingPolls.length === 0) {
+      this.props.dispatch(actionFetchHome());
+    }
   }
 
   render() {

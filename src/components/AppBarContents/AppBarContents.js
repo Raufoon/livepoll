@@ -1,6 +1,6 @@
 import React from "react";
 import {connect} from 'react-redux'
-import {NavLink} from 'react-router-dom'
+import {NavLink, withRouter} from 'react-router-dom'
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import MenuIcon from '@material-ui/icons/Menu';
 import Typography from "@material-ui/core/Typography/Typography";
@@ -56,4 +56,8 @@ const AppBarContents = props => {
   )
 };
 
-export default connect()(AppBarContents)
+export default withRouter(
+  connect()(
+    AppBarContents
+  )
+)

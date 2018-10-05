@@ -47,6 +47,9 @@ class App extends Component {
           <Switch>
             <Route path={'/poll/:id'} component={LivepollPage}/>
             <Route path={'/me'} component={ProfilePage}/>
+            <Route exact path={'/trending'} component={() => "Trending polls will be displayed here"}/>
+            <Route exact path={'/popular'} component={() => "Popular polls will be displayed here"}/>
+            <Route exact path={'/recent'} component={() => "Recent polls will be displayed here"}/>
             <Route component={HomePage}/>
           </Switch>
         </div>
