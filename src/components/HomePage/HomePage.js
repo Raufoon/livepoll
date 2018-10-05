@@ -32,6 +32,9 @@ class HomePage extends React.Component {
             <Grid item xs={12}>
               <TrendingPollsSlider moreLink={'/trending'} columnWidth={2} polls={this.props.trendingPolls}/>
             </Grid>
+            <Grid item xs={12}>
+              <MostPopularPollsCard moreLink={'/popular'} polls={this.props.trendingPolls}/>
+            </Grid>
           </Grid>
         </MediaQuery>
       </React.Fragment>
