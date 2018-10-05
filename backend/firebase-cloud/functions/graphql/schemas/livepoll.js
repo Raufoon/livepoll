@@ -71,7 +71,7 @@ const definitions = `
   type Livepoll {
     id: ID!
     settings: LivepollSettings!
-    items(id: String, startAt: Int, howMany: Int): [LivepollItem]!
+    items(idList: [String], startAt: Int, howMany: Int): [LivepollItem]!
   }
 `;
 
@@ -85,7 +85,7 @@ const queries = `
 const mutations = `
   publishLivepoll(settings: InputLivepollCreate!): Livepoll
   addItem(pollId: String!, content: InputLivepollItemContent!): LivepollItem
-  vote(pollId: String!, votedItemId: String!): Int!
+  vote(pollId: String!, votedItemId: String!): Boolean!
 `;
 
 module.exports = {

@@ -1,6 +1,8 @@
 import firebase from 'firebase/app'
 import 'firebase/database'
 
+const LIMIT = 15;
+
 let mapPollIdToTop15Items = {
   // polid: { itemNid: {} }
 };
@@ -32,7 +34,7 @@ export const updateRealtimeItems = (pollId, items) => {
   let itemId;
   let newSubscriberItemIds = [];
 
-  for (let i=0; i<15 && i<items.length; i++) {
+  for (let i=0; i < LIMIT && i<items.length; i++) {
     itemId = items[i].id;
     mapNewItemsKeyValue[itemId] = items[i];
     if (!mapPollIdToTop15Items[pollId][itemId]) {

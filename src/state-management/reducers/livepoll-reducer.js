@@ -8,7 +8,9 @@ import initialState from "../initial-state";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
 const livepollReducer = (state = initialState.polls, action) => {
-  let newState = {...state};
+  let newState = {...state},
+    i,
+    item;
 
   switch (action.type) {
     case ACTION_FETCH_POLL_INFO_SUCCESS:
@@ -47,19 +49,19 @@ const livepollReducer = (state = initialState.polls, action) => {
       });
       return newState;
 
-    // case ACTION_GIVE_VOTE_SUCCESS:
-    //   newState = {
-    //     ...state,
-    //     [action.pollId]: {
-    //       ...state[action.pollId]
-    //     }
-    //   };
-    //   if (action.lastVotedItemId) {
-    //     newState[action.pollId].items[action.lastVotedItemId].voteCount--;
-    //     if (action.lastVotedItemId === action.itemId) return newState;
-    //   }
-    //   newState[action.pollId].items[action.itemId].voteCount++;
-    //   return newState;
+    case ACTION_GIVE_VOTE_SUCCESS:
+      newState = {
+        ...state,
+        [action.pollId]: {
+          ...state[action.pollId]
+        }
+      };
+      for (i = 0; i < action.updatedItems.length; i++) {
+        // there would be a second item in case you recast your vote
+        item = action.updatedItems[i];
+        newState[action.pollId].items[item.id].voteCount = item.voteCount;
+      }
+      return newState;
 
     case ACTION_FETCH_VOTER_LIST_SUCCESS:
       return {

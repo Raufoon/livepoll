@@ -2,7 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AddItemIcon from '@material-ui/icons/AddToHomeScreen';
+import AddItemIcon from '@material-ui/icons/Add';
 
 import './LivepollPage.css'
 import {

@@ -57,9 +57,12 @@ module.exports.addItem = (_, { pollId, content }, context) => {
     );
 };
 
-module.exports.items = (livepoll, {id, startAt, howMany}) => {
-  if (id) {
-    return DB.read(`/itemList/${livepoll.id}/${id}`).then(item => [item]);
+module.exports.items = (livepoll, {idList, startAt, howMany}) => {
+  if (idList) {
+    return DB.read(`/itemList/${livepoll.id}`)
+      .then(items => {
+        return Object.values(items).filter(item => idList.indexOf(item.id) !== -1);
+      });
   } else if (startAt !== undefined || howMany !== undefined) {
     return DB.readWithinRange(`/itemList/${livepoll.id}`, startAt, howMany, 'voteCount');
   }

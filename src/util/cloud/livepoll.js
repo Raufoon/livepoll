@@ -103,9 +103,9 @@ export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUT
 });
 
 const QUERY_VOTER_LIST = `
-  query GetVoterList($pollId: String!, $itemId: String!) {
+  query GetVoterList($pollId: String!, $itemIdList: [String]!) {
     livepoll(id: $pollId) {
-      items (id: $itemId) {
+      items (idList: $itemIdList) {
         voterIds
       }
     }
@@ -123,3 +123,17 @@ export const requestVoterList = (pollId, itemId, startAt, howMany) => {
       return Promise.reject('Not Found');
     });
 };
+
+const QUERY_VOTE_COUNT = `
+  query GetVoterList($pollId: String!, $itemIdList: [String]!) {
+    livepoll(id: $pollId) {
+      items (idList: $itemIdList) {
+        id,
+        voteCount
+      }
+    }
+  }
+`;
+export const requestVoteCountsByIdList = (pollId, itemIdList) => graphqlRequest(QUERY_VOTE_COUNT, {
+  pollId, itemIdList
+});

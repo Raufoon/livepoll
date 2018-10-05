@@ -2,7 +2,7 @@ import {
   requestAddPollitem,
   requestGiveVote,
   requestPollInfo,
-  requestTopItems, requestVoterList
+  requestTopItems, requestVoteCountsByIdList, requestVoterList
 } from "../../util/cloud/livepoll";
 import {actionAlreadyVotedPollFound} from "./my-profile-actions";
 import {actionMakeInfoToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
@@ -57,24 +57,30 @@ export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
     itemId === lastVotedItemId? 'Cancelling your vote':'Sending your vote...'
   ));
   return requestGiveVote(pollId, itemId)
-    .then(response => {
+    .then(() => {
       dispatch(actionMakeSuccessToast(
         itemId === lastVotedItemId? 'Vote cancelled':'Vote successful'
       ));
-      dispatch(actionGiveVoteSuccess(pollId, itemId, lastVotedItemId));
       dispatch(actionAlreadyVotedPollFound(pollId, itemId, lastVotedItemId));
+
+      requestVoteCountsByIdList(pollId,
+        lastVotedItemId && lastVotedItemId !== itemId ? [itemId, lastVotedItemId] : [itemId]
+      )
+        .then(response => {
+          dispatch(actionGiveVoteSuccess(pollId, response.livepoll.items));
+        })
     });
 };
 
 export const ACTION_GIVE_VOTE_SUCCESS = 'ACTION_GIVE_VOTE_SUCCESS';
-export const actionGiveVoteSuccess = (pollId, itemId, lastVotedItemId) => ({
+export const actionGiveVoteSuccess = (pollId, updatedItems) => ({
   type: ACTION_GIVE_VOTE_SUCCESS,
-  pollId, itemId, lastVotedItemId
+  pollId, updatedItems
 });
 
 export const actionFetchVoterList = (pollId, itemId, startAt, howMany) => dispatch => {
   dispatch(actionMakeWarningToast('Fetching the voter list'));
-  requestVoterList(pollId, itemId, startAt, howMany)
+  requestVoterList(pollId, [itemId], startAt, howMany)
     .then(voterList => {
       dispatch(actionMakeSuccessToast('Voter list loaded'));
       dispatch(actionFetchVoterListSuccess(pollId, itemId, voterList));

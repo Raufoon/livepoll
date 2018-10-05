@@ -82,7 +82,7 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
         ]);
       }
     })
-    .then(() => DB.read(`itemList/${pollId}/${votedItemId}/voteCount`));
+    .then(() => true);
 };
 
 module.exports.getMostPopularPolls = (_, {startAt, howMany}) => {

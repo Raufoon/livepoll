@@ -24,6 +24,8 @@ import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 
 const styles = {
   flexGrow10: {flexGrow: 1},
+  flexGrow3: {flexGrow: .3},
+  flexGrow7: {flexGrow: .7},
   pollCreateButton: {color: 'primary'},
   pollCreateButtonFloating: {
     color: 'secondary',
@@ -47,7 +49,12 @@ class App extends Component {
               <Link className={'app-title'} to={'/'}>Livepoll</Link>
             </Typography>
 
-            <div style={styles.flexGrow10}/>
+            <div style={styles.flexGrow3}/>
+            <MediaQuery orientation="landscape">
+              <Button>Trending</Button>
+              <Button>Most Popular</Button>
+            </MediaQuery>
+            <div style={styles.flexGrow7}/>
 
             <AuthUserBadge/>
             <MediaQuery orientation="landscape">
