@@ -76,15 +76,19 @@ const TextItem = props => {
         }}
       />
       <CardActions>
-        <MediaQuery orientation={'portrait'}>
-          <Button
-            onClick={props.vote}
-            color={props.isAlreadyVoted ? 'secondary':'default'}>
-            <StarIcon/>
-            &nbsp;&nbsp;
-            {props.isAlreadyVoted ? 'Unvote':'Vote'}
-          </Button>
-        </MediaQuery>
+        {
+          !props.voteDisabled && (
+            <MediaQuery orientation={'portrait'}>
+              <Button
+                onClick={props.vote}
+                color={props.isAlreadyVoted ? 'secondary':'default'}>
+                <StarIcon/>
+                &nbsp;&nbsp;
+                {props.isAlreadyVoted ? 'Unvote':'Vote'}
+              </Button>
+            </MediaQuery>
+          )
+        }
       </CardActions>
     </Card>
   )
