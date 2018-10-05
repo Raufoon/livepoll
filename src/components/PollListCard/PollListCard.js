@@ -27,7 +27,7 @@ const listItemSecondaryText = {
   gutterBottom: true
 };
 
-function MostPopularPollsCard(props) {
+function PollListCard(props) {
   const { classes } = props;
   return (
     <Paper className={classes.root}>
@@ -56,12 +56,12 @@ function MostPopularPollsCard(props) {
   );
 }
 
-MostPopularPollsCard.propTypes = {
+PollListCard.propTypes = {
   polls: PropTypes.array
 };
 
 export default withRouter(
   withStyles(styles)(
-    MostPopularPollsCard
+    PollListCard
   )
 )

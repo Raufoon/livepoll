@@ -38,7 +38,7 @@ const autoHeight = {
   height: 'auto'
 };
 
-function TrendingPollsSlider(props) {
+function PollGridCard(props) {
   const { classes } = props;
 
   return (
@@ -71,12 +71,12 @@ function TrendingPollsSlider(props) {
   );
 }
 
-TrendingPollsSlider.propTypes = {
+PollGridCard.propTypes = {
   polls: PropTypes.array
 };
 
 export default withRouter(
   withStyles(styles)(
-    TrendingPollsSlider
+    PollGridCard
   )
 )
