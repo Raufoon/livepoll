@@ -5,14 +5,20 @@ import {
   requestTopItems, requestVoteCountsByIdList, requestVoterList
 } from "../../util/cloud/livepoll";
 import {actionAlreadyVotedPollFound} from "./my-profile-actions";
-import {actionMakeInfoToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
+import {
+  actionMakeErrorToast,
+  actionMakeInfoToast,
+  actionMakeSuccessToast,
+  actionMakeWarningToast
+} from "./toast-actions";
 
 export const actionFetchPollInfo = (id) => dispatch => {
   dispatch(actionMakeWarningToast('Fetching poll info...'));
   return requestPollInfo(id)
     .then(response => {
       dispatch(actionFetchPollInfoSuccess(response.livepoll));
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to fetch poll info!')));
 };
 
 export const ACTION_FETCH_POLL_INFO_SUCCESS = 'ACTION_FETCH_POLL_INFO_SUCCESS';
@@ -28,6 +34,7 @@ export const actionRequestAddItem = (pollId, data) => dispatch => {
       dispatch(actionMakeSuccessToast('Item successfully added'));
       dispatch(actionRequestAddItemSuccess(pollId, response.item))
     })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to add item!')))
 };
 
 export const ACTION_REQUEST_ADD_ITEM_SUCCESS = 'ACTION_REQUEST_ADD_ITEM_SUCCESS';
@@ -42,7 +49,8 @@ export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
   return requestTopItems(pollId, startAt, howMany)
     .then(response => {
       dispatch(actionRequestTopItemsSuccess(pollId, response.livepoll.items))
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to load items!')));
 };
 
 export const ACTION_REQUEST_TOP_ITEMS_SUCCESS = 'ACTION_REQUEST_TOP_ITEMS_SUCCESS';
@@ -69,7 +77,8 @@ export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
         .then(response => {
           dispatch(actionGiveVoteSuccess(pollId, response.livepoll.items));
         })
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to give vote! Try again?')));
 };
 
 export const ACTION_GIVE_VOTE_SUCCESS = 'ACTION_GIVE_VOTE_SUCCESS';
@@ -85,6 +94,7 @@ export const actionFetchVoterList = (pollId, itemId, startAt, howMany) => dispat
       dispatch(actionMakeSuccessToast('Voter list loaded'));
       dispatch(actionFetchVoterListSuccess(pollId, itemId, voterList));
     })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to fetch voter list')))
 };
 
 export const ACTION_FETCH_VOTER_LIST_SUCCESS = 'ACTION_FETCH_VOTER_LIST_SUCCESS';

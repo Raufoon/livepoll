@@ -1,5 +1,5 @@
 import {requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
-import {actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
+import {actionMakeErrorToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
 
 export const actionRequestUpdateBasicInfo = data => dispatch => {
   dispatch(actionMakeWarningToast('Trying to update your profile...'));
@@ -7,7 +7,8 @@ export const actionRequestUpdateBasicInfo = data => dispatch => {
     .then(response => {
       dispatch(actionMakeSuccessToast('Profile update successfull'));
       dispatch(actionMyProfileBasicInfoUpdateSuccess(response.basicInfo));
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to update profile!')));
 };
 
 export const ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS = 'ACTION_MY_PROFILE_BASIC_DATA_UPDATE_SUCCESS';
@@ -24,7 +25,7 @@ export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
         pollId,
         response.votedItemId
       ))
-    })
+    }).catch(() => dispatch(actionMakeErrorToast('Please refresh!')))
 };
 
 export const ACTION_ALREADY_VOTED_POLL_FOUND = 'ACTION_ALREADY_VOTED_POLL_FOUND';

@@ -1,5 +1,5 @@
 import {requestPopularPolls, requestTrendingPolls} from "../../util/cloud/home";
-import {actionMakeInfoToast} from "./toast-actions";
+import {actionMakeErrorToast, actionMakeInfoToast} from "./toast-actions";
 
 export const actionFetchHome = () => dispatch => {
   dispatch(actionMakeInfoToast('Fetching polls...'));
@@ -12,7 +12,8 @@ export const actionFetchPopularPolls = (startAt, howMany) => dispatch => {
   return requestPopularPolls(startAt, howMany)
     .then(response => {
       dispatch(actionFetchPopularPollsSuccess(response.popularPolls));
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to load polls. Please refresh!')));
 };
 export const ACTION_FETCH_POPULAR_POLLS_SUCCESS = 'ACTION_FETCH_POPULAR_POLLS_SUCCESS';
 export const actionFetchPopularPollsSuccess = popularPolls => ({
@@ -24,7 +25,8 @@ export const actionFetchTrendingPolls = (startAt, howMany) => dispatch => {
   return requestTrendingPolls(startAt, howMany)
     .then(response => {
       dispatch(actionFetchTrendingPollsSuccess(response.trendingPolls));
-    });
+    })
+    .catch(() => dispatch(actionMakeErrorToast('Failed to fetch polls. Please refresh!')));
 };
 export const ACTION_FETCH_TRENDING_POLLS_SUCCESS = 'ACTION_FETCH_TRENDING_POLLS_SUCCESS';
 export const actionFetchTrendingPollsSuccess = trendingPolls => ({

@@ -60,7 +60,6 @@ function PollListCard(props) {
         <ListItem>
           <Button
             className={classes.moreButton}
-            color={'primary'}
             to={props.moreLink}
             component={Link}>
             <MoreIcon/>
