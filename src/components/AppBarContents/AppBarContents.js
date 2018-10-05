@@ -48,7 +48,7 @@ const AppBarContents = props => {
       <AuthUserBadge/>
       <MediaQuery orientation="landscape">
         &nbsp;&nbsp;
-        <Button size="small" color="secondary" onClick={doSignOut}>
+        <Button size="small" onClick={doSignOut}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>
       </MediaQuery>

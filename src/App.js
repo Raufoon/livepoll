@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import {connect} from 'react-redux';
-import {Switch, withRouter, Route, Link} from 'react-router-dom';
+import {Switch, withRouter, Route} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,13 +10,13 @@ import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
 import HomePage from "./components/HomePage/HomePage";
 import LivepollPage from "./components/LivepollPage/LivepollPage";
-import {actionSignoutRequest} from "./state-management/actions/auth-actions";
 import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import HomeNavigationPanel from "./components/HomePage/MobileNavigationPanel/MobileNavigationPanel";
 import AppBarContents from "./components/AppBarContents/AppBarContents";
+import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
 
 const styles = {
   flexGrow10: {flexGrow: 1},
@@ -41,7 +41,11 @@ class App extends Component {
           <AppBarContents/>
         </AppBar>
         <AppBar position="static" color={'default'} className={'hidden-app-bar'}><Toolbar/></AppBar>
+
+        <NetworkStatus/>
+
         <MediaQuery orientation={'portrait'}><HomeNavigationPanel/></MediaQuery>
+
         <br/>
         <div className='app-content app-content-resp'>
           <Switch>
