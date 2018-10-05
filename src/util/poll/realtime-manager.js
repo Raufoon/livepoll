@@ -58,8 +58,8 @@ export const updateRealtimeItems = (pollId, items) => {
     turnOn(pollId, newSubscriberItemIds[i]);
   }
 
-  console.log('Cancel following subscription for poll ' + pollId);
-  console.log(cancelSubscriptionItemIds);
+  // console.log('Cancel following subscription for poll ' + pollId);
+  // console.log(cancelSubscriptionItemIds);
   for (let i=0; i<cancelSubscriptionItemIds.length; i++) {
     turnOff(pollId, cancelSubscriptionItemIds[i]);
   }
@@ -68,8 +68,8 @@ export const updateRealtimeItems = (pollId, items) => {
 export const unsubscribeRealtime = pollId => {
   let cancelSubscriptionItemIds = Object.keys(mapPollIdToTop15Items[pollId]);
 
-  console.log('Cancel following subscription for poll ' + pollId);
-  console.log(cancelSubscriptionItemIds);
+  // console.log('Cancel following subscription for poll ' + pollId);
+  // console.log(cancelSubscriptionItemIds);
   for (let i=0; i<cancelSubscriptionItemIds.length; i++) {
     turnOff(pollId, cancelSubscriptionItemIds[i]);
   }

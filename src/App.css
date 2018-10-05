@@ -1,6 +1,11 @@
 .app-content{
   margin: 20px;
 }
+@media (orientation: portrait) {
+  .app-content-resp{
+    margin: 10px !important;
+  }
+}
 .app-title{
   text-decoration: none;
   color: inherit;
@@ -9,7 +14,8 @@
 .fr{float: right}
 .tac{text-align: center}
 .mg5{margin: 5px}
-.w100{width: 100%}
+.w100{width: 100% !important;}
+.nomargin{margin: 0 !important;}
 .h100{height: 100%}
 .hidden-app-bar{
   visibility: hidden;
