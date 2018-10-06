@@ -16,19 +16,22 @@ const LivepollInfoCard = props => {
 
   return (
     <div>
-      <Badge
-        color="default"
-        badgeContent={props.isLive ? 'LIVE':''}
-        classes={{
-          badge: props.isLive ? 'poll-live-indicator blink' : ''
-        }}>
-        <MediaQuery orientation={'landscape'}>
+      <MediaQuery orientation={'landscape'}>
+        <Badge
+          color="default"
+          badgeContent={props.isLive ? 'LIVE':''}
+          classes={{
+            badge: props.isLive ? 'poll-live-indicator blink' : ''
+          }}>
           <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
-        </MediaQuery>
-        <MediaQuery orientation={'portrait'}>
-          <Typography variant="display1" gutterBottom>{props.livepoll.settings.title}</Typography>
-        </MediaQuery>
-      </Badge>
+        </Badge>
+      </MediaQuery>
+
+      <MediaQuery orientation={'portrait'}>
+        <Typography variant="display1" gutterBottom>
+          {props.livepoll.settings.title}
+        </Typography>
+      </MediaQuery>
 
       {
         props.livepoll.settings.isPrivate && (
@@ -54,6 +57,12 @@ const LivepollInfoCard = props => {
           {props.hasEnded ? 'Ended' : 'Will end'} on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
         </Typography>
       }
+      <MediaQuery orientation={'portrait'}>
+        <br/>
+        <Typography className={props.isLive ? 'poll-live-indicator tac blink' : ''}>
+          &nbsp;&nbsp;{props.isLive ? 'LIVE':''}
+        </Typography>
+      </MediaQuery>
     </div>
   )
 };

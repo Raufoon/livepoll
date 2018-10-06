@@ -6,28 +6,41 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 import EditIcon from '@material-ui/icons/Edit';
+import { withStyles } from '@material-ui/core/styles';
+import CardMedia from '@material-ui/core/CardMedia';
+
 import {actionSignoutRequest} from "../../../state-management/actions/auth-actions";
 
-const ProfileCard = (props) => {
+const styles = {
+  card: {
+  },
+  media: {
+    height: 100,
+  },
+};
+
+function ProfileCard(props) {
+  const { classes } = props;
   if (!props.myProfile.basicInfo) return 'loading...';
   const signOut = () => props.dispatch(actionSignoutRequest());
   return (
-    <Card>
+    <Card className={classes.card}>
       <CardActionArea>
+        <CardMedia
+          className={classes.media}
+          image="/static/images/cards/contemplative-reptile.jpg"
+          title="Contemplative Reptile"
+        />
         <CardContent>
-          <Typography gutterBottom variant="display1" component="h2">
+          <Typography gutterBottom variant="headline" component="h2">
             {props.myProfile.basicInfo.name}
           </Typography>
-          <List>
-            <ListItem>
-              <ListItemText primary={props.myProfile.basicInfo.dob} secondary="Date of birth" />
-            </ListItem>
-          </List>
+          <Typography component="p">
+            {props.myProfile.basicInfo.name} has been an active member of this community, creating
+            and voting in many polls.
+          </Typography>
         </CardContent>
       </CardActionArea>
       <CardActions>
@@ -40,8 +53,14 @@ const ProfileCard = (props) => {
       </CardActions>
     </Card>
   );
-};
+}
+
 const s2p = state => ({
   myProfile: state.myProfile
 });
-export default connect(s2p)(ProfileCard);
+
+export default withStyles(styles)(
+  connect(s2p)(
+    ProfileCard
+  )
+);
