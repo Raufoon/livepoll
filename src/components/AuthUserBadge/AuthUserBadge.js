@@ -4,9 +4,14 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
+import Loadable from 'react-loadable';
 
 import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
-import CreateProfileForm from "../forms/CreateProfileForm/CreateProfileForm";
+
+const CreateProfileForm = Loadable({
+  loader: ()=>import('../forms/CreateProfileForm/CreateProfileForm'),
+  loading: ()=>'',
+});
 
 const AuthUserBadge = props => {
   if (!props.loggedInUserData.name) {

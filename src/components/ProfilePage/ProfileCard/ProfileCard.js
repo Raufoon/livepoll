@@ -34,7 +34,7 @@ const ProfileCard = (props) => {
         <Button size="small" color="secondary" onClick={signOut}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>
-        <Button size="small" color="primary">
+        <Button size="small">
           <EditIcon/>&nbsp;&nbsp;Edit
         </Button>
       </CardActions>

@@ -1,12 +1,17 @@
 import React from 'react';
-import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
-import SignUpForm from "../forms/SignupForm/SignUpForm";
 import Typography from '@material-ui/core/Typography';
 import MediaQuery from 'react-responsive';
 import JoinDesktopIcon from '@material-ui/icons/Computer';
 import JoinMobileIcon from '@material-ui/icons/PhoneAndroid';
+import Loadable from 'react-loadable';
 
 import './SignUpPage.css'
+import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
+
+const SignUpForm = Loadable({
+  loader: ()=>import('../forms/SignupForm/SignUpForm'),
+  loading: ()=>'',
+});
 
 const SignUpPage = (props) => {
   return (

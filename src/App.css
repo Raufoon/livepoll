@@ -13,7 +13,7 @@
 }
 .fl{float: left}
 .fr{float: right}
-.tac{text-align: center}
+.tac{text-align: center !important;}
 .mg5{margin: 5px}
 .w100{width: 100% !important;}
 .nomargin{margin: 0 !important;}

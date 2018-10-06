@@ -4,18 +4,35 @@ import {connect} from 'react-redux';
 import {Switch, withRouter, Route} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
+import Loadable from 'react-loadable';
 
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
-import HomePage from "./components/HomePage/HomePage";
-import LivepollPage from "./components/LivepollPage/LivepollPage";
 import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
-import PollCreationForm from "./components/forms/PollCreationForm/PollCreationForm";
-import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
-import ProfilePage from "./components/ProfilePage/ProfilePage";
-import HomeNavigationPanel from "./components/HomePage/MobileNavigationPanel/MobileNavigationPanel";
 import AppBarContents from "./components/AppBarContents/AppBarContents";
 import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
+import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
+
+const HomePage = Loadable({
+  loader: ()=>import('./components/HomePage/HomePage'),
+  loading: ()=>'',
+});
+const LivepollPage = Loadable({
+  loader: ()=>import('./components/LivepollPage/LivepollPage'),
+  loading: ()=>'',
+});
+const PollCreationForm = Loadable({
+  loader: ()=>import('./components/forms/PollCreationForm/PollCreationForm'),
+  loading: ()=>'',
+});
+const ProfilePage = Loadable({
+  loader: ()=>import('./components/ProfilePage/ProfilePage'),
+  loading: ()=>'',
+});
+const HomeNavigationPanel = Loadable({
+  loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
+  loading: ()=>'',
+});
 
 const styles = {
   flexGrow10: {flexGrow: 1},

@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddItemIcon from '@material-ui/icons/Add';
+import Loadable from 'react-loadable';
 
 import './LivepollPage.css'
 import {
@@ -14,8 +15,12 @@ import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
-import CreateItemForm from "../forms/CreateItemForm/CreateItemForm";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
+
+const CreateItemForm = Loadable({
+  loader: ()=>import('../forms/CreateItemForm/CreateItemForm'),
+  loading: ()=>'',
+});
 
 class LivepollPage extends React.Component {
   constructor(props) {

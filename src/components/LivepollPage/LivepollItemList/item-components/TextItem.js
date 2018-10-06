@@ -8,11 +8,16 @@ import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 import Typography from "@material-ui/core/Typography/Typography";
 import StarIcon from '@material-ui/icons/StarBorder';
+import Loadable from 'react-loadable';
 
-import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import './TextItem.css'
+import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import ModalOpenerButton from "../../../modal-openers/ModalOpenerButton/ModalOpenerButton";
-import LivepollItemVoterList from "../../LivepollItemVoterList/LivepollItemVoterList";
+
+const LivepollItemVoterList = Loadable({
+  loader: ()=>import('../../LivepollItemVoterList/LivepollItemVoterList'),
+  loading: ()=>'',
+});
 
 const TextItem = props => {
   let VoteCounter = false;
