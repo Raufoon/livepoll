@@ -10,7 +10,7 @@
   top: 50vh;
   left: 50vw;
   transform: translateX(-50%) translateY(-50%);
-  box-shadow: 0 0 10px lightgrey;
+  box-shadow: none;
   background-color: white;
 }
 @media (orientation: portrait) {
