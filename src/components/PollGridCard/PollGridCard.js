@@ -16,8 +16,10 @@ const styles = theme => ({
     flexWrap: 'wrap',
     justifyContent: 'space-around',
     padding: '20px',
-    backgroundColor: theme.palette.background.paper,
-    margin: 'auto'
+    backgroundColor: '#fbfbfb',
+    margin: 'auto',
+    boxShadow: 'none',
+    border: '1px solid lightgray'
   },
   gridList: {
     width: '100%',
@@ -51,7 +53,7 @@ function PollGridCard(props) {
     <Paper className={classes.root}>
       <GridList cellHeight={150} className={classes.gridList}>
         <GridListTile cols={2} style={autoHeight}>
-          <Typography variant="headline" gutterBottom>Trending Now</Typography>
+          <Typography variant="headline" gutterBottom>{props.title}</Typography>
         </GridListTile>
 
         <GridListTile cols={2} style={autoHeight}><br/></GridListTile>
@@ -87,6 +89,7 @@ function PollGridCard(props) {
 PollGridCard.propTypes = {
   polls: PropTypes.array,
   moreLink: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default withRouter(

@@ -9,6 +9,7 @@
 .app-title{
   text-decoration: none;
   color: inherit;
+  font-family: 'Nova Flat' !important;
 }
 .fl{float: left}
 .fr{float: right}
@@ -24,4 +25,13 @@
   position: fixed !important;
   bottom: 20px !important;
   right: 20px !important;;
+}
+.app-bar{
+  box-shadow: none !important;
+  border: none !important;
+}
+@media (orientation: landscape) {
+  .app-bar-resp{
+    box-shadow: 0px 2px 2px lightgray !important;
+  }
 }

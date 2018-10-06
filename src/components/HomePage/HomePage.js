@@ -21,10 +21,10 @@ class HomePage extends React.Component {
         <MediaQuery orientation="landscape">
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={8}>
-              <TrendingPollsSlider moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
+              <TrendingPollsSlider title={'Trending Now'} moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
             </Grid>
             <Grid item xs={4}>
-              <MostPopularPollsCard moreLink={'/popular'} polls={this.props.popularPolls}/>
+              <MostPopularPollsCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.popularPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>
@@ -32,10 +32,10 @@ class HomePage extends React.Component {
         <MediaQuery orientation="portrait">
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={12}>
-              <TrendingPollsSlider moreLink={'/trending'} columnWidth={2} polls={this.props.trendingPolls}/>
+              <MostPopularPollsCard title={'Trending Now'} moreLink={'/trending'} polls={this.props.trendingPolls}/>
             </Grid>
             <Grid item xs={12}>
-              <MostPopularPollsCard moreLink={'/popular'} polls={this.props.trendingPolls}/>
+              <MostPopularPollsCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.trendingPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>

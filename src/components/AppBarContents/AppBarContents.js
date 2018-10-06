@@ -20,6 +20,9 @@ const styles = {
   flexGrow10: {flexGrow: 1},
   flexGrow3: {flexGrow: .3},
   flexGrow7: {flexGrow: .7},
+  signOutBtn: {
+    color: 'grey'
+  }
 };
 
 const AppBarContents = props => {
@@ -48,7 +51,7 @@ const AppBarContents = props => {
       <AuthUserBadge/>
       <MediaQuery orientation="landscape">
         &nbsp;&nbsp;
-        <Button size="small" onClick={doSignOut}>
+        <Button size="small" onClick={doSignOut} style={styles.signOutBtn}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>
       </MediaQuery>

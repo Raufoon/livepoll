@@ -1,7 +1,6 @@
 import React from 'react';
 import {withRouter} from 'react-router-dom'
-import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
+import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -13,9 +12,10 @@ import RecentIcon from '@material-ui/icons/Sort';
 const styles = {
   root: {
     flexGrow: 1,
-    marginTop: 10,
     marginBotton: 0,
     maxWidth: 500,
+    boxShadow: '0px 2px 2px lightgray',
+    border: 'none',
   },
 };
 
@@ -79,6 +79,8 @@ class MobileNavigationPanel extends React.Component {
       case 3:
         this.props.history.push('/recent');
         break;
+
+      default:
     }
   };
 
@@ -86,7 +88,7 @@ class MobileNavigationPanel extends React.Component {
     const { classes } = this.props;
 
     return (
-      <Paper square className={classes.root} elevation={1}>
+      <AppBar className={classes.root} position="sticky" color={'default'}>
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
@@ -99,7 +101,7 @@ class MobileNavigationPanel extends React.Component {
           <Tab icon={<PopularIcon />} label="Popular" />
           <Tab icon={<RecentIcon />} label="Recent" />
         </Tabs>
-      </Paper>
+      </AppBar>
     );
   }
 }

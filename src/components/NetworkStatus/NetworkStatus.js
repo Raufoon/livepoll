@@ -1,6 +1,6 @@
 import React from 'react'
 import Typography from "@material-ui/core/Typography/Typography";
-import {Offline, Online} from "react-detect-offline";
+import {Offline} from "react-detect-offline";
 
 const styles = {
   offlineNotifier: {

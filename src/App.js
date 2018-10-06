@@ -4,7 +4,6 @@ import {connect} from 'react-redux';
 import {Switch, withRouter, Route} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
 
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
@@ -37,10 +36,10 @@ class App extends Component {
 
     return (
       <React.Fragment>
-        <AppBar position="fixed" color={'default'}>
+        <AppBar position="static" color={'default'} className={'app-bar app-bar-resp'}>
           <AppBarContents/>
         </AppBar>
-        <AppBar position="static" color={'default'} className={'hidden-app-bar'}><Toolbar/></AppBar>
+        {/*<AppBar position="static" color={'default'} className={'hidden-app-bar'}><Toolbar/></AppBar>*/}
 
         <NetworkStatus/>
 

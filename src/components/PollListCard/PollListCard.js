@@ -16,7 +16,9 @@ import Typography from "@material-ui/core/Typography/Typography";
 const styles = theme => ({
   root: {
     width: '100%',
-    backgroundColor: theme.palette.background.paper,
+    backgroundColor: '#fbfbfb',
+    boxShadow: 'none',
+    border: '1px solid lightgray',
   },
   avatar: {
     cursor: 'pointer'
@@ -39,7 +41,7 @@ function PollListCard(props) {
     <Paper className={classes.root}>
       <List>
         <ListItem>
-          <Typography variant="headline" gutterBottom>Most Popular Ever</Typography>
+          <Typography variant="headline" gutterBottom>{props.title}</Typography>
         </ListItem>
         {
           props.polls.map((poll, index) => (
@@ -74,6 +76,7 @@ function PollListCard(props) {
 PollListCard.propTypes = {
   polls: PropTypes.array,
   moreLink: PropTypes.string,
+  title: PropTypes.string,
 };
 
 export default withRouter(
