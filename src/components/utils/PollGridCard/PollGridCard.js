@@ -9,6 +9,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from "@material-ui/core/Typography/Typography";
 import Button from "@material-ui/core/Button/Button";
 import MoreIcon from '@material-ui/icons/MoreHoriz';
+import VoteCountChip from "../VoteCountChip/VoteCountChip";
 
 const styles = theme => ({
   root: {
@@ -30,7 +31,8 @@ const styles = theme => ({
     cursor: 'pointer'
   },
   content: {
-    margin: '15px'
+    marginTop: '15px',
+    marginLeft: '15px'
   },
   title: {
     color: 'black'
@@ -61,8 +63,10 @@ function PollGridCard(props) {
         {
           props.polls.map(poll => (
             <GridListTile cols={props.columnWidth} key={poll.id}  className={classes.tile}>
-              <Typography variant="headline" className={classes.content}>{poll.items[0].content.text}</Typography>
-              <Typography variant="body1" className={classes.content}>{poll.items[0].voteCount} votes</Typography>
+              <div className={classes.content}>
+                <Typography variant="headline">{poll.items[0].content.text}</Typography>
+                <VoteCountChip count={poll.items[0].voteCount}/>
+              </div>
               <GridListTileBar
                 title={poll.settings.title}
                 onClick={()=>props.history.push('/poll/' + poll.id)}
