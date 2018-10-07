@@ -6,7 +6,7 @@ import JoinMobileIcon from '@material-ui/icons/PhoneAndroid';
 import Loadable from 'react-loadable';
 
 import './SignUpPage.css'
-import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),

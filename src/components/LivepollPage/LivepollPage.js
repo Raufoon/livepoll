@@ -14,7 +14,7 @@ import {
 import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
-import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
 
 const CreateItemForm = Loadable({
@@ -113,7 +113,6 @@ class LivepollPage extends React.Component {
           willStartOnFuture={willStartOnFuture}
           hasEnded={hasEnded}
         />
-        <br/>
         {
           showAddItemButton &&
           <ModalOpenerButton

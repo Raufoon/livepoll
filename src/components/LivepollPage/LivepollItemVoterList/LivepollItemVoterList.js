@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Typography from "@material-ui/core/Typography/Typography";
-import BigRemoteDataDisplay from "../../BigRemoteDataDisplay/BigRemoteDataDisplay";
+import BigRemoteDataDisplay from "../../utils/BigRemoteDataDisplay/BigRemoteDataDisplay";
 import {actionFetchVoterList} from "../../../state-management/actions/livepoll-actions";
 
 const LivepollItemVoterList = props => (

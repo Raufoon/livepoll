@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import MediaQuery from 'react-responsive';
 
 import {actionFetchHome} from "../../state-management/actions/home-actions";
-import TrendingPollsSlider from "../PollGridCard/PollGridCard";
-import MostPopularPollsCard from "../PollListCard/PollListCard";
+import TrendingPollsSlider from "../utils/PollGridCard/PollGridCard";
+import MostPopularPollsCard from "../utils/PollListCard/PollListCard";
 
 class HomePage extends React.Component {
   componentDidMount() {

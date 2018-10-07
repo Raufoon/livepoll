@@ -8,9 +8,9 @@ import Loadable from 'react-loadable';
 
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
-import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "./components/utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import AppBarContents from "./components/AppBarContents/AppBarContents";
-import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
+import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 
 const HomePage = Loadable({

@@ -3,6 +3,7 @@ import Grid from "@material-ui/core/Grid/Grid";
 import MediaQuery from 'react-responsive';
 
 import ProfileCard from "./ProfileCard/ProfileCard";
+import ProfileSectionTab from "./ProfileSectionTab/ProfileSectionTab";
 
 const ProfilePage = props => {
   return (
@@ -20,11 +21,8 @@ const ProfilePage = props => {
           <Grid item xs={3}>
             <ProfileCard/>
           </Grid>
-          <Grid item xs={5}>
-
-          </Grid>
-          <Grid item xs={4}>
-
+          <Grid item xs={9}>
+            <ProfileSectionTab/>
           </Grid>
         </Grid>
       </MediaQuery>

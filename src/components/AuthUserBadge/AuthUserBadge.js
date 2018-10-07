@@ -6,7 +6,7 @@ import Chip from '@material-ui/core/Chip';
 import Avatar from '@material-ui/core/Avatar';
 import Loadable from 'react-loadable';
 
-import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 
 const CreateProfileForm = Loadable({
   loader: ()=>import('../forms/CreateProfileForm/CreateProfileForm'),
