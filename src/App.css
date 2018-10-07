@@ -9,6 +9,7 @@
 .app-title{
   text-decoration: none;
   color: inherit;
+  font-size: x-large !important;
   font-family: 'Nova Flat' !important;
 }
 .fl{float: left}
