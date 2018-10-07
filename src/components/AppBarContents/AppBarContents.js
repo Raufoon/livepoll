@@ -13,6 +13,7 @@ import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 import TrendingIcon from '@material-ui/icons/TrendingUp';
 import PopularIcon from '@material-ui/icons/FavoriteBorder';
 import RecentIcon from '@material-ui/icons/Sort';
+import { withStyles } from '@material-ui/core/styles';
 
 import {actionSignoutRequest} from "../../state-management/actions/auth-actions";
 
@@ -21,12 +22,19 @@ const styles = {
   flexGrow3: {flexGrow: .3},
   flexGrow7: {flexGrow: .7},
   signOutBtn: {
-    color: 'grey'
+    color: '#4a4e69'
+  },
+  activeLink: {
+    color: 'crimson !important'
+  },
+  navlink: {
+    color: '#4a4e69'
   }
 };
 
 const AppBarContents = props => {
   const doSignOut = () => props.dispatch(actionSignoutRequest());
+  const {classes} = props;
   return (
     <Toolbar>
       <IconButton color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
@@ -34,24 +42,36 @@ const AppBarContents = props => {
         <Link className={'app-title'} to={'/'}>Livepoll</Link>
       </Typography>
 
-      <div style={styles.flexGrow3}/>
+      <div className={classes.flexGrow3}/>
       <MediaQuery orientation="landscape">
-        <Button component={NavLink} to={'/trending'}>
+        <Button
+          className={classes.navlink}
+          activeClassName={classes.activeLink}
+          component={NavLink}
+          to={'/trending'}>
           <TrendingIcon/>&nbsp;&nbsp;Trending
         </Button>
-        <Button component={NavLink} to={'/popular'}>
+        <Button
+          className={classes.navlink}
+          activeClassName={classes.activeLink}
+          component={NavLink}
+          to={'/popular'}>
           <PopularIcon/>&nbsp;&nbsp;Popular
         </Button>
-        <Button component={NavLink} to={'/recent'}>
+        <Button
+          className={classes.navlink}
+          activeClassName={classes.activeLink}
+          component={NavLink}
+          to={'/recent'}>
           <RecentIcon/>&nbsp;&nbsp;Recent
         </Button>
       </MediaQuery>
-      <div style={styles.flexGrow7}/>
+      <div className={classes.flexGrow7}/>
 
       <AuthUserBadge/>
       <MediaQuery orientation="landscape">
         &nbsp;&nbsp;
-        <Button size="small" onClick={doSignOut} style={styles.signOutBtn}>
+        <Button size="small" onClick={doSignOut} className={classes.signOutBtn}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>
       </MediaQuery>
@@ -61,6 +81,6 @@ const AppBarContents = props => {
 
 export default withRouter(
   connect()(
-    AppBarContents
+    withStyles(styles)(AppBarContents)
   )
 )

@@ -14,10 +14,14 @@ import {actionSignoutRequest} from "../../../state-management/actions/auth-actio
 
 const styles = {
   card: {
+    backgroundColor: '#fbfbfb',
   },
   media: {
     height: 100,
   },
+  buttonPanel: {
+    opacity: '0.5'
+  }
 };
 
 function ProfileCard(props) {
@@ -37,7 +41,7 @@ function ProfileCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
-      <CardActions>
+      <CardActions className={classes.buttonPanel}>
         <Button size="small" color="secondary" onClick={signOut}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>

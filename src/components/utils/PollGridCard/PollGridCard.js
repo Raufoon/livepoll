@@ -41,7 +41,8 @@ const styles = theme => ({
     border: '1px solid lightgray',
   },
   moreButton: {
-    marginTop: 15
+    marginTop: 15,
+    color: 'gray'
   }
 });
 const autoHeight = {

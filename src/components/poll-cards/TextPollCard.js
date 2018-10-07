@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
+import { withStyles } from '@material-ui/core/styles';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -9,13 +10,19 @@ import VoteCountChip from "../utils/VoteCountChip/VoteCountChip";
 import MediaQuery from "react-responsive";
 import MoreButton from "../buttons/MoreButton/MoreButton";
 
-const moreButtonStyle = {
-  color: 'grey',
-};
+const styles = theme => ({
+  moreButton: {
+    color: 'grey'
+  },
+  container: {
+    backgroundColor: '#fbfbfb',
+  }
+});
 
 function TextPollCard(props) {
+  const {classes} = props;
   return (
-    <Card style={props.style}>
+    <Card className={classes.container} style={props.style}>
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
@@ -35,7 +42,7 @@ function TextPollCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <MoreButton style={moreButtonStyle} moreLink={`/poll/${props.poll.id}`}/>
+        <MoreButton className={classes.moreButton} moreLink={`/poll/${props.poll.id}`}/>
       </CardActions>
     </Card>
   );
@@ -45,4 +52,4 @@ TextPollCard.propTypes = {
   poll: PropTypes.object.isRequired
 };
 
-export default TextPollCard
+export default withStyles(styles)(TextPollCard)

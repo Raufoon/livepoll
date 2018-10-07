@@ -21,7 +21,8 @@ const styles = theme => ({
     cursor: 'pointer'
   },
   moreButton: {
-    margin: '0 auto'
+    margin: '0 auto',
+    color: 'gray'
   }
 });
 const listItemPrimaryText = {
