@@ -28,11 +28,11 @@ function ProfileCard(props) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        <CardMedia
-          className={classes.media}
-          image="/static/images/cards/contemplative-reptile.jpg"
-          title="Contemplative Reptile"
-        />
+        {/*<CardMedia*/}
+          {/*className={classes.media}*/}
+          {/*image="/static/images/cards/contemplative-reptile.jpg"*/}
+          {/*title="Contemplative Reptile"*/}
+        {/*/>*/}
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             {props.myProfile.basicInfo.name}

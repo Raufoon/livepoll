@@ -5,18 +5,10 @@ import AppBar from '@material-ui/core/AppBar';
 import { withStyles } from '@material-ui/core/styles';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import HomeIcon from '@material-ui/icons/HomeOutlined';
-import TrendingIcon from '@material-ui/icons/TrendingUp';
-import PopularIcon from '@material-ui/icons/Favorite';
-import RecentIcon from '@material-ui/icons/Sort';
 
 const styles = {
   root: {
     flexGrow: 1,
-    marginBotton: 0,
-    maxWidth: 500,
-    boxShadow: '0px 2px 2px lightgray',
-    border: 'none',
   },
 };
 
@@ -61,7 +53,7 @@ class SectionTabsMaker extends React.Component {
     const { classes } = this.props;
 
     return (
-      <AppBar className={classes.root} position="sticky" color={'default'}>
+      <AppBar className={classes.root} style={this.props.style} position="sticky" color={'default'}>
         <Tabs
           value={this.state.value}
           onChange={this.handleChange}
@@ -92,6 +84,7 @@ class SectionTabsMaker extends React.Component {
 SectionTabsMaker.propTypes = {
   tabIcons: PropTypes.array,
   tabLabels: PropTypes.array,
+  style: PropTypes.object,
   tabRoutes: PropTypes.array.isRequired,
 };
 
