@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types'
-import {withRouter} from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -8,10 +7,8 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
-import Button from '@material-ui/core/Button';
-import MoreIcon from '@material-ui/icons/MoreHoriz';
-import { Link } from 'react-router-dom'
 import Typography from "@material-ui/core/Typography/Typography";
+import MoreButton from "../../buttons/MoreButton/MoreButton";
 
 const styles = theme => ({
   root: {
@@ -60,13 +57,7 @@ function PollListCard(props) {
           ))
         }
         <ListItem>
-          <Button
-            className={classes.moreButton}
-            to={props.moreLink}
-            component={Link}>
-            <MoreIcon/>
-            &nbsp;&nbsp;View More
-          </Button>
+          <MoreButton className={classes.moreButton} moreLink={props.moreLink}/>
         </ListItem>
       </List>
     </Paper>
@@ -79,8 +70,6 @@ PollListCard.propTypes = {
   title: PropTypes.string,
 };
 
-export default withRouter(
-  withStyles(styles)(
-    PollListCard
-  )
+export default withStyles(styles)(
+  PollListCard
 )

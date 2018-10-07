@@ -1,5 +1,6 @@
 import {requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
 import {actionMakeErrorToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
+import {actionFetchTrendingPolls} from "./home-actions";
 
 export const actionRequestUpdateBasicInfo = data => dispatch => {
   dispatch(actionMakeWarningToast('Trying to update your profile...'));
@@ -33,3 +34,7 @@ export const actionAlreadyVotedPollFound = (pollId, votedItemId, lastVotedItemId
   type: ACTION_ALREADY_VOTED_POLL_FOUND,
   votedItemId, pollId, lastVotedItemId
 });
+
+export const actionFetchMyPolls = () => dispatch => {
+  dispatch(actionFetchTrendingPolls(0, 6))
+};

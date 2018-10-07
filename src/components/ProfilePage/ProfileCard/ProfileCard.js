@@ -9,7 +9,6 @@ import Typography from '@material-ui/core/Typography';
 import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles';
-import CardMedia from '@material-ui/core/CardMedia';
 
 import {actionSignoutRequest} from "../../../state-management/actions/auth-actions";
 
@@ -28,11 +27,6 @@ function ProfileCard(props) {
   return (
     <Card className={classes.card}>
       <CardActionArea>
-        {/*<CardMedia*/}
-          {/*className={classes.media}*/}
-          {/*image="/static/images/cards/contemplative-reptile.jpg"*/}
-          {/*title="Contemplative Reptile"*/}
-        {/*/>*/}
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2">
             {props.myProfile.basicInfo.name}
