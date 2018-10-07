@@ -4,7 +4,7 @@ import {
   ACTION_REQUEST_ADD_ITEM_SUCCESS,
   ACTION_REQUEST_TOP_ITEMS_SUCCESS
 } from "../actions/livepoll-actions";
-import initialState from "../initial-state";
+import initialState, {initialBlankState} from "../initial-state";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
 const livepollReducer = (state = initialState.polls, action) => {
@@ -97,7 +97,7 @@ const livepollReducer = (state = initialState.polls, action) => {
       };
 
     case ACTION_SIGNOUT_SUCCESS:
-      newState = {...initialState.polls};
+      newState = {...initialBlankState.polls};
       return newState;
 
     default:

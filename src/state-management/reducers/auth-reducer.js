@@ -1,4 +1,4 @@
-import initialState from "../initial-state";
+import initialState, {initialBlankState} from "../initial-state";
 import {ACTION_SIGNIN_SUCCESS, ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
 const authReducer = (state = initialState.auth, action) => {
@@ -11,7 +11,7 @@ const authReducer = (state = initialState.auth, action) => {
 
     case ACTION_SIGNOUT_SUCCESS:
       return {
-        ...initialState.auth
+        ...initialBlankState.auth
       };
 
     default:

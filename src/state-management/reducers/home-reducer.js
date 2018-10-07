@@ -1,8 +1,9 @@
-import initialState from "../initial-state";
+import initialState, {initialBlankState} from "../initial-state";
 import {
   ACTION_FETCH_POPULAR_POLLS_SUCCESS,
   ACTION_FETCH_TRENDING_POLLS_SUCCESS
 } from "../actions/home-actions";
+import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 
 const homeReducer = (state = initialState.homePage, action) => {
   switch (action.type) {
@@ -22,6 +23,12 @@ const homeReducer = (state = initialState.homePage, action) => {
           ...state.trendingPolls,
           ...action.trendingPolls,
         })
+      };
+
+    case ACTION_SIGNOUT_SUCCESS:
+      return {
+        ...state,
+        ...initialBlankState.homePage
       };
 
     default:

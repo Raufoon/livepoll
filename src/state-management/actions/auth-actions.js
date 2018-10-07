@@ -1,4 +1,4 @@
-import {signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
+import {onUserSignedout, signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
 import {actionMakeWarningToast} from "./toast-actions";
 
 export const actionSigninRequest = (method, data) => dispatch => {
@@ -22,7 +22,9 @@ export const actionSigninSuccess = (currentUser) => ({
 
 export const actionSignoutRequest = () => dispatch => {
   dispatch(actionMakeWarningToast('Signing Out...'));
-  signOut();
+  signOut().then(() => {
+    onUserSignedout();
+  });
 };
 
 export const ACTION_SIGNOUT_SUCCESS = 'ACTION_SIGNOUT_SUCCESS';

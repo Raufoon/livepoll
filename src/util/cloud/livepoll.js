@@ -111,9 +111,9 @@ const QUERY_VOTER_LIST = `
     }
   }
 `;
-export const requestVoterList = (pollId, itemId, startAt, howMany) => {
+export const requestVoterList = (pollId, itemIdList, startAt, howMany) => {
   return graphqlRequest(QUERY_VOTER_LIST, {
-    pollId, itemId
+    pollId, itemIdList
   })
     .then(response => {
       const items = response.livepoll.items;

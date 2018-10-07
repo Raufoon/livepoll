@@ -48,6 +48,7 @@ class LivepollPage extends React.Component {
     clearInterval(this.refreshInterval);
   }
 
+  // TODO: try using requestAnimationFrame
   componentDidUpdate(prevProps) {
     const pid = this.props.match.params.id;
     let items;
