@@ -1,5 +1,6 @@
 import {requestPopularPolls, requestTrendingPolls} from "../../util/cloud/home";
 import {actionMakeErrorToast, actionMakeInfoToast} from "./toast-actions";
+import {getStateManagerWorker} from "../../init/state-manager-worker";
 
 export const actionFetchHome = () => dispatch => {
   dispatch(actionMakeInfoToast('Fetching polls...'));
@@ -9,27 +10,39 @@ export const actionFetchHome = () => dispatch => {
 
 
 export const actionFetchPopularPolls = (startAt, howMany) => dispatch => {
-  return requestPopularPolls(startAt, howMany)
-    .then(response => {
-      dispatch(actionFetchPopularPollsSuccess(response.popularPolls));
-    })
-    .catch(() => dispatch(actionMakeErrorToast('Failed to load polls. Please refresh!')));
+  getStateManagerWorker().postMessage({
+    action: 'ACTION_FETCH_POPULAR_POLLS',
+    payload: {
+      startAt, howMany
+    }
+  });
+  // return requestPopularPolls(startAt, howMany)
+  //   .then(response => {
+  //     dispatch(actionFetchPopularPollsSuccess(response.popularPolls));
+  //   })
+  //   .catch(() => dispatch(actionMakeErrorToast('Failed to load polls. Please refresh!')));
 };
-export const ACTION_FETCH_POPULAR_POLLS_SUCCESS = 'ACTION_FETCH_POPULAR_POLLS_SUCCESS';
-export const actionFetchPopularPollsSuccess = popularPolls => ({
-  type: ACTION_FETCH_POPULAR_POLLS_SUCCESS,
-  popularPolls
-});
+// export const ACTION_FETCH_POPULAR_POLLS_SUCCESS = 'ACTION_FETCH_POPULAR_POLLS_SUCCESS';
+// export const actionFetchPopularPollsSuccess = popularPolls => ({
+//   type: ACTION_FETCH_POPULAR_POLLS_SUCCESS,
+//   popularPolls
+// });
 
 export const actionFetchTrendingPolls = (startAt, howMany) => dispatch => {
-  return requestTrendingPolls(startAt, howMany)
-    .then(response => {
-      dispatch(actionFetchTrendingPollsSuccess(response.trendingPolls));
-    })
-    .catch(() => dispatch(actionMakeErrorToast('Failed to fetch polls. Please refresh!')));
+  getStateManagerWorker().postMessage({
+    action: 'ACTION_FETCH_TRENDING_POLLS',
+    payload: {
+      startAt, howMany
+    }
+  });
+  // return requestTrendingPolls(startAt, howMany)
+  //   .then(response => {
+  //     dispatch(actionFetchTrendingPollsSuccess(response.trendingPolls));
+  //   })
+  //   .catch(() => dispatch(actionMakeErrorToast('Failed to fetch polls. Please refresh!')));
 };
-export const ACTION_FETCH_TRENDING_POLLS_SUCCESS = 'ACTION_FETCH_TRENDING_POLLS_SUCCESS';
-export const actionFetchTrendingPollsSuccess = trendingPolls => ({
-  type: ACTION_FETCH_TRENDING_POLLS_SUCCESS,
-  trendingPolls
-});
+// export const ACTION_FETCH_TRENDING_POLLS_SUCCESS = 'ACTION_FETCH_TRENDING_POLLS_SUCCESS';
+// export const actionFetchTrendingPollsSuccess = trendingPolls => ({
+//   type: ACTION_FETCH_TRENDING_POLLS_SUCCESS,
+//   trendingPolls
+// });

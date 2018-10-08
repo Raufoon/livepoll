@@ -1,0 +1,1 @@
+export const FIRST_TROPHY_IMG_URL = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/common%2Ffirst-trophy%2F1st-place-trophy-300.png?alt=media&token=22831760-e3fc-4b69-aaff-138b769b5abb';

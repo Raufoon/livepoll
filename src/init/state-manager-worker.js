@@ -1,6 +1,6 @@
+import * as StateManagerWorker from '../workers/state-manager.worker';
 import getLivepollStore from "./state-management";
-import {actionStateUpdatedFromWorker} from "../state-management/actions/worker-sync-actions";
-import workerScript from "../workers/state-manager/state-manager-worker";
+import {actionSyncMainAndWorker} from "../state-management/actions/worker-sync-actions";
 
 let stateManagerWorker;
 
@@ -9,10 +9,16 @@ export const initStateManagerWorker = () => {
     throw Error('Worker not supported');
   }
 
-  stateManagerWorker = new Worker(workerScript);
-  window.worker = stateManagerWorker;
-  stateManagerWorker.onmessage = (event => {
-    console.log('MAIN' + event.data)
-    // getLivepollStore().dispatch(actionStateUpdatedFromWorker(event.data));
-  })
+  stateManagerWorker = new StateManagerWorker();
+
+  stateManagerWorker.onmessage = event => {
+    getLivepollStore().dispatch(actionSyncMainAndWorker(event.data));
+  };
+
+  stateManagerWorker.postMessage({
+    action: 'INIT',
+    appState: getLivepollStore().getState()
+  });
 };
+
+export const getStateManagerWorker = () => stateManagerWorker;

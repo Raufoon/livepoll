@@ -1,0 +1,4 @@
+export const SIGNIN_METHODS = {
+  GOOGLE: 'GOOGLE',
+  EMAIL_PASS: 'EMAIL_PASS',
+};

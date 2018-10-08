@@ -1,4 +1,4 @@
-export let initialBlankState = {
+export const initialBlankState = {
   auth: {
     currentUser: undefined
   },
@@ -19,7 +19,10 @@ export let initialBlankState = {
   }
 };
 
-let stateFromStorage = {};
-// stateFromStorage = JSON.parse(localStorage.getItem('app-state') || '{}');
-let initialState = {...initialBlankState,  ...stateFromStorage};
-export default initialState
+let initialState = initialBlankState;
+
+export const setInitialState = (state) => {
+  initialState = state;
+};
+
+export default initialState;

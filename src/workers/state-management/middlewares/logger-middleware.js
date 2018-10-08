@@ -1,8 +1,8 @@
 const loggerMiddleware = store => next => action => {
-  console.log('MAIN: ACTION DISPATCHED!!!');
+  console.log('WORKER: ACTION DISPATCHED!!!');
   console.log(action);
   let result = next(action);
-  console.log('MAIN: NEXT STATE:');
+  console.log('WORKER: NEXT STATE:');
   console.log(store.getState());
   return result
 };
