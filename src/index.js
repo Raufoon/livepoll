@@ -9,6 +9,7 @@ import registerServiceWorker from './registerServiceWorker';
 import getLivepollStore from "./init/state-management";
 import initFirebase from "./init/firebase";
 import initAuth from "./init/auth";
+import {initStateManagerWorker} from "./init/state-manager-worker";
 
 const App = Loadable({
   loader: ()=>import('./App'),
@@ -16,11 +17,13 @@ const App = Loadable({
 });
 
 // Initialization code
+const store = getLivepollStore();
 initFirebase();
 initAuth();
+initStateManagerWorker();
 
 ReactDOM.render(
-  <Provider store={getLivepollStore()}>
+  <Provider store={store}>
     <BrowserRouter>
       <App/>
     </BrowserRouter>
