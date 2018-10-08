@@ -14,16 +14,20 @@ const livepollReducer = (state = initialState.polls, action) => {
 
   switch (action.type) {
     case ACTION_FETCH_POLL_INFO_SUCCESS:
-      return {
+      newState = {
         ...state,
         [action.livepoll.id] : {
           ...state[action.livepoll.id],
           ...action.livepoll
         }
       };
+      postMessage({
+        polls: newState
+      });
+      return newState;
 
     case ACTION_REQUEST_ADD_ITEM_SUCCESS:
-      return {
+      newState = {
         ...state,
         [action.pollId]: {
           ...state[action.pollId],
@@ -33,6 +37,10 @@ const livepollReducer = (state = initialState.polls, action) => {
           }
         }
       };
+      postMessage({
+        polls: newState
+      });
+      return newState;
 
     case ACTION_REQUEST_TOP_ITEMS_SUCCESS:
       newState = {
@@ -46,6 +54,9 @@ const livepollReducer = (state = initialState.polls, action) => {
       };
       action.items.forEach(item => {
         newState[action.pollId].items[item.id] = item;
+      });
+      postMessage({
+        polls: newState
       });
       return newState;
 
@@ -61,10 +72,13 @@ const livepollReducer = (state = initialState.polls, action) => {
         item = action.updatedItems[i];
         newState[action.pollId].items[item.id].voteCount = item.voteCount;
       }
+      postMessage({
+        polls: newState
+      });
       return newState;
 
     case ACTION_FETCH_VOTER_LIST_SUCCESS:
-      return {
+      newState = {
         ...state,
         [action.pollId]: {
           ...state[action.pollId],
@@ -80,8 +94,12 @@ const livepollReducer = (state = initialState.polls, action) => {
           }
         }
       };
+      postMessage({
+        polls: newState
+      });
+      return newState;
 
-    case ACTION_POLL_REALTIME_UPDATE:
+    case ACTION_POLL_REALTIME_UPDATE: // TODO: SYNC
       return {
         ...state,
         [action.pollId]: {

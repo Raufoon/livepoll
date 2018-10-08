@@ -10,13 +10,17 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
 
   switch (action.type) {
     case ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS:
-      return {
+      newState = {
         ...state,
         basicInfo: {
           ...state.basicInfo,
           ...action.basicInfo
         }
       };
+      postMessage({
+        myProfile: newState
+      });
+      return newState;
 
     case ACTION_ALREADY_VOTED_POLL_FOUND:
       newState = {...state};
@@ -28,9 +32,12 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
       } else {
         newState.votedPolls[action.pollId] = action.votedItemId;
       }
+      postMessage({
+        myProfile: newState
+      });
       return newState;
 
-    case ACTION_SIGNOUT_SUCCESS:
+    case ACTION_SIGNOUT_SUCCESS: // TODO: sync worker
       return {
         ...state,
         votedPolls: {},

@@ -33,7 +33,7 @@ const homeReducer = (state = initialState.homePage, action) => {
       };
 
     case ACTION_SYNC_MAIN_AND_WORKER:
-      return action.newState.homePage;
+      return action.newState.homePage ? action.newState.homePage : state;
 
     default:
       return state;
