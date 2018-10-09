@@ -21,8 +21,4 @@ export const initialBlankState = {
 
 let initialState = initialBlankState;
 
-export const setInitialState = (state) => {
-  initialState = state;
-};
-
 export default initialState;

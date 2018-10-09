@@ -19,7 +19,7 @@ function onmessage(event) {
 
   switch (event.data.action) {
     case 'INIT':
-      initAppState(event.data.appState);
+      initAppState();
       break;
 
     case ACTION_SYNC_MAIN_AND_WORKER:

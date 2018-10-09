@@ -20,7 +20,7 @@ const styles = {
 const NetworkStatus = props => (
   <React.Fragment>
     <Offline>
-      <Typography variant={'body1'} style={styles.offlineNotifier}>You are offline</Typography>
+      <Typography variant={'button'} style={styles.offlineNotifier}>You are offline</Typography>
     </Offline>
   </React.Fragment>
 );

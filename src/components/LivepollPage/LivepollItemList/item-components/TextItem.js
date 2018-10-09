@@ -49,7 +49,7 @@ const TextItem = props => {
       <CardHeader
         avatar={
           props.isFirst ? (
-            <Avatar className={'avatar-first-item'} src={FIRST_TROPHY_IMG_URL}>
+            <Avatar className={'avatar-first-item avatar-first-item-resp'} src={FIRST_TROPHY_IMG_URL}>
               {props.index}
             </Avatar>
           ):(
@@ -63,6 +63,7 @@ const TextItem = props => {
             <MediaQuery minWidth={800}>
               <Button
                 onClick={props.vote}
+                size={'small'}
                 color={props.isAlreadyVoted ? 'secondary':'default'}>
                 <StarIcon/>
                 &nbsp;&nbsp;

@@ -1,6 +1,6 @@
 import * as StateManagerWorker from '../workers/state-manager.worker';
 import getLivepollStore from "./state-management";
-import {actionSyncMainAndWorker} from "../state-management/actions/worker-sync-actions";
+import {ACTION_SYNC_MAIN_AND_WORKER, actionSyncMainAndWorker} from "../state-management/actions/worker-sync-actions";
 
 let stateManagerWorker;
 
@@ -16,8 +16,11 @@ export const initStateManagerWorker = () => {
   };
 
   stateManagerWorker.postMessage({
-    action: 'INIT',
-    appState: getLivepollStore().getState()
+    action: 'INIT'
+  });
+  stateManagerWorker.postMessage({
+    action: ACTION_SYNC_MAIN_AND_WORKER,
+    payload: getLivepollStore().getState()
   });
 };
 

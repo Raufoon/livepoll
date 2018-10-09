@@ -28,7 +28,7 @@ const LivepollInfoCard = props => {
       </MediaQuery>
 
       <MediaQuery maxWidth={799}>
-        <Typography variant="h4" gutterBottom>
+        <Typography variant="h5" gutterBottom>
           {props.livepoll.settings.title}
         </Typography>
       </MediaQuery>
@@ -40,14 +40,13 @@ const LivepollInfoCard = props => {
       }
 
       <Typography variant="body2">
-        Created by&nbsp;&nbsp;&nbsp;
+        Created by&nbsp;&nbsp;
         <Chip
-          avatar={<Avatar variant="outlined">{props.livepoll.settings.creatorName[0]}</Avatar>}
           label={props.livepoll.settings.creatorName}
         />
       </Typography>
 
-      <Typography variant="body1">
+      <Typography variant="body2">
         {props.willStartOnFuture ? 'Will start' : 'Started'} on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
       </Typography>
 
