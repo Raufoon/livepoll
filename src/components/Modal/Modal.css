@@ -9,6 +9,7 @@
 .modal-container{
   margin-top: 10vh;
   margin-left: 50vw;
+  float: left;
   transform: translateX(-50%);
   box-shadow: none;
   background-color: white;

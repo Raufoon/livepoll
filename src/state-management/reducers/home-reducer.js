@@ -18,7 +18,7 @@ const homeReducer = (state = initialState.homePage, action) => {
           homePage: newState
         }
       });
-      return;
+      return newState;
 
     case ACTION_SYNC_MAIN_AND_WORKER:
       return action.newState.homePage ? action.newState.homePage : state;
