@@ -20,7 +20,6 @@ function onmessage(event) {
   switch (event.data.action) {
     case 'INIT':
       initAppState(event.data.appState);
-      postMessage(getLivepollStore().getState());
       break;
 
     case ACTION_SYNC_MAIN_AND_WORKER:

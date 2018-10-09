@@ -15,7 +15,7 @@ const CreateProfileForm = (props) => {
 
   return (
     <LPForm title={'Create your profile'} onSubmit={onSubmit}>
-      <Typography variant="subheading" gutterBottom>Create your profile</Typography>
+      <Typography variant="subtitle1" gutterBottom>Create your profile</Typography>
       {
         LPFormField.createRequiredField({
           name: 'name',

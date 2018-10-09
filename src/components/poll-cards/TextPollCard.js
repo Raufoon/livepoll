@@ -25,17 +25,17 @@ function TextPollCard(props) {
     <Card className={classes.container} style={props.style}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
+          <Typography gutterBottom variant="h5" component="h2">
             {props.poll.settings.title}
           </Typography>
           <MediaQuery orientation={'portrait'}>
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               {props.poll.items[0].content.text}
             </Typography>
             <VoteCountChip count={props.poll.items[0].voteCount}/>
           </MediaQuery>
           <MediaQuery orientation={'landscape'}>
-            <Typography variant="subheading">
+            <Typography variant="subtitle1">
               {props.poll.items[0].content.text}&nbsp;&nbsp;<VoteCountChip count={props.poll.items[0].voteCount}/>
             </Typography>
           </MediaQuery>

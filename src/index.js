@@ -12,16 +12,16 @@ import initFirebase from "./init/firebase";
 import initAuth from "./init/auth";
 import {initStateManagerWorker} from "./init/state-manager-worker";
 
-const App = Loadable({
-  loader: ()=>import('./App'),
-  loading: ()=>'',
-});
-
 // Initialization code
 const store = getLivepollStore();
 initFirebase();
 initAuth();
 initStateManagerWorker();
+
+const App = Loadable({
+  loader: ()=>import('./App'),
+  loading: ()=>'',
+});
 
 ReactDOM.render(
   <Provider store={store}>

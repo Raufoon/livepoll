@@ -26,7 +26,7 @@ const styles = theme => ({
   }
 });
 const listItemPrimaryText = {
-  variant: 'subheading',
+  variant: 'subtitle1',
   gutterBottom: true
 };
 const listItemSecondaryText = {
@@ -39,7 +39,7 @@ function PollListCard(props) {
     <Paper className={classes.root}>
       <List>
         <ListItem>
-          <Typography variant="headline" gutterBottom>{props.title}</Typography>
+          <Typography variant="h5" gutterBottom>{props.title}</Typography>
         </ListItem>
         {
           props.polls.map((poll, index) => (

@@ -19,7 +19,7 @@ const CreateItemForm = props => {
 
   return (
     <LPForm submitButtonLabel={'Add item'} onSubmit={onSubmit}>
-      <Typography variant="subheading" gutterBottom>Create an item</Typography>
+      <Typography variant="subtitle1" gutterBottom>Create an item</Typography>
       {
         LPFormField.createRequiredField({
           name: 'text',

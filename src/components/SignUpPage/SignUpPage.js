@@ -17,7 +17,7 @@ const SignUpPage = (props) => {
   return (
     <div className={'signup-page-container'}>
       <div className={'signup-page-center'}>
-        <Typography variant="display3" className={'app-big-title'} gutterBottom>Livepoll</Typography>
+        <Typography variant="h2" className={'app-big-title'} gutterBottom>Livepoll</Typography>
         <br/>
         <MediaQuery orientation={'landscape'}>
           <ModalOpenerButton

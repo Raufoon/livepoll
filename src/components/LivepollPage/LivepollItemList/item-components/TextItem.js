@@ -34,7 +34,7 @@ const TextItem = props => {
           }}
           OpenerComponent={Typography}
           dontHideOpener={true}
-          openerComponentProps={{variant: 'body1'}}
+          openerComponentProps={{variant: 'body2'}}
         >
           {props.item.voteCount} votes
         </ModalOpenerButton>
@@ -73,11 +73,11 @@ const TextItem = props => {
         }
         title={props.item.content.text}
         titleTypographyProps={{
-          variant: props.isFirst ? 'display1' : 'headline',
+          variant: props.isFirst ? 'h4' : 'h5',
         }}
         subheader={VoteCounter}
         subheaderTypographyProps={{
-          variant: props.isFirst ? 'subheading' : 'caption'
+          variant: props.isFirst ? 'subtitle1' : 'caption'
         }}
       />
       <CardActions>

@@ -56,7 +56,7 @@ function PollGridCard(props) {
     <Paper className={classes.root}>
       <GridList cellHeight={150} className={classes.gridList}>
         <GridListTile cols={2} style={autoHeight}>
-          <Typography variant="headline" gutterBottom>{props.title}</Typography>
+          <Typography variant="h5" gutterBottom>{props.title}</Typography>
         </GridListTile>
 
         <GridListTile cols={2} style={autoHeight}><br/></GridListTile>
@@ -65,7 +65,7 @@ function PollGridCard(props) {
           props.polls.map(poll => (
             <GridListTile cols={props.columnWidth} key={poll.id}  className={classes.tile}>
               <div className={classes.content}>
-                <Typography variant="headline">{poll.items[0].content.text}</Typography>
+                <Typography variant="h5">{poll.items[0].content.text}</Typography>
                 <VoteCountChip count={poll.items[0].voteCount}/>
               </div>
               <GridListTileBar

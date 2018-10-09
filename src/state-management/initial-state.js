@@ -20,6 +20,7 @@ export let initialBlankState = {
 };
 
 let stateFromStorage = {};
-// stateFromStorage = JSON.parse(localStorage.getItem('app-state') || '{}');
+stateFromStorage = JSON.parse(localStorage.getItem('app-state') || '{}');
+delete stateFromStorage.auth;
 let initialState = {...initialBlankState,  ...stateFromStorage};
 export default initialState

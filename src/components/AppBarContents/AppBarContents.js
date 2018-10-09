@@ -38,7 +38,7 @@ const AppBarContents = props => {
   return (
     <Toolbar>
       <IconButton color="inherit" aria-label="Menu"><MenuIcon /></IconButton>
-      <Typography variant="title" color="inherit">
+      <Typography variant="h6" color="inherit">
         <Link className={'app-title'} to={'/'}>Livepoll</Link>
       </Typography>
 

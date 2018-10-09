@@ -23,12 +23,12 @@ const LivepollInfoCard = props => {
           classes={{
             badge: props.isLive ? 'poll-live-indicator blink' : ''
           }}>
-          <Typography variant="display3" gutterBottom>{props.livepoll.settings.title}</Typography>
+          <Typography variant="h2" gutterBottom>{props.livepoll.settings.title}</Typography>
         </Badge>
       </MediaQuery>
 
       <MediaQuery orientation={'portrait'}>
-        <Typography variant="display1" gutterBottom>
+        <Typography variant="h4" gutterBottom>
           {props.livepoll.settings.title}
         </Typography>
       </MediaQuery>
@@ -39,7 +39,7 @@ const LivepollInfoCard = props => {
         )
       }
 
-      <Typography variant="body1">
+      <Typography variant="body2">
         Created by&nbsp;&nbsp;&nbsp;
         <Chip
           avatar={<Avatar variant="outlined">{props.livepoll.settings.creatorName[0]}</Avatar>}
@@ -53,7 +53,7 @@ const LivepollInfoCard = props => {
 
       {
         props.livepoll.settings.endDatetime &&
-        <Typography variant="body1">
+        <Typography variant="body2">
           {props.hasEnded ? 'Ended' : 'Will end'} on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
         </Typography>
       }

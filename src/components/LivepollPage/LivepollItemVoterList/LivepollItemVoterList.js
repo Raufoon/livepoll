@@ -19,7 +19,7 @@ const LivepollItemVoterList = props => (
     totalFetched={props.voters ? props.voters.length: 0}>
     <List>
       <ListItem dense button>
-        <Typography variant="headline" gutterBottom>Members Who Voted</Typography>
+        <Typography variant="h5" gutterBottom>Members Who Voted</Typography>
       </ListItem>
       {
         props.voterList.map(voter => (

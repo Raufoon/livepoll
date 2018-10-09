@@ -16,7 +16,7 @@ class LPDropdownInput extends LPFormField {
   render() {
     return (
       <React.Fragment>
-        <Typography variant="subheading" gutterBottom>{this.props.label}</Typography>
+        <Typography variant="subtitle1" gutterBottom>{this.props.label}</Typography>
         <select name={this.props.name}
                 defaultValue={this.props.dropdownOptions[0]}
                 onChange={this.onChange}

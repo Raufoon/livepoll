@@ -21,7 +21,7 @@ const SignUpForm = (props) => {
 
   return (
     <div className={'tac'}>
-      <Typography variant="display1" className={'app-big-title'} gutterBottom>Livepoll</Typography>
+      <Typography variant="h4" className={'app-big-title'} gutterBottom>Livepoll</Typography>
       <LPForm submitButtonLabel={'Create / Log In'} onSubmit={signinWithEmailPass}>
         {
           LPFormField.createRequiredField({

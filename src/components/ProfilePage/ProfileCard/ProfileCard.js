@@ -32,7 +32,7 @@ function ProfileCard(props) {
     <Card className={classes.card}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="headline" component="h2">
+          <Typography gutterBottom variant="h5" component="h2">
             {props.myProfile.basicInfo.name}
           </Typography>
           <Typography component="p">
