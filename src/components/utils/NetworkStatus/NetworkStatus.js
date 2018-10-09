@@ -1,6 +1,7 @@
 import React from 'react'
 import Typography from "@material-ui/core/Typography/Typography";
 import {Offline} from "react-detect-offline";
+import Paper from "@material-ui/core/Paper/Paper";
 
 const styles = {
   offlineNotifier: {
@@ -18,11 +19,11 @@ const styles = {
 };
 
 const NetworkStatus = props => (
-  <React.Fragment>
+  <Paper>
     <Offline>
       <Typography variant={'button'} style={styles.offlineNotifier}>You are offline</Typography>
     </Offline>
-  </React.Fragment>
+  </Paper>
 );
 
 export default NetworkStatus;
