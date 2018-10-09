@@ -43,10 +43,6 @@ function onmessage(event) {
       getLivepollStore().dispatch(actionFetchPollInfo(payload.id));
       break;
 
-    case 'ACTION_REQUEST_ADD_ITEM':
-      getLivepollStore().dispatch(actionRequestAddItem(payload.idToken, payload.pollId, payload.data));
-      break;
-
     case 'ACTION_FETCH_TOP_ITEMS':
       getLivepollStore().dispatch(actionRequestTopItems(payload.pollId, payload.startAt, payload.howMany));
       break;

@@ -13,3 +13,25 @@ export const requestPublishLivepoll = livepollSettings => {
     settings: livepollSettings
   });
 };
+
+const MUTATION_ADD_POLL_ITEM = `
+  mutation AddPollItem (
+    $pollId: String!,
+    $content: InputLivepollItemContent! 
+  ) {
+    item: addItem(pollId: $pollId, content: $content) {
+      id,
+      content{
+        ... on TextContent{
+          text
+        }
+      },
+      voteCount
+    }
+  }
+`;
+export const requestAddPollitem = (pollId, content) => {
+  return graphqlSecureRequest(MUTATION_ADD_POLL_ITEM, {
+    pollId, content
+  })
+};

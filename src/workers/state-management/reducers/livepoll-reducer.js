@@ -27,22 +27,6 @@ const livepollReducer = (state = initialState.polls, action) => {
       });
       return newState;
 
-    case ACTION_REQUEST_ADD_ITEM_SUCCESS:
-      newState = {
-        ...state,
-        [action.pollId]: {
-          ...state[action.pollId],
-          items: {
-            ...state[action.pollId].items,
-            [action.newItem.id]: action.newItem
-          }
-        }
-      };
-      postMessage({
-        polls: newState
-      });
-      return newState;
-
     case ACTION_REQUEST_TOP_ITEMS_SUCCESS:
       newState = {
         ...state,

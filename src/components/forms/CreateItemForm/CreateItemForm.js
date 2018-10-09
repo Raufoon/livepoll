@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {actionRequestAddItem} from "../../../state-management/actions/livepoll-actions";
 import Typography from "@material-ui/core/Typography/Typography";
+import {requestAddPollitem} from "../../../util/cloud/livepoll";
+import {actionRequestAddItemSuccess} from "../../../state-management/actions/livepoll-actions";
 
 const CreateItemForm = props => {
   const onSubmit = (data) => {
-    props.dispatch(actionRequestAddItem(props.pollId, data))
-      .then(() => {
+    requestAddPollitem(props.pollId, data)
+      .then((response) => {
+        props.dispatch(actionRequestAddItemSuccess(props.pollId, response.item))
         if (props.onModalResult) props.onModalResult();
       });
   };

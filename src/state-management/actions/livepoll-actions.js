@@ -10,16 +10,12 @@ export const actionFetchPollInfo = (id) => dispatch => {
   });
 };
 
-export const actionRequestAddItem = (pollId, data) => dispatch => {
-  getLoggedInUser().getIdToken().then(idToken => {
-    getStateManagerWorker().postMessage({
-      action: 'ACTION_REQUEST_ADD_ITEM',
-      payload: {
-        pollId, data, idToken
-      }
-    });
-  });
-};
+export const ACTION_REQUEST_ADD_ITEM_SUCCESS = 'ACTION_REQUEST_ADD_ITEM_SUCCESS';
+export const actionRequestAddItemSuccess = (pollId, newItem) => ({
+  type: ACTION_REQUEST_ADD_ITEM_SUCCESS,
+  pollId,
+  newItem
+});
 
 export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
   getStateManagerWorker().postMessage({

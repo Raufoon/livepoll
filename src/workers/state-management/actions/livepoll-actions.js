@@ -27,23 +27,6 @@ export const actionFetchPollInfoSuccess = (livepoll) => ({
   livepoll
 });
 
-export const actionRequestAddItem = (idToken, pollId, data) => dispatch => {
-  dispatch(actionMakeWarningToast('Adding a new item...'));
-  return requestAddPollitem(idToken, pollId, data)
-    .then(response => {
-      dispatch(actionMakeSuccessToast('Item successfully added'));
-      dispatch(actionRequestAddItemSuccess(pollId, response.item))
-    })
-    .catch(() => dispatch(actionMakeErrorToast('Failed to add item!')))
-};
-
-export const ACTION_REQUEST_ADD_ITEM_SUCCESS = 'ACTION_REQUEST_ADD_ITEM_SUCCESS';
-export const actionRequestAddItemSuccess = (pollId, newItem) => ({
-  type: ACTION_REQUEST_ADD_ITEM_SUCCESS,
-  pollId,
-  newItem
-});
-
 export const actionRequestTopItems = (pollId, startAt, howMany) => dispatch => {
   dispatch(actionMakeInfoToast('Loading the top items...'));
   return requestTopItems(pollId, startAt, howMany)

@@ -1,4 +1,4 @@
-import { ACTION_POLL_REALTIME_UPDATE } from "../actions/livepoll-actions";
+import {ACTION_POLL_REALTIME_UPDATE, ACTION_REQUEST_ADD_ITEM_SUCCESS} from "../actions/livepoll-actions";
 import initialState, {initialBlankState} from "../initial-state";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 import {ACTION_SYNC_MAIN_AND_WORKER} from "../actions/worker-sync-actions";
@@ -22,6 +22,25 @@ const livepollReducer = (state = initialState.polls, action) => {
           }
         }
       };
+
+    case ACTION_REQUEST_ADD_ITEM_SUCCESS:
+      newState = {
+        ...state,
+        [action.pollId]: {
+          ...state[action.pollId],
+          items: {
+            ...state[action.pollId].items,
+            [action.newItem.id]: action.newItem
+          }
+        }
+      };
+      getStateManagerWorker().postMessage({
+        action: ACTION_SYNC_MAIN_AND_WORKER,
+        payload: {
+          polls: newState
+        }
+      });
+      return newState;
 
     case ACTION_SIGNOUT_SUCCESS:
       newState = {...initialBlankState.polls};
