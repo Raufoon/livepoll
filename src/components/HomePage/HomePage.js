@@ -16,7 +16,7 @@ class HomePage extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <MediaQuery orientation="landscape">
+        <MediaQuery minWidth={800}>
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={8}>
               <TrendingPollsSlider title={'Trending Now'} moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
@@ -27,7 +27,7 @@ class HomePage extends React.Component {
           </Grid>
         </MediaQuery>
 
-        <MediaQuery orientation="portrait">
+        <MediaQuery maxWidth={799}>
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={12}>
               <MostPopularPollsCard title={'Trending Now'} moreLink={'/trending'} polls={this.props.trendingPolls}/>

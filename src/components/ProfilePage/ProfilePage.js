@@ -8,7 +8,7 @@ import ProfileSection from "./ProfileSection/ProfileSection";
 const ProfilePage = props => {
   return (
     <React.Fragment>
-      <MediaQuery orientation={'portrait'}>
+      <MediaQuery maxWidth={799}>
         <Grid container alignItems="flex-start" spacing={16}>
           <Grid item xs={12}>
             <ProfileCard/>
@@ -19,7 +19,7 @@ const ProfilePage = props => {
         </Grid>
       </MediaQuery>
 
-      <MediaQuery orientation={'landscape'}>
+      <MediaQuery minWidth={800}>
         <Grid container alignItems="flex-start" spacing={16}>
           <Grid item xs={3}>
             <ProfileCard/>

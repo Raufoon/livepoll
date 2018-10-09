@@ -19,7 +19,7 @@ const SignUpPage = (props) => {
       <div className={'signup-page-center'}>
         <Typography variant="h2" className={'app-big-title'} gutterBottom>Livepoll</Typography>
         <br/>
-        <MediaQuery orientation={'landscape'}>
+        <MediaQuery minWidth={800}>
           <ModalOpenerButton
             className={'join-button'}
             OpenerIcon={JoinDesktopIcon}
@@ -27,7 +27,7 @@ const SignUpPage = (props) => {
             Join Us
           </ModalOpenerButton>
         </MediaQuery>
-        <MediaQuery orientation={'portrait'}>
+        <MediaQuery maxWidth={799}>
           <ModalOpenerButton
             className={'join-button'}
             OpenerIcon={JoinMobileIcon}

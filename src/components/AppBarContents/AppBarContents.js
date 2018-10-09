@@ -43,7 +43,7 @@ const AppBarContents = props => {
       </Typography>
 
       <div className={classes.flexGrow3}/>
-      <MediaQuery orientation="landscape">
+      <MediaQuery minWidth={800}>
         <Button
           className={classes.navlink}
           activeClassName={classes.activeLink}
@@ -69,7 +69,7 @@ const AppBarContents = props => {
       <div className={classes.flexGrow7}/>
 
       <AuthUserBadge/>
-      <MediaQuery orientation="landscape">
+      <MediaQuery minWidth={800}>
         &nbsp;&nbsp;
         <Button size="small" onClick={doSignOut} className={classes.signOutBtn}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out

@@ -60,7 +60,7 @@ const TextItem = props => {
         }
         action={
           !props.voteDisabled && (
-            <MediaQuery orientation={'landscape'}>
+            <MediaQuery minWidth={800}>
               <Button
                 onClick={props.vote}
                 color={props.isAlreadyVoted ? 'secondary':'default'}>
@@ -83,7 +83,7 @@ const TextItem = props => {
       <CardActions>
         {
           !props.voteDisabled && (
-            <MediaQuery orientation={'portrait'}>
+            <MediaQuery maxWidth={799}>
               <Button
                 onClick={props.vote}
                 color={props.isAlreadyVoted ? 'secondary':'default'}>

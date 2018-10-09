@@ -13,7 +13,7 @@
   box-shadow: none;
   background-color: white;
 }
-@media (orientation: portrait) {
+@media (max-width: 799px) {
   .modal-container-resp{
     width: 90vw;
   }

@@ -60,7 +60,7 @@ class App extends Component {
 
         <NetworkStatus/>
 
-        <MediaQuery orientation={'portrait'}><HomeNavigationPanel/></MediaQuery>
+        <MediaQuery maxWidth={799}><HomeNavigationPanel/></MediaQuery>
 
         <br/>
         <div className='app-content app-content-resp'>

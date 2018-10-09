@@ -28,13 +28,13 @@ function TextPollCard(props) {
           <Typography gutterBottom variant="h5" component="h2">
             {props.poll.settings.title}
           </Typography>
-          <MediaQuery orientation={'portrait'}>
+          <MediaQuery maxWidth={799}>
             <Typography variant="subtitle1">
               {props.poll.items[0].content.text}
             </Typography>
             <VoteCountChip count={props.poll.items[0].voteCount}/>
           </MediaQuery>
-          <MediaQuery orientation={'landscape'}>
+          <MediaQuery minWidth={800}>
             <Typography variant="subtitle1">
               {props.poll.items[0].content.text}&nbsp;&nbsp;<VoteCountChip count={props.poll.items[0].voteCount}/>
             </Typography>

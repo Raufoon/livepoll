@@ -16,7 +16,7 @@ const LivepollInfoCard = props => {
 
   return (
     <div>
-      <MediaQuery orientation={'landscape'}>
+      <MediaQuery minWidth={800}>
         <Badge
           color="default"
           badgeContent={props.isLive ? 'LIVE':''}
@@ -27,7 +27,7 @@ const LivepollInfoCard = props => {
         </Badge>
       </MediaQuery>
 
-      <MediaQuery orientation={'portrait'}>
+      <MediaQuery maxWidth={799}>
         <Typography variant="h4" gutterBottom>
           {props.livepoll.settings.title}
         </Typography>
@@ -57,7 +57,7 @@ const LivepollInfoCard = props => {
           {props.hasEnded ? 'Ended' : 'Will end'} on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
         </Typography>
       }
-      <MediaQuery orientation={'portrait'}>
+      <MediaQuery maxWidth={799}>
         <br/>
         <Typography className={props.isLive ? 'poll-live-indicator tac blink' : ''}>
           &nbsp;&nbsp;{props.isLive ? 'LIVE':''}
