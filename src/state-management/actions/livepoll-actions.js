@@ -1,4 +1,3 @@
-import {actionAlreadyVotedPollFound} from "./my-profile-actions";
 import {getStateManagerWorker} from "../../init/state-manager-worker";
 import {getLoggedInUser} from "../../util/cloud/auth";
 

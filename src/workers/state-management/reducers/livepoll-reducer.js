@@ -6,6 +6,7 @@ import {
 } from "../actions/livepoll-actions";
 import initialState, {initialBlankState} from "../initial-state";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
+import {ACTION_SYNC_MAIN_AND_WORKER} from "../actions/worker-sync-actions";
 
 const livepollReducer = (state = initialState.polls, action) => {
   let newState = {...state},
@@ -117,6 +118,9 @@ const livepollReducer = (state = initialState.polls, action) => {
     case ACTION_SIGNOUT_SUCCESS:
       newState = {...initialBlankState.polls};
       return newState;
+
+    case ACTION_SYNC_MAIN_AND_WORKER:
+      return action.newState.polls ? action.newState.polls: state;
 
     default:
       return state;

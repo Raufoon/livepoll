@@ -11,51 +11,58 @@ import {
   actionRequestAddItem,
   actionRequestTopItems
 } from "./state-management/actions/livepoll-actions";
+import {ACTION_SYNC_MAIN_AND_WORKER} from "./state-management/actions/worker-sync-actions";
+import {actionSyncMainAndWorker} from "../state-management/actions/worker-sync-actions";
 
 function onmessage(event) {
   let store = getLivepollStore();
+
   let payload = event.data.payload;
 
   switch (event.data.action) {
     case 'INIT':
       initAppState(event.data.appState);
-      postMessage(getLivepollStore().getState());
+      postMessage(store.getState());
       break;
 
+    case ACTION_SYNC_MAIN_AND_WORKER:
+      store.dispatch(actionSyncMainAndWorker(payload));
+      return;
+
     case 'ACTION_FETCH_POPULAR_POLLS':
-      getLivepollStore().dispatch(actionFetchPopularPolls(payload.startAt, payload.howMany));
+      store.dispatch(actionFetchPopularPolls(payload.startAt, payload.howMany));
       break;
 
     case 'ACTION_FETCH_TRENDING_POLLS':
-      getLivepollStore().dispatch(actionFetchTrendingPolls(payload.startAt, payload.howMany));
+      store.dispatch(actionFetchTrendingPolls(payload.startAt, payload.howMany));
       break;
 
     case 'ACTION_UPDATE_BASIC_INFO':
-      getLivepollStore().dispatch(actionRequestUpdateBasicInfo(payload.idToken, payload.data));
+      store.dispatch(actionRequestUpdateBasicInfo(payload.idToken, payload.data));
       break;
 
     case 'ACTION_FETCH_POLL_INFO':
-      getLivepollStore().dispatch(actionFetchPollInfo(payload.id));
+      store.dispatch(actionFetchPollInfo(payload.id));
       break;
 
     case 'ACTION_REQUEST_ADD_ITEM':
-      getLivepollStore().dispatch(actionRequestAddItem(payload.idToken, payload.pollId, payload.data));
+      store.dispatch(actionRequestAddItem(payload.idToken, payload.pollId, payload.data));
       break;
 
     case 'ACTION_FETCH_TOP_ITEMS':
-      getLivepollStore().dispatch(actionRequestTopItems(payload.pollId, payload.startAt, payload.howMany));
+      store.dispatch(actionRequestTopItems(payload.pollId, payload.startAt, payload.howMany));
       break;
 
     case 'ACTION_GIVE_VOTE':
-      getLivepollStore().dispatch(actionGiveVote(payload.idToken, payload.pollId, payload.itemId, payload.lastVotedItemId));
+      store.dispatch(actionGiveVote(payload.idToken, payload.pollId, payload.itemId, payload.lastVotedItemId));
       break;
 
     case 'ACTION_FETCH_VOTER_LIST':
-      getLivepollStore().dispatch(actionFetchVoterList(payload.pollId, payload.itemId, payload.startAt, payload.howMany));
+      store.dispatch(actionFetchVoterList(payload.pollId, payload.itemId, payload.startAt, payload.howMany));
       break;
 
     case 'ACTION_CHECK_ALREADY_VOTED_POLL':
-      getLivepollStore().dispatch(actionRequestCheckAlreadyVotedPoll(payload.idToken, payload.pollId));
+      store.dispatch(actionRequestCheckAlreadyVotedPoll(payload.idToken, payload.pollId));
       break;
 
     default:

@@ -18,7 +18,7 @@ export const ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS = 'ACTION_MY_PROFILE_BA
 export const actionMyProfileBasicInfoUpdateSuccess = (basicInfo) => ({
   type: ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS,
   basicInfo
-});
+}); // TODO: sync
 
 export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
   getLoggedInUser().getIdToken().then(idToken => {

@@ -4,6 +4,7 @@ import {
   ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS
 } from "../actions/my-profile-actions";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
+import {ACTION_SYNC_MAIN_AND_WORKER} from "../actions/worker-sync-actions";
 
 const myProfileReducer = (state = initialState.myProfile, action) => {
   let newState;
@@ -37,12 +38,15 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
       });
       return newState;
 
-    case ACTION_SIGNOUT_SUCCESS: // TODO: sync worker
+    case ACTION_SIGNOUT_SUCCESS:
       return {
         ...state,
         votedPolls: {},
         basicInfo: {}
       };
+
+    case ACTION_SYNC_MAIN_AND_WORKER:
+      return action.newState.myProfile? action.newState.myProfile: state;
 
     default:
       return state;

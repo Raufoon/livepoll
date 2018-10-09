@@ -1,12 +1,8 @@
-import {
-  ACTION_FETCH_POLL_INFO_SUCCESS, ACTION_FETCH_VOTER_LIST_SUCCESS,
-  ACTION_GIVE_VOTE_SUCCESS, ACTION_POLL_REALTIME_UPDATE,
-  ACTION_REQUEST_ADD_ITEM_SUCCESS,
-  ACTION_REQUEST_TOP_ITEMS_SUCCESS
-} from "../actions/livepoll-actions";
+import { ACTION_POLL_REALTIME_UPDATE } from "../actions/livepoll-actions";
 import initialState, {initialBlankState} from "../initial-state";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
 import {ACTION_SYNC_MAIN_AND_WORKER} from "../actions/worker-sync-actions";
+import {getStateManagerWorker} from "../../init/state-manager-worker";
 
 const livepollReducer = (state = initialState.polls, action) => {
   let newState = {...state};
@@ -29,6 +25,12 @@ const livepollReducer = (state = initialState.polls, action) => {
 
     case ACTION_SIGNOUT_SUCCESS:
       newState = {...initialBlankState.polls};
+      getStateManagerWorker().postMessage({
+        action: ACTION_SYNC_MAIN_AND_WORKER,
+        payload: {
+          polls: newState
+        }
+      });
       return newState;
 
     case ACTION_SYNC_MAIN_AND_WORKER:
