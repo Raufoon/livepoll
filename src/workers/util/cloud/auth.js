@@ -7,6 +7,7 @@ import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/acti
 import {actionMakeErrorToast, actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
+throw Error('CHECK HERE')
 
 export const signInWithGoogle = () => {
   firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)

@@ -2,9 +2,9 @@ import {requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../uti
 import {actionMakeErrorToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
 import {actionFetchTrendingPolls} from "./home-actions";
 
-export const actionRequestUpdateBasicInfo = data => dispatch => {
+export const actionRequestUpdateBasicInfo = (idToken, data) => dispatch => {
   dispatch(actionMakeWarningToast('Trying to update your profile...'));
-  return requestUpdateMyProfileBasicInfo(data)
+  return requestUpdateMyProfileBasicInfo(idToken, data)
     .then(response => {
       dispatch(actionMakeSuccessToast('Profile update successfull'));
       dispatch(actionMyProfileBasicInfoUpdateSuccess(response.basicInfo));
@@ -18,15 +18,17 @@ export const actionMyProfileBasicInfoUpdateSuccess = (basicInfo) => ({
   basicInfo
 });
 
-export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
-  return requestCheckHaveIVoted(pollId)
+export const actionRequestCheckAlreadyVotedPoll = (idToken, pollId) => dispatch => {
+  return requestCheckHaveIVoted(idToken, pollId)
     .then(response => {
       if (!response.votedItemId) return;
       return dispatch(actionAlreadyVotedPollFound(
         pollId,
         response.votedItemId
       ))
-    }).catch(() => dispatch(actionMakeErrorToast('Please refresh!')))
+    }).catch(() => {
+      dispatch(actionMakeErrorToast('Please refresh!'))
+    })
 };
 
 export const ACTION_ALREADY_VOTED_POLL_FOUND = 'ACTION_ALREADY_VOTED_POLL_FOUND';

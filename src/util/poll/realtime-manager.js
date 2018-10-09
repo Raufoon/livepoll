@@ -52,8 +52,8 @@ export const updateRealtimeItems = (pollId, items) => {
   }
 
   mapPollIdToTop15Items[pollId] = mapNewItemsKeyValue;
-  console.log('New subscribers for poll ' + pollId);
-  console.log(newSubscriberItemIds);
+  // console.log('New subscribers for poll ' + pollId);
+  // console.log(newSubscriberItemIds);
   for (let i=0; i<newSubscriberItemIds.length; i++) {
     turnOn(pollId, newSubscriberItemIds[i]);
   }

@@ -8,8 +8,8 @@ const MUTATION_PUBLISH_LIVEPOLL = `
     }
   }
 `;
-export const requestPublishLivepoll = livepollSettings => {
-  return graphqlSecureRequest(MUTATION_PUBLISH_LIVEPOLL, {
+export const requestPublishLivepoll = (idToken, livepollSettings) => {
+  return graphqlSecureRequest(idToken, MUTATION_PUBLISH_LIVEPOLL, {
     settings: livepollSettings
   });
 };
@@ -63,8 +63,8 @@ const MUTATION_ADD_POLL_ITEM = `
     }
   }
 `;
-export const requestAddPollitem = (pollId, content) => {
-  return graphqlSecureRequest(MUTATION_ADD_POLL_ITEM, {
+export const requestAddPollitem = (idToken, pollId, content) => {
+  return graphqlSecureRequest(idToken, MUTATION_ADD_POLL_ITEM, {
     pollId, content
   })
 };
@@ -98,9 +98,10 @@ const MUTATION_GIVE_VOTE = `
     voteCount: vote(pollId: $pollId, votedItemId: $votedItemId)
   }
 `;
-export const requestGiveVote = (pollId, votedItemId) => graphqlSecureRequest(MUTATION_GIVE_VOTE, {
-  pollId, votedItemId
-});
+export const requestGiveVote = (idToken, pollId, votedItemId) =>
+  graphqlSecureRequest(idToken, MUTATION_GIVE_VOTE, {
+    pollId, votedItemId
+  });
 
 const QUERY_VOTER_LIST = `
   query GetVoterList($pollId: String!, $itemIdList: [String]!) {

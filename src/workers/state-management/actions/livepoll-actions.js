@@ -27,9 +27,9 @@ export const actionFetchPollInfoSuccess = (livepoll) => ({
   livepoll
 });
 
-export const actionRequestAddItem = (pollId, data) => dispatch => {
+export const actionRequestAddItem = (idToken, pollId, data) => dispatch => {
   dispatch(actionMakeWarningToast('Adding a new item...'));
-  return requestAddPollitem(pollId, data)
+  return requestAddPollitem(idToken, pollId, data)
     .then(response => {
       dispatch(actionMakeSuccessToast('Item successfully added'));
       dispatch(actionRequestAddItemSuccess(pollId, response.item))
@@ -60,11 +60,11 @@ export const actionRequestTopItemsSuccess = (pollId, items) => ({
   items
 });
 
-export const actionGiveVote = (pollId, itemId, lastVotedItemId) => dispatch => {
+export const actionGiveVote = (idToken, pollId, itemId, lastVotedItemId) => dispatch => {
   dispatch(actionMakeWarningToast(
     itemId === lastVotedItemId? 'Cancelling your vote':'Sending your vote...'
   ));
-  return requestGiveVote(pollId, itemId)
+  return requestGiveVote(idToken, pollId, itemId)
     .then(() => {
       dispatch(actionMakeSuccessToast(
         itemId === lastVotedItemId? 'Vote cancelled':'Vote successful'

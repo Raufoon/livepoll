@@ -21,8 +21,8 @@ const MUTATION_CREATE_USER = `
     }
   }
 `;
-export const requestCreateUserWithOnlyId = () => {
-  return graphqlSecureRequest(MUTATION_CREATE_USER)
+export const requestCreateUserWithOnlyId = (idToken) => {
+  return graphqlSecureRequest(idToken, MUTATION_CREATE_USER)
 };
 
 const MUTATION_UPDATE_MY_PROFILE_BASIC_INFO = `
@@ -35,8 +35,8 @@ const MUTATION_UPDATE_MY_PROFILE_BASIC_INFO = `
     }
   }
 `;
-export const requestUpdateMyProfileBasicInfo = (newBasicInfo) => {
-  return graphqlSecureRequest(MUTATION_UPDATE_MY_PROFILE_BASIC_INFO, {newBasicInfo})
+export const requestUpdateMyProfileBasicInfo = (idToken, newBasicInfo) => {
+  return graphqlSecureRequest(idToken, MUTATION_UPDATE_MY_PROFILE_BASIC_INFO, {newBasicInfo})
 };
 
 const QUERY_CHECK_IF_ALREADY_VOTED = `
@@ -44,8 +44,8 @@ const QUERY_CHECK_IF_ALREADY_VOTED = `
     votedItemId: haveIVoted(pollId: $pollId)
   }
 `;
-export const requestCheckHaveIVoted = (pollId) => {
-  return graphqlSecureRequest(QUERY_CHECK_IF_ALREADY_VOTED, {pollId})
+export const requestCheckHaveIVoted = (idToken, pollId) => {
+  return graphqlSecureRequest(idToken, QUERY_CHECK_IF_ALREADY_VOTED, {pollId})
 };
 
 const QUERY_GET_USERNAMES_BY_IDS = `
