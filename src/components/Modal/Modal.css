@@ -4,12 +4,12 @@
   position: fixed;
   z-index: 2999;
   background-color: rgba(0, 0, 0, 0.4);
+  overflow: auto;
 }
 .modal-container{
-  position: fixed;
-  top: 50vh;
-  left: 50vw;
-  transform: translateX(-50%) translateY(-50%);
+  margin-top: 10vh;
+  margin-left: 50vw;
+  transform: translateX(-50%);
   box-shadow: none;
   background-color: white;
 }

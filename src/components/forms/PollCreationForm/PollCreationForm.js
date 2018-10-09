@@ -11,6 +11,7 @@ import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
 import LPCheckboxInput from "../form-fields/LPCheckboxInput/LPCheckboxInput";
 import LPDropdownInput from "../form-fields/LPDropdownInput/LPDropdownInput";
 import {actionMakeErrorToast} from "../../../state-management/actions/toast-actions";
+import Typography from "@material-ui/core/Typography/Typography";
 
 class PollCreationForm extends React.Component {
   constructor(props) {
@@ -45,6 +46,8 @@ class PollCreationForm extends React.Component {
   render() {
     return (
       <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
+        <br/>
+        <Typography className={'tac'} variant="h5" gutterBottom>Create your poll</Typography>
         {
           LPFormField.createRequiredField({
             className: 'w100',
