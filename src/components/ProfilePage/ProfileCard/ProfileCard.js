@@ -20,7 +20,6 @@ const styles = {
     height: 100,
   },
   buttonPanel: {
-    opacity: '0.5'
   }
 };
 
@@ -42,7 +41,7 @@ function ProfileCard(props) {
         </CardContent>
       </CardActionArea>
       <CardActions className={classes.buttonPanel}>
-        <Button size="small" color="secondary" onClick={signOut}>
+        <Button size="small" onClick={signOut}>
           <SignoutIcon/>&nbsp;&nbsp;Sign out
         </Button>
         <Button size="small">
