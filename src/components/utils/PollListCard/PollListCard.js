@@ -10,6 +10,7 @@ import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Typography from "@material-ui/core/Typography/Typography";
 import MoreButton from "../../buttons/MoreButton/MoreButton";
+import VoteCountChip from "../VoteCountChip/VoteCountChip";
 
 const styles = theme => ({
   root: {
@@ -53,7 +54,7 @@ function PollListCard(props) {
                   primary={poll.settings.title}
                   primaryTypographyProps={listItemPrimaryText}
                   secondaryTypographyProps={listItemSecondaryText}
-                  secondary={`${poll.items[0].content.text} (${poll.items[0].voteCount} votes)`} />
+                  secondary={<Typography variant={'subtitle1'} gutterBottom>{poll.items[0].content.text} <VoteCountChip count={poll.items[0].voteCount}/></Typography>} />
               </ListItem>
             </React.Fragment>
           ))

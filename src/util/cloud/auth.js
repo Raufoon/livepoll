@@ -9,30 +9,24 @@ import {actionMakeErrorToast, actionMakeSuccessToast} from "../../state-manageme
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
 export const signInWithGoogle = () => {
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .then(() =>
-      firebase.auth().signInWithPopup(
-        new firebase.auth.GoogleAuthProvider()
-      )
-    );
+  firebase.auth().signInWithPopup(
+    new firebase.auth.GoogleAuthProvider()
+  )
 };
 
 // I haven't added email verification yet since I needed to create some fake profiles first
 export const signInWithEmailPass = (email, pass) => {
-  firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    .then(() => {
-      return firebase.auth()
-        .createUserWithEmailAndPassword(email, pass)
-        .catch(error => {
-          switch (error.code) {
-            case 'auth/email-already-in-use':
-              return firebase.auth().signInWithEmailAndPassword(email, pass);
+  return firebase.auth()
+    .createUserWithEmailAndPassword(email, pass)
+    .catch(error => {
+      switch (error.code) {
+        case 'auth/email-already-in-use':
+          return firebase.auth().signInWithEmailAndPassword(email, pass);
 
-            default:
-              return Promise.reject(error.code);
-          }
-        });
-    })
+        default:
+          return Promise.reject(error.code);
+      }
+    });
 };
 
 export const signOut = () => firebase.auth().signOut();

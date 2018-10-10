@@ -13,6 +13,7 @@ import Loadable from 'react-loadable';
 import './TextItem.css'
 import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import ModalOpenerButton from "../../../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import VoteCountChip from "../../../utils/VoteCountChip/VoteCountChip";
 
 const LivepollItemVoterList = Loadable({
   loader: ()=>import('../../LivepollItemVoterList/LivepollItemVoterList'),
@@ -36,11 +37,11 @@ const TextItem = props => {
           dontHideOpener={true}
           openerComponentProps={{variant: 'body2'}}
         >
-          {props.item.voteCount} votes
+          <VoteCountChip count={props.item.voteCount}/>
         </ModalOpenerButton>
       )
     } else {
-      VoteCounter = `${props.item.voteCount} votes`;
+      VoteCounter = <VoteCountChip count={props.item.voteCount}/>;
     }
   }
 

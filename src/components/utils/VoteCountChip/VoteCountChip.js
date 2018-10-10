@@ -5,7 +5,8 @@ import StarIcon from '@material-ui/icons/Star';
 
 const buttonStyle = {
   color: 'grey',
-  padding: 0
+  padding: 0,
+  textTransform: 'none'
 };
 
 const iconStyle = {
@@ -13,7 +14,7 @@ const iconStyle = {
 };
 
 const VoteCountChip = props => (
-  <Button component={'p'} className={props.className} style={buttonStyle} size={"small"}>
+  <Button component={'span'} className={props.className} style={buttonStyle} size={"small"}>
     <StarIcon style={iconStyle}/>&nbsp;{`${props.count} votes`}
   </Button>
 );

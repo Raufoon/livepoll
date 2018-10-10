@@ -5,7 +5,6 @@ import JoinDesktopIcon from '@material-ui/icons/Computer';
 import JoinMobileIcon from '@material-ui/icons/PhoneAndroid';
 import Loadable from 'react-loadable';
 
-import './SignUpPage.css'
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 
 const SignUpForm = Loadable({

@@ -19,7 +19,7 @@ const styles = {
 };
 
 const NetworkStatus = props => (
-  <Paper>
+  <Paper elevation={1}>
     <Offline>
       <Typography variant={'button'} style={styles.offlineNotifier}>You are offline</Typography>
     </Offline>
