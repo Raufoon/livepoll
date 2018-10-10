@@ -1,29 +1,41 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
 import getLivepollStore from "../../init/state-management";
-import {actionSigninSuccess, actionSignoutSuccess} from "../../state-management/actions/auth-actions";
+import {
+  actionSigninSuccess,
+  actionSignoutSuccess,
+  actionStopAuthLoading
+} from "../../state-management/actions/auth-actions";
 import {requestCreateUserWithOnlyId, requestUserDataById} from "./user";
 import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/actions/my-profile-actions";
 import {actionMakeErrorToast, actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
-export const signInWithGoogle = () => {
+export const signInWithGoogle = (dispatch) => {
   firebase.auth().signInWithPopup(
     new firebase.auth.GoogleAuthProvider()
-  )
+  ).catch(() => {
+    dispatch(actionMakeErrorToast('Could not sign in!'));
+    dispatch(actionStopAuthLoading());
+  })
 };
 
 // I haven't added email verification yet since I needed to create some fake profiles first
-export const signInWithEmailPass = (email, pass) => {
+export const signInWithEmailPass = (dispatch, email, pass) => {
   return firebase.auth()
     .createUserWithEmailAndPassword(email, pass)
     .catch(error => {
       switch (error.code) {
         case 'auth/email-already-in-use':
-          return firebase.auth().signInWithEmailAndPassword(email, pass);
+          return firebase.auth().signInWithEmailAndPassword(email, pass)
+            .catch(() => {
+              dispatch(actionMakeErrorToast('Could not sign in!'));
+              dispatch(actionStopAuthLoading());
+            });
 
         default:
+          dispatch(actionStopAuthLoading());
           return Promise.reject(error.code);
       }
     });

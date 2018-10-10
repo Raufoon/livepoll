@@ -5,7 +5,7 @@ import {onUserSignedIn, onUserSignedout} from "../util/cloud/auth";
 export const initAuthStateListener = () => {
   firebase.auth().onAuthStateChanged(currentUser => {
     if (currentUser) onUserSignedIn(currentUser);
-    // else onUserSignedout();
+    else onUserSignedout();
   });
 };
 

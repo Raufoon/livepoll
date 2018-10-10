@@ -1,6 +1,7 @@
 export let initialBlankState = {
   auth: {
-    currentUser: undefined
+    currentUser: undefined,
+    isLoading: true
   },
   myProfile: {
     basicInfo: undefined,

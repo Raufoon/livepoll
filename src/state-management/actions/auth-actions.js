@@ -1,13 +1,24 @@
 import {onUserSignedout, signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
 import {actionMakeWarningToast} from "./toast-actions";
 
+export const ACTION_AUTH_LOADING = 'ACTION_AUTH_LOADING';
+export const actionAuthLoading = () => ({
+  type: ACTION_AUTH_LOADING
+});
+
+export const ACTION_STOP_AUTH_LOADING = 'ACTION_STOP_AUTH_LOADING';
+export const actionStopAuthLoading = () => ({
+  type: ACTION_STOP_AUTH_LOADING
+});
+
 export const actionSigninRequest = (method, data) => dispatch => {
+  dispatch(actionAuthLoading());
   switch (method) {
     case 'GOOGLE':
-      signInWithGoogle();
+      signInWithGoogle(dispatch);
       break;
     case 'EMAIL_PASS':
-      signInWithEmailPass(data.email, data.password);
+      signInWithEmailPass(dispatch, data.email, data.password);
       break;
 
     default:

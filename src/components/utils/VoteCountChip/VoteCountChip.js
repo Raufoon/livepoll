@@ -10,7 +10,7 @@ const buttonStyle = {
 };
 
 const iconStyle = {
-  color: 'yellow'
+  color: '#e2cc00'
 };
 
 const VoteCountChip = props => (

@@ -12,6 +12,7 @@ import ModalOpenerButton from "./components/utils/modal-openers/ModalOpenerButto
 import AppBarContents from "./components/AppBarContents/AppBarContents";
 import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
+import FullScreenLoader from "./components/loaders/FullScreenLoader";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
@@ -47,6 +48,10 @@ const styles = {
 
 class App extends Component {
   render() {
+    if (this.props.isAuthLoading) {
+      return <FullScreenLoader/>
+    }
+
     if (!this.props.isLoggedIn) {
       return <SignUpPage />;
     }
@@ -56,7 +61,6 @@ class App extends Component {
         <AppBar position="static" color={'default'} className={'app-bar app-bar-resp'}>
           <AppBarContents/>
         </AppBar>
-        {/*<AppBar position="static" color={'default'} className={'hidden-app-bar'}><Toolbar/></AppBar>*/}
 
         <NetworkStatus/>
 
@@ -90,6 +94,7 @@ class App extends Component {
 }
 
 const s2p = state => ({
+  isAuthLoading: state.auth.isLoading,
   isLoggedIn: !!state.auth.currentUser,
 });
 export default withRouter(connect(s2p)(App));
