@@ -3,6 +3,7 @@ import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader'
+import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 import Typography from "@material-ui/core/Typography/Typography";
@@ -34,8 +35,16 @@ const VoteButton = (props) => {
 };
 
 const mobileVoteBtn = {
-  padding: 0,
-  textTransform: 'none'
+  paddingTop: 0,
+  paddingBottom: 0,
+  textTransform: 'none',
+  marginRight: 0,
+  marginLeft: 'auto'
+};
+const mobileVoteButtonPanel = {
+  paddingTop: 0,
+  paddingBottom: 0,
+  textAlign: 'right',
 };
 
 const TextItem = props => {
@@ -91,16 +100,17 @@ const TextItem = props => {
         subheader={
           <div>
             {VoteCounter}
-            <MediaQuery maxWidth={799}>
-              &nbsp;&nbsp;&nbsp;
-              <VoteButton {...props} style={mobileVoteBtn}/>
-            </MediaQuery>
           </div>
         }
         subheaderTypographyProps={{
           variant: props.isFirst ? 'subtitle1' : 'caption'
         }}
       />
+      <MediaQuery maxWidth={799}>
+        <CardActions style={mobileVoteButtonPanel}>
+          <VoteButton {...props} style={mobileVoteBtn}/>
+        </CardActions>
+      </MediaQuery>
     </Card>
   )
 };
