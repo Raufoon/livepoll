@@ -1,5 +1,4 @@
 import React from 'react'
-import CardActions from '@material-ui/core/CardActions';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card';
@@ -7,7 +6,7 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 import Typography from "@material-ui/core/Typography/Typography";
-import StarIcon from '@material-ui/icons/StarBorder';
+import StarIcon from '@material-ui/icons/Star';
 import Loadable from 'react-loadable';
 
 import './TextItem.css'
@@ -19,6 +18,25 @@ const LivepollItemVoterList = Loadable({
   loader: ()=>import('../../LivepollItemVoterList/LivepollItemVoterList'),
   loading: ()=>'',
 });
+
+const VoteButton = (props) => {
+  let style = {...props.style};
+  style.color = props.isAlreadyVoted ? 'gray':'#006e3c';
+  return (
+    <Button
+      style={style}
+      onClick={props.vote}>
+      <StarIcon/>
+        &nbsp;
+        {props.isAlreadyVoted ? 'Unvote':'Vote'}
+    </Button>
+  )
+};
+
+const mobileVoteBtn = {
+  padding: 0,
+  textTransform: 'none'
+};
 
 const TextItem = props => {
   let VoteCounter = false;
@@ -62,14 +80,7 @@ const TextItem = props => {
         action={
           !props.voteDisabled && (
             <MediaQuery minWidth={800}>
-              <Button
-                onClick={props.vote}
-                size={'small'}
-                color={props.isAlreadyVoted ? 'secondary':'default'}>
-                <StarIcon/>
-                &nbsp;&nbsp;
-                {props.isAlreadyVoted ? 'Unvote':'Vote'}
-              </Button>
+              <VoteButton {...props}/>
             </MediaQuery>
           )
         }
@@ -77,26 +88,19 @@ const TextItem = props => {
         titleTypographyProps={{
           variant: props.isFirst ? 'h4' : 'h5',
         }}
-        subheader={VoteCounter}
+        subheader={
+          <div>
+            {VoteCounter}
+            <MediaQuery maxWidth={799}>
+              &nbsp;&nbsp;&nbsp;
+              <VoteButton {...props} style={mobileVoteBtn}/>
+            </MediaQuery>
+          </div>
+        }
         subheaderTypographyProps={{
           variant: props.isFirst ? 'subtitle1' : 'caption'
         }}
       />
-      <CardActions>
-        {
-          !props.voteDisabled && (
-            <MediaQuery maxWidth={799}>
-              <Button
-                onClick={props.vote}
-                color={props.isAlreadyVoted ? 'secondary':'default'}>
-                <StarIcon/>
-                &nbsp;&nbsp;
-                {props.isAlreadyVoted ? 'Unvote':'Vote'}
-              </Button>
-            </MediaQuery>
-          )
-        }
-      </CardActions>
     </Card>
   )
 };

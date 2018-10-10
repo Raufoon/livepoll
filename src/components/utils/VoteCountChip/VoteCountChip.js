@@ -15,7 +15,7 @@ const iconStyle = {
 
 const VoteCountChip = props => (
   <Button component={'span'} className={props.className} style={buttonStyle} size={"small"}>
-    <StarIcon style={iconStyle}/>&nbsp;{`${props.count} votes`}
+    <StarIcon style={iconStyle}/>&nbsp;{`${props.count} Votes`}
   </Button>
 );
 

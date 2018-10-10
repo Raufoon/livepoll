@@ -7,7 +7,7 @@ const fullScreenLoader = {
   width: '100%',
   position: 'fixed',
   zIndex: 3000,
-  backgroundColor: '#f7f2ea'
+  backgroundColor: '#eeeeee'
 };
 
 const FullScreenLoader = () => (

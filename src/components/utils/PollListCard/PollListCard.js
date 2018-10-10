@@ -28,11 +28,12 @@ const styles = theme => ({
   }
 });
 const listItemPrimaryText = {
-  variant: 'subtitle1',
+  variant: 'body2',
   gutterBottom: true
 };
 const listItemSecondaryText = {
-  gutterBottom: true
+  gutterBottom: true,
+  variant: 'body1',
 };
 
 function PollListCard(props) {

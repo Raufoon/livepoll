@@ -130,7 +130,7 @@ class LivepollPage extends React.Component {
           >New item</ModalOpenerButton>
         }
 
-        <br/><br/>
+        <br/>
 
         <LivepollItemList
           items={this.state.items}
