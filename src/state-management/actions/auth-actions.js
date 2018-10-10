@@ -12,7 +12,6 @@ export const actionStopAuthLoading = () => ({
 });
 
 export const actionSigninRequest = (method, data) => dispatch => {
-  dispatch(actionAuthLoading());
   switch (method) {
     case 'GOOGLE':
       signInWithGoogle(dispatch);
