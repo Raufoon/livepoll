@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
-import TextItem from "./item-components/TextItem";
+import TextItem from "./item-components/TextPollItem";
 import {actionGiveVote, actionRequestTopItems} from "../../../state-management/actions/livepoll-actions";
 import BigRemoteDataDisplay from "../../utils/BigRemoteDataDisplay/BigRemoteDataDisplay";
 
