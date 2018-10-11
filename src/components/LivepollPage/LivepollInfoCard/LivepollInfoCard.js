@@ -3,7 +3,6 @@ import dateFormat from 'dateformat';
 import Typography from "@material-ui/core/Typography/Typography";
 import Badge from '@material-ui/core/Badge';
 import PropTypes from 'prop-types';
-import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import MediaQuery from 'react-responsive';
 

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Button from "@material-ui/core/Button/Button";
-import MoreIcon from '@material-ui/icons/MoreHoriz';
 import Paper from "@material-ui/core/Paper";
 
 const styles = {
@@ -45,7 +44,7 @@ const FullScreenLoader = (props) => (
           barColorPrimary: props.classes.barColorPrimary
         }}/>
       <Button className={props.classes.button} size="large">
-        <MoreIcon/>&nbsp;&nbsp;{props.message}
+        {props.message}
       </Button>
       <LinearProgress
         variant="query"

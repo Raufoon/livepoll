@@ -46,7 +46,7 @@ export const actionRequestTopItemsSuccess = (pollId, items) => ({
 
 export const actionGiveVote = (idToken, pollId, itemId, lastVotedItemId) => dispatch => {
   dispatch(actionShowFullscrLoader(
-    itemId === lastVotedItemId? 'Cancelling your vote':'Sending your vote...'
+    itemId === lastVotedItemId? 'Cancelling your vote':'Sending your vote'
   ));
   return requestGiveVote(idToken, pollId, itemId)
     .then(() => {
