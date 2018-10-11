@@ -48,11 +48,10 @@ const styles = {
 
 class App extends Component {
   render() {
-    if (this.props.loaderState.show) {
-      return <FullScreenLoader message={this.props.loaderState.message}/>
-    }
-
     if (!this.props.isLoggedIn) {
+      if (this.props.loaderState.show) {
+        return <FullScreenLoader message={this.props.loaderState.message}/>;
+      }
       return <SignUpPage />;
     }
 
@@ -63,6 +62,8 @@ class App extends Component {
         </AppBar>
 
         <NetworkStatus/>
+
+        {this.props.loaderState.show && <FullScreenLoader message={this.props.loaderState.message}/>}
 
         <MediaQuery maxWidth={799}><HomeNavigationPanel/></MediaQuery>
 

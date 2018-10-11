@@ -20,7 +20,7 @@ export let initialBlankState = {
   loader: {
     fullScreenLoader: {
       show: true,
-      message: 'loading'
+      message: 'Loading'
     }
   }
 };

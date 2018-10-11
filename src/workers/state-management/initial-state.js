@@ -16,6 +16,12 @@ export const initialBlankState = {
     trendingPolls: [],
     popularPolls: [],
     recentPolls: []
+  },
+  loader: {
+    fullScreenLoader: {
+      show: true,
+      message: 'Loading'
+    }
   }
 };
 

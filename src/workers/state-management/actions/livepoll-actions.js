@@ -11,6 +11,7 @@ import {
   actionMakeSuccessToast,
   actionMakeWarningToast
 } from "./toast-actions";
+import {actionHideFullscrLoader, actionShowFullscrLoader} from "./loader-actions";
 
 export const actionFetchPollInfo = (id) => dispatch => {
   dispatch(actionMakeWarningToast('Fetching poll info...'));
@@ -44,24 +45,30 @@ export const actionRequestTopItemsSuccess = (pollId, items) => ({
 });
 
 export const actionGiveVote = (idToken, pollId, itemId, lastVotedItemId) => dispatch => {
-  dispatch(actionMakeWarningToast(
+  dispatch(actionShowFullscrLoader(
     itemId === lastVotedItemId? 'Cancelling your vote':'Sending your vote...'
   ));
   return requestGiveVote(idToken, pollId, itemId)
     .then(() => {
-      dispatch(actionMakeSuccessToast(
-        itemId === lastVotedItemId? 'Vote cancelled':'Vote successful'
-      ));
+      setTimeout(() => {
+        dispatch(actionHideFullscrLoader());
+      }, 2000);
       dispatch(actionAlreadyVotedPollFound(pollId, itemId, lastVotedItemId));
-
       requestVoteCountsByIdList(pollId,
         lastVotedItemId && lastVotedItemId !== itemId ? [itemId, lastVotedItemId] : [itemId]
-      )
-        .then(response => {
+      ).then(response => {
+        setTimeout(() => {
           dispatch(actionGiveVoteSuccess(pollId, response.livepoll.items));
-        })
+        }, 1000)
+        // dispatch(actionMakeSuccessToast(
+        //   itemId === lastVotedItemId? 'Vote cancelled':'Vote successful'
+        // ));
+      })
     })
-    .catch(() => dispatch(actionMakeErrorToast('Failed to give vote! Try again?')));
+    .catch(() => {
+      dispatch(actionHideFullscrLoader());
+      dispatch(actionMakeErrorToast('Failed to give vote! Try again?'))
+    });
 };
 
 export const ACTION_GIVE_VOTE_SUCCESS = 'ACTION_GIVE_VOTE_SUCCESS';
