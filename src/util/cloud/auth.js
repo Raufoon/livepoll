@@ -9,6 +9,7 @@ import {
 import {requestCreateUserWithOnlyId, requestUserDataById} from "./user";
 import {actionMyProfileBasicInfoUpdateSuccess} from "../../state-management/actions/my-profile-actions";
 import {actionMakeErrorToast, actionMakeSuccessToast} from "../../state-management/actions/toast-actions";
+import {actionHideFullscrLoader} from "../../state-management/actions/loader-actions";
 
 export const getLoggedInUser = () => firebase.auth().currentUser;
 
@@ -17,7 +18,6 @@ export const signInWithGoogle = (dispatch) => {
     new firebase.auth.GoogleAuthProvider()
   ).catch(() => {
     dispatch(actionMakeErrorToast('Could not sign in!'));
-    dispatch(actionStopAuthLoading());
   })
 };
 
@@ -31,11 +31,9 @@ export const signInWithEmailPass = (dispatch, email, pass) => {
           return firebase.auth().signInWithEmailAndPassword(email, pass)
             .catch(() => {
               dispatch(actionMakeErrorToast('Could not sign in!'));
-              dispatch(actionStopAuthLoading());
             });
 
         default:
-          dispatch(actionStopAuthLoading());
           return Promise.reject(error.code);
       }
     });
@@ -62,6 +60,7 @@ export const onUserSignedIn = (currentUser) => {
     })
     .then(response => {
       getLivepollStore().dispatch(actionSigninSuccess(currentUser));
+      getLivepollStore().dispatch(actionHideFullscrLoader());
       getLivepollStore().dispatch(actionMakeSuccessToast('Successfully logged in'));
       getLivepollStore().dispatch(actionMyProfileBasicInfoUpdateSuccess(response.user.basicInfo))
     });

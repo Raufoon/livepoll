@@ -1,18 +1,9 @@
 import {onUserSignedout, signInWithEmailPass, signInWithGoogle, signOut} from "../../util/cloud/auth";
 import {actionMakeWarningToast} from "./toast-actions";
-
-export const ACTION_AUTH_LOADING = 'ACTION_AUTH_LOADING';
-export const actionAuthLoading = () => ({
-  type: ACTION_AUTH_LOADING
-});
-
-export const ACTION_STOP_AUTH_LOADING = 'ACTION_STOP_AUTH_LOADING';
-export const actionStopAuthLoading = () => ({
-  type: ACTION_STOP_AUTH_LOADING
-});
+import {actionShowFullscrLoader} from "./loader-actions";
 
 export const actionSigninRequest = (method, data) => dispatch => {
-  dispatch(actionAuthLoading());
+  dispatch(actionShowFullscrLoader('Signing in to Livepoll'));
   switch (method) {
     case 'GOOGLE':
       signInWithGoogle(dispatch);

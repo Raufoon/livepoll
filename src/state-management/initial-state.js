@@ -1,7 +1,6 @@
 export let initialBlankState = {
   auth: {
-    currentUser: undefined,
-    isLoading: true
+    currentUser: undefined
   },
   myProfile: {
     basicInfo: undefined,
@@ -17,6 +16,12 @@ export let initialBlankState = {
     trendingPolls: [],
     popularPolls: [],
     recentPolls: []
+  },
+  loader: {
+    fullScreenLoader: {
+      show: true,
+      message: 'loading'
+    }
   }
 };
 

@@ -19,6 +19,7 @@ const getLivepollStore = () => livepollStore;
 window.addEventListener('beforeunload', () => {
   let stateToSave = getLivepollStore().getState();
   delete stateToSave.auth;
+  delete stateToSave.loader; // some states are not meant to be saved
   localStorage.setItem('app-state', JSON.stringify(stateToSave))
 });
 

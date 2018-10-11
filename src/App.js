@@ -48,8 +48,8 @@ const styles = {
 
 class App extends Component {
   render() {
-    if (this.props.isAuthLoading) {
-      return <FullScreenLoader/>
+    if (this.props.loaderState.show) {
+      return <FullScreenLoader message={this.props.loaderState.message}/>
     }
 
     if (!this.props.isLoggedIn) {
@@ -94,7 +94,7 @@ class App extends Component {
 }
 
 const s2p = state => ({
-  isAuthLoading: state.auth.isLoading,
   isLoggedIn: !!state.auth.currentUser,
+  loaderState: state.loader.fullScreenLoader
 });
 export default withRouter(connect(s2p)(App));

@@ -1,9 +1,7 @@
 import initialState, {initialBlankState} from "../initial-state";
 import {
-  ACTION_AUTH_LOADING,
   ACTION_SIGNIN_SUCCESS,
   ACTION_SIGNOUT_SUCCESS,
-  ACTION_STOP_AUTH_LOADING
 } from "../actions/auth-actions";
 
 const authReducer = (state = initialState.auth, action) => {
@@ -20,19 +18,6 @@ const authReducer = (state = initialState.auth, action) => {
         ...initialBlankState.auth,
         isLoading: false
       };
-
-    case ACTION_AUTH_LOADING:
-      return {
-        ...state,
-        isLoading: true
-      };
-
-    case ACTION_STOP_AUTH_LOADING:
-      return {
-        ...state,
-        isLoading: true
-      };
-
     default:
       return state;
   }
