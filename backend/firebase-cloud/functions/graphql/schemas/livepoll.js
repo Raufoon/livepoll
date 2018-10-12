@@ -72,6 +72,7 @@ const definitions = `
     id: ID!
     settings: LivepollSettings!
     items(idList: [String], startAt: Int, howMany: Int): [LivepollItem]!
+    totalVotes: Int
   }
 `;
 

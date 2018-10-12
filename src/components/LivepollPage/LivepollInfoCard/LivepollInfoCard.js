@@ -22,17 +22,23 @@ const LivepollInfoCard = props => {
       </MediaQuery>
       <br/>
 
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
         Created by&nbsp;&nbsp;<Chip label={props.livepoll.settings.creatorName}/>
       </Typography>
 
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
+        {props.livepoll.totalVotes} participants
+      </Typography>
+
+      <br/>
+
+      <Typography variant="subtitle1">
         {
           props.willStartOnFuture ?
             'Will start' : 'Started'} on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
       </Typography>
 
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
         {
           settings.endDatetime && (
             `${props.hasEnded ? 'Ended' : 'Will end'} on ${dateFormat(end, 'mmm dd, yyyy')} at ${dateFormat(end, 'hh:MM TT')}`
@@ -42,18 +48,18 @@ const LivepollInfoCard = props => {
           !settings.endDatetime && ('Will never expire')
         }
       </Typography>
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
         {
           settings.othersCanAdd ? 'Anyone': 'Only creator'
         }
         &nbsp;can add to this poll
       </Typography>
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
         {
           !settings.showVoters ? 'Secret vote': 'Click on the votes to view the voter list'
         }
       </Typography>
-      <Typography variant="body2">
+      <Typography variant="subtitle1">
         {
           settings.itemFormat === PollSettings.POLL_ITEM_FORMAT.TEXT && 'Items must be a single line text'
         }

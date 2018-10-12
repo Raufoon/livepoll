@@ -27,7 +27,8 @@ const QUERY_POLL_INFO = `
         itemFormat,
         othersCanAdd,
         showVoters
-      }
+      },
+      totalVotes
     }
   }
 `;
