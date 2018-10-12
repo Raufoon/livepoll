@@ -34,25 +34,28 @@ const styles = {
   },
 };
 
+export const Loader = withStyles(styles)((props) => (
+  <Paper className={props.classes.loader} elevation={1}>
+    <LinearProgress
+      classes={{
+        colorPrimary: props.classes.colorPrimary,
+        barColorPrimary: props.classes.barColorPrimary
+      }}/>
+    <Button className={props.classes.button} size="large">
+      {props.message || 'Loading'}
+    </Button>
+    <LinearProgress
+      variant="query"
+      classes={{
+        colorPrimary: props.classes.colorPrimary,
+        barColorPrimary: props.classes.barColorPrimary
+      }}/>
+  </Paper>
+));
 
 const FullScreenLoader = (props) => (
   <div className={props.classes.fullScreenLoader}>
-    <Paper className={props.classes.loader} elevation={1}>
-      <LinearProgress
-        classes={{
-          colorPrimary: props.classes.colorPrimary,
-          barColorPrimary: props.classes.barColorPrimary
-        }}/>
-      <Button className={props.classes.button} size="large">
-        {props.message}
-      </Button>
-      <LinearProgress
-        variant="query"
-        classes={{
-          colorPrimary: props.classes.colorPrimary,
-          barColorPrimary: props.classes.barColorPrimary
-        }}/>
-    </Paper>
+    <Loader message={props.message}/>
   </div>
 );
 

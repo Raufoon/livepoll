@@ -15,10 +15,11 @@ import './TextItem.css'
 import {FIRST_TROPHY_IMG_URL} from '../../../../constants/livepoll-constants';
 import ModalOpenerButton from "../../../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import VoteCountChip from "../../../utils/VoteCountChip/VoteCountChip";
+import {Loader} from "../../../loaders/FullScreenLoader";
 
 const LivepollItemVoterList = Loadable({
   loader: ()=>import('../../LivepollItemVoterList/LivepollItemVoterList'),
-  loading: ()=>'',
+  loading: Loader,
 });
 
 const TextPollItemAvatar = props => {

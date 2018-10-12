@@ -12,27 +12,27 @@ import ModalOpenerButton from "./components/utils/modal-openers/ModalOpenerButto
 import AppBarContents from "./components/AppBarContents/AppBarContents";
 import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
-import FullScreenLoader from "./components/loaders/FullScreenLoader";
+import FullScreenLoader, {Loader} from "./components/loaders/FullScreenLoader";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
-  loading: ()=>'',
+  loading: Loader,
 });
 const LivepollPage = Loadable({
   loader: ()=>import('./components/LivepollPage/LivepollPage'),
-  loading: ()=>'',
+  loading: Loader,
 });
 const PollCreationForm = Loadable({
   loader: ()=>import('./components/forms/PollCreationForm/PollCreationForm'),
-  loading: ()=>'',
+  loading: Loader,
 });
 const ProfilePage = Loadable({
   loader: ()=>import('./components/ProfilePage/ProfilePage'),
-  loading: ()=>'',
+  loading: Loader,
 });
 const HomeNavigationPanel = Loadable({
   loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
-  loading: ()=>'',
+  loading: Loader,
 });
 
 const styles = {
@@ -42,7 +42,8 @@ const styles = {
   pollCreateButton: {color: 'primary'},
   pollCreateButtonFloating: {
     color: 'secondary',
-    variant: 'extendedFab'
+    variant: 'extendedFab',
+    size: 'small'
   }
 };
 

@@ -3,23 +3,45 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import AddItemIcon from '@material-ui/icons/Add';
+import InfoIcon from '@material-ui/icons/InfoOutlined';
 import Loadable from 'react-loadable';
+import { withStyles } from '@material-ui/core/styles';
+import MediaQuery from "react-responsive";
+import Typography from "@material-ui/core/Typography/Typography";
+import Badge from "@material-ui/core/Badge/Badge";
+import Grid from "@material-ui/core/Grid/Grid";
 
-import './LivepollPage.css'
 import {
   actionFetchPollInfo,
   actionPollRealtimeUpdate,
   actionRequestTopItems
 } from "../../state-management/actions/livepoll-actions";
-import LivepollInfoCard from "./LivepollInfoCard/LivepollInfoCard";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
+import {Loader} from "../loaders/FullScreenLoader";
+
+const LivepollInfoCard = Loadable({
+  loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
+  loading: Loader,
+});
+
+const styles = theme => ({
+  infoButton: {
+    color: '#67908c'
+  },
+  addButton: {
+    color: '#45422a'
+  },
+  PollInfoCardDesktop: {
+    borderLeft: '1px solid lightgray'
+  }
+});
 
 const CreateItemForm = Loadable({
   loader: ()=>import('../forms/CreateItemForm/CreateItemForm'),
-  loading: ()=>'',
+  loading: Loader,
 });
 
 class LivepollPage extends React.Component {
@@ -48,7 +70,6 @@ class LivepollPage extends React.Component {
     clearInterval(this.refreshInterval);
   }
 
-  // TODO: try using requestAnimationFrame
   componentDidUpdate(prevProps) {
     const pid = this.props.match.params.id;
     let items;
@@ -91,9 +112,7 @@ class LivepollPage extends React.Component {
   render () {
     const livepoll = this.props.livepoll;
 
-    if (!livepoll) {
-      return "loading..."
-    }
+    if (!livepoll) return '';
 
     const settings = livepoll.settings;
     const start = new Date(settings.startDatetime);
@@ -106,39 +125,91 @@ class LivepollPage extends React.Component {
     const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === this.props.authUserId);
     const showAddItemButton = canIAdd && !hasEnded;
 
-    return (
+    const PollTitle = (
+      <Badge
+        color="default"
+        badgeContent={isLive ? 'LIVE':''}
+        classes={{
+          badge: isLive ? 'poll-live-indicator blink' : ''
+        }}>
+        <MediaQuery minWidth={800}>
+          <Typography variant="h2" gutterBottom>{settings.title}</Typography>
+        </MediaQuery>
+        <MediaQuery maxWidth={799}>
+          <Typography variant="h5" gutterBottom>{settings.title}</Typography>
+        </MediaQuery>
+      </Badge>
+    );
+
+    const PollActions = (
       <div>
-        <LivepollInfoCard
-          livepoll={this.props.livepoll}
-          isLive={isLive}
-          willStartOnFuture={willStartOnFuture}
-          hasEnded={hasEnded}
-        />
+        <MediaQuery maxWidth={799}>
+          <ModalOpenerButton
+            className={this.props.classes.infoButton}
+            ModalComponent={LivepollInfoCard}
+            OpenerIcon={InfoIcon}
+            openerComponentProps={{size: "small"}}
+            childProps={{
+              livepoll: this.props.livepoll,
+              isLive: isLive,
+              willStartOnFuture: willStartOnFuture,
+              hasEnded: hasEnded
+            }}>Info
+          </ModalOpenerButton>
+        </MediaQuery>
         {
           showAddItemButton &&
           <ModalOpenerButton
+            className={this.props.classes.addButton}
             ModalComponent={CreateItemForm}
             OpenerIcon={AddItemIcon}
-            openerComponentProps={{
-              size: "small",
-              color: 'primary'
-            }}
+            openerComponentProps={{size: "small"}}
             childProps={{
               pollId: this.props.livepoll.id,
               format: this.props.livepoll.settings.itemFormat,
             }}
-          >New item</ModalOpenerButton>
+          >Add</ModalOpenerButton>
         }
-
-        <br/>
-
-        <LivepollItemList
-          items={this.state.items}
-          lastVotedItemId={this.props.lastVotedItemId}
-          voteDisabled={!isLive}
-          willStartOnFuture={willStartOnFuture}
-          livepoll={this.props.livepoll}/>
       </div>
+    );
+
+    const PollItems = (
+      <LivepollItemList
+        items={this.state.items}
+        lastVotedItemId={this.props.lastVotedItemId}
+        voteDisabled={!isLive}
+        willStartOnFuture={willStartOnFuture}
+        livepoll={this.props.livepoll}
+      />
+    );
+
+    return (
+      <React.Fragment>
+        {PollTitle}
+        <MediaQuery minWidth={800}>
+          <Grid container alignItems="flex-start" spacing={40}>
+            <Grid item xs={7}>
+              {PollActions}
+              <br/>
+              {PollItems}
+            </Grid>
+            <Grid item xs={2}/>
+            <Grid item xs={3} className={this.props.classes.PollInfoCardDesktop}>
+              <LivepollInfoCard
+                livepoll={this.props.livepoll}
+                isLive={isLive}
+                willStartOnFuture={willStartOnFuture}
+                hasEnded={hasEnded}
+              />
+            </Grid>
+          </Grid>
+        </MediaQuery>
+        <MediaQuery maxWidth={799}>
+          {PollActions}
+          <br/>
+          {PollItems}
+        </MediaQuery>
+      </React.Fragment>
     )
   }
 }
@@ -155,4 +226,8 @@ LivepollPage.propTypes = {
   authUserId: PropTypes.string,
 };
 
-export default connect(s2p)(withRouter(LivepollPage))
+export default connect(s2p)(
+  withRouter(
+    withStyles(styles)(LivepollPage)
+  )
+)

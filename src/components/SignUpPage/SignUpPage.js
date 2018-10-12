@@ -6,10 +6,11 @@ import JoinMobileIcon from '@material-ui/icons/PhoneAndroid';
 import Loadable from 'react-loadable';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import {Loader} from "../loaders/FullScreenLoader";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),
-  loading: ()=>'',
+  loading: Loader,
 });
 
 const SignUpPage = (props) => {

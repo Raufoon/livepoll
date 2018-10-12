@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Loadable from 'react-loadable';
+import {Loader} from "../../../loaders/FullScreenLoader";
 
 const Modal = Loadable({
   loader: ()=>import('../../../Modal/Modal'),
-  loading: ()=>'',
+  loading: Loader,
 });
 
 const openerDefaultStyle = {
