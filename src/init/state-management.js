@@ -16,12 +16,4 @@ const createLivepollStore = () => {
 const livepollStore = createLivepollStore();
 const getLivepollStore = () => livepollStore;
 
-window.addEventListener('beforeunload', () => {
-  if (getLivepollStore().getState().auth.currentUser) {
-    localStorage.setItem('isLoggedIn', true);
-  } else {
-    localStorage.setItem('isLoggedIn', false);
-  }
-});
-
 export default getLivepollStore;

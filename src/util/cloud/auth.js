@@ -48,6 +48,7 @@ export const signOut = () => {
 
 export const onUserSignedIn = (currentUser) => {
   const dispatch = getLivepollStore().dispatch;
+  localStorage.setItem('isLoggedIn', true);
 
   requestUserDataById(currentUser.uid)
     .then(response => {
