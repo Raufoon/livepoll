@@ -18,6 +18,14 @@ const LivepollItemList = props => {
     default:
   }
 
+  let percentData = {};
+  if (props.isPercentView) {
+    percentData = {
+      isPercentView: true,
+      totalVotes: props.livepoll.totalVotes
+    }
+  }
+
   return (
     <BigRemoteDataDisplay
       doRequest={(startAt, limit) =>
@@ -30,6 +38,7 @@ const LivepollItemList = props => {
           .map((item, index) =>
             <ItemComponent
               key={item.id}
+              {...percentData}
               index={index + 1}
               isFirst={item.voteCount !== 0 && item.voteCount === props.items[0].voteCount}
               item={item}

@@ -10,6 +10,8 @@ import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography/Typography";
 import Badge from "@material-ui/core/Badge/Badge";
 import Grid from "@material-ui/core/Grid/Grid";
+import Switch from '@material-ui/core/Switch';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
   actionFetchPollInfo,
@@ -39,6 +41,10 @@ const styles = theme => ({
   pollLiveIndicator: {
     color: 'crimson',
     fontSize: 'x-small',
+  },
+  percentText: {
+    color: 'gray',
+    textTransform: 'uppercase'
   }
 });
 
@@ -53,8 +59,10 @@ class LivepollPage extends React.Component {
     this.state = {
       items: [],
       isSubscribed: false,
+      viewAsPercent: false,
     };
     this.isLive = this.isLive.bind(this);
+    this.onClickPercentCheckbox = this.onClickPercentCheckbox.bind(this);
   }
 
   componentDidMount() {
@@ -110,6 +118,10 @@ class LivepollPage extends React.Component {
     const willStartOnFuture = now < start;
     const hasEnded = endTimeExists && now >= end;
     return !(willStartOnFuture || hasEnded);
+  }
+
+  onClickPercentCheckbox(event) {
+    this.setState({viewAsPercent: event.target.checked})
   }
 
   render () {
@@ -173,12 +185,26 @@ class LivepollPage extends React.Component {
             }}
           >Add</ModalOpenerButton>
         }
+        &nbsp;&nbsp;&nbsp;
+        <FormControlLabel
+          className={this.props.classes.percentText}
+          control={
+            <Switch
+              checked={this.state.viewAsPercent}
+              onChange={this.onClickPercentCheckbox}
+              value={'Percent'}
+              color={'primary'}
+            />
+          }
+          label={<b className={this.props.classes.percentText}>percent</b>}
+        />
       </div>
     );
 
     const PollItems = (
       <LivepollItemList
         items={this.state.items}
+        isPercentView={this.state.viewAsPercent}
         lastVotedItemId={this.props.lastVotedItemId}
         voteDisabled={!isLive}
         willStartOnFuture={willStartOnFuture}

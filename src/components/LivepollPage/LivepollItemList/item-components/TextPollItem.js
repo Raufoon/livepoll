@@ -55,6 +55,12 @@ const VoteButton = (props) => {
 
 const VoteCounter = props => {
   if (props.hideVotes) return <div/>;
+  let voteCount = props.item.voteCount;
+  if (props.isPercentView) {
+    voteCount = parseInt((voteCount / props.totalVotes)*10000);
+    voteCount /= 100;
+    voteCount += '%';
+  }
   if (props.showVoters) {
     return (
       <ModalOpenerButton
@@ -69,11 +75,11 @@ const VoteCounter = props => {
         dontHideOpener={true}
         openerComponentProps={{variant: 'body2'}}
       >
-        <VoteCountChip count={props.item.voteCount} short={true}/>
+        <VoteCountChip count={voteCount} short={true}/>
       </ModalOpenerButton>
     )
   }
-  return <VoteCountChip className={props.className} short={true} count={props.item.voteCount}/>;
+  return <VoteCountChip className={props.className} short={true} count={voteCount}/>;
 };
 
 const styles = (theme) => ({
