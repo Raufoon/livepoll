@@ -4,7 +4,6 @@ import Typography from "@material-ui/core/Typography/Typography";
 import PropTypes from 'prop-types';
 import Chip from '@material-ui/core/Chip';
 
-import './LivepollInfoCard.css'
 import MediaQuery from "react-responsive";
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 
@@ -51,7 +50,7 @@ const LivepollInfoCard = props => {
       </Typography>
       <Typography variant="body2">
         {
-          settings.showVoters ? 'Secret vote': 'Click on the votes to view the voter list'
+          !settings.showVoters ? 'Secret vote': 'Click on the votes to view the voter list'
         }
       </Typography>
       <Typography variant="body2">

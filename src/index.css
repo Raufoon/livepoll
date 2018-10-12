@@ -38,7 +38,9 @@ body {
   left: 50vw;
   transform: translateY(-50%) translateX(-50%);
 }
-
+.m-auto{
+  margin: 0 auto !important;
+}
 .app-big-title{
   font-family: 'Nova Flat' !important;
 }

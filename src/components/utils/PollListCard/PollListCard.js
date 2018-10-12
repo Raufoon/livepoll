@@ -25,6 +25,9 @@ const styles = theme => ({
   moreButton: {
     margin: '0 auto',
     color: 'gray'
+  },
+  notAvailableText: {
+    color: 'gray'
   }
 });
 const listItemPrimaryText = {
@@ -60,9 +63,20 @@ function PollListCard(props) {
             </React.Fragment>
           ))
         }
-        <ListItem>
-          <MoreButton className={classes.moreButton} moreLink={props.moreLink}/>
-        </ListItem>
+        {
+          props.polls.length > 0 && (
+            <ListItem>
+              <MoreButton className={classes.moreButton} moreLink={props.moreLink}/>
+            </ListItem>
+          )
+        }
+        {
+          props.polls.length === 0 && (
+            <ListItem>
+              <Typography className={'m-auto ' + props.classes.notAvailableText} variant={'body1'}>None available</Typography>
+            </ListItem>
+          )
+        }
       </List>
     </Paper>
   );

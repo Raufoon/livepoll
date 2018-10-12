@@ -43,6 +43,9 @@ const styles = theme => ({
   moreButton: {
     marginTop: 15,
     color: 'gray'
+  },
+  notAvailableText: {
+    color: 'gray'
   }
 });
 const autoHeight = {
@@ -80,9 +83,18 @@ function PollGridCard(props) {
           ))
         }
       </GridList>
-      <MoreButton
-        className={classes.moreButton}
-        moreLink={props.moreLink}/>
+      {
+        props.polls.length > 0 && (
+          <MoreButton
+            className={classes.moreButton}
+            moreLink={props.moreLink}/>
+        )
+      }
+      {
+        props.polls.length === 0 && (
+          <Typography className={props.classes.notAvailableText} variant={'body1'}>None available</Typography>
+        )
+      }
     </Paper>
   );
 }

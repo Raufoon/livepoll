@@ -17,15 +17,11 @@ const livepollStore = createLivepollStore();
 const getLivepollStore = () => livepollStore;
 
 window.addEventListener('beforeunload', () => {
-  let stateToSave = getLivepollStore().getState();
-  if (stateToSave.auth.currentUser) {
-    stateToSave.loader.fullScreenLoader = {
-      show: true,
-      message: 'Loading'
-    };
+  if (getLivepollStore().getState().auth.currentUser) {
+    localStorage.setItem('isLoggedIn', true);
+  } else {
+    localStorage.setItem('isLoggedIn', false);
   }
-  delete stateToSave.auth;
-  localStorage.setItem('app-state', JSON.stringify(stateToSave))
 });
 
 export default getLivepollStore;

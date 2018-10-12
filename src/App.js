@@ -12,27 +12,27 @@ import ModalOpenerButton from "./components/utils/modal-openers/ModalOpenerButto
 import AppBarContents from "./components/AppBarContents/AppBarContents";
 import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
-import FullScreenLoader, {Loader} from "./components/loaders/FullScreenLoader";
+import FullScreenLoader from "./components/loaders/FullScreenLoader";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
-  loading: Loader,
+  loading: ()=>'',
 });
 const LivepollPage = Loadable({
   loader: ()=>import('./components/LivepollPage/LivepollPage'),
-  loading: Loader,
+  loading: ()=>'',
 });
 const PollCreationForm = Loadable({
   loader: ()=>import('./components/forms/PollCreationForm/PollCreationForm'),
-  loading: Loader,
+  loading: ()=>'',
 });
 const ProfilePage = Loadable({
   loader: ()=>import('./components/ProfilePage/ProfilePage'),
-  loading: Loader,
+  loading: ()=>'',
 });
 const HomeNavigationPanel = Loadable({
   loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
-  loading: Loader,
+  loading: ()=>'',
 });
 
 const styles = {

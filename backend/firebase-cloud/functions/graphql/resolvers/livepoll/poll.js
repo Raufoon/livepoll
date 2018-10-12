@@ -11,7 +11,8 @@ module.exports.publishLivepoll = (_, { settings }, context) => {
     .then(() => DB.write(`/myPolls/${settings.creatorId}/${newPollId}`, true))
     .then(() => DB.write(`/polls/${newPollId}`, {
       id: newPollId,
-      settings
+      settings,
+      totalVotes: 0,
     }));
 };
 
@@ -56,6 +57,20 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
     return voteCount;
   });
 
+  let decreaseTotalVote = () => DB.doTransaction(`polls/${pollId}/totalVotes`, totalVotes => {
+    if (totalVotes !== null) {
+      return totalVotes - 1
+    }
+    return totalVotes;
+  });
+
+  let increaseTotalVote = () => DB.doTransaction(`polls/${pollId}/totalVotes`, totalVotes => {
+    if (totalVotes !== null) {
+      return totalVotes + 1
+    }
+    return totalVotes;
+  });
+
   let unsaveVote = (itemId) => Promise.all([
     DB.remove(`voterList/${itemId}/${authUserId}`)
   ]);
@@ -70,11 +85,13 @@ module.exports.vote = (_, { pollId, votedItemId }, context) => {
     .then(lastVotedItemId => {
       if (!lastVotedItemId) {
         return increaseVote(votedItemId)
-          .then(() => saveVote(votedItemId));
+          .then(() => saveVote(votedItemId))
+          .then(increaseTotalVote);
       } else if (lastVotedItemId === votedItemId) {
         return decreaseVote(votedItemId)
           .then(() => DB.remove(`myVotedPolls/${authUserId}/${pollId}`))
-          .then(() => unsaveVote(votedItemId));
+          .then(() => unsaveVote(votedItemId))
+          .then(decreaseTotalVote);
       } else {
         return Promise.all([
           decreaseVote(lastVotedItemId).then(() => unsaveVote(lastVotedItemId)),

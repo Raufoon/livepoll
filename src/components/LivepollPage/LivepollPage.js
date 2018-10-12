@@ -20,11 +20,10 @@ import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
-import {Loader} from "../loaders/FullScreenLoader";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
-  loading: Loader,
+  loading: ()=>'',
 });
 
 const styles = theme => ({
@@ -36,12 +35,16 @@ const styles = theme => ({
   },
   PollInfoCardDesktop: {
     borderLeft: '1px solid lightgray'
+  },
+  pollLiveIndicator: {
+    color: 'crimson',
+    fontSize: 'x-small',
   }
 });
 
 const CreateItemForm = Loadable({
   loader: ()=>import('../forms/CreateItemForm/CreateItemForm'),
-  loading: Loader,
+  loading: ()=>'',
 });
 
 class LivepollPage extends React.Component {
@@ -130,7 +133,7 @@ class LivepollPage extends React.Component {
         color="default"
         badgeContent={isLive ? 'LIVE':''}
         classes={{
-          badge: isLive ? 'poll-live-indicator blink' : ''
+          badge: isLive ? this.props.classes.pollLiveIndicator + ' blink' : ''
         }}>
         <MediaQuery minWidth={800}>
           <Typography variant="h2" gutterBottom>{settings.title}</Typography>

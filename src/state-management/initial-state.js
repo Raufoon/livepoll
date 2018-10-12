@@ -25,8 +25,10 @@ export let initialBlankState = {
   }
 };
 
-let stateFromStorage = {};
-stateFromStorage = JSON.parse(localStorage.getItem('app-state') || '{}');
-delete stateFromStorage.auth;
-let initialState = {...initialBlankState,  ...stateFromStorage};
+let initialState = initialBlankState;
+
+if (JSON.parse(localStorage.getItem('isLoggedIn'))) {
+  initialState.loader.fullScreenLoader.show = true;
+}
+
 export default initialState
