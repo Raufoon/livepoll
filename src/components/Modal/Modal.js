@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import CloseIcon from '@material-ui/icons/Close';
 
 import './Modal.css';
 
@@ -15,11 +17,33 @@ class Modal extends React.Component {
     this.zIndex = ++Modal.zIndex;
     this.modalDomParent = document.createElement('div');
     modalRoot.appendChild(this.modalDomParent);
+
+    this.onEscape = this.onEscape.bind(this);
+    this.onBackPressed = this.onBackPressed.bind(this);
+  }
+
+  onEscape(event) {
+    if (event.key === "Escape") {
+      event.preventDefault();
+      event.stopPropagation();
+      this.props.onClose();
+    }
+  }
+
+  onBackPressed(event) {
+    if (event && event.preventDefault) event.preventDefault();
+    if (event && event.stopPropagation) event.stopPropagation();
+    this.props.onClose();
+  }
+
+  componentDidMount() {
+    document.addEventListener('keyup', this.onEscape);
   }
 
   componentWillUnmount() {
     Modal.zIndex--;
     modalRoot.removeChild(modalRoot.lastChild);
+    document.removeEventListener('keyup', this.onEscape);
   }
 
   render() {
@@ -30,7 +54,7 @@ class Modal extends React.Component {
         <Paper className='modal-container modal-container-resp' style={{zIndex: this.zIndex}}>
           {
             !modalSettings.hideCloseButton && (
-              <button className='modal-close-btn' onClick={this.props.onClose}>X</button>
+              <Button className='modal-close-btn' onClick={this.props.onClose}><CloseIcon/></Button>
             )
           }
           <div className='modal-content'>
