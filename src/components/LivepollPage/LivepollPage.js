@@ -94,9 +94,9 @@ class LivepollPage extends React.Component {
           this.props.dispatch(actionPollRealtimeUpdate(pollId, itemId, voteCount));
         });
 
-        this.refreshInterval = setInterval(() => {
-          this.props.dispatch(actionRequestTopItems(this.props.livepoll.id, 0, this.state.items.length));
-        }, 300000)
+        // this.refreshInterval = setInterval(() => {
+        //   this.props.dispatch(actionRequestTopItems(this.props.livepoll.id, 0, this.state.items.length));
+        // }, 300000) TODO: add in worker
       }
 
       items = Object.values(this.props.livepoll.items || {}).sort((A, B) => A.voteCount > B.voteCount ? -1 : 1);

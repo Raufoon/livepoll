@@ -71,10 +71,7 @@ const livepollReducer = (state = initialState.polls, action) => {
             ...state[action.pollId].items,
             [action.itemId]: {
               ...state[action.pollId].items[action.itemId],
-              voterIds: Object.values({
-                ...(state[action.pollId].items[action.itemId].voterIds || {}),
-                ...action.voterList
-              })
+              voterIds: Object.values(action.voterList)
             }
           }
         }
