@@ -26,9 +26,8 @@ const styles = theme => ({
     width: '100%',
   },
   titleBar: {
-    backgroundColor: 'lightgray',
-    opacity: '0.5',
-    cursor: 'pointer'
+    backgroundColor: '#fef8eb',
+    cursor: 'pointer',
   },
   content: {
     marginTop: '15px',
@@ -57,7 +56,7 @@ function PollGridCard(props) {
 
   return (
     <Paper className={classes.root}>
-      <GridList cellHeight={150} className={classes.gridList}>
+      <GridList cellHeight={150} className={classes.gridList} spacing={16}>
         <GridListTile cols={2} style={autoHeight}>
           <Typography variant="h5" gutterBottom>{props.title}</Typography>
         </GridListTile>
@@ -70,15 +69,15 @@ function PollGridCard(props) {
               <div className={classes.content}>
                 <Typography variant="h5">{poll.items[0].content.text}</Typography>
                 <VoteCountChip count={poll.items[0].voteCount}/>
+                <GridListTileBar
+                  title={poll.settings.title}
+                  onClick={()=>props.history.push('/poll/' + poll.id)}
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                  }}
+                />
               </div>
-              <GridListTileBar
-                title={poll.settings.title}
-                onClick={()=>props.history.push('/poll/' + poll.id)}
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-              />
             </GridListTile>
           ))
         }

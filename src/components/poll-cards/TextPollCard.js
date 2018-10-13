@@ -2,38 +2,48 @@ import React from 'react'
 import PropTypes from 'prop-types';
 import Card from '@material-ui/core/Card';
 import { withStyles } from '@material-ui/core/styles';
+import { Link, withRouter } from 'react-router-dom';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import VoteCountChip from "../utils/VoteCountChip/VoteCountChip";
 import MediaQuery from "react-responsive";
-import MoreButton from "../buttons/MoreButton/MoreButton";
 
 const styles = theme => ({
-  moreButton: {
-    color: 'grey'
-  },
   container: {
     backgroundColor: '#fbfbfb',
+    margin: 10,
+    boxShadow: 'none',
+    border: '1px solid lightgray',
+  },
+  cardTitle: {
+    textDecoration: 'none'
   }
 });
 
 function TextPollCard(props) {
   const {classes} = props;
   return (
-    <Card className={classes.container} style={props.style}>
+    <Card className={classes.container + ' ' + props.className}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography
+            className={classes.cardTitle}
+            gutterBottom
+            variant="h5"
+            component={Link}
+            to={`/poll/${props.poll.id}`}
+          >
             {props.poll.settings.title}
           </Typography>
+
           <MediaQuery maxWidth={799}>
             <Typography variant="subtitle1">
               {props.poll.items[0].content.text}
             </Typography>
             <VoteCountChip count={props.poll.items[0].voteCount}/>
           </MediaQuery>
+
           <MediaQuery minWidth={800}>
             <Typography variant="subtitle1">
               {props.poll.items[0].content.text}&nbsp;&nbsp;<VoteCountChip count={props.poll.items[0].voteCount}/>
@@ -41,9 +51,6 @@ function TextPollCard(props) {
           </MediaQuery>
         </CardContent>
       </CardActionArea>
-      <CardActions>
-        <MoreButton className={classes.moreButton} moreLink={`/poll/${props.poll.id}`}/>
-      </CardActions>
     </Card>
   );
 }
@@ -52,4 +59,8 @@ TextPollCard.propTypes = {
   poll: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(TextPollCard)
+export default withStyles(styles)(
+  withRouter(
+    TextPollCard
+  )
+)

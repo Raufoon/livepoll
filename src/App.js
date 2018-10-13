@@ -34,6 +34,10 @@ const HomeNavigationPanel = Loadable({
   loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
   loading: ()=>'',
 });
+const TrendingPollList = Loadable({
+  loader: ()=> import('./components/TrendingPollList/TrendingPollList'),
+  loading: ()=>'',
+});
 
 const styles = {
   flexGrow10: {flexGrow: 1},
@@ -73,9 +77,9 @@ class App extends Component {
           <Switch>
             <Route path={'/poll/:id'} component={LivepollPage}/>
             <Route path={'/me'} component={ProfilePage}/>
-            <Route exact path={'/trending'} component={() => "Trending polls will be displayed here"}/>
-            <Route exact path={'/popular'} component={() => "Popular polls will be displayed here"}/>
-            <Route exact path={'/recent'} component={() => "Recent polls will be displayed here"}/>
+            <Route exact path={'/trending'} component={TrendingPollList}/>
+            <Route exact path={'/popular'} component={TrendingPollList}/>
+            <Route exact path={'/recent'} component={TrendingPollList}/>
             <Route component={HomePage}/>
           </Switch>
         </div>
