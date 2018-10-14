@@ -26,3 +26,13 @@ module.exports.updateProfileBasicInfo = (_, {newBasicInfo}, context) => {
       return DB.write(`/users/${authUid}/basicInfo`, Object.assign({}, existingData, newBasicInfo))
     });
 };
+
+module.exports.myPolls = (_, {startAt, howMany}, context) => {
+  return decodeIdToken(context.idToken)
+    .then(decodedUid => DB.read(`myPolls/${decodedUid}`))
+    .then(pollIdDTO => Object.keys(pollIdDTO))
+    .then(pollIdList => pollIdList.slice(startAt, howMany))
+    .then(pollIdList => Promise.all(
+      pollIdList.map(pollId => DB.read(`polls/${pollId}`))
+    ));
+};

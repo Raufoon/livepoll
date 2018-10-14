@@ -1,4 +1,4 @@
-import {requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
+import {fetchMyPolls, requestCheckHaveIVoted, requestUpdateMyProfileBasicInfo} from "../../util/cloud/user";
 import {actionMakeErrorToast, actionMakeSuccessToast, actionMakeWarningToast} from "./toast-actions";
 import {actionFetchTrendingPolls} from "./home-actions";
 
@@ -37,6 +37,18 @@ export const actionAlreadyVotedPollFound = (pollId, votedItemId, lastVotedItemId
   votedItemId, pollId, lastVotedItemId
 });
 
-export const actionFetchMyPolls = () => dispatch => {
-  dispatch(actionFetchTrendingPolls(0, 6))
+export const actionFetchMyPolls = (idToken, startAt, howMany) => dispatch => {
+  fetchMyPolls(idToken, startAt, howMany)
+    .then(response => {
+      dispatch(actionFetchMyPollsSuccess(response.myPolls))
+    })
+    .catch(err => {
+      return err;
+    });
 };
+
+export const ACTION_FETCH_MY_POLLS_SUCCESS = 'ACTION_FETCH_MY_POLLS_SUCCESS';
+export const actionFetchMyPollsSuccess = myPolls => ({
+  type: ACTION_FETCH_MY_POLLS_SUCCESS,
+  myPolls
+});

@@ -20,6 +20,9 @@ const styles = {
     height: 100,
   },
   buttonPanel: {
+  },
+  profileUsername: {
+    color: '#065535'
   }
 };
 
@@ -31,7 +34,7 @@ function ProfileCard(props) {
     <Card className={classes.card}>
       <CardActionArea>
         <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
+          <Typography gutterBottom variant="h4" component="h2" className={classes.profileUsername}>
             {props.myProfile.basicInfo.name}
           </Typography>
           <Typography component="p">

@@ -20,6 +20,7 @@ const queries = `
   user(id: ID!): User
   users(idList: [String]): [User]!
   haveIVoted(pollId: String!): String
+  myPolls(startAt: Int!, howMany: Int!): [Livepoll]!
 `;
 
 const mutations = `

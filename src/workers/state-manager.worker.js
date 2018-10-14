@@ -1,6 +1,7 @@
 import {getLivepollStore, initAppState} from "./init";
 import {actionFetchPopularPolls, actionFetchTrendingPolls} from "./state-management/actions/home-actions";
 import {
+  actionFetchMyPolls,
   actionRequestCheckAlreadyVotedPoll,
   actionRequestUpdateBasicInfo
 } from "./state-management/actions/my-profile-actions";
@@ -58,6 +59,9 @@ function onmessage(event) {
       getLivepollStore().dispatch(actionRequestCheckAlreadyVotedPoll(payload.idToken, payload.pollId));
       break;
 
+    case 'ACTION_FETCH_MY_POLLS':
+      getLivepollStore().dispatch(actionFetchMyPolls(payload.idToken, payload.startAt, payload.howMany));
+      break;
     default:
   }
 }

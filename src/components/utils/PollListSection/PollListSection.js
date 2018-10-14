@@ -20,7 +20,7 @@ const PollListSection = props => (
 PollListSection.propTypes = {
   fetchPollFunc: PropTypes.func.isRequired,
   polls: PropTypes.array,
-  pollCardClassName: PropTypes.object
+  pollCardClassName: PropTypes.string
 };
 
 export default PollListSection

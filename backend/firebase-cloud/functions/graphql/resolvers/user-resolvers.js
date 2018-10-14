@@ -33,6 +33,7 @@ const queries = {
       });
   },
   haveIVoted: require('./user/user').haveIVoted,
+  myPolls: require('./user/user').myPolls,
 };
 
 const mutations = {

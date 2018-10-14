@@ -2,7 +2,7 @@
   margin-bottom: 10px;
   background-color: #fbfbfb;
   box-shadow: none !important;
-  border: 1px solid lightgrey;
+  border-bottom: 1px solid lightgrey;
 }
 @media (max-width: 799px) {
   .text-item-resp{

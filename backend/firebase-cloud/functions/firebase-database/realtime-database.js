@@ -2,6 +2,9 @@ const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 
 const DB = {
+  getRef(path) {
+    return admin.database().ref(path);
+  },
   read(path) {
     return admin.database()
       .ref(path)

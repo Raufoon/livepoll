@@ -32,6 +32,14 @@ export const actionRequestCheckAlreadyVotedPoll = pollId => dispatch => {
   })
 };
 
-export const actionFetchMyPolls = () => dispatch => {
-  dispatch(actionFetchTrendingPolls(0, 6))
+export const actionFetchMyPolls = (startAt, howMany) => dispatch => {
+  getLoggedInUser().getIdToken().then(idToken => {
+    getStateManagerWorker().postMessage({
+      action: 'ACTION_FETCH_MY_POLLS',
+      payload: {
+        startAt, howMany,
+        idToken
+      }
+    });
+  })
 };

@@ -61,3 +61,22 @@ const QUERY_GET_USERNAMES_BY_IDS = `
 export const requestUsernamesByIds = (idList) => {
   return graphqlRequest(QUERY_GET_USERNAMES_BY_IDS, {idList})
 };
+
+const QUERY_FETCH_MY_POLLS = `
+  query FetchMyPolls ($startAt: Int!, $howMany: Int!) {
+    myPolls(startAt: $startAt, howMany: $howMany) {
+      id,
+      settings {
+        title
+      },
+      items(startAt: 0, howMany: 1) {
+        content {
+          text
+        }
+      }
+    }
+  }
+`;
+export const fetchMyPolls = (idToken, startAt, howMany) => graphqlSecureRequest(
+  idToken, QUERY_FETCH_MY_POLLS, {startAt, howMany}
+);

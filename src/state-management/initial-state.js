@@ -5,6 +5,7 @@ export let initialBlankState = {
   myProfile: {
     basicInfo: undefined,
     votedPolls: {},
+    myPolls: []
   },
   polls: {},
   toast: {

@@ -1,6 +1,6 @@
 import initialState from "../initial-state";
 import {
-  ACTION_ALREADY_VOTED_POLL_FOUND,
+  ACTION_ALREADY_VOTED_POLL_FOUND, ACTION_FETCH_MY_POLLS_SUCCESS,
   ACTION_MY_PROFILE_BASIC_INFO_UPDATE_SUCCESS
 } from "../actions/my-profile-actions";
 import {ACTION_SIGNOUT_SUCCESS} from "../actions/auth-actions";
@@ -18,10 +18,7 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
           ...action.basicInfo
         }
       };
-      postMessage({
-        myProfile: newState
-      });
-      return newState;
+      break;
 
     case ACTION_ALREADY_VOTED_POLL_FOUND:
       newState = {...state};
@@ -33,24 +30,41 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
       } else {
         newState.votedPolls[action.pollId] = action.votedItemId;
       }
-      postMessage({
-        myProfile: newState
-      });
-      return newState;
+      break;
 
     case ACTION_SIGNOUT_SUCCESS:
-      return {
+      newState = {
         ...state,
         votedPolls: {},
         basicInfo: {}
       };
+      break;
+
+    case ACTION_FETCH_MY_POLLS_SUCCESS:
+      newState = {
+        ...state,
+        myPolls: Object.values({
+          ...state.myPolls,
+          ...action.myPolls,
+        })
+      };
+      break;
 
     case ACTION_SYNC_MAIN_AND_WORKER:
-      return action.newState.myProfile? action.newState.myProfile: state;
+      newState = action.newState.myProfile? action.newState.myProfile: state;
+      break;
 
     default:
-      return state;
+      newState = state;
   }
+
+  if (newState != state) {
+    postMessage({
+      myProfile: newState
+    });
+  }
+
+  return newState;
 };
 
 export default myProfileReducer

@@ -18,13 +18,13 @@ const ProfileSection = (props) => {
   const MyPollsSection = () =>
     <PollListSection
       pollCardClassName={props.classes.textPollCard}
-      fetchPollFunc={() => props.dispatch(actionFetchMyPolls())}
+      fetchPollFunc={(startAt, howMany) => props.dispatch(actionFetchMyPolls(startAt, howMany))}
       polls={props.polls}/>;
 
   const PollsIVotedSection = () =>
     <PollListSection
       pollCardClassName={props.classes.textPollCard}
-      fetchPollFunc={() => props.dispatch(actionFetchMyPolls())}
+      fetchPollFunc={(startAt, howMany) => props.dispatch(actionFetchMyPolls(startAt, howMany))}
       polls={props.polls}/>;
 
   return (
@@ -40,7 +40,7 @@ const ProfileSection = (props) => {
 };
 
 const s2p = state => ({
-  polls: state.homePage.trendingPolls
+  polls: state.myProfile.myPolls
 });
 
 export default connect(s2p)(
