@@ -10,6 +10,10 @@ import Typography from "@material-ui/core/Typography/Typography";
 
 import VoteCountChip from "../VoteCountChip/VoteCountChip";
 import MoreButton from "../../buttons/MoreButton/MoreButton";
+import Chip from "@material-ui/core/Chip/Chip";
+import Avatar from "@material-ui/core/Avatar/Avatar";
+import {FIRST_TROPHY_IMG_URL} from "../../../constants/livepoll-constants";
+import Button from "@material-ui/core/Button/Button";
 
 const styles = theme => ({
   root: {
@@ -26,7 +30,7 @@ const styles = theme => ({
     width: '100%',
   },
   titleBar: {
-    backgroundColor: '#fef8eb',
+    backgroundColor: '#f2f2f2',
     cursor: 'pointer',
   },
   content: {
@@ -45,6 +49,16 @@ const styles = theme => ({
   },
   notAvailableText: {
     color: 'gray'
+  },
+  itemChip: {
+    backgroundColor: 'transparent',
+    marginTop: 5,
+  },
+  itemText: {
+    textTransform: 'none',
+  },
+  itemAvatar: {
+    backgroundColor: '#f2f2f2'
   }
 });
 const autoHeight = {
@@ -56,7 +70,7 @@ function PollGridCard(props) {
 
   return (
     <Paper className={classes.root}>
-      <GridList cellHeight={150} className={classes.gridList} spacing={16}>
+      <GridList className={classes.gridList} spacing={16}>
         <GridListTile cols={2} style={autoHeight}>
           <Typography variant="h5" gutterBottom>{props.title}</Typography>
         </GridListTile>
@@ -67,8 +81,30 @@ function PollGridCard(props) {
           props.polls.map(poll => (
             <GridListTile cols={props.columnWidth} key={poll.id}  className={classes.tile}>
               <div className={classes.content}>
-                <Typography variant="h5">{poll.items[0].content.text}</Typography>
-                <VoteCountChip count={poll.items[0].voteCount}/>
+                {
+                  poll.items.map((item, itemIdx) => (
+                    <div key={item.id}>
+                      <Chip
+                        className={props.classes.itemChip}
+                        avatar={
+                          itemIdx === 0 ? (
+                            <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
+                          ):(
+                            <Avatar className={props.classes.itemAvatar}>{itemIdx + 1}</Avatar>
+                          )
+                        }
+                        label={
+                          <div>
+                            <Button className={props.classes.itemText} size={'small'}>{item.content.text}</Button>
+                            <VoteCountChip count={item.voteCount}/>
+                          </div>
+                        }
+                      />
+                      <br/>
+                      <br/>
+                    </div>
+                  ))
+                }
                 <GridListTileBar
                   title={poll.settings.title}
                   onClick={()=>props.history.push('/poll/' + poll.id)}

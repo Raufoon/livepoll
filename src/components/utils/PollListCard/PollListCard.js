@@ -6,11 +6,14 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Divider from '@material-ui/core/Divider';
 import Typography from "@material-ui/core/Typography/Typography";
 import MoreButton from "../../buttons/MoreButton/MoreButton";
 import VoteCountChip from "../VoteCountChip/VoteCountChip";
+import {FIRST_TROPHY_IMG_URL} from "../../../constants/livepoll-constants";
 
 const styles = theme => ({
   root: {
@@ -18,8 +21,6 @@ const styles = theme => ({
     backgroundColor: '#fbfbfb',
     boxShadow: 'none',
     border: '1px solid lightgray',
-  },
-  avatar: {
     cursor: 'pointer'
   },
   moreButton: {
@@ -28,19 +29,26 @@ const styles = theme => ({
   },
   notAvailableText: {
     color: 'gray'
+  },
+  itemChip: {
+    backgroundColor: 'transparent',
+    marginTop: 5,
+  },
+  itemText: {
+    textTransform: 'none',
+  },
+  itemAvatar: {
+    backgroundColor: '#f2f2f2'
   }
 });
-const listItemPrimaryText = {
-  variant: 'body2',
-  gutterBottom: true
-};
-const listItemSecondaryText = {
-  gutterBottom: true,
-  variant: 'body1',
-};
 
 function PollListCard(props) {
   const { classes } = props;
+
+  const listItemSecondaryText = {
+    gutterBottom: true,
+    variant: 'body1',
+  };
   return (
     <Paper className={classes.root}>
       <List>
@@ -50,15 +58,38 @@ function PollListCard(props) {
         {
           props.polls.map((poll, index) => (
             <React.Fragment key={poll.id}>
-              { index > 0 && <li><Divider inset/></li> }
+              { index > 0 && <li><Divider/></li> }
 
               <ListItem>
-                <Avatar className={classes.avatar} onClick={()=>props.history.push('/poll/' + poll.id)}>{index + 1}</Avatar>
                 <ListItemText
                   primary={poll.settings.title}
-                  primaryTypographyProps={listItemPrimaryText}
+                  primaryTypographyProps={{
+                    variant: 'body2',
+                    gutterBottom: true,
+                    onClick: () => props.history.push('/poll/' + poll.id),
+                  }}
                   secondaryTypographyProps={listItemSecondaryText}
-                  secondary={<Typography variant={'subtitle1'} gutterBottom>{poll.items[0].content.text} <VoteCountChip count={poll.items[0].voteCount}/></Typography>} />
+                  secondary={
+                    poll.items.map((item, itemIdx) => (
+                      <Chip
+                        key={item.id}
+                        className={classes.itemChip}
+                        avatar={
+                          itemIdx === 0 ? (
+                            <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
+                          ):(
+                            <Avatar className={classes.itemAvatar}>{itemIdx + 1}</Avatar>
+                          )
+                        }
+                        label={
+                          <div>
+                            <Button className={classes.itemText} size={'small'}>{item.content.text}</Button>
+                            <VoteCountChip count={item.voteCount}/>
+                          </div>
+                        }
+                      />
+                    ))
+                  } />
               </ListItem>
             </React.Fragment>
           ))

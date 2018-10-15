@@ -8,6 +8,10 @@ import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import VoteCountChip from "../utils/VoteCountChip/VoteCountChip";
 import MediaQuery from "react-responsive";
+import Chip from "@material-ui/core/Chip/Chip";
+import Avatar from "@material-ui/core/Avatar/Avatar";
+import {FIRST_TROPHY_IMG_URL} from "../../constants/livepoll-constants";
+import Button from "@material-ui/core/Button/Button";
 
 const styles = theme => ({
   container: {
@@ -18,6 +22,16 @@ const styles = theme => ({
   },
   cardTitle: {
     textDecoration: 'none'
+  },
+  itemChip: {
+    backgroundColor: 'transparent',
+    marginTop: 5,
+  },
+  itemText: {
+    textTransform: 'none',
+  },
+  itemAvatar: {
+    backgroundColor: '#f2f2f2'
   }
 });
 
@@ -37,18 +51,29 @@ function TextPollCard(props) {
             {props.poll.settings.title}
           </Typography>
 
-          <MediaQuery maxWidth={799}>
-            <Typography variant="subtitle1">
-              {props.poll.items[0].content.text}
-            </Typography>
-            <VoteCountChip count={props.poll.items[0].voteCount}/>
-          </MediaQuery>
-
-          <MediaQuery minWidth={800}>
-            <Typography variant="subtitle1">
-              {props.poll.items[0].content.text}&nbsp;&nbsp;<VoteCountChip count={props.poll.items[0].voteCount}/>
-            </Typography>
-          </MediaQuery>
+          {
+            props.poll.items.map((item, itemIdx) => (
+              <div key={item.id}>
+                <br/><br/>
+                <Chip
+                  className={props.classes.itemChip}
+                  avatar={
+                    itemIdx === 0 ? (
+                      <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
+                    ):(
+                      <Avatar className={props.classes.itemAvatar}>{itemIdx + 1}</Avatar>
+                    )
+                  }
+                  label={
+                    <div>
+                      <Button className={props.classes.itemText} size={'small'}>{item.content.text}</Button>
+                      <VoteCountChip count={item.voteCount}/>
+                    </div>
+                  }
+                />
+              </div>
+            ))
+          }
         </CardContent>
       </CardActionArea>
     </Card>

@@ -46,7 +46,7 @@ const myProfileReducer = (state = initialState.myProfile, action) => {
         myPolls: Object.values({
           ...state.myPolls,
           ...action.myPolls,
-        })
+        }).sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
       };
       break;
 

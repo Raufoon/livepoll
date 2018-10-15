@@ -69,7 +69,7 @@ const QUERY_FETCH_MY_POLLS = `
       settings {
         title
       },
-      items(startAt: 0, howMany: 1) {
+      items(startAt: 0, howMany: 3) {
         content {
           text
         }

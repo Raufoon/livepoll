@@ -15,8 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
   actionFetchPollInfo,
-  actionPollRealtimeUpdate,
-  actionRequestTopItems
+  actionPollRealtimeUpdate
 } from "../../state-management/actions/livepoll-actions";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
@@ -60,9 +59,11 @@ class LivepollPage extends React.Component {
       items: [],
       isSubscribed: false,
       viewAsPercent: false,
+      isRealtime: false,
     };
     this.isLive = this.isLive.bind(this);
     this.onClickPercentCheckbox = this.onClickPercentCheckbox.bind(this);
+    this.onClickLiveCheckbox = this.onClickLiveCheckbox.bind(this);
   }
 
   componentDidMount() {
@@ -90,6 +91,10 @@ class LivepollPage extends React.Component {
       if (!isSubscribed && this.isLive()) {
         isSubscribed = true;
 
+        this.setState({
+          isRealtime: true
+        });
+
         subscribeRealtime(pid, (pollId, itemId, voteCount) => {
           this.props.dispatch(actionPollRealtimeUpdate(pollId, itemId, voteCount));
         });
@@ -99,7 +104,9 @@ class LivepollPage extends React.Component {
         // }, 300000) TODO: add in worker
       }
 
-      items = Object.values(this.props.livepoll.items || {}).sort((A, B) => A.voteCount > B.voteCount ? -1 : 1);
+      items = Object.values(this.props.livepoll.items || {})
+        .sort((A, B) => A.voteCount > B.voteCount ? -1 : 1);
+
       this.setState({items, isSubscribed}, () => {
         if (isSubscribed) {
           updateRealtimeItems(this.props.livepoll.id, items);
@@ -124,6 +131,17 @@ class LivepollPage extends React.Component {
     this.setState({viewAsPercent: event.target.checked})
   }
 
+  onClickLiveCheckbox(event) {
+    this.setState({isRealtime: event.target.checked});
+    if (event.target.checked && !this.state.isSubscribed) {
+      subscribeRealtime(this.props.livepoll.id, (pollId, itemId, voteCount) => {
+        this.props.dispatch(actionPollRealtimeUpdate(pollId, itemId, voteCount));
+      });
+    } else if (!event.target.checked && this.state.isSubscribed) {
+      unsubscribeRealtime(this.props.livepoll.id);
+    }
+  }
+
   render () {
     const livepoll = this.props.livepoll;
 
@@ -143,7 +161,7 @@ class LivepollPage extends React.Component {
     const PollTitle = (
       <Badge
         color="default"
-        badgeContent={isLive ? 'LIVE':''}
+        badgeContent={isLive && this.state.isRealtime ? 'LIVE':''}
         classes={{
           badge: isLive ? this.props.classes.pollLiveIndicator + ' blink' : ''
         }}>
@@ -198,6 +216,22 @@ class LivepollPage extends React.Component {
           }
           label={<b className={this.props.classes.percentText}>percent</b>}
         />
+        {
+          isLive && (
+            <FormControlLabel
+              color={'secondary'}
+              control={
+                <Switch
+                  checked={this.state.isRealtime}
+                  onChange={this.onClickLiveCheckbox}
+                  value={'live'}
+                  color={'secondary'}
+                />
+              }
+              label={<b className={this.props.classes.percentText}>Live</b>}
+            />
+          )
+        }
       </div>
     );
 

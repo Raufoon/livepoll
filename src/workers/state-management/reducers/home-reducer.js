@@ -15,7 +15,7 @@ const homeReducer = (state = initialState.homePage, action) => {
         popularPolls: Object.values({
           ...state.popularPolls,
           ...action.popularPolls,
-        })
+        }).sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
       };
       postMessage({
         homePage: newState
@@ -28,7 +28,7 @@ const homeReducer = (state = initialState.homePage, action) => {
         trendingPolls: Object.values({
           ...state.trendingPolls,
           ...action.trendingPolls,
-        })
+        }).sort((A, B) => A.voteCount > B.voteCount ? -1 : 1)
       };
       postMessage({
         homePage: newState

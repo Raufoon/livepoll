@@ -3,14 +3,13 @@ import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 
 import PollListSection from "../utils/PollListSection/PollListSection";
-import {actionFetchMyPolls} from "../../state-management/actions/my-profile-actions";
 import Grid from "@material-ui/core/Grid/Grid";
 import MediaQuery from "react-responsive";
+import {actionFetchTrendingPolls} from "../../state-management/actions/home-actions";
 
 const style = theme => ({
   textPollCard: {
-    border: 'none',
-    borderBottom: '1px solid lightgray',
+    border: '1px solid lightgray',
   }
 });
 
@@ -22,7 +21,7 @@ const TrendingPollList = (props) => {
           <Grid item xs={8}>
             <PollListSection
               pollCardClassName={props.classes.textPollCard}
-              fetchPollFunc={() => props.dispatch(actionFetchMyPolls())}
+              fetchPollFunc={() => props.dispatch(actionFetchTrendingPolls(0, 10))}
               polls={props.polls}/>
           </Grid>
         </Grid>
@@ -32,7 +31,7 @@ const TrendingPollList = (props) => {
           <Grid item xs={12}>
             <PollListSection
               pollCardClassName={props.classes.textPollCard}
-              fetchPollFunc={() => props.dispatch(actionFetchMyPolls())}
+              fetchPollFunc={() => props.dispatch(actionFetchTrendingPolls(0, 10))}
               polls={props.polls}/>
           </Grid>
         </Grid>

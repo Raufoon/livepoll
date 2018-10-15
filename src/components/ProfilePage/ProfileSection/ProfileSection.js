@@ -9,8 +9,7 @@ import {actionFetchMyPolls} from "../../../state-management/actions/my-profile-a
 
 const style = theme => ({
   textPollCard: {
-    border: 'none',
-    borderBottom: '1px solid lightgray',
+    border: '1px solid lightgray',
   }
 });
 

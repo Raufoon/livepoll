@@ -7,7 +7,7 @@ const QUERY_POPULAR_POLLS = `
       settings {
         title
       },
-      items(startAt: 0, howMany: 1) {
+      items(startAt: 0, howMany: 3) {
         content {
           text
         },
@@ -29,7 +29,7 @@ const QUERY_TRENDING_POLLS = `
       settings {
         title
       },
-      items(startAt: 0, howMany: 1) {
+      items(startAt: 0, howMany: 3) {
         content {
           text
         },

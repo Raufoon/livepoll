@@ -5,8 +5,8 @@ import Grid from '@material-ui/core/Grid';
 import MediaQuery from 'react-responsive';
 
 import {actionFetchHome} from "../../state-management/actions/home-actions";
-import TrendingPollsSlider from "../utils/PollGridCard/PollGridCard";
-import MostPopularPollsCard from "../utils/PollListCard/PollListCard";
+import PollGridCard from "../utils/PollGridCard/PollGridCard";
+import PollListCard from "../utils/PollListCard/PollListCard";
 
 class HomePage extends React.Component {
   componentDidMount() {
@@ -19,10 +19,10 @@ class HomePage extends React.Component {
         <MediaQuery minWidth={800}>
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={8}>
-              <TrendingPollsSlider title={'Trending Now'} moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
+              <PollGridCard title={'Trending Now'} moreLink={'/trending'} columnWidth={1} polls={this.props.trendingPolls}/>
             </Grid>
             <Grid item xs={4}>
-              <MostPopularPollsCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.popularPolls}/>
+              <PollListCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.popularPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>
@@ -30,10 +30,10 @@ class HomePage extends React.Component {
         <MediaQuery maxWidth={799}>
           <Grid container alignItems="flex-start" spacing={16}>
             <Grid item xs={12}>
-              <MostPopularPollsCard title={'Trending Now'} moreLink={'/trending'} polls={this.props.trendingPolls}/>
+              <PollListCard title={'Trending Now'} moreLink={'/trending'} polls={this.props.trendingPolls}/>
             </Grid>
             <Grid item xs={12}>
-              <MostPopularPollsCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.trendingPolls}/>
+              <PollListCard title={'Most Popular'} moreLink={'/popular'} polls={this.props.popularPolls}/>
             </Grid>
           </Grid>
         </MediaQuery>
