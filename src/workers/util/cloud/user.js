@@ -70,9 +70,11 @@ const QUERY_FETCH_MY_POLLS = `
         title
       },
       items(startAt: 0, howMany: 3) {
+        id,
         content {
           text
-        }
+        },
+        voteCount
       }
     }
   }

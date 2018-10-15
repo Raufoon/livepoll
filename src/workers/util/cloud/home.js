@@ -8,6 +8,7 @@ const QUERY_POPULAR_POLLS = `
         title
       },
       items(startAt: 0, howMany: 3) {
+        id,
         content {
           text
         },
@@ -30,6 +31,7 @@ const QUERY_TRENDING_POLLS = `
         title
       },
       items(startAt: 0, howMany: 3) {
+        id,
         content {
           text
         },
