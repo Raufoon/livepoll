@@ -25,7 +25,7 @@ const styles = theme => ({
   },
   itemChip: {
     backgroundColor: 'transparent',
-    marginTop: 5,
+    marginTop: 10,
   },
   itemText: {
     textTransform: 'none',
@@ -54,7 +54,6 @@ function TextPollCard(props) {
           {
             props.poll.items.map((item, itemIdx) => (
               <div key={item.id}>
-                <br/><br/>
                 <Chip
                   className={props.classes.itemChip}
                   avatar={
