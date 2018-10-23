@@ -1,6 +1,7 @@
 import React from "react";
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
+import FlipMove from 'react-flip-move';
 
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 import TextItem from "./item-components/TextPollItem";
@@ -33,23 +34,25 @@ const LivepollItemList = props => {
       }
       totalFetched={Object.keys(props.livepoll.items || {}).length}
       limit={50}>
-      {
-        props.items
-          .map((item, index) =>
-            <ItemComponent
-              key={item.id}
-              {...percentData}
-              index={index + 1}
-              isFirst={item.voteCount !== 0 && item.voteCount === props.items[0].voteCount}
-              item={item}
-              pollId={props.livepoll.id}
-              showVoters={props.livepoll.settings.showVoters}
-              isAlreadyVoted={props.lastVotedItemId === item.id}
-              voteDisabled={props.voteDisabled}
-              hideVotes={props.willStartOnFuture}
-              vote={()=> props.dispatch(actionGiveVote(props.livepoll.id, item.id, props.lastVotedItemId))}/>
-          )
-      }
+      <FlipMove>
+        {
+          props.items
+            .map((item, index) =>
+              <ItemComponent
+                key={item.id}
+                {...percentData}
+                index={index + 1}
+                isFirst={item.voteCount !== 0 && item.voteCount === props.items[0].voteCount}
+                item={item}
+                pollId={props.livepoll.id}
+                showVoters={props.livepoll.settings.showVoters}
+                isAlreadyVoted={props.lastVotedItemId === item.id}
+                voteDisabled={props.voteDisabled}
+                hideVotes={props.willStartOnFuture}
+                vote={()=> props.dispatch(actionGiveVote(props.livepoll.id, item.id, props.lastVotedItemId))}/>
+            )
+        }
+      </FlipMove>
     </BigRemoteDataDisplay>
   );
 };
