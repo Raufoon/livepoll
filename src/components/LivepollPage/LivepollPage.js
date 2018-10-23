@@ -214,7 +214,7 @@ class LivepollPage extends React.Component {
               color={'primary'}
             />
           }
-          label={<b className={this.props.classes.percentText}>percent</b>}
+          label={<b className={this.props.classes.percentText}>ratio</b>}
         />
         {
           isLive && (

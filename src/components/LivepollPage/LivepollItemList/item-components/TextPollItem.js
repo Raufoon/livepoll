@@ -30,7 +30,7 @@ const TextPollItemAvatar = props => {
     )
   } else {
     return (
-      <Avatar>
+      <Avatar className={'avatar-regular'}>
         {props.index}
       </Avatar>
     )

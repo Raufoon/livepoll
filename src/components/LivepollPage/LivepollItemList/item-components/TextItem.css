@@ -18,6 +18,9 @@
   width: 100px !important;
   height: 100px !important;
 }
+.avatar-regular{
+  background-color: #133337 !important;
+}
 @media (max-width: 799px) {
   .avatar-first-item-resp{
     width: 70px !important;

@@ -35,6 +35,8 @@ const styles = theme => ({
     marginTop: 5,
   },
   itemText: {
+    color: '#222',
+    fontWeight: 'normal',
     textTransform: 'none',
   },
   itemAvatar: {
@@ -64,7 +66,7 @@ function PollListCard(props) {
                 <ListItemText
                   primary={poll.settings.title}
                   primaryTypographyProps={{
-                    variant: 'body2',
+                    variant: 'body1',
                     gutterBottom: true,
                     onClick: () => props.history.push('/poll/' + poll.id),
                   }}
