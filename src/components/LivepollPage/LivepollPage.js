@@ -249,6 +249,12 @@ class LivepollPage extends React.Component {
     return (
       <React.Fragment>
         {PollTitle}
+        {
+          hasEnded && <Typography variant="h6" gutterBottom>Poll has ended</Typography>
+        }
+        {
+          willStartOnFuture && <Typography variant="h6" gutterBottom>Poll has not started yet</Typography>
+        }
         <MediaQuery minWidth={800}>
           <Grid container alignItems="flex-start" spacing={40}>
             <Grid item xs={7}>

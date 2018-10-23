@@ -1,7 +1,7 @@
 .text-item{
   margin-bottom: 10px;
   background-color: #fbfbfb;
-  box-shadow: none !important;
+  box-shadow: 0 0 2px lightgrey !important;
   border-bottom: 1px solid lightgrey;
 }
 @media (max-width: 799px) {
