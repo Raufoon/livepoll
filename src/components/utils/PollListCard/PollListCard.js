@@ -75,7 +75,7 @@ function PollListCard(props) {
                     poll.items.map((item, itemIdx) => (
                       <Chip
                         key={item.id}
-                        className={classes.itemChip}
+                        classNambottome={classes.itemChip}
                         avatar={
                           itemIdx === 0 ? (
                             <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
