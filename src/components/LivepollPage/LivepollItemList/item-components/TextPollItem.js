@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader'
-import CardActions from '@material-ui/core/CardActions'
 import Button from '@material-ui/core/Button';
 import Avatar from '@material-ui/core/Avatar'
 import Typography from "@material-ui/core/Typography/Typography";
@@ -57,7 +56,7 @@ const VoteCounter = props => {
   if (props.hideVotes) return <div/>;
   let voteCount = props.item.voteCount;
   if (props.isPercentView) {
-    voteCount = parseInt((voteCount / props.totalVotes)*10000);
+    voteCount = parseInt((voteCount / props.totalVotes)*10000, 10);
     voteCount /= 100;
     voteCount += '%';
   }

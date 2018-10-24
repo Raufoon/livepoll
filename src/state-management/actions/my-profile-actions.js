@@ -1,4 +1,3 @@
-import {actionFetchTrendingPolls} from "./home-actions";
 import {getStateManagerWorker} from "../../init/state-manager-worker";
 import {getLoggedInUser} from "../../util/cloud/auth";
 

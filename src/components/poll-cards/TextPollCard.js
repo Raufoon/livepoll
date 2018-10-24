@@ -7,7 +7,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import Typography from '@material-ui/core/Typography';
 import VoteCountChip from "../utils/VoteCountChip/VoteCountChip";
-import MediaQuery from "react-responsive";
 import Chip from "@material-ui/core/Chip/Chip";
 import Avatar from "@material-ui/core/Avatar/Avatar";
 import {FIRST_TROPHY_IMG_URL} from "../../constants/livepoll-constants";
