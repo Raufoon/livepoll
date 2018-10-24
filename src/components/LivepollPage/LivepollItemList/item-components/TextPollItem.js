@@ -135,4 +135,4 @@ TextPollItem.propTypes = {
   voterList: PropTypes.array,
 };
 
-export default withStyles(styles)(TextPollItem);
+export default React.memo(withStyles(styles)(TextPollItem));

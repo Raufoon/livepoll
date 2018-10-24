@@ -15,7 +15,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
   actionFetchPollInfo,
-  actionPollRealtimeUpdate
+  actionPollRealtimeUpdate, actionRequestTopItems
 } from "../../state-management/actions/livepoll-actions";
 import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
@@ -100,9 +100,9 @@ class LivepollPage extends React.Component {
           this.props.dispatch(actionPollRealtimeUpdate(pollId, itemId, voteCount));
         });
 
-        // this.refreshInterval = setInterval(() => {
-        //   this.props.dispatch(actionRequestTopItems(this.props.livepoll.id, 0, this.state.items.length));
-        // }, 300000) TODO: add in worker
+        this.refreshInterval = setInterval(() => {
+          this.props.dispatch(actionRequestTopItems(this.props.livepoll.id, 0, this.state.items.length));
+        }, 300000)
       }
 
       items = Object.values(this.props.livepoll.items || {})
