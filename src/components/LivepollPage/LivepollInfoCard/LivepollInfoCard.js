@@ -11,8 +11,11 @@ import DateIcon from '@material-ui/icons/DateRange';
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 
 const styles = theme => ({
+  container: {
+    color: '#222',
+    fontWeight: 'normal'
+  },
   dateTime: {
-    color: 'gray'
   }
 });
 
@@ -23,7 +26,7 @@ const LivepollInfoCard = props => {
 
   const {classes} = props;
   return (
-    <div className={props.className}>
+    <div className={props.className + ' ' + classes.container}>
       <Typography variant="h5" gutterBottom>About this poll</Typography>
       <br/>
 
