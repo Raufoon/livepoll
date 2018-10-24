@@ -53,7 +53,7 @@ const CreateItemForm = Loadable({
   loading: LPLoader,
 });
 
-class LivepollPage extends React.Component {
+class LivepollPage extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {

@@ -34,48 +34,54 @@ const styles = theme => ({
   }
 });
 
-function TextPollCard(props) {
-  const {classes} = props;
-  return (
-    <Card className={classes.container + ' ' + props.className}>
-      <CardActionArea>
-        <CardContent>
-          <Typography
-            className={classes.cardTitle}
-            gutterBottom
-            variant="h5"
-            component={Link}
-            to={`/poll/${props.poll.id}`}
-          >
-            {props.poll.settings.title}
-          </Typography>
+class TextPollCard extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return nextProps.poll != this.props.poll;
+  }
+  render() {
+    const props = this.props;
+    const {classes} = props;
+    return (
+      <Card className={classes.container + ' ' + props.className}>
+        <CardActionArea>
+          <CardContent>
+            <Typography
+              className={classes.cardTitle}
+              gutterBottom
+              variant="h5"
+              component={Link}
+              to={`/poll/${props.poll.id}`}
+            >
+              {props.poll.settings.title}
+            </Typography>
 
-          {
-            props.poll.items.map((item, itemIdx) => (
-              <div key={item.id}>
-                <Chip
-                  className={props.classes.itemChip}
-                  avatar={
-                    itemIdx === 0 ? (
-                      <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
-                    ):(
-                      <Avatar className={props.classes.itemAvatar}>{itemIdx + 1}</Avatar>
-                    )
-                  }
-                  label={
-                    <div>
-                      <Button className={props.classes.itemText} size={'small'}>{item.content.text}</Button>
-                      <VoteCountChip count={item.voteCount}/>
-                    </div>
-                  }
-                />
-              </div>
-            ))
-          }
-        </CardContent>
-      </CardActionArea>
-    </Card>
-  );
+            {
+              props.poll.items.map((item, itemIdx) => (
+                <div key={item.id}>
+                  <Chip
+                    className={props.classes.itemChip}
+                    avatar={
+                      itemIdx === 0 ? (
+                        <Avatar src={FIRST_TROPHY_IMG_URL}>{itemIdx + 1}</Avatar>
+                      ):(
+                        <Avatar className={props.classes.itemAvatar}>{itemIdx + 1}</Avatar>
+                      )
+                    }
+                    label={
+                      <div>
+                        <Button className={props.classes.itemText} size={'small'}>{item.content.text}</Button>
+                        <VoteCountChip count={item.voteCount}/>
+                      </div>
+                    }
+                  />
+                </div>
+              ))
+            }
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    );
+  }
 }
 
 TextPollCard.propTypes = {

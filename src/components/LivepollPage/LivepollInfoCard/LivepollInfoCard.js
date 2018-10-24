@@ -16,6 +16,11 @@ const styles = theme => ({
     fontWeight: 'normal'
   },
   dateTime: {
+    color: '#4c4c4c',
+  },
+  para: {
+    color: '#4c4c4c',
+    fontWeight: 'normal'
   }
 });
 
@@ -58,7 +63,7 @@ const LivepollInfoCard = props => {
       }
       <br/><br/>
 
-      <Typography variant="body1">
+      <Typography variant="body1" className={classes.para}>
         <b>{props.livepoll.totalVotes}</b> people have voted in this poll.&nbsp;
         <b>
           { settings.othersCanAdd ? 'Anyone': 'Only creator' }
@@ -85,4 +90,4 @@ LivepollInfoCard.propTypes = {
   livepoll: PropTypes.object,
 };
 
-export default withStyles(styles)(LivepollInfoCard)
+export default React.memo(withStyles(styles)(LivepollInfoCard))

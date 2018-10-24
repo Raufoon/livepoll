@@ -8,11 +8,11 @@ const iconStyle = {
   color: '#e2cc00'
 };
 
-const VoteCountChip = props => (
+const VoteCountChip = React.memo(props => (
   <Button className={`vote-count-chip ${props.className}`} size={'small'}>
     <StarIcon style={iconStyle}/>&nbsp;{props.count}{!props.short && ' Votes'}
   </Button>
-);
+));
 
 VoteCountChip.propTypes = {
   count: PropTypes.number.isRequired
