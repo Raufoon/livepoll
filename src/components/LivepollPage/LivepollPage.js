@@ -10,6 +10,7 @@ import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography/Typography";
 import Badge from "@material-ui/core/Badge/Badge";
 import Grid from "@material-ui/core/Grid/Grid";
+import Button from "@material-ui/core/Button";
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 
@@ -45,6 +46,13 @@ const styles = theme => ({
   percentText: {
     color: 'gray',
     textTransform: 'uppercase'
+  },
+  checkboxThumb: {
+    minHeight: '5px',
+    minWidth: '5px',
+    height: '20px',
+    width: '20px',
+    fontWeight: 'bold',
   }
 });
 
@@ -213,9 +221,19 @@ class LivepollPage extends React.PureComponent {
               onChange={this.onClickPercentCheckbox}
               value={'Percent'}
               color={'primary'}
+              icon={
+                <Button className={this.props.classes.checkboxThumb} color={'primary'} variant={'fab'}>%</Button>
+              }
+              checkedIcon={
+                <Button className={this.props.classes.checkboxThumb} color={'primary'} variant={'fab'}>%</Button>
+              }
             />
           }
-          label={<b className={this.props.classes.percentText}>ratio</b>}
+          label={
+            <MediaQuery minWidth={800}>
+              <b className={this.props.classes.percentText}>ratio</b>
+            </MediaQuery>
+          }
         />
         {
           isLive && (
