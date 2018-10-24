@@ -21,10 +21,11 @@ import LivepollItemList from "./LivepollItemList/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
+import LPLoader from "../loaders/LPLoader";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 const styles = theme => ({
@@ -49,7 +50,7 @@ const styles = theme => ({
 
 const CreateItemForm = Loadable({
   loader: ()=>import('../forms/CreateItemForm/CreateItemForm'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 class LivepollPage extends React.Component {

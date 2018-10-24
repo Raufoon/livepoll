@@ -12,9 +12,9 @@ const LPLoader = props => {
   const {classes} = props;
   return (
     <div>
-      <CircularProgress className={classes.progress} color="secondary" />
-      <CircularProgress className={classes.progress} color="secondary" />
-      <CircularProgress className={classes.progress} color="secondary" />
+      <CircularProgress className={classes.progress} style={{color: '#00a562'}} />
+      <CircularProgress className={classes.progress} style={{color: '#d3db5c'}} />
+      <CircularProgress className={classes.progress} style={{color: '#fdf893'}} />
       <CircularProgress className={classes.progress} color="secondary" />
     </div>
   )

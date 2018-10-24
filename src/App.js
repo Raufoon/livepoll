@@ -13,30 +13,31 @@ import AppBarContents from "./components/AppBarContents/AppBarContents";
 import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import FullScreenLoader from "./components/loaders/FullScreenLoader";
+import LPLoader from "./components/loaders/LPLoader";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 const LivepollPage = Loadable({
   loader: ()=>import('./components/LivepollPage/LivepollPage'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 const PollCreationForm = Loadable({
   loader: ()=>import('./components/forms/PollCreationForm/PollCreationForm'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 const ProfilePage = Loadable({
   loader: ()=>import('./components/ProfilePage/ProfilePage'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 const HomeNavigationPanel = Loadable({
   loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 const TrendingPollList = Loadable({
   loader: ()=> import('./components/TrendingPollList/TrendingPollList'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 const styles = {

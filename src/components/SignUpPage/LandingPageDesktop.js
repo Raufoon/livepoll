@@ -5,10 +5,11 @@ import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import LPLoader from "../loaders/LPLoader";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 const styles = theme => ({

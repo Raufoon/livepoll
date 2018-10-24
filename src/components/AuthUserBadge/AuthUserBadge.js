@@ -7,10 +7,11 @@ import Avatar from '@material-ui/core/Avatar';
 import Loadable from 'react-loadable';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import LPLoader from "../loaders/LPLoader";
 
 const CreateProfileForm = Loadable({
   loader: ()=>import('../forms/CreateProfileForm/CreateProfileForm'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 const AuthUserBadge = props => {

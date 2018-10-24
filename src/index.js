@@ -11,6 +11,7 @@ import getLivepollStore from "./init/state-management";
 import initFirebase from "./init/firebase";
 import initAuth from "./init/auth";
 import {initStateManagerWorker} from "./init/state-manager-worker";
+import LPLoader from "./components/loaders/LPLoader";
 
 // Initialization code
 const store = getLivepollStore();
@@ -20,7 +21,7 @@ initStateManagerWorker();
 
 const App = Loadable({
   loader: ()=>import('./App'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 ReactDOM.render(

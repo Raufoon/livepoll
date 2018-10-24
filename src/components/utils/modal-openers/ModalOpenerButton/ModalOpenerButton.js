@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '@material-ui/core/Button';
 import Loadable from 'react-loadable';
+import LPLoader from "../../../loaders/LPLoader";
 
 const Modal = Loadable({
   loader: ()=>import('../../../Modal/Modal'),
-  loading: ()=>'',
+  loading: LPLoader,
 });
 
 const openerDefaultStyle = {
