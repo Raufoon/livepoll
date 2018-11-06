@@ -8,11 +8,14 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
+import Avatar from '@material-ui/core/Avatar';
+import Chip from '@material-ui/core/Chip';
+import FaceIcon from '@material-ui/icons/Face';
+import DoneIcon from '@material-ui/icons/Done';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
 import Smartphone from "./desktop-landing-page-content/Smartphone";
-import Footer from "./desktop-landing-page-content/Footer";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),
@@ -52,7 +55,13 @@ const styles = theme => ({
     bottom: 0,
     width: '100vw',
     height: '10vh',
-    backgroundColor: '#dfe7dd'
+    backgroundColor: '#fbfbfb'
+  },
+  footerInner: {
+    position: 'relative',
+    width: '100%',
+    height: '100%',
+    textAlign: 'center'
   },
   starIcon: {
     color: '#ffff66'
@@ -60,6 +69,11 @@ const styles = theme => ({
   featText: {
     color: '#fbfbfb',
     textTransform: 'uppercase',
+  },
+  featchip: {
+    margin: '20px',
+    backgroundColor: 'transparent',
+    marginTop: '10px',
   }
 });
 
@@ -69,6 +83,20 @@ const featureList = [
   'Get poll updates in real-time',
   'Create polls with images & videos (coming soon)',
 ];
+
+const FeatChip = props => (
+  <Chip
+    className={props.className}
+    avatar={<Avatar src={props.avatarSrc}/>}
+    label={props.label}
+    deleteIcon={<DoneIcon />}
+  />
+);
+
+const REACT_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Freact-min.png?alt=media&token=bf9f9724-f30d-43ac-9bda-940d77cf82b4';
+const REDUX_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fredux-min.png?alt=media&token=0e05e66f-8e2c-48f5-8dc4-9c54d37ad5c0';
+const PWA_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fpwa-min.png?alt=media&token=1801672c-f07a-4f94-b066-59a377eb1eae';
+const MAT_UI_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fmatui-icon.png?alt=media&token=f00d9ccb-2e49-4603-8b14-ba0ca7e15ab8';
 
 const LandingPageDesktop = (props) => {
   const {classes} = props;
@@ -107,7 +135,14 @@ const LandingPageDesktop = (props) => {
         Join Us
       </ModalOpenerButton>
       <Smartphone className={classes.smartphone}/>
-      <Footer className={classes.footer}/>
+      <div className={classes.footer}>
+        <div className={classes.footerInner}>
+          <FeatChip className={classes.featchip} avatarSrc={REACT_LOGO} label={'Built With React'}/>
+          <FeatChip className={classes.featchip} avatarSrc={REDUX_LOGO} label={'Redux State at Worker Thread'}/>
+          <FeatChip className={classes.featchip} avatarSrc={PWA_LOGO} label={'Progressive Web App'}/>
+          <FeatChip className={classes.featchip} avatarSrc={MAT_UI_LOGO} label={'Material UI'}/>
+        </div>
+      </div>
     </React.Fragment>
   )
 };
