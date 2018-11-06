@@ -37,7 +37,7 @@ const styles = theme => ({
     top: 10,
     right: 10,
     color: '#fff',
-    backgroundColor: '#f6546a'
+    backgroundColor: '#088da5'
   },
   smartphone: {
     position: 'absolute',
