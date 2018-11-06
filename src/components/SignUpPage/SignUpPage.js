@@ -1,13 +1,22 @@
 import React from 'react';
 import MediaQuery from 'react-responsive';
 import { withStyles } from '@material-ui/core/styles';
+import Loadable from 'react-loadable';
 
-import LandingPageDesktop from "./LandingPageDesktop";
-import LandingPageMobile from "./LandingPageMobile";
+import LPLoader from "../loaders/LPLoader";
+
+const LandingPageDesktop = Loadable({
+  loader: ()=>import('./LandingPageDesktop'),
+  loading: LPLoader,
+});
+const LandingPageMobile = Loadable({
+  loader: ()=>import('./LandingPageMobile'),
+  loading: LPLoader,
+});
 
 const styles = theme => ({
   container: {
-    backgroundImage: 'linear-gradient(to bottom right, #00493f, #fbfbfb)',
+    backgroundImage: 'linear-gradient(to bottom right, #628b57, #b6f500)',
   }
 });
 

@@ -12,7 +12,7 @@ const style = {
   border: 'none',
 };
 const tabRoutes = [
-  '/', '/trending', '/popular', '/recent'
+  '', '/trending', '/popular', '/recent'
 ];
 const tabIcons = [
   HomeIcon, TrendingIcon, PopularIcon, RecentIcon

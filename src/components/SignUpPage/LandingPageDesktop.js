@@ -3,10 +3,16 @@ import Typography from '@material-ui/core/Typography';
 import JoinDesktopIcon from '@material-ui/icons/Computer';
 import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import StarIcon from '@material-ui/icons/Star';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
 import Smartphone from "./desktop-landing-page-content/Smartphone";
+import Footer from "./desktop-landing-page-content/Footer";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),
@@ -16,13 +22,12 @@ const SignUpForm = Loadable({
 const styles = theme => ({
   appInfoCard: {
     position: 'absolute',
-    top: '20vh',
-    transform: 'translateY(-50%)',
+    top: '10vh',
     left: 60,
   },
   appBigTitle: {
     color: '#fbfbfb',
-    textShadow: '-1px 0 #007b6a, 0 1px #007b6a, 1px 0 #007b6a, 0 -1px #007b6a'
+    textShadow: '-1px 0 #628b57, 0 1px #628b57, 1px 0 #628b57, 0 -1px #628b57'
   },
   appSubtitle: {
     color: '#fbfbfb',
@@ -31,7 +36,8 @@ const styles = theme => ({
     position: 'absolute',
     top: 10,
     right: 10,
-    color: '#fbfbfb',
+    color: '#fff',
+    backgroundColor: '#f6546a'
   },
   smartphone: {
     position: 'absolute',
@@ -40,8 +46,29 @@ const styles = theme => ({
     width: '38vh',
     height: '70vh',
     transform: 'translateX(-50%) translateY(-50%)'
+  },
+  footer: {
+    position: 'absolute',
+    bottom: 0,
+    width: '100vw',
+    height: '10vh',
+    backgroundColor: '#dfe7dd'
+  },
+  starIcon: {
+    color: '#ffff66'
+  },
+  featText: {
+    color: '#fbfbfb',
+    textTransform: 'uppercase',
   }
 });
+
+const featureList = [
+  'Create polls with texts',
+  'Manage profile easily',
+  'Get poll updates in real-time',
+  'Create polls with images & videos (coming soon)',
+];
 
 const LandingPageDesktop = (props) => {
   const {classes} = props;
@@ -59,6 +86,19 @@ const LandingPageDesktop = (props) => {
           gutterBottom>
           Create and manage polls online. Have fun!
         </Typography>
+        <br/><br/>
+        <List>
+          {
+            featureList.map(feat => (
+              <ListItem button key={feat} >
+                <ListItemIcon className={classes.starIcon}><StarIcon/></ListItemIcon>
+                <ListItemText inset primary={feat} primaryTypographyProps={{
+                  className: classes.featText,
+                }} />
+              </ListItem>
+            ))
+          }
+        </List>
       </div>
       <ModalOpenerButton
         className={classes.joinButton}
@@ -67,6 +107,7 @@ const LandingPageDesktop = (props) => {
         Join Us
       </ModalOpenerButton>
       <Smartphone className={classes.smartphone}/>
+      <Footer className={classes.footer}/>
     </React.Fragment>
   )
 };
