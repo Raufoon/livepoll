@@ -44,9 +44,9 @@ const styles = theme => ({
   smartphone: {
     position: 'absolute',
     left: '70vw',
-    top: '52vh',
+    top: '50vh',
     width: '38vh',
-    height: '70vh',
+    height: '73vh',
     transform: 'translateX(-50%) translateY(-50%)'
   },
   footer: {
