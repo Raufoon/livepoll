@@ -85,7 +85,7 @@ const featureList = [
   'Create polls with images & videos (coming soon)',
 ];
 
-const FeatChip = props => (
+export const FeatChip = props => (
   <Chip
     className={props.className}
     avatar={<Avatar src={props.avatarSrc}/>}
@@ -94,10 +94,10 @@ const FeatChip = props => (
   />
 );
 
-const REACT_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Freact-min.png?alt=media&token=bf9f9724-f30d-43ac-9bda-940d77cf82b4';
-const REDUX_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fredux-min.png?alt=media&token=0e05e66f-8e2c-48f5-8dc4-9c54d37ad5c0';
-const PWA_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fpwa-min.png?alt=media&token=1801672c-f07a-4f94-b066-59a377eb1eae';
-const MAT_UI_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fmatui-icon.png?alt=media&token=f00d9ccb-2e49-4603-8b14-ba0ca7e15ab8';
+export const REACT_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Freact-min.png?alt=media&token=bf9f9724-f30d-43ac-9bda-940d77cf82b4';
+export const REDUX_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fredux-min.png?alt=media&token=0e05e66f-8e2c-48f5-8dc4-9c54d37ad5c0';
+export const PWA_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fpwa-min.png?alt=media&token=1801672c-f07a-4f94-b066-59a377eb1eae';
+export const MAT_UI_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fmatui-icon.png?alt=media&token=f00d9ccb-2e49-4603-8b14-ba0ca7e15ab8';
 
 const LandingPageDesktop = (props) => {
   const {classes} = props;
