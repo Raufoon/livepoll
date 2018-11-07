@@ -1,8 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-import { Player } from 'video-react';
 
 const style = props => ({
   shell: {
@@ -49,24 +48,18 @@ const style = props => ({
   }
 });
 
-const DEMO_VID_URL = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fmobile-demo.mp4?alt=media&token=7a74ee6e-8941-4a80-b0bd-8bc9b70d644e';
-
-const Smartphone = props => (
-  <Paper elevation={2} className={`${props.classes.shell} ${props.className}`}>
-    <div className={props.classes.content}>
-      <b className={props.classes.speaker}>......</b>
-      {/*<Player*/}
-        {/*className={props.classes.screen}*/}
-        {/*playsInline*/}
-        {/*poster="/images/app-icon/launcher-icon.png"*/}
-        {/*src={DEMO_VID_URL}*/}
-      {/*/>*/}
-      <div
-        className={props.classes.screen}
-      />
-      <Button size='small' variant={'raised'} className={props.classes.homebutton}/>
-    </div>
-  </Paper>
-);
+const Smartphone = props => {
+  // const [visibleSlideIndex, setVisibleSlideIndex] = useState(0);
+  return (
+    <Paper elevation={2} className={`${props.classes.shell} ${props.className}`}>
+      <div className={props.classes.content}>
+        <b className={props.classes.speaker}>......</b>
+        <div className={props.classes.screen}>
+        </div>
+        <Button size='small' variant={'raised'} className={props.classes.homebutton}/>
+      </div>
+    </Paper>
+  )
+};
 
 export default withStyles(style)(Smartphone);

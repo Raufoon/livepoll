@@ -10,7 +10,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import StarIcon from '@material-ui/icons/Star';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
-import FaceIcon from '@material-ui/icons/Face';
 import DoneIcon from '@material-ui/icons/Done';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
@@ -74,6 +73,8 @@ const styles = theme => ({
     margin: '20px',
     backgroundColor: 'transparent',
     marginTop: '10px',
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
   }
 });
 
@@ -138,7 +139,7 @@ const LandingPageDesktop = (props) => {
       <div className={classes.footer}>
         <div className={classes.footerInner}>
           <FeatChip className={classes.featchip} avatarSrc={REACT_LOGO} label={'Built With React'}/>
-          <FeatChip className={classes.featchip} avatarSrc={REDUX_LOGO} label={'Redux State at Worker Thread'}/>
+          <FeatChip className={classes.featchip} avatarSrc={REDUX_LOGO} label={'Redux State at Worker'}/>
           <FeatChip className={classes.featchip} avatarSrc={PWA_LOGO} label={'Progressive Web App'}/>
           <FeatChip className={classes.featchip} avatarSrc={MAT_UI_LOGO} label={'Material UI'}/>
         </div>
