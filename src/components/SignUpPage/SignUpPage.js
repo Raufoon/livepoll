@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Loadable from 'react-loadable';
 
 import LPLoader from "../loaders/LPLoader";
+import {APP_COLOR_GRADIENT} from "../../constants/livepoll-constants";
 
 const LandingPageDesktop = Loadable({
   loader: ()=>import('./LandingPageDesktop'),
@@ -16,7 +17,7 @@ const LandingPageMobile = Loadable({
 
 const styles = theme => ({
   container: {
-    backgroundImage: 'linear-gradient(to bottom right, #628b57, #b6f500)',
+    backgroundImage: APP_COLOR_GRADIENT,
   }
 });
 

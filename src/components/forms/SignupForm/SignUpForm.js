@@ -55,9 +55,9 @@ const SignUpForm = (props) => {
           })
         }
         <br/>
-        <br/>
         <Typography variant={'body1'}>We currently do not verify emails</Typography>
       </LPForm>
+      <br/>
       <div>
         <Button className={classes.googleBtn} onClick={signinWithGoogle}>Google</Button>
         &nbsp;

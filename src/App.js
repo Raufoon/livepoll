@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MediaQuery from 'react-responsive';
 import {connect} from 'react-redux';
+import { withStyles } from '@material-ui/core/styles';
 import {Switch, withRouter, Route} from 'react-router-dom';
 import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
@@ -14,6 +15,7 @@ import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import FullScreenLoader from "./components/loaders/FullScreenLoader";
 import LPLoader from "./components/loaders/LPLoader";
+import {APP_COLOR_GRADIENT, APP_TEXT_SHADOW} from "./constants/livepoll-constants";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
@@ -41,14 +43,12 @@ const TrendingPollList = Loadable({
 });
 
 const styles = {
-  flexGrow10: {flexGrow: 1},
-  flexGrow3: {flexGrow: .3},
-  flexGrow7: {flexGrow: .7},
-  pollCreateButton: {color: 'primary'},
-  pollCreateButtonFloating: {
-    color: 'secondary',
-    variant: 'extendedFab',
-    size: 'small'
+  pollCreateButton: {
+    position: 'fixed',
+    bottom: 20,
+    right: 20,
+    backgroundImage: APP_COLOR_GRADIENT,
+    color: '#163c39',
   }
 };
 
@@ -86,10 +86,13 @@ class App extends Component {
         </div>
 
         <ModalOpenerButton
-          className={'poll-create-float-btn'}
+          className={this.props.classes.pollCreateButton}
           ModalComponent={PollCreationForm}
           OpenerIcon={CreateIcon}
-          openerComponentProps={styles.pollCreateButtonFloating}>
+          openerComponentProps={{
+            variant: 'extendedFab',
+            size: 'small'
+          }}>
           Create a poll
         </ModalOpenerButton>
 
@@ -104,4 +107,8 @@ const s2p = state => ({
   isLoggedIn: !!state.auth.currentUser,
   loaderState: state.loader.fullScreenLoader
 });
-export default withRouter(connect(s2p)(App));
+export default withRouter(
+  connect(s2p)(
+    withStyles(styles)(App)
+  )
+);
