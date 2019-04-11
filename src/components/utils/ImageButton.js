@@ -28,9 +28,15 @@ const ImageButton = props => {
   return (
     <div className={`pure-button ${className}`} style={styles.container} >
       <div style={{display: 'flex', alignItems: 'center'}}>
-        <img style={styles.icon} src={src}/>
-        &nbsp;&nbsp;
-        <TextComponent className={textClassName}>{text}</TextComponent>
+        {
+          src && <img style={styles.icon} src={src}/>
+        }
+        {
+          src && <span>&nbsp;&nbsp;</span>
+        }
+        {
+          text && <TextComponent className={textClassName}>{text}</TextComponent>
+        }
       </div>
     </div>
   )

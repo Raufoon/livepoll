@@ -14,12 +14,7 @@ const styles = theme => ({
     textAlign: 'center'
   },
   googleBtn: {
-    backgroundColor: 'yellow',
-    color: '#222'
-  },
-  fbBtn: {
-    backgroundColor: '#0082c8',
-    color: 'white'
+
   }
 });
 
@@ -35,8 +30,8 @@ const SignUpForm = (props) => {
   const {classes} = props;
 
   return (
-    <div className={'tac'}>
-      <Typography variant="h5" className={'app-big-title'} gutterBottom>Join Livepoll</Typography>
+    <div className={'tac font-comf'}>
+      <h1>Join Livepoll</h1>
       <LPForm submitButtonLabel={'Create / Log In'} onSubmit={signinWithEmailPass}>
         {
           LPFormField.createRequiredField({
@@ -55,14 +50,13 @@ const SignUpForm = (props) => {
           })
         }
         <br/>
-        <Typography variant={'body1'}>We currently do not verify emails</Typography>
       </LPForm>
-      <br/>
-      <div>
-        <Button className={classes.googleBtn} onClick={signinWithGoogle}>Google</Button>
-        &nbsp;
-        <Button className={classes.fbBtn} size="small">Facebook</Button>
-      </div>
+      <p>We currently do not verify emails. Use credentials "rg@rg.com" and "123456" to get a quick view</p>
+      <button
+        className={`pure-button ${classes.googleBtn}`}
+        onClick={signinWithGoogle}>
+        Sign in with Google
+      </button>
     </div>
   )
 };

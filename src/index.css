@@ -11,6 +11,12 @@ body {
   overflow-x: hidden;
   overflow-y: auto;
 }
+.font-comf {
+  font-family: 'Comfortaa';
+}
+.font-bold {
+  font-weight: bold;
+}
 #root{
   width: 100%;
   height: 100%;

@@ -1,55 +1,44 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import JoinMobileIcon from '@material-ui/icons/PhoneAndroid';
-import Loadable from 'react-loadable';
+import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
-import ListItem from "@material-ui/core/ListItem/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import List from "@material-ui/core/List/List";
-import StarIcon from '@material-ui/icons/Star';
+import LandingPageFooter from "./LandingPageFooter";
+import {actionSigninRequest} from "../../state-management/actions/auth-actions";
+import {SIGNIN_METHODS} from "../../constants/auth-constants";
+import Smartphone from "./desktop-landing-page-content/Smartphone";
 
-import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
-import LPLoader from "../loaders/LPLoader";
-import {FeatChip, PWA_LOGO, REACT_LOGO, REDUX_LOGO} from "./LandingPageDesktop";
-
-const SignUpForm = Loadable({
-  loader: ()=>import('../forms/SignupForm/SignUpForm'),
-  loading: LPLoader,
-});
-
-const featureList = [
-  'Create polls with texts',
-  'Manage profile easily',
-  'Get poll updates in real-time',
-  'Create polls with images & videos (coming soon)',
-];
-
-const styles = theme => ({
+const styles = () => ({
   appInfoCard: {
-    backgroundColor: 'rgba(0, 0, 0, 0.2)',
     textAlign: 'center',
     position: 'absolute',
     bottom: '10vh',
     paddingTop: 10,
     paddingBottom: 10,
     width: '100vw',
+    fontFamily: 'Comfortaa',
+    backgroundColor: 'rgba(6, 30, 17, 0.9)',
   },
   appBigTitle: {
-    color: '#fbfbfb',
+    color: '#ffa500',
+    fontSize: 35,
   },
   appSubtitle: {
-    color: '#fbfbfb',
-  },
-  joinButton: {
-    color: '#fbfbfb',
+    fontSize: 15,
+    color: '#fbfbfb'
   },
   footer: {
     position: 'absolute',
     bottom: 0,
+    fontSize: 'small',
     width: '100vw',
     height: '10vh',
     backgroundColor: '#fbfbfb'
+  },
+  smartphone: {
+    width: '38vh',
+    height: '73vh',
+    marginLeft: '50%',
+    marginTop: 10,
+    transform: 'translateX(-50%)'
   },
   footerInner: {
     position: 'relative',
@@ -57,18 +46,13 @@ const styles = theme => ({
     height: '100%',
     textAlign: 'center'
   },
-  starIcon: {
-    color: '#ffff66'
-  },
   featText: {
-    color: '#fff',
-    textTransform: 'uppercase',
+    fontFamily: 'Comfortaa',
   },
   featchip: {
     backgroundColor: 'transparent',
     marginTop: '10px',
     textTransform: 'uppercase',
-    fontWeight: 'bold'
   },
   featList: {
     marginTop: '5vh',
@@ -77,52 +61,33 @@ const styles = theme => ({
 
 const LandingPageMobile = (props) => {
   const {classes} = props;
+  const signinWithGoogle = () => {
+    props.dispatch(actionSigninRequest(SIGNIN_METHODS.GOOGLE))
+  };
   return (
     <div className={'tac'}>
-      <List className={classes.featList}>
-        <ListItem button >
-          <Typography variant={'h5'} className={classes.featText}>Features</Typography>
-        </ListItem>
-        {
-          featureList.map(feat => (
-            <ListItem button key={feat} >
-              <ListItemIcon className={classes.starIcon}><StarIcon/></ListItemIcon>
-              <ListItemText inset primary={feat} primaryTypographyProps={{
-                className: classes.featText,
-                variant: 'body2'
-              }} />
-            </ListItem>
-          ))
-        }
-      </List>
+      <Smartphone className={classes.smartphone}/>
+
       <div className={classes.appInfoCard}>
-        <Typography
-          variant="h3"
-          className={classes.appBigTitle}
-          gutterBottom>Livepoll
-        </Typography>
-        <Typography
-          variant="body1"
-          className={classes.appSubtitle}
-          gutterBottom>
-          Create and manage polls online. Have fun!
-        </Typography>
-        <br/>
-        <ModalOpenerButton
-          className={classes.joinButton}
-          OpenerIcon={JoinMobileIcon}
-          ModalComponent={SignUpForm}>
-          Join Us
-        </ModalOpenerButton>
+        <h1 className={classes.appBigTitle}>Livepoll</h1>
+        <h2 className={classes.appSubtitle}>Create and manage polls online.</h2>
+        <h2 className={classes.appSubtitle}>Have fun!!</h2>
+        <button className={`pure-button ${classes.googleButton}`} onClick={signinWithGoogle}>
+          Sign in with Google
+        </button>
       </div>
-      <div className={classes.footer}>
-        <div className={classes.footerInner}>
-          <FeatChip className={classes.featchip} avatarSrc={REACT_LOGO} label={'React'}/>
-          <FeatChip className={classes.featchip} avatarSrc={REDUX_LOGO} label={'Redux at Worker'}/>
-          <FeatChip className={classes.featchip} avatarSrc={PWA_LOGO} label={'PWA'}/>
-        </div>
-      </div>
+      <LandingPageFooter
+        containerClass={classes.footer}
+        innerClass={classes.footerInner}
+        featureItemClass={classes.featchip}
+        isForMobile={true}
+      />
     </div>
   )
 };
-export default withStyles(styles)(LandingPageMobile);
+
+export default connect()(
+  withStyles(styles)(
+    LandingPageMobile
+  )
+);
