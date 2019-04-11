@@ -8,6 +8,8 @@ import DoneIcon from '@material-ui/icons/Done';
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
 import Smartphone from "./desktop-landing-page-content/Smartphone";
+import ImageButton from "../utils/ImageButton";
+import {STAR_URL} from "../../constants/livepoll-constants";
 
 const SignUpForm = Loadable({
   loader: ()=>import('../forms/SignupForm/SignUpForm'),
@@ -49,18 +51,14 @@ const styles = theme => ({
     height: '100%',
     textAlign: 'center'
   },
-  starIcon: {
-    color: '#ffff66'
-  },
   featText: {
     fontFamily: 'Comfortaa',
     padding: 10,
   },
   featchip: {
-    margin: '20px',
+    margin: '10px',
     backgroundColor: 'transparent',
     marginTop: '10px',
-    textTransform: 'uppercase',
     fontWeight: 'bold'
   }
 });
@@ -86,6 +84,13 @@ export const REDUX_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepol
 export const PWA_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fpwa-min.png?alt=media&token=1801672c-f07a-4f94-b066-59a377eb1eae';
 export const MAT_UI_LOGO = 'https://firebasestorage.googleapis.com/v0/b/lllivepolll.appspot.com/o/landingpage%2Fmatui-icon.png?alt=media&token=f00d9ccb-2e49-4603-8b14-ba0ca7e15ab8';
 
+const footerItems = [
+  { src: REACT_LOGO, label: 'Built with React' },
+  { src: REDUX_LOGO, label: 'Redux State at Worker' },
+  { src: PWA_LOGO, label: 'Progressive Web App' },
+  { src: MAT_UI_LOGO, label: 'Served with GraphQL' },
+];
+
 const LandingPageDesktop = (props) => {
   const {classes} = props;
   return (
@@ -100,27 +105,34 @@ const LandingPageDesktop = (props) => {
           {
             featureList.map(feat => (
               <li key={feat} className={`pure-menu-item ${classes.featText}`}>
-                <span>{feat}</span>
+                <ImageButton src={STAR_URL} text={feat}/>
               </li>
             ))
           }
         </ul>
       </div>
-      <ModalOpenerButton
-        className="pure-button button-xlarge fr mg5"
-        ModalComponent={SignUpForm}>
+
+      <ModalOpenerButton className="pure-button button-xlarge fr mg5" ModalComponent={SignUpForm}>
         Join us
       </ModalOpenerButton>
       <Smartphone className={classes.smartphone}/>
       <div className={classes.footer}>
         <div className={classes.footerInner}>
-          <FeatChip className={classes.featchip} avatarSrc={REACT_LOGO} label={'Built With React'}/>
-          <FeatChip className={classes.featchip} avatarSrc={REDUX_LOGO} label={'Redux State at Worker'}/>
-          <FeatChip className={classes.featchip} avatarSrc={PWA_LOGO} label={'Progressive Web App'}/>
-          <FeatChip className={classes.featchip} avatarSrc={MAT_UI_LOGO} label={'Material UI'}/>
+          {
+            footerItems.map(item => (
+              <ImageButton
+                key={item.label}
+                className={classes.featchip}
+                src={item.src}
+                text={item.label}
+                iconHeight={30}/>
+            ))
+          }
         </div>
       </div>
     </React.Fragment>
   )
 };
+
+
 export default withStyles(styles)(LandingPageDesktop);
