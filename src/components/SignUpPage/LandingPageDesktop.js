@@ -1,13 +1,6 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography';
-import JoinDesktopIcon from '@material-ui/icons/Computer';
 import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import StarIcon from '@material-ui/icons/Star';
 import Avatar from '@material-ui/core/Avatar';
 import Chip from '@material-ui/core/Chip';
 import DoneIcon from '@material-ui/icons/Done';
@@ -26,20 +19,14 @@ const styles = theme => ({
     position: 'absolute',
     top: '10vh',
     left: 60,
+    fontFamily: 'Comfortaa',
   },
   appBigTitle: {
-    color: '#fbfbfb',
-    textShadow: '-1px 0 #628b57, 0 1px #628b57, 1px 0 #628b57, 0 -1px #628b57'
+    color: '#ffa500',
+    fontSize: '4em',
   },
   appSubtitle: {
-    color: '#fbfbfb',
-  },
-  joinButton: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    color: '#fff',
-    backgroundColor: '#065535'
+    color: '#202624'
   },
   smartphone: {
     position: 'absolute',
@@ -66,8 +53,8 @@ const styles = theme => ({
     color: '#ffff66'
   },
   featText: {
-    color: '#fbfbfb',
-    textTransform: 'uppercase',
+    fontFamily: 'Comfortaa',
+    padding: 10,
   },
   featchip: {
     margin: '20px',
@@ -104,36 +91,25 @@ const LandingPageDesktop = (props) => {
   return (
     <React.Fragment>
       <div className={classes.appInfoCard}>
-        <Typography
-          variant="h1"
-          className={classes.appBigTitle}
-          gutterBottom>Livepoll
-        </Typography>
-        <Typography
-          variant="h5"
-          className={classes.appSubtitle}
-          gutterBottom>
+        <h1 className={classes.appBigTitle}>Livepoll</h1>
+        <h2 className={classes.appSubtitle}>
           Create and manage polls online. Have fun!
-        </Typography>
+        </h2>
         <br/><br/>
-        <List>
+        <ul className="pure-menu-list">
           {
             featureList.map(feat => (
-              <ListItem button key={feat} >
-                <ListItemIcon className={classes.starIcon}><StarIcon/></ListItemIcon>
-                <ListItemText inset primary={feat} primaryTypographyProps={{
-                  className: classes.featText,
-                }} />
-              </ListItem>
+              <li key={feat} className={`pure-menu-item ${classes.featText}`}>
+                <span>{feat}</span>
+              </li>
             ))
           }
-        </List>
+        </ul>
       </div>
       <ModalOpenerButton
-        className={classes.joinButton}
-        OpenerIcon={JoinDesktopIcon}
+        className="pure-button button-xlarge fr mg5"
         ModalComponent={SignUpForm}>
-        Join Us
+        Join us
       </ModalOpenerButton>
       <Smartphone className={classes.smartphone}/>
       <div className={classes.footer}>

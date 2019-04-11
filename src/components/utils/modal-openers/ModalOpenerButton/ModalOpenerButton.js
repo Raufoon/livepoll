@@ -33,7 +33,7 @@ class ModalOpenerButton extends React.Component {
   }
   render() {
     const ModalComponent = this.props.ModalComponent;
-    const Opener = this.props.OpenerComponent || Button;
+    const Opener = this.props.OpenerComponent || "button";
     const OpenerIcon = this.props.OpenerIcon;
     return (
       <React.Fragment>
