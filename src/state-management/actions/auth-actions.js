@@ -3,7 +3,6 @@ import {actionMakeWarningToast} from "./toast-actions";
 import {actionShowFullscrLoader} from "./loader-actions";
 
 export const actionSigninRequest = (method, data) => dispatch => {
-  dispatch(actionShowFullscrLoader('Signing in to Livepoll'));
   switch (method) {
     case 'GOOGLE':
       signInWithGoogle(dispatch);
