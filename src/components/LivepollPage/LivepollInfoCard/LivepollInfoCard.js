@@ -1,93 +1,64 @@
 import React from "react";
 import dateFormat from 'dateformat';
-import Typography from "@material-ui/core/Typography/Typography";
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
-import Chip from '@material-ui/core/Chip';
 import { withStyles } from '@material-ui/core/styles';
-import TimeIcon from '@material-ui/icons/Watch';
-import DateIcon from '@material-ui/icons/DateRange';
+import ImageButton from "../../utils/ImageButton";
+import {FIRST_TROPHY_IMG_URL} from "../../../constants/livepoll-constants";
 
-import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
 
-const styles = theme => ({
+const styles = () => ({
   container: {
+    fontFamily: 'Comfortaa',
     color: '#222',
-    fontWeight: 'normal'
-  },
-  dateTime: {
-    color: '#4c4c4c',
-  },
-  para: {
-    color: '#4c4c4c',
-    fontWeight: 'normal'
+    fontWeight: 'normal',
+    textAlign: 'left',
+    marginLeft: '50%',
+    transform: 'translateX(-50%)'
   }
 });
 
 const LivepollInfoCard = props => {
-  const settings = props.livepoll.settings;
-  const start = new Date(settings.startDatetime);
-  const end = new Date(settings.endDatetime);
+  const {
+    classes,
+    className,
+    creatorName,
+    startDatetime,
+    endDatetime,
+    totalVotes
+  } = props;
+  const start = new Date(startDatetime);
+  const end = new Date(endDatetime);
 
-  const {classes} = props;
   return (
-    <div className={props.className + ' ' + classes.container}>
-      <Typography variant="h5" gutterBottom>About this poll</Typography>
-      <br/>
-
-      <Typography variant="subtitle1">
-        Created by&nbsp;&nbsp;<Chip label={props.livepoll.settings.creatorName}/>
-      </Typography>
-
-      <br/>
-
-      <Button className={classes.dateTime}>
-        <DateIcon/>&nbsp;{dateFormat(start, 'mmm dd, yyyy')}
-      </Button>
-      <Button className={classes.dateTime}>
-        <TimeIcon/>&nbsp;{dateFormat(start, 'hh:MM TT')}
-      </Button>
-
-      <br/>
+    <div className={`${className} ${classes.container}`}>
+      <h4>
+        Created by {creatorName}
+      </h4>
+      <h5>
+        Created on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
+      </h5>
       {
-        settings.endDatetime && (
-          <div>
-            <Button className={classes.dateTime}>
-              <DateIcon/>&nbsp;{dateFormat(end, 'mmm dd, yyyy')}
-            </Button>
-            <Button className={classes.dateTime}>
-              <TimeIcon/>&nbsp;{dateFormat(end, 'hh:MM TT')}
-            </Button>
-          </div>
+        endDatetime && (
+          <h5>
+            Will end on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
+          </h5>
         )
       }
-      <br/><br/>
-
-      <Typography variant="body1" className={classes.para}>
-        <b>{props.livepoll.totalVotes}</b> people have voted in this poll.&nbsp;
-        <b>
-          { settings.othersCanAdd ? 'Anyone': 'Only creator' }
-        </b>&nbsp;can add items to this poll. Voter list is&nbsp;
-        <b>
-          { !settings.showVoters ? 'hidden.': 'visible.'}
-        </b>&nbsp;
-        Items must be&nbsp;
-        <b>
-          { settings.itemFormat === PollSettings.POLL_ITEM_FORMAT.TEXT && 'single line text'}
-        </b>.
-        {
-          !settings.endDatetime && ' This poll will never end.'
-        }
-      </Typography>
+      <h5>Total Votes: {totalVotes}</h5>
+      <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*first item here*'} iconHeight={100}/>
+      <br/>
+      <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*second item here*'} iconHeight={100}/>
     </div>
   )
 };
 
 LivepollInfoCard.propTypes = {
   hasEnded: PropTypes.bool,
-  isLive: PropTypes.bool,
   willStartOnFuture: PropTypes.bool,
-  livepoll: PropTypes.object,
+  creatorName: PropTypes.string.isRequired,
+  startDatetime: PropTypes.object.isRequired,
+  endDatetime: PropTypes.object,
+  totalVotes: PropTypes.number.isRequired,
 };
 
 export default React.memo(withStyles(styles)(LivepollInfoCard))

@@ -2,16 +2,9 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
-import AddItemIcon from '@material-ui/icons/Add';
-import InfoIcon from '@material-ui/icons/InfoOutlined';
 import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
 import MediaQuery from "react-responsive";
-import Typography from "@material-ui/core/Typography/Typography";
-import Grid from "@material-ui/core/Grid/Grid";
-import Button from "@material-ui/core/Button";
-import Switch from '@material-ui/core/Switch';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 
 import {
   actionFetchPollInfo,
@@ -22,6 +15,7 @@ import {actionRequestCheckAlreadyVotedPoll} from "../../state-management/actions
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
 import LPLoader from "../loaders/LPLoader";
+import ImageButton from "../utils/ImageButton";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
@@ -40,19 +34,17 @@ const styles = () => ({
   },
   pollLiveIndicator: {
     color: 'crimson',
-    fontSize: 'smaller'
+    fontSize: 'x-small'
   },
-  percentText: {
-    color: 'gray',
-    textTransform: 'uppercase'
+  container: {
+    fontFamily: 'Comfortaa',
   },
-  checkboxThumb: {
-    minHeight: '5px',
-    minWidth: '5px',
-    height: '20px',
-    width: '20px',
-    fontWeight: 'bold',
-  }
+  option: {
+    fontSize: 'small',
+    textTransform: 'uppercase',
+    color: '#10042b',
+    backgroundColor: 'white',
+  },
 });
 
 const CreateItemForm = Loadable({
@@ -151,143 +143,127 @@ class LivepollPage extends React.PureComponent {
   }
 
   render () {
-    const livepoll = this.props.livepoll;
+    if (!this.props.livepoll) return '';
 
-    if (!livepoll) return '';
+    const {
+      livepoll,
+      classes,
+      authUserId,
+      lastVotedItemId,
+    } = this.props;
 
-    const settings = livepoll.settings;
-    const start = new Date(settings.startDatetime);
-    const end = new Date(settings.endDatetime);
+    const {
+      startDatetime,
+      endDatetime,
+      othersCanAdd,
+      creatorId,
+      itemFormat,
+      creatorName,
+      title,
+    } = livepoll.settings;
+
+    const start = new Date(startDatetime);
+    const end = new Date(endDatetime);
     const now = new Date();
-    const endTimeExists = !!settings.endDatetime;
+    const endTimeExists = !!endDatetime;
     const willStartOnFuture = now < start;
     const hasEnded = endTimeExists && now >= end;
     const isLive = this.isLive();
-    const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === this.props.authUserId);
+    const canIAdd = othersCanAdd || (!othersCanAdd && creatorId === authUserId);
     const showAddItemButton = canIAdd && !hasEnded;
-
-    const pollTitle = (
-      <h1>
-        {settings.title}
-        {
-          isLive && (
-            <sup><small>
-              <span className={`${this.props.classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
-            </small></sup>
-          )
-        }
-      </h1>
-    );
 
     const PollActions = (
       <div>
         <MediaQuery maxWidth={799}>
           <ModalOpenerButton
-            className={this.props.classes.infoButton}
+            className={`${classes.option} ${classes.infoButton} fl`}
             ModalComponent={LivepollInfoCard}
-            OpenerIcon={InfoIcon}
-            openerComponentProps={{size: "small"}}
-            childProps={{
-              livepoll: this.props.livepoll,
-              isLive: isLive,
-              willStartOnFuture: willStartOnFuture,
-              hasEnded: hasEnded
-            }}>Info
+            childProps={{creatorName, startDatetime, endDatetime, willStartOnFuture, hasEnded, totalVotes: livepoll.totalVotes,}}>
+            Info
           </ModalOpenerButton>
         </MediaQuery>
         {
           showAddItemButton &&
           <ModalOpenerButton
-            className={this.props.classes.addButton}
+            className={`${classes.option} ${classes.addButton} fl`}
             ModalComponent={CreateItemForm}
-            OpenerIcon={AddItemIcon}
-            openerComponentProps={{size: "small"}}
-            childProps={{
-              pollId: this.props.livepoll.id,
-              format: this.props.livepoll.settings.itemFormat,
-            }}
+            childProps={{ pollId: livepoll.id, format: itemFormat }}
           >+ADD</ModalOpenerButton>
         }
-        &nbsp;&nbsp;&nbsp;
-        <FormControlLabel
-          className={this.props.classes.percentText}
-          control={
-            <Switch
-              checked={this.state.viewAsPercent}
-              onChange={this.onClickPercentCheckbox}
-              value={'Percent'}
-              color={'primary'}
-            />
-          }
-          label={
-            <MediaQuery minWidth={800}>
-              <b className={this.props.classes.percentText}>ratio</b>
-            </MediaQuery>
-          }
-        />
+        <ImageButton className={`${classes.option} fl`}>
+          <input type={'checkbox'} checked={this.state.viewAsPercent} onChange={this.onClickPercentCheckbox}
+          /> View As Percent
+        </ImageButton>
         {
           isLive && (
-            <FormControlLabel
-              color={'secondary'}
-              control={
-                <Switch
-                  checked={this.state.isRealtime}
-                  onChange={this.onClickLiveCheckbox}
-                  value={'live'}
-                  color={'secondary'}
-                />
-              }
-              label={<b className={this.props.classes.percentText}>Live</b>}
-            />
+            <ImageButton className={`${classes.option} fl`}>
+              <input type={'checkbox'} checked={this.state.isRealtime} onChange={this.onClickLiveCheckbox}
+              /> Live
+            </ImageButton>
           )
         }
+        <br/><br/>
       </div>
     );
 
-    const PollItems = (
+    const itemList = (
       <LivepollItemList
         items={this.state.items}
         isPercentView={this.state.viewAsPercent}
-        lastVotedItemId={this.props.lastVotedItemId}
+        lastVotedItemId={lastVotedItemId}
         voteDisabled={!isLive}
         willStartOnFuture={willStartOnFuture}
-        livepoll={this.props.livepoll}
+        livepoll={livepoll}
       />
     );
 
     return (
-      <React.Fragment>
-        {pollTitle}
-        {
-          hasEnded && <Typography variant="h6" gutterBottom>Poll has ended</Typography>
-        }
-        {
-          willStartOnFuture && <Typography variant="h6" gutterBottom>Poll has not started yet</Typography>
-        }
+      <div className={`pure-g ${classes.container}`}>
+        <div className={'pure-u-1-1'}>
+          <h2 className={'font-comf'}>
+            {title}
+            {
+              isLive && (
+                <sup><small>
+                  <span className={`${classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
+                </small></sup>
+              )
+            }
+            {hasEnded && <h3>Poll has ended</h3>}
+            {willStartOnFuture && <h3>Poll has not started yet</h3>}
+          </h2>
+        </div>
+
         <MediaQuery minWidth={800}>
-          <Grid container alignItems="flex-start" spacing={40}>
-            <Grid item xs={7}>
-              {PollActions}
-              <br/>
-              {PollItems}
-            </Grid>
-            <Grid item xs={2}/>
-            <Grid item xs={3} className={this.props.classes.PollInfoCardDesktop}>
-              <LivepollInfoCard
-                livepoll={this.props.livepoll}
-                isLive={isLive}
-                willStartOnFuture={willStartOnFuture}
-                hasEnded={hasEnded}
-              />
-            </Grid>
-          </Grid>
+          <div className={'pure-u-1-1'}>
+            <div className={'pure-g'}>
+              <div className={'pure-u-1-2'}>
+                {PollActions}
+                <br/><br/>
+                {itemList}
+              </div>
+              <div className={'pure-u-1-2'}>
+                <LivepollInfoCard
+                  creatorName={creatorName}
+                  startDatetime={startDatetime}
+                  endDatetime={endDatetime}
+                  willStartOnFuture={willStartOnFuture}
+                  hasEnded={hasEnded}
+                  totalVotes={livepoll.totalVotes}
+                />
+              </div>
+            </div>
+          </div>
         </MediaQuery>
+
         <MediaQuery maxWidth={799}>
-          {PollActions}
-          <br/>
-          {PollItems}
+          <div className={'pure-u-1-1'}>{PollActions}<br/><br/></div>
+          <div className={'pure-u-1-1'}>
+            <br/>
+            {itemList}
+          </div>
         </MediaQuery>
-      </React.Fragment>
+      </div>
     )
   }
 }
