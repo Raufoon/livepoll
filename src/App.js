@@ -44,10 +44,12 @@ const TrendingPollList = Loadable({
 const styles = () => ({
   pollCreateButton: {
     position: 'fixed',
-    bottom: 20,
-    right: 20,
-    backgroundImage: APP_COLOR_GRADIENT,
-    color: '#163c39',
+    bottom: 5,
+    right: 5,
+    color: 'white',
+    backgroundColor: '#163c39',
+    border: '1px solid lightgray',
+    borderRadius: 5,
   }
 });
 
