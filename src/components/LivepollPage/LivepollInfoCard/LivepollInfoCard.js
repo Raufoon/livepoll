@@ -28,17 +28,23 @@ const LivepollInfoCard = props => {
   } = props;
   const start = new Date(startDatetime);
   const end = new Date(endDatetime);
+  const now = new Date();
+  const endTimeExists = !!endDatetime;
+  const willStartOnFuture = now < start;
+  const hasEnded = endTimeExists && now >= end;
 
   return (
     <div className={`${className} ${classes.container}`}>
       <h4>
         Created by {creatorName}
       </h4>
+      {hasEnded && <h4>Poll has ended</h4>}
+      {willStartOnFuture && <h4>Poll has not started yet</h4>}
       <h5>
         Created on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
       </h5>
       {
-        endDatetime && (
+        endDatetime && !hasEnded && (
           <h5>
             Will end on {dateFormat(end, 'mmm dd, yyyy')} at {dateFormat(end, 'hh:MM TT')}
           </h5>
@@ -56,8 +62,8 @@ LivepollInfoCard.propTypes = {
   hasEnded: PropTypes.bool,
   willStartOnFuture: PropTypes.bool,
   creatorName: PropTypes.string.isRequired,
-  startDatetime: PropTypes.object.isRequired,
-  endDatetime: PropTypes.object,
+  startDatetime: PropTypes.string.isRequired,
+  endDatetime: PropTypes.string,
   totalVotes: PropTypes.number.isRequired,
 };
 

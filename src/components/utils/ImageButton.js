@@ -9,7 +9,8 @@ const ImageButton = props => {
     src,
     className,
     textClassName,
-    children
+    children,
+    onClick
   } = props;
 
   const styles = {
@@ -27,7 +28,7 @@ const ImageButton = props => {
   const TextComponent = props.TextComponent || 'span';
 
   return (
-    <div className={`pure-button ${className}`} style={styles.container} >
+    <div className={`pure-button ${className}`} style={styles.container} onClick={onClick}>
       <div style={{display: 'flex', alignItems: 'center'}}>
         {
           src && <img style={styles.icon} src={src}/>

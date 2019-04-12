@@ -44,6 +44,7 @@ const TextPollItem = props => {
     isPercentView,
     totalVotes,
     vote,
+    voteDisabled
   } = props;
 
   const serialStyle = {backgroundColor: '#eeeeee'};
@@ -71,9 +72,13 @@ const TextPollItem = props => {
               iconHeight={10}
               text={`${voteAmount} votes`}
             />
-            <button className={`pure-button fr ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
-              {isAlreadyVoted ? 'Unvote':'Vote'}
-            </button>
+            {
+              !voteDisabled && (
+                <button className={`pure-button fr ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
+                  {isAlreadyVoted ? 'Unvote':'Vote'}
+                </button>
+              )
+            }
           </div>
         </div>
       </div>

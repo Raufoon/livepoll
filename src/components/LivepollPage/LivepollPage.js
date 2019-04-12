@@ -127,12 +127,16 @@ class LivepollPage extends React.PureComponent {
     return !(willStartOnFuture || hasEnded);
   }
 
-  onClickPercentCheckbox(event) {
-    this.setState({viewAsPercent: event.target.checked})
+  onClickPercentCheckbox() {
+    this.setState(prevState => ({
+      viewAsPercent: !prevState.viewAsPercent
+    }))
   }
 
   onClickLiveCheckbox(event) {
-    this.setState({isRealtime: event.target.checked});
+    this.setState(prevState => ({
+      isRealtime: !prevState.isRealtime
+    }));
     if (event.target.checked && !this.state.isSubscribed) {
       subscribeRealtime(this.props.livepoll.id, (pollId, itemId, voteCount) => {
         this.props.dispatch(actionPollRealtimeUpdate(pollId, itemId, voteCount));
@@ -190,15 +194,13 @@ class LivepollPage extends React.PureComponent {
             childProps={{ pollId: livepoll.id, format: itemFormat }}
           >+ADD</ModalOpenerButton>
         }
-        <ImageButton className={`${classes.option} fl`}>
-          <input type={'checkbox'} checked={this.state.viewAsPercent} onChange={this.onClickPercentCheckbox}
-          /> View As Percent
+        <ImageButton className={`${classes.option} fl`} onClick={this.onClickPercentCheckbox}>
+          <input type={'checkbox'} checked={this.state.viewAsPercent} disabled/> View As Percent
         </ImageButton>
         {
           isLive && (
-            <ImageButton className={`${classes.option} fl`}>
-              <input type={'checkbox'} checked={this.state.isRealtime} onChange={this.onClickLiveCheckbox}
-              /> Live
+            <ImageButton className={`${classes.option} fl`} onClick={this.onClickLiveCheckbox}>
+              <input type={'checkbox'} checked={this.state.isRealtime} disabled/> Live
             </ImageButton>
           )
         }
@@ -229,8 +231,6 @@ class LivepollPage extends React.PureComponent {
                 </small></sup>
               )
             }
-            {hasEnded && <h3>Poll has ended</h3>}
-            {willStartOnFuture && <h3>Poll has not started yet</h3>}
           </h2>
         </div>
 
