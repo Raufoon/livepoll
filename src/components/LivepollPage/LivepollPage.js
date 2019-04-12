@@ -206,7 +206,7 @@ class LivepollPage extends React.PureComponent {
               pollId: this.props.livepoll.id,
               format: this.props.livepoll.settings.itemFormat,
             }}
-          >Add</ModalOpenerButton>
+          >+ADD</ModalOpenerButton>
         }
         &nbsp;&nbsp;&nbsp;
         <FormControlLabel
@@ -217,12 +217,6 @@ class LivepollPage extends React.PureComponent {
               onChange={this.onClickPercentCheckbox}
               value={'Percent'}
               color={'primary'}
-              icon={
-                <Button className={this.props.classes.checkboxThumb} color={'primary'} variant={'fab'}>%</Button>
-              }
-              checkedIcon={
-                <Button className={this.props.classes.checkboxThumb} color={'primary'} variant={'fab'}>%</Button>
-              }
             />
           }
           label={

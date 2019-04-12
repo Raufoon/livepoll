@@ -40,15 +40,14 @@ const TextPollItem = props => {
     classes,
     item,
     index,
-    isAlreadyVoted
+    isAlreadyVoted,
+    isPercentView,
+    totalVotes,
+    vote,
   } = props;
 
-  const serialStyle = {
-    backgroundColor: '#eeeeee',
-  };
-  const voteButtonStyle = {
-    color: 'black',
-  };
+  const serialStyle = {backgroundColor: '#eeeeee'};
+  const voteButtonStyle = {color: isAlreadyVoted ? 'darkred':'black'};
 
   if (index === 1) {
     serialStyle.backgroundColor = '#f7c741';
@@ -58,11 +57,7 @@ const TextPollItem = props => {
     serialStyle.backgroundColor = '#f7bf8f';
     serialStyle.color = 'white';
   }
-
-  if (isAlreadyVoted) {
-    voteButtonStyle.color = 'green';
-    voteButtonStyle.fontWeight = 'bold';
-  }
+  const voteAmount = isPercentView ? `${parseInt((item.voteCount / totalVotes) * 100, 10)}%` : item.voteCount;
 
   return (
     <div className={`pure-g ${classes.item}`}>
@@ -71,8 +66,12 @@ const TextPollItem = props => {
         <div className={'pure-g mg5'}>
           <label className={`pure-u-1-1 ${classes.itemText}`}>{item.content.text}</label>
           <div className={`tac pure-u-1-1 ${classes.voteCounter}`}>
-            <ImageButton src={STAR_URL} iconHeight={10} text={`${ props.item.voteCount } votes`}/>
-            <button className={`pure-button fr ${classes.voteButton}`} onClick={props.vote} style={voteButtonStyle}>
+            <ImageButton
+              src={STAR_URL}
+              iconHeight={10}
+              text={`${voteAmount} votes`}
+            />
+            <button className={`pure-button fr ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
               {isAlreadyVoted ? 'Unvote':'Vote'}
             </button>
           </div>
