@@ -3,7 +3,6 @@ import MediaQuery from 'react-responsive';
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import {Switch, withRouter, Route} from 'react-router-dom';
-import CreateIcon from '@material-ui/icons/CreateSharp';
 import AppBar from '@material-ui/core/AppBar';
 import Loadable from 'react-loadable';
 
@@ -15,7 +14,7 @@ import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import FullScreenLoader from "./components/loaders/FullScreenLoader";
 import LPLoader from "./components/loaders/LPLoader";
-import {APP_COLOR_GRADIENT, APP_TEXT_SHADOW} from "./constants/livepoll-constants";
+import {APP_COLOR_GRADIENT} from "./constants/livepoll-constants";
 
 const HomePage = Loadable({
   loader: ()=>import('./components/HomePage/HomePage'),
@@ -42,7 +41,7 @@ const TrendingPollList = Loadable({
   loading: LPLoader,
 });
 
-const styles = {
+const styles = () => ({
   pollCreateButton: {
     position: 'fixed',
     bottom: 20,
@@ -50,7 +49,7 @@ const styles = {
     backgroundImage: APP_COLOR_GRADIENT,
     color: '#163c39',
   }
-};
+});
 
 class App extends Component {
   render() {
@@ -85,16 +84,13 @@ class App extends Component {
           </Switch>
         </div>
 
-        <ModalOpenerButton
-          className={this.props.classes.pollCreateButton}
-          ModalComponent={PollCreationForm}
-          OpenerIcon={CreateIcon}
-          openerComponentProps={{
-            variant: 'extendedFab',
-            size: 'small'
-          }}>
-          Create a poll
-        </ModalOpenerButton>
+        <MediaQuery maxWidth={799}>
+          <ModalOpenerButton
+            className={this.props.classes.pollCreateButton}
+            ModalComponent={PollCreationForm}>
+            Create
+          </ModalOpenerButton>
+        </MediaQuery>
 
         <ToastDisplayer/>
         <br/><br/><br/><br/><br/>

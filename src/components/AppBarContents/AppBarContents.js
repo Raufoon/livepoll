@@ -9,8 +9,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 import {actionSignoutRequest} from "../../state-management/actions/auth-actions";
 import ImageButton from "../utils/ImageButton";
+import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import PollCreationForm from "../forms/PollCreationForm/PollCreationForm";
 
-const styles = {
+const styles = () => ({
   flexGrow10: {flexGrow: 1},
   flexGrow3: {flexGrow: .3},
   flexGrow7: {flexGrow: .7},
@@ -21,10 +23,13 @@ const styles = {
   activeLink: {
     color: 'crimson !important'
   },
+  menuItem: {
+    backgroundColor: 'inherit'
+  },
   navlink: {
     color: '#4a4e69'
   }
-};
+});
 
 const AppBarContents = props => {
   const doSignOut = () => props.dispatch(actionSignoutRequest());
@@ -32,7 +37,7 @@ const AppBarContents = props => {
 
   const createLink = (to, label) => (
     <ImageButton
-      className={classes.navlink}
+      className={`${classes.navlink} ${classes.menuItem}`}
       activeClassName={classes.activeLink}
       text={label}
       to={to}
@@ -49,6 +54,11 @@ const AppBarContents = props => {
         {createLink('/trending', 'Trending')}
         {createLink('/popular', 'Popular')}
         {createLink('/recent', 'Recent')}
+        <ModalOpenerButton
+          className={`${classes.navlink} ${classes.menuItem}`}
+          ModalComponent={PollCreationForm}>
+          Create
+        </ModalOpenerButton>
       </MediaQuery>
 
       <div className={classes.flexGrow7}/>
