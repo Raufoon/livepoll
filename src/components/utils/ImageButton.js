@@ -10,7 +10,10 @@ const ImageButton = props => {
     className,
     textClassName,
     children,
-    onClick
+    onClick,
+    ContainerComponent,
+    TextComponent,
+    ...restProps
   } = props;
 
   const styles = {
@@ -25,10 +28,16 @@ const ImageButton = props => {
     }
   };
 
-  const TextComponent = props.TextComponent || 'span';
+  const Text = TextComponent || 'span';
+  const Container = ContainerComponent || 'div';
 
   return (
-    <div className={`pure-button ${className}`} style={styles.container} onClick={onClick}>
+    <Container
+      className={`pure-button ${className}`}
+      style={styles.container}
+      {...restProps}
+      onClick={onClick}
+    >
       <div style={{display: 'flex', alignItems: 'center'}}>
         {
           src && <img style={styles.icon} src={src}/>
@@ -37,10 +46,10 @@ const ImageButton = props => {
           src && <span>&nbsp;&nbsp;</span>
         }
         {
-          (text || children) && <TextComponent className={textClassName}>{text || children}</TextComponent>
+          (text || children) && <Text className={textClassName}>{text || children}</Text>
         }
       </div>
-    </div>
+    </Container>
   )
 };
 

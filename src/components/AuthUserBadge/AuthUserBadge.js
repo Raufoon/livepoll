@@ -2,12 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import Chip from '@material-ui/core/Chip';
-import Avatar from '@material-ui/core/Avatar';
 import Loadable from 'react-loadable';
 
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
+import ImageButton from "../utils/ImageButton";
 
 const CreateProfileForm = Loadable({
   loader: ()=>import('../forms/CreateProfileForm/CreateProfileForm'),
@@ -28,10 +27,11 @@ const AuthUserBadge = props => {
 
   const goToProfile = () => props.history.push('/me');
   return (
-    <Chip
+    <ImageButton
       className={props.className}
-      avatar={<Avatar>{props.loggedInUserData.name[0]}</Avatar>}
-      label={props.loggedInUserData.name}
+      iconHeight={30}
+      src={'https://static.thenounproject.com/png/99472-200.png'}
+      text={props.loggedInUserData.name}
       onClick={goToProfile}
     />
   );

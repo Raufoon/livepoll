@@ -1,5 +1,6 @@
 .app-content{
   margin: 20px;
+  font-family: 'Comfortaa';
 }
 @media (max-width: 799px) {
   .app-content-resp{
@@ -8,9 +9,8 @@
 }
 .app-title{
   text-decoration: none;
-  color: inherit;
   font-size: x-large !important;
-  font-family: 'Nova Flat' !important;
+  color: #ffa500;
 }
 .fl{float: left}
 .fr{float: right}
