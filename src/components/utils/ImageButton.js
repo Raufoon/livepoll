@@ -9,6 +9,7 @@ const ImageButton = props => {
     src,
     className,
     textClassName,
+    children
   } = props;
 
   const styles = {
@@ -35,7 +36,7 @@ const ImageButton = props => {
           src && <span>&nbsp;&nbsp;</span>
         }
         {
-          text && <TextComponent className={textClassName}>{text}</TextComponent>
+          (text || children) && <TextComponent className={textClassName}>{text || children}</TextComponent>
         }
       </div>
     </div>

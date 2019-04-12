@@ -8,7 +8,6 @@ import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
 import MediaQuery from "react-responsive";
 import Typography from "@material-ui/core/Typography/Typography";
-import Badge from "@material-ui/core/Badge/Badge";
 import Grid from "@material-ui/core/Grid/Grid";
 import Button from "@material-ui/core/Button";
 import Switch from '@material-ui/core/Switch';
@@ -29,7 +28,7 @@ const LivepollInfoCard = Loadable({
   loading: LPLoader,
 });
 
-const styles = theme => ({
+const styles = () => ({
   infoButton: {
     color: '#67908c'
   },
@@ -41,7 +40,7 @@ const styles = theme => ({
   },
   pollLiveIndicator: {
     color: 'crimson',
-    fontSize: 'x-small',
+    fontSize: 'smaller'
   },
   percentText: {
     color: 'gray',
@@ -167,20 +166,17 @@ class LivepollPage extends React.PureComponent {
     const canIAdd = settings.othersCanAdd || (!settings.othersCanAdd && settings.creatorId === this.props.authUserId);
     const showAddItemButton = canIAdd && !hasEnded;
 
-    const PollTitle = (
-      <Badge
-        color="default"
-        badgeContent={isLive && this.state.isRealtime ? 'LIVE':''}
-        classes={{
-          badge: isLive ? this.props.classes.pollLiveIndicator + ' blink' : ''
-        }}>
-        <MediaQuery minWidth={800}>
-          <Typography variant="h2" gutterBottom>{settings.title}</Typography>
-        </MediaQuery>
-        <MediaQuery maxWidth={799}>
-          <Typography variant="h5" gutterBottom>{settings.title}</Typography>
-        </MediaQuery>
-      </Badge>
+    const pollTitle = (
+      <h1>
+        {settings.title}
+        {
+          isLive && (
+            <sup><small>
+              <span className={`${this.props.classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
+            </small></sup>
+          )
+        }
+      </h1>
     );
 
     const PollActions = (
@@ -267,7 +263,7 @@ class LivepollPage extends React.PureComponent {
 
     return (
       <React.Fragment>
-        {PollTitle}
+        {pollTitle}
         {
           hasEnded && <Typography variant="h6" gutterBottom>Poll has ended</Typography>
         }
