@@ -54,6 +54,7 @@ const AppBarContents = props => {
       <div className={classes.flexGrow7}/>
 
       <AuthUserBadge/>
+
       <MediaQuery minWidth={800}>
         &nbsp;&nbsp;
         <ImageButton text={'SIGN OUT'} onClick={doSignOut} className={classes.signOutBtn}/>

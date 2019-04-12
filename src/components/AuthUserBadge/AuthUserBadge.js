@@ -7,6 +7,7 @@ import Loadable from 'react-loadable';
 import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
 import ImageButton from "../utils/ImageButton";
+import MediaQuery from "react-responsive";
 
 const CreateProfileForm = Loadable({
   loader: ()=>import('../forms/CreateProfileForm/CreateProfileForm'),
@@ -31,9 +32,10 @@ const AuthUserBadge = props => {
       className={props.className}
       iconHeight={30}
       src={'https://static.thenounproject.com/png/99472-200.png'}
-      text={props.loggedInUserData.name}
-      onClick={goToProfile}
-    />
+      onClick={goToProfile}>
+      <MediaQuery minWidth={800}>{props.loggedInUserData.name}</MediaQuery>
+      <MediaQuery maxWidth={799}>{props.loggedInUserData.name.split(' ')[0]}</MediaQuery>
+    </ImageButton>
   );
 };
 
