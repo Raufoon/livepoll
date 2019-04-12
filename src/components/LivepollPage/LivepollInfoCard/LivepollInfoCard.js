@@ -13,7 +13,9 @@ const styles = () => ({
     fontWeight: 'normal',
     textAlign: 'left',
     marginLeft: '50%',
-    transform: 'translateX(-50%)'
+    transform: 'translateX(-50%)',
+    borderLeft: '1px solid lightgray',
+    paddingLeft: 20
   }
 });
 
@@ -39,9 +41,8 @@ const LivepollInfoCard = props => {
         Created by {creatorName}
       </h4>
       {hasEnded && <h4>Poll has ended</h4>}
-      {willStartOnFuture && <h4>Poll has not started yet</h4>}
       <h5>
-        Created on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
+        {willStartOnFuture ? 'Will start':'Created'} on {dateFormat(start, 'mmm dd, yyyy')} at {dateFormat(start, 'hh:MM TT')}
       </h5>
       {
         endDatetime && !hasEnded && (
@@ -50,10 +51,16 @@ const LivepollInfoCard = props => {
           </h5>
         )
       }
-      <h5>Total Votes: {totalVotes}</h5>
-      <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*first item here*'} iconHeight={100}/>
-      <br/>
-      <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*second item here*'} iconHeight={100}/>
+      {
+        !willStartOnFuture && (
+          <React.Fragment>
+            <h5>Total Votes: {totalVotes}</h5>
+            <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*first item here*'} iconHeight={100}/>
+            <br/>
+            <ImageButton src={FIRST_TROPHY_IMG_URL} text={'*second item here*'} iconHeight={100}/>
+          </React.Fragment>
+        )
+      }
     </div>
   )
 };
