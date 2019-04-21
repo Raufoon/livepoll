@@ -4,7 +4,6 @@ import {withRouter} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import Loadable from 'react-loadable';
 import { withStyles } from '@material-ui/core/styles';
-import MediaQuery from "react-responsive";
 
 import {
   actionFetchPollInfo,
@@ -16,6 +15,7 @@ import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpe
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
 import LPLoader from "../loaders/LPLoader";
 import ImageButton from "../utils/ImageButton";
+import Responsive, {MEDIUM_SCREEN, PHONE_SCREEN} from "../utils/Responsive";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
@@ -178,14 +178,14 @@ class LivepollPage extends React.PureComponent {
 
     const PollActions = (
       <div>
-        <MediaQuery maxWidth={799}>
+        <Responsive screen={PHONE_SCREEN}>
           <ModalOpenerButton
             className={`${classes.option} ${classes.infoButton} fl`}
             ModalComponent={LivepollInfoCard}
             childProps={{creatorName, startDatetime, endDatetime, willStartOnFuture, hasEnded, totalVotes: livepoll.totalVotes,}}>
             Info
           </ModalOpenerButton>
-        </MediaQuery>
+        </Responsive>
         {
           showAddItemButton &&
           <ModalOpenerButton
@@ -234,7 +234,7 @@ class LivepollPage extends React.PureComponent {
           </h2>
         </div>
 
-        <MediaQuery minWidth={800}>
+        <Responsive screen={MEDIUM_SCREEN}>
           <div className={'pure-u-1-1'}>
             <div className={'pure-g'}>
               <div className={'pure-u-1-2'}>
@@ -254,15 +254,15 @@ class LivepollPage extends React.PureComponent {
               </div>
             </div>
           </div>
-        </MediaQuery>
+        </Responsive>
 
-        <MediaQuery maxWidth={799}>
+        <Responsive screen={PHONE_SCREEN}>
           <div className={'pure-u-1-1'}>{PollActions}<br/><br/></div>
           <div className={'pure-u-1-1'}>
             <br/>
             {itemList}
           </div>
-        </MediaQuery>
+        </Responsive>
       </div>
     )
   }
