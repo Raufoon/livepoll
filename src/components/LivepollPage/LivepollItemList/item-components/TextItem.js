@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 import PropTypes from 'prop-types'
 import ImageButton from "../../../utils/ImageButton";
 import {STAR_URL} from "../../../../constants/livepoll-constants";
+import Responsive, {MEDIUM_AND_LARGE_SCREEN, PHONE_SCREEN} from "../../../utils/Responsive";
 
 
 const styles = () => ({
@@ -64,20 +65,31 @@ const TextItem = props => {
     <div className={`pure-g ${classes.item}`}>
       <div className={`pure-u-2-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
       <div className={`pure-u-1-24`} />
-      <div className={`pure-u-12-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+      <div className={`pure-u-14-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
       <ImageButton
-        className={`pure-u-6-24`}
+        className={`pure-u-4-24`}
         src={STAR_URL}
         iconHeight={10}
-        text={`${voteAmount} votes`}
+        text={`${voteAmount}`}
       />
-      {
-        !voteDisabled && (
-          <button className={`pure-u-3-24 pure-button ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
-            {isAlreadyVoted ? 'Unvote':'Vote'}
-          </button>
-        )
-      }
+      <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
+        {
+          !voteDisabled && (
+            <button className={`pure-u-3-24 pure-button ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
+              {isAlreadyVoted ? 'Unvote':'Vote'}
+            </button>
+          )
+        }
+      </Responsive>
+      <Responsive screen={PHONE_SCREEN}>
+        {
+          !voteDisabled && (
+            <div className={'pure-u-3-24 vert-cent'}>
+              <input type="checkbox" checked={isAlreadyVoted} onChange={vote}/>
+            </div>
+          )
+        }
+      </Responsive>
     </div>
   )
 };
