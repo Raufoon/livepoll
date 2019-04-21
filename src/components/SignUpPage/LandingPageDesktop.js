@@ -3,9 +3,9 @@ import { withStyles } from '@material-ui/core/styles';
 import {connect} from 'react-redux';
 
 import Smartphone from "./desktop-landing-page-content/Smartphone";
-import ImageButton from "../utils/ImageButton";
+import ImageButton from "../ImageButton";
 import {STAR_URL} from "../../constants/livepoll-constants";
-import {actionSigninRequest} from "../../state-management/actions/auth-actions";
+import {actionSigninRequest} from "../../services/state-management/actions/auth-actions";
 import {SIGNIN_METHODS} from "../../constants/auth-constants";
 import LandingPageFooter from "./LandingPageFooter";
 

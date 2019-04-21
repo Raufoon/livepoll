@@ -8,20 +8,20 @@ import Loadable from 'react-loadable';
 
 import './App.css';
 import SignUpPage from "./components/SignUpPage/SignUpPage";
-import ModalOpenerButton from "./components/utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "./components/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import AppBarContents from "./components/AppBarContents/AppBarContents";
-import NetworkStatus from "./components/utils/NetworkStatus/NetworkStatus";
+import NetworkStatus from "./components/NetworkStatus/NetworkStatus";
 import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import FullScreenLoader from "./components/loaders/FullScreenLoader";
 import LPLoader from "./components/loaders/LPLoader";
 import {APP_COLOR_GRADIENT} from "./constants/livepoll-constants";
 
 const HomePage = Loadable({
-  loader: ()=>import('./components/HomePage/HomePage'),
+  loader: ()=>import('./routes/HomePage/HomePage'),
   loading: LPLoader,
 });
 const LivepollPage = Loadable({
-  loader: ()=>import('./components/LivepollPage/LivepollPage'),
+  loader: ()=>import('./routes/Livepoll/LivepollPage'),
   loading: LPLoader,
 });
 const PollCreationForm = Loadable({
@@ -29,15 +29,15 @@ const PollCreationForm = Loadable({
   loading: LPLoader,
 });
 const ProfilePage = Loadable({
-  loader: ()=>import('./components/ProfilePage/ProfilePage'),
+  loader: ()=>import('./routes/Profile/ProfilePage'),
   loading: LPLoader,
 });
 const HomeNavigationPanel = Loadable({
-  loader: ()=> import('./components/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
+  loader: ()=> import('./routes/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
   loading: LPLoader,
 });
 const TrendingPollList = Loadable({
-  loader: ()=> import('./components/TrendingPollList/TrendingPollList'),
+  loader: ()=> import('./routes/TrendingPollList/TrendingPollList'),
   loading: LPLoader,
 });
 

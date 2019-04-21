@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
 import Typography from "@material-ui/core/Typography/Typography";
-import {requestAddPollitem} from "../../../util/cloud/livepoll";
-import {actionRequestAddItemSuccess} from "../../../state-management/actions/livepoll-actions";
+import {requestAddPollitem} from "../../../services/util/cloud/livepoll";
+import {actionRequestAddItemSuccess} from "../../../services/state-management/actions/livepoll-actions";
 
 const CreateItemForm = props => {
   const onSubmit = (data) => {

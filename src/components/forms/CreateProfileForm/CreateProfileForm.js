@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {actionRequestUpdateBasicInfo} from "../../../state-management/actions/my-profile-actions";
+import {actionRequestUpdateBasicInfo} from "../../../services/state-management/actions/my-profile-actions";
 import Typography from "@material-ui/core/Typography/Typography";
 
 const CreateProfileForm = (props) => {

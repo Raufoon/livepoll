@@ -7,9 +7,9 @@ import AuthUserBadge from "../AuthUserBadge/AuthUserBadge";
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import { withStyles } from '@material-ui/core/styles';
 
-import {actionSignoutRequest} from "../../state-management/actions/auth-actions";
-import ImageButton from "../utils/ImageButton";
-import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import {actionSignoutRequest} from "../../services/state-management/actions/auth-actions";
+import ImageButton from "../ImageButton";
+import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import PollCreationForm from "../forms/PollCreationForm/PollCreationForm";
 
 const styles = () => ({

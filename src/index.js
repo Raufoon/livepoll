@@ -7,10 +7,10 @@ import Loadable from 'react-loadable';
 
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import getLivepollStore from "./init/state-management";
-import initFirebase from "./init/firebase";
-import initAuth from "./init/auth";
-import {initStateManagerWorker} from "./init/state-manager-worker";
+import getLivepollStore from "./services/state-management";
+import initFirebase from "./services/firebase";
+import initAuth from "./services/auth";
+import {initStateManagerWorker} from "./services/state-manager-worker";
 import LPLoader from "./components/loaders/LPLoader";
 
 // Initialization code

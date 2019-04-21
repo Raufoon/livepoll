@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {actionSigninRequest} from "../../../state-management/actions/auth-actions";
+import {actionSigninRequest} from "../../../services/state-management/actions/auth-actions";
 import {SIGNIN_METHODS} from "../../../constants/auth-constants";
 
 const styles = theme => ({

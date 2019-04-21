@@ -5,12 +5,12 @@ import {withRouter} from 'react-router-dom';
 import './PollCreationForm.css'
 import LPForm from "../LPForm/LPForm";
 import LPFormField from "../form-fields/LPFormField/LPFormField";
-import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
-import {requestPublishLivepoll} from "../../../util/cloud/livepoll";
+import PollSettings from "../../../services/util/poll/poll-definitions/poll-settings";
+import {requestPublishLivepoll} from "../../../services/util/cloud/livepoll";
 import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
 import LPCheckboxInput from "../form-fields/LPCheckboxInput/LPCheckboxInput";
 import LPDropdownInput from "../form-fields/LPDropdownInput/LPDropdownInput";
-import {actionMakeErrorToast} from "../../../state-management/actions/toast-actions";
+import {actionMakeErrorToast} from "../../../services/state-management/actions/toast-actions";
 import Typography from "@material-ui/core/Typography/Typography";
 
 class PollCreationForm extends React.Component {

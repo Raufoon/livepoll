@@ -13,7 +13,7 @@ import {
   actionRequestTopItems
 } from "./state-management/actions/livepoll-actions";
 import {ACTION_SYNC_MAIN_AND_WORKER} from "./state-management/actions/worker-sync-actions";
-import {actionSyncMainAndWorker} from "../state-management/actions/worker-sync-actions";
+import {actionSyncMainAndWorker} from "../services/state-management/actions/worker-sync-actions";
 
 function onmessage(event) {
   let payload = event.data.payload;

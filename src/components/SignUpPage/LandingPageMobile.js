@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import LandingPageFooter from "./LandingPageFooter";
-import {actionSigninRequest} from "../../state-management/actions/auth-actions";
+import {actionSigninRequest} from "../../services/state-management/actions/auth-actions";
 import {SIGNIN_METHODS} from "../../constants/auth-constants";
 import Smartphone from "./desktop-landing-page-content/Smartphone";
 

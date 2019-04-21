@@ -4,9 +4,9 @@ import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom'
 import Loadable from 'react-loadable';
 
-import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpenerButton";
+import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
 import LPLoader from "../loaders/LPLoader";
-import ImageButton from "../utils/ImageButton";
+import ImageButton from "../ImageButton";
 import MediaQuery from "react-responsive";
 
 const CreateProfileForm = Loadable({
