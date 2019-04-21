@@ -8,7 +8,7 @@ import {STAR_URL} from "../../../../constants/livepoll-constants";
 const styles = () => ({
   voteButton: {
     textTransform: 'uppercase',
-    fontWeight: 'normal',
+    fontSize: 'small'
   },
   voteCounter: {
     fontSize: 'x-small',
@@ -30,8 +30,6 @@ const styles = () => ({
   },
   itemText: {
     fontSize: 'large',
-    height: '100%',
-    marginLeft: 10
   }
 });
 
@@ -62,26 +60,21 @@ const TextPollItem = props => {
 
   return (
     <div className={`pure-g ${classes.item}`}>
-      <div className={`pure-u-2-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
-      <div className="pure-u-22-24">
-        <div className={'pure-g mg5'}>
-          <label className={`pure-u-1-1 ${classes.itemText}`}>{item.content.text}</label>
-          <div className={`tac pure-u-1-1 ${classes.voteCounter}`}>
-            <ImageButton
-              src={STAR_URL}
-              iconHeight={10}
-              text={`${voteAmount} votes`}
-            />
-            {
-              !voteDisabled && (
-                <button className={`pure-button fr ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
-                  {isAlreadyVoted ? 'Unvote':'Vote'}
-                </button>
-              )
-            }
-          </div>
-        </div>
-      </div>
+      <div className={`pure-u-3-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
+      <div className={`pure-u-12-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+      <ImageButton
+        className={`pure-u-6-24`}
+        src={STAR_URL}
+        iconHeight={10}
+        text={`${voteAmount} votes`}
+      />
+      {
+        !voteDisabled && (
+          <button className={`pure-u-3-24 pure-button ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
+            {isAlreadyVoted ? 'Unvote':'Vote'}
+          </button>
+        )
+      }
     </div>
   )
 };
