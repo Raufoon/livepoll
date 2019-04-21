@@ -152,10 +152,7 @@ class Livepoll extends React.PureComponent {
             Info
           </ModalOpenerButton>
         </Responsive>
-        {
-          showAddItemButton &&
-          <ItemAdditionButton pollId={livepoll.id} itemFormat={itemFormat}/>
-        }
+        { showAddItemButton && <ItemAdditionButton pollId={livepoll.id} itemFormat={itemFormat}/> }
         <ImageButton className={`${classes.option} fl`} onClick={this.onClickPercentCheckbox}>
           <input type={'checkbox'} checked={this.state.viewAsPercent} disabled/> View As Percent
         </ImageButton>
