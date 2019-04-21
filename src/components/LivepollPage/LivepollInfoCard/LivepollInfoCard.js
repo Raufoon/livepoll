@@ -11,10 +11,6 @@ const styles = () => ({
     fontFamily: 'Comfortaa',
     color: '#222',
     fontWeight: 'normal',
-    textAlign: 'left',
-    marginLeft: '50%',
-    transform: 'translateX(-50%)',
-    borderLeft: '1px solid lightgray',
     paddingLeft: 20
   }
 });

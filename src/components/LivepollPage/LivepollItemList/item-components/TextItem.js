@@ -62,9 +62,9 @@ const TextItem = props => {
 
   return (
     <div className={`pure-g ${classes.item}`}>
-      <div className={`pure-u-3-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
+      <div className={`pure-u-2-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
       <div className={`pure-u-1-24`} />
-      <div className={`pure-u-11-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+      <div className={`pure-u-12-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
       <ImageButton
         className={`pure-u-6-24`}
         src={STAR_URL}

@@ -15,7 +15,7 @@ import ModalOpenerButton from "../utils/modal-openers/ModalOpenerButton/ModalOpe
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../util/poll/realtime-manager";
 import LPLoader from "../loaders/LPLoader";
 import ImageButton from "../utils/ImageButton";
-import Responsive, {MEDIUM_SCREEN, PHONE_SCREEN} from "../utils/Responsive";
+import Responsive, {LARGE_SCREEN, MEDIUM_SCREEN, PHONE_SCREEN} from "../utils/Responsive";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
@@ -149,13 +149,7 @@ class LivepollPage extends React.PureComponent {
   render () {
     if (!this.props.livepoll) return '';
 
-    const {
-      livepoll,
-      classes,
-      authUserId,
-      lastVotedItemId,
-    } = this.props;
-
+    const { livepoll, classes, authUserId, lastVotedItemId,} = this.props;
     const {
       startDatetime,
       endDatetime,
@@ -219,49 +213,42 @@ class LivepollPage extends React.PureComponent {
       />
     );
 
+    const pollInfoCard = (
+      <LivepollInfoCard
+        creatorName={creatorName}
+        startDatetime={startDatetime}
+        endDatetime={endDatetime}
+        willStartOnFuture={willStartOnFuture}
+        hasEnded={hasEnded}
+        totalVotes={livepoll.totalVotes}
+      />
+    );
+
     return (
       <div className={`pure-g ${classes.container}`}>
         <div className={'pure-u-1-1'}>
-          <h2 className={'font-comf'}>
-            {title}
-            {
-              isLive && (
-                <sup><small>
-                  <span className={`${classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
-                </small></sup>
-              )
-            }
-          </h2>
+          <h2 className={'font-comf'}> {title} {isLive && <sup><small>
+                <span className={`${classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
+              </small></sup>} </h2>
         </div>
 
         <Responsive screen={MEDIUM_SCREEN}>
-          <div className={'pure-u-1-1'}>
-            <div className={'pure-g'}>
-              <div className={'pure-u-1-2'}>
-                {PollActions}
-                <br/><br/>
-                {itemList}
-              </div>
-              <div className={'pure-u-1-2'}>
-                <LivepollInfoCard
-                  creatorName={creatorName}
-                  startDatetime={startDatetime}
-                  endDatetime={endDatetime}
-                  willStartOnFuture={willStartOnFuture}
-                  hasEnded={hasEnded}
-                  totalVotes={livepoll.totalVotes}
-                />
-              </div>
-            </div>
-          </div>
+          <div className={'pure-u-14-24'}>{PollActions}<br/><br/>{itemList}</div>
+          <div className={'pure-u-1-24'}/>
+          <div className={'pure-u-9-24'}>{pollInfoCard}</div>
+        </Responsive>
+
+        <Responsive screen={LARGE_SCREEN}>
+          <div className={'pure-u-10-24'}>{PollActions}<br/><br/>{itemList}</div>
+          <div className={'pure-u-1-24'}/>
+          <div className={'pure-u-5-24'}>{pollInfoCard}</div>
+          <div className={'pure-u-1-24'}/>
+          <div className={'pure-u-7-24'}>Similar polls will be listed here</div>
         </Responsive>
 
         <Responsive screen={PHONE_SCREEN}>
           <div className={'pure-u-1-1'}>{PollActions}<br/><br/></div>
-          <div className={'pure-u-1-1'}>
-            <br/>
-            {itemList}
-          </div>
+          <div className={'pure-u-1-1'}><br/>{itemList}</div>
         </Responsive>
       </div>
     )
@@ -280,8 +267,4 @@ LivepollPage.propTypes = {
   authUserId: PropTypes.string,
 };
 
-export default connect(s2p)(
-  withRouter(
-    withStyles(styles)(LivepollPage)
-  )
-)
+export default connect(s2p)(withRouter(withStyles(styles)(LivepollPage)))
