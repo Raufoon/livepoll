@@ -12,6 +12,13 @@ const styles = {
   container: {
     fontFamily: 'Comfortaa',
   },
+  option: {
+    backgroundColor: 'transparent',
+    textTransform: 'uppercase',
+    border: '1px solid lightgray',
+    margin: 5,
+    fontSize: 'smaller'
+  },
 };
 
 export default styles;

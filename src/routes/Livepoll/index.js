@@ -144,61 +144,80 @@ class Livepoll extends React.PureComponent {
     let pollInfoCardProps = {
       creatorName, startDatetime, endDatetime, willStartOnFuture, hasEnded, totalVotes: livepoll.totalVotes
     };
+    let itemListProps = {
+      items: this.state.items,
+      isPercentView: this.state.viewAsPercent,
+      lastVotedItemId: lastVotedItemId,
+      voteDisabled: !isLive,
+      willStartOnFuture: willStartOnFuture,
+      livepoll: livepoll
+    };
 
-    const PollActions = (
-      <div>
-        <Responsive screen={PHONE_SCREEN}>
-          <ModalOpenerButton
-            className={`${classes.option} ${classes.infoButton} fl`}
-            ModalComponent={LivepollInfoCard}
-            childProps={{...pollInfoCardProps}}>
-            Info
-          </ModalOpenerButton>
-        </Responsive>
-        { showAddItemButton && <ItemAdditionButton pollId={livepoll.id} itemFormat={itemFormat}/> }
-        <ImageButton className={`${classes.option} fl`} onClick={this.onClickPercentCheckbox}>
-          <input type={'checkbox'} checked={this.state.viewAsPercent} disabled/> View As Percent
-        </ImageButton>
-        {
-          isLive && (
-            <ImageButton className={`${classes.option} fl`} onClick={this.onClickLiveCheckbox}>
-              <input type={'checkbox'} checked={this.state.isRealtime} disabled/> Live
-            </ImageButton>
-          )
-        }
-        <br/><br/>
-      </div>
+    const pollCardOpener = (
+      <ModalOpenerButton
+        className={`${classes.option} fl`}
+        ModalComponent={LivepollInfoCard}
+        childProps={{...pollInfoCardProps}}>
+        Info
+      </ModalOpenerButton>
     );
 
-    const itemList = (
-      <LivepollItemList
-        items={this.state.items}
-        isPercentView={this.state.viewAsPercent}
-        lastVotedItemId={lastVotedItemId}
-        voteDisabled={!isLive}
-        willStartOnFuture={willStartOnFuture}
-        livepoll={livepoll}
-      />
+    const voteCountToggler = (
+      <ImageButton className={`${classes.option} fl`} onClick={this.onClickPercentCheckbox}>
+        <input type={'checkbox'} checked={this.state.viewAsPercent} disabled/> Ratio
+      </ImageButton>
+    );
+
+    const realtimeToggler = (
+      <ImageButton className={`${classes.option} fl`} onClick={this.onClickLiveCheckbox}>
+        <input type={'checkbox'} checked={this.state.isRealtime} disabled/> Live
+      </ImageButton>
+    );
+
+    const menu = (
+      <React.Fragment>
+        <Responsive screen={PHONE_SCREEN}>{pollCardOpener}</Responsive>
+        { showAddItemButton && <ItemAdditionButton className={`${classes.option} fl`} pollId={livepoll.id} itemFormat={itemFormat}/> }
+        { voteCountToggler }
+        { isLive && realtimeToggler }
+        <br/><br/>
+        <br/><br/>
+      </React.Fragment>
     );
 
     return (
       <div className={`pure-g ${classes.container}`}>
         <div className={'pure-u-1-1'}>
-          <h2 className={'font-comf'}> {title} {isLive && <sup><small>
-                <span className={`${classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
-              </small></sup>} </h2>
+          <h2 className={'font-comf'}>
+            {title}
+            {
+              isLive && (
+                <sup><small>
+                  <span className={`${classes.pollLiveIndicator} blink`}>&nbsp;&nbsp;LIVE</span>
+                </small></sup>
+              )
+            }
+          </h2>
         </div>
 
+
         <Responsive screen={MEDIUM_SCREEN}>
-          <div className={'pure-u-14-24'}>{PollActions}<br/><br/>{itemList}</div>
+          <div className={'pure-u-14-24'}>
+            {menu}
+            <LivepollItemList {...itemListProps} />
+          </div>
           <div className={'pure-u-1-24'}/>
           <div className={'pure-u-9-24'}>
             <LivepollInfoCard {...pollInfoCardProps} />
           </div>
         </Responsive>
 
+
         <Responsive screen={LARGE_SCREEN}>
-          <div className={'pure-u-10-24'}>{PollActions}<br/><br/>{itemList}</div>
+          <div className={'pure-u-10-24'}>
+            {menu}
+            <LivepollItemList {...itemListProps} />
+          </div>
           <div className={'pure-u-1-24'}/>
           <div className={'pure-u-5-24'}>
             <LivepollInfoCard {...pollInfoCardProps} />
@@ -207,9 +226,14 @@ class Livepoll extends React.PureComponent {
           <div className={'pure-u-7-24'}>Similar polls will be listed here</div>
         </Responsive>
 
+
         <Responsive screen={PHONE_SCREEN}>
-          <div className={'pure-u-1-1'}>{PollActions}<br/><br/></div>
-          <div className={'pure-u-1-1'}><br/>{itemList}</div>
+          <div className={'pure-u-1-1'}>
+            {menu}
+          </div>
+          <div className={'pure-u-1-1'}><br/>
+            <LivepollItemList {...itemListProps} />
+          </div>
         </Responsive>
       </div>
     )
