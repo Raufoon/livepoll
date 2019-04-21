@@ -119,7 +119,7 @@ class Livepoll extends React.PureComponent {
   }
 
   render () {
-    if (!this.props.livepoll) return '';
+    if (!this.props.livepoll) return `There's nothing here!`;
 
     const { livepoll, classes, authUserId, lastVotedItemId,} = this.props;
     const {
@@ -141,6 +141,9 @@ class Livepoll extends React.PureComponent {
     const isLive = this.isLive();
     const canIAdd = othersCanAdd || (!othersCanAdd && creatorId === authUserId);
     const showAddItemButton = canIAdd && !hasEnded;
+    let pollInfoCardProps = {
+      creatorName, startDatetime, endDatetime, willStartOnFuture, hasEnded, totalVotes: livepoll.totalVotes
+    };
 
     const PollActions = (
       <div>
@@ -148,7 +151,7 @@ class Livepoll extends React.PureComponent {
           <ModalOpenerButton
             className={`${classes.option} ${classes.infoButton} fl`}
             ModalComponent={LivepollInfoCard}
-            childProps={{creatorName, startDatetime, endDatetime, willStartOnFuture, hasEnded, totalVotes: livepoll.totalVotes,}}>
+            childProps={{...pollInfoCardProps}}>
             Info
           </ModalOpenerButton>
         </Responsive>
@@ -178,17 +181,6 @@ class Livepoll extends React.PureComponent {
       />
     );
 
-    const pollInfoCard = (
-      <LivepollInfoCard
-        creatorName={creatorName}
-        startDatetime={startDatetime}
-        endDatetime={endDatetime}
-        willStartOnFuture={willStartOnFuture}
-        hasEnded={hasEnded}
-        totalVotes={livepoll.totalVotes}
-      />
-    );
-
     return (
       <div className={`pure-g ${classes.container}`}>
         <div className={'pure-u-1-1'}>
@@ -200,13 +192,17 @@ class Livepoll extends React.PureComponent {
         <Responsive screen={MEDIUM_SCREEN}>
           <div className={'pure-u-14-24'}>{PollActions}<br/><br/>{itemList}</div>
           <div className={'pure-u-1-24'}/>
-          <div className={'pure-u-9-24'}>{pollInfoCard}</div>
+          <div className={'pure-u-9-24'}>
+            <LivepollInfoCard {...pollInfoCardProps} />
+          </div>
         </Responsive>
 
         <Responsive screen={LARGE_SCREEN}>
           <div className={'pure-u-10-24'}>{PollActions}<br/><br/>{itemList}</div>
           <div className={'pure-u-1-24'}/>
-          <div className={'pure-u-5-24'}>{pollInfoCard}</div>
+          <div className={'pure-u-5-24'}>
+            <LivepollInfoCard {...pollInfoCardProps} />
+          </div>
           <div className={'pure-u-1-24'}/>
           <div className={'pure-u-7-24'}>Similar polls will be listed here</div>
         </Responsive>
