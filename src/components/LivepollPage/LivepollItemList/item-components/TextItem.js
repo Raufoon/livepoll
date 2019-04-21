@@ -8,7 +8,8 @@ import {STAR_URL} from "../../../../constants/livepoll-constants";
 const styles = () => ({
   voteButton: {
     textTransform: 'uppercase',
-    fontSize: 'small'
+    fontSize: 'small',
+    fontWeight: 'bold'
   },
   voteCounter: {
     fontSize: 'x-small',
@@ -30,10 +31,11 @@ const styles = () => ({
   },
   itemText: {
     fontSize: 'large',
+    justifyContent: 'left'
   }
 });
 
-const TextPollItem = props => {
+const TextItem = props => {
   const {
     classes,
     item,
@@ -61,7 +63,8 @@ const TextPollItem = props => {
   return (
     <div className={`pure-g ${classes.item}`}>
       <div className={`pure-u-3-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
-      <div className={`pure-u-12-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+      <div className={`pure-u-1-24`} />
+      <div className={`pure-u-11-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
       <ImageButton
         className={`pure-u-6-24`}
         src={STAR_URL}
@@ -79,7 +82,7 @@ const TextPollItem = props => {
   )
 };
 
-TextPollItem.propTypes = {
+TextItem.propTypes = {
   isAlreadyVoted: PropTypes.bool,
   voteDisabled: PropTypes.bool,
   vote: PropTypes.func,
@@ -89,4 +92,4 @@ TextPollItem.propTypes = {
   voterList: PropTypes.array,
 };
 
-export default React.memo(withStyles(styles)(TextPollItem));
+export default React.memo(withStyles(styles)(TextItem));

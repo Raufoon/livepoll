@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 
 import PollSettings from "../../../util/poll/poll-definitions/poll-settings";
-import TextItem from "./item-components/TextPollItem";
+import TextItem from "./item-components/TextItem";
 import {actionGiveVote, actionRequestTopItems} from "../../../state-management/actions/livepoll-actions";
 import BigRemoteDataDisplay from "../../utils/BigRemoteDataDisplay/BigRemoteDataDisplay";
 
