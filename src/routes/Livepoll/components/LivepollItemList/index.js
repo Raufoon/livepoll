@@ -3,10 +3,10 @@ import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 import FlipMove from 'react-flip-move';
 
-import PollSettings from "../../../services/util/poll/poll-definitions/poll-settings";
-import TextItem from "./item-components/TextItem";
-import {actionGiveVote, actionRequestTopItems} from "../../../services/state-management/actions/livepoll-actions";
-import BigRemoteDataDisplay from "../../../components/BigRemoteDataDisplay/BigRemoteDataDisplay";
+import PollSettings from "../../../../services/util/poll/poll-definitions/poll-settings";
+import TextItem from "./components/TextItem";
+import {actionGiveVote, actionRequestTopItems} from "../../../../services/state-management/actions/livepoll-actions";
+import BigRemoteDataDisplay from "../../../../components/BigRemoteDataDisplay/BigRemoteDataDisplay";
 
 const LivepollItemList = props => {
   let ItemComponent;

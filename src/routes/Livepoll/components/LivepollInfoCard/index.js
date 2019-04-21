@@ -2,8 +2,8 @@ import React from "react";
 import dateFormat from 'dateformat';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles/index';
-import ImageButton from "../../../components/ImageButton";
-import {FIRST_TROPHY_IMG_URL} from "../../../constants/livepoll-constants";
+import ImageButton from "../../../../components/ImageButton";
+import {FIRST_TROPHY_IMG_URL} from "../../../../constants/livepoll-constants";
 
 
 const styles = () => ({

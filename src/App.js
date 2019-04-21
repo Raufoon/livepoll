@@ -21,7 +21,7 @@ const HomePage = Loadable({
   loading: LPLoader,
 });
 const LivepollPage = Loadable({
-  loader: ()=>import('./routes/Livepoll/LivepollPage'),
+  loader: ()=>import('./routes/Livepoll'),
   loading: LPLoader,
 });
 const PollCreationForm = Loadable({

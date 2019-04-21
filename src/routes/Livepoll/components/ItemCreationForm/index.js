@@ -2,13 +2,12 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 
-import LPForm from "../LPForm/LPForm";
-import LPFormField from "../form-fields/LPFormField/LPFormField";
-import Typography from "@material-ui/core/Typography/Typography";
-import {requestAddPollitem} from "../../../services/util/cloud/livepoll";
-import {actionRequestAddItemSuccess} from "../../../services/state-management/actions/livepoll-actions";
+import LPForm from "../../../../components/forms/LPForm/LPForm";
+import LPFormField from "../../../../components/forms/form-fields/LPFormField/LPFormField";
+import {requestAddPollitem} from "../../../../services/util/cloud/livepoll";
+import {actionRequestAddItemSuccess} from "../../../../services/state-management/actions/livepoll-actions";
 
-const CreateItemForm = props => {
+const ItemCreationForm = props => {
   const onSubmit = (data) => {
     requestAddPollitem(props.pollId, data)
       .then((response) => {
@@ -19,7 +18,7 @@ const CreateItemForm = props => {
 
   return (
     <LPForm submitButtonLabel={'Add item'} onSubmit={onSubmit}>
-      <Typography variant="subtitle1" gutterBottom>Create an item</Typography>
+      <h2 className={'font-comf'}>Create an item</h2>
       {
         LPFormField.createRequiredField({
           name: 'text',
@@ -31,9 +30,9 @@ const CreateItemForm = props => {
   )
 };
 
-CreateItemForm.propTypes = {
+ItemCreationForm.propTypes = {
   pollId: PropTypes.string.isRequired,
   format: PropTypes.string.isRequired,
 };
 
-export default connect()(CreateItemForm)
+export default connect()(ItemCreationForm)

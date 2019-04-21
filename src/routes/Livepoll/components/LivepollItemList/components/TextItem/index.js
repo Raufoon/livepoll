@@ -1,40 +1,10 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles/index';
 import PropTypes from 'prop-types'
-import ImageButton from "../../../../components/ImageButton";
-import {STAR_URL} from "../../../../constants/livepoll-constants";
-import Responsive, {MEDIUM_AND_LARGE_SCREEN, PHONE_SCREEN} from "../../../../components/Responsive";
-
-
-const styles = () => ({
-  voteButton: {
-    textTransform: 'uppercase',
-    fontSize: 'small',
-    fontWeight: 'bold'
-  },
-  voteCounter: {
-    fontSize: 'x-small',
-    fontWeight: 'bold',
-    color: '#222',
-    textTransform: 'uppercase'
-  },
-  itemSerial: {
-    color: '#19564c',
-    fontWeight: 'bold',
-    fontSize: 'large',
-  },
-  item: {
-    fontFamily: 'Comfortaa',
-    marginBottom: '10px',
-    backgroundColor: '#fbfbfb',
-    border: '1px solid lightgrey',
-    borderRadius: '5px'
-  },
-  itemText: {
-    fontSize: 'large',
-    justifyContent: 'left'
-  }
-});
+import ImageButton from "../../../../../../components/ImageButton";
+import {STAR_URL} from "../../../../../../constants/livepoll-constants";
+import Responsive, {MEDIUM_AND_LARGE_SCREEN, PHONE_SCREEN} from "../../../../../../components/Responsive";
+import style from "./styles";
 
 const TextItem = props => {
   const {
@@ -48,18 +18,19 @@ const TextItem = props => {
     voteDisabled
   } = props;
 
-  const serialStyle = {backgroundColor: '#eeeeee'};
   const voteButtonStyle = {color: isAlreadyVoted ? 'darkred':'black'};
-
+  const serialStyle = {backgroundColor: '#eeeeee'};
   if (index === 1) {
     serialStyle.backgroundColor = '#f7c741';
     serialStyle.color = 'white';
-  }
-  else if (index === 2) {
+  } else if (index === 2) {
     serialStyle.backgroundColor = '#f7bf8f';
     serialStyle.color = 'white';
   }
-  const voteAmount = isPercentView ? `${parseInt((item.voteCount / totalVotes) * 100, 10)}%` : item.voteCount;
+
+  const voteAmount = isPercentView ?
+    `${parseInt((item.voteCount / totalVotes) * 100, 10)}%`
+    : item.voteCount;
 
   return (
     <div className={`pure-g ${classes.item}`}>
@@ -69,7 +40,7 @@ const TextItem = props => {
       <ImageButton
         className={`pure-u-4-24`}
         src={STAR_URL}
-        iconHeight={10}
+        iconHeight={15}
         text={`${voteAmount}`}
       />
       <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
@@ -104,4 +75,4 @@ TextItem.propTypes = {
   voterList: PropTypes.array,
 };
 
-export default React.memo(withStyles(styles)(TextItem));
+export default React.memo(withStyles(() => style)(TextItem));

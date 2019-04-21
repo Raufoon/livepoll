@@ -9,50 +9,26 @@ import {
   actionFetchPollInfo,
   actionPollRealtimeUpdate, actionRequestTopItems
 } from "../../services/state-management/actions/livepoll-actions";
-import LivepollItemList from "./LivepollItemList/LivepollItemList";
+import LivepollItemList from "./components/LivepollItemList";
 import {actionRequestCheckAlreadyVotedPoll} from "../../services/state-management/actions/my-profile-actions";
 import ModalOpenerButton from "../../components/modal-openers/ModalOpenerButton/ModalOpenerButton";
 import {subscribeRealtime, unsubscribeRealtime, updateRealtimeItems} from "../../services/util/poll/realtime-manager";
 import LPLoader from "../../components/loaders/LPLoader";
 import ImageButton from "../../components/ImageButton";
 import Responsive, {LARGE_SCREEN, MEDIUM_SCREEN, PHONE_SCREEN} from "../../components/Responsive";
+import styles from './styles';
 
 const LivepollInfoCard = Loadable({
-  loader: ()=>import('./LivepollInfoCard/LivepollInfoCard'),
+  loader: ()=>import('./components/LivepollInfoCard'),
   loading: LPLoader,
-});
-
-const styles = () => ({
-  infoButton: {
-    color: '#67908c'
-  },
-  addButton: {
-    color: '#45422a'
-  },
-  PollInfoCardDesktop: {
-    borderLeft: '1px solid lightgray'
-  },
-  pollLiveIndicator: {
-    color: 'crimson',
-    fontSize: 'x-small'
-  },
-  container: {
-    fontFamily: 'Comfortaa',
-  },
-  option: {
-    fontSize: 'small',
-    textTransform: 'uppercase',
-    color: '#10042b',
-    backgroundColor: 'white',
-  },
 });
 
 const CreateItemForm = Loadable({
-  loader: ()=>import('../../components/forms/CreateItemForm/CreateItemForm'),
+  loader: ()=>import('./components/ItemCreationForm'),
   loading: LPLoader,
 });
 
-class LivepollPage extends React.PureComponent {
+class Livepoll extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
@@ -261,10 +237,14 @@ const s2p = (state, ownProps) => ({
   authUserId: state.auth.currentUser.uid,
 });
 
-LivepollPage.propTypes = {
+Livepoll.propTypes = {
   livepoll: PropTypes.object,
   lastVotedItemId: PropTypes.string,
   authUserId: PropTypes.string,
 };
 
-export default connect(s2p)(withRouter(withStyles(styles)(LivepollPage)))
+export default connect(s2p)(
+  withRouter(
+    withStyles(()=>styles)(Livepoll)
+  )
+)
