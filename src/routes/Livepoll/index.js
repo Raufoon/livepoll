@@ -17,14 +17,10 @@ import LPLoader from "../../components/loaders/LPLoader";
 import ImageButton from "../../components/ImageButton";
 import Responsive, {LARGE_SCREEN, MEDIUM_SCREEN, PHONE_SCREEN} from "../../components/Responsive";
 import styles from './styles';
+import ItemAdditionButton from "./components/ItemAdditionButton";
 
 const LivepollInfoCard = Loadable({
   loader: ()=>import('./components/LivepollInfoCard'),
-  loading: LPLoader,
-});
-
-const CreateItemForm = Loadable({
-  loader: ()=>import('./components/ItemCreationForm'),
   loading: LPLoader,
 });
 
@@ -158,11 +154,7 @@ class Livepoll extends React.PureComponent {
         </Responsive>
         {
           showAddItemButton &&
-          <ModalOpenerButton
-            className={`${classes.option} ${classes.addButton} fl`}
-            ModalComponent={CreateItemForm}
-            childProps={{ pollId: livepoll.id, format: itemFormat }}
-          >+ADD</ModalOpenerButton>
+          <ItemAdditionButton pollId={livepoll.id} itemFormat={itemFormat}/>
         }
         <ImageButton className={`${classes.option} fl`} onClick={this.onClickPercentCheckbox}>
           <input type={'checkbox'} checked={this.state.viewAsPercent} disabled/> View As Percent
