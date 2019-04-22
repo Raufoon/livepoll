@@ -13,7 +13,7 @@ const PollCard = props => {
     <div className={`${classes.card} pure-menu-list ${className}`}>
       <div className={`pure-menu-item ${classes.title}`}>{title}</div>
       {
-        topItems.map((item, index) => <TextItem index={index} voteDisabled={true} item={item}/>)
+        topItems.map((item, index) => <TextItem index={1+index} voteDisabled={true} item={item}/>)
       }
     </div>
   )

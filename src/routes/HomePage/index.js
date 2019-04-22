@@ -16,38 +16,53 @@ class HomePage extends React.Component {
   render() {
     const {trendingPolls, popularPolls, classes} = this.props;
 
+    const trendingPollListView = trendingPolls.map(
+      ({id, settings, items}) =>
+        <PollCard
+          key={id}
+          className={classes.trendingPollCard}
+          title={settings.title}
+          type={settings.type}
+          topItems={items}
+          id={id}/>
+    );
+    const popularPollListView = popularPolls.map(
+      ({id, settings, items}) =>
+        <PollCard
+          key={id}
+          className={classes.trendingPollCard}
+          title={settings.title}
+          type={settings.type}
+          topItems={items}
+          id={id}/>
+    );
+
     return (
       <div className={'pure-g'}>
         <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
-          <div className={'pure-u-12-24'}>
-            Recent
+          <div className={'pure-u-11-24'}>
+            <label>RECENT</label>
+            <br/>
+            (under construction)
           </div>
 
           <Responsive screen={MEDIUM_SCREEN}>
             <div className={'pure-u-2-24'}/>
-            <div className={'pure-u-10-24'}>
+            <div className={'pure-u-11-24'}>
               <label>TRENDING</label>
-              {
-                trendingPolls.map(
-                  ({id, settings, items}) =>
-                    <PollCard
-                      key={id}
-                      className={classes.trendingPollCard}
-                      title={settings.title}
-                      type={settings.type}
-                      topItems={items}
-                      id={id}/>
-                )
-              }
+              {trendingPollListView}
             </div>
           </Responsive>
 
           <Responsive screen={LARGE_SCREEN}>
+            <div className={'pure-u-1-24'}/>
             <div className={'pure-u-6-24'}>
-              Trending
+              <label>TRENDING</label>
+              {trendingPollListView}
             </div>
             <div className={'pure-u-6-24'}>
-              Most Popular
+              <label>MOST POPULAR</label>
+              {popularPollListView}
             </div>
           </Responsive>
         </Responsive>

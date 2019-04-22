@@ -38,10 +38,10 @@ const TextItem = props => {
       <div className={`pure-u-2-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
       <div className={`pure-u-1-24`} />
 
-      <div className={`pure-u-${voteDisabled ? 17 : 14}-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+      <div className={`pure-u-${voteDisabled ? 16 : 13}-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
 
       <ImageButton
-        className={`pure-u-4-24`}
+        className={`pure-u-5-24`}
         src={STAR_URL}
         iconHeight={15}
         text={`${voteAmount}`}
