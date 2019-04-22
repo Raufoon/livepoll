@@ -3,7 +3,7 @@ import HomeIcon from '@material-ui/icons/HomeOutlined';
 import TrendingIcon from '@material-ui/icons/TrendingUp';
 import PopularIcon from '@material-ui/icons/Favorite';
 import RecentIcon from '@material-ui/icons/Sort';
-import SectionTabsMaker from "../../../components/SectionTabsMaker/SectionTabsMaker";
+import SectionTabsMaker from "../../../../components/SectionTabsMaker/SectionTabsMaker";
 
 const style = {
   marginBotton: 0,

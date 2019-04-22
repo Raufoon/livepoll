@@ -1,9 +1,9 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles/index';
 import PropTypes from 'prop-types'
-import ImageButton from "../../../../../../components/ImageButton";
-import {STAR_URL} from "../../../../../../constants/livepoll-constants";
-import Responsive, {MEDIUM_AND_LARGE_SCREEN, PHONE_SCREEN} from "../../../../../../components/Responsive";
+import ImageButton from "../../ImageButton";
+import {STAR_URL} from "../../../constants/livepoll-constants";
+import Responsive, {MEDIUM_AND_LARGE_SCREEN, PHONE_SCREEN} from "../../Responsive";
 import style from "./styles";
 
 const TextItem = props => {
@@ -15,7 +15,8 @@ const TextItem = props => {
     isPercentView,
     totalVotes,
     vote,
-    voteDisabled
+    voteDisabled,
+    className
   } = props;
 
   const voteButtonStyle = {color: isAlreadyVoted ? 'darkred':'black'};
@@ -33,16 +34,19 @@ const TextItem = props => {
     : item.voteCount;
 
   return (
-    <div className={`pure-g ${classes.item}`}>
+    <div className={`pure-g ${classes.item} ${className}`}>
       <div className={`pure-u-2-24 ${classes.itemSerial} vert-cent`} style={serialStyle}>{index}</div>
       <div className={`pure-u-1-24`} />
-      <div className={`pure-u-14-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+
+      <div className={`pure-u-${voteDisabled ? 17 : 14}-24 ${classes.itemText} vert-cent`}>{item.content.text}</div>
+
       <ImageButton
         className={`pure-u-4-24`}
         src={STAR_URL}
         iconHeight={15}
         text={`${voteAmount}`}
       />
+
       <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
         {
           !voteDisabled && (
@@ -52,6 +56,7 @@ const TextItem = props => {
           )
         }
       </Responsive>
+
       <Responsive screen={PHONE_SCREEN}>
         {
           !voteDisabled && (

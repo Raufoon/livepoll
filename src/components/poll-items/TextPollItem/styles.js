@@ -17,10 +17,7 @@ const style = {
   },
   item: {
     fontFamily: 'Comfortaa',
-    marginBottom: '10px',
     backgroundColor: '#fbfbfb',
-    border: '1px solid lightgrey',
-    borderRadius: '5px'
   },
   itemText: {
     fontSize: 'large',

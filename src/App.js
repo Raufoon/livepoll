@@ -17,7 +17,7 @@ import LPLoader from "./components/loaders/LPLoader";
 import {APP_COLOR_GRADIENT} from "./constants/livepoll-constants";
 
 const HomePage = Loadable({
-  loader: ()=>import('./routes/HomePage/HomePage'),
+  loader: ()=>import('./routes/HomePage'),
   loading: LPLoader,
 });
 const LivepollPage = Loadable({
@@ -33,7 +33,7 @@ const ProfilePage = Loadable({
   loading: LPLoader,
 });
 const HomeNavigationPanel = Loadable({
-  loader: ()=> import('./routes/HomePage/MobileNavigationPanel/MobileNavigationPanel'),
+  loader: ()=> import('./routes/HomePage/components/MobileNavigationPanel/MobileNavigationPanel'),
   loading: LPLoader,
 });
 const TrendingPollList = Loadable({
