@@ -37,7 +37,7 @@ const HomeNavigationPanel = Loadable({
   loading: LPLoader,
 });
 const TrendingPollList = Loadable({
-  loader: ()=> import('./routes/TrendingPollList/TrendingPollList'),
+  loader: ()=> import('./routes/TrendingPollList'),
   loading: LPLoader,
 });
 

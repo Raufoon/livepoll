@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import {withStyles} from '@material-ui/core/styles/index';
 import styles from './styles'
 import TextItem from "../poll-items/TextPollItem";
+import Link from "react-router-dom/es/Link";
 
 const PollCard = props => {
   const {
@@ -11,7 +12,9 @@ const PollCard = props => {
 
   return (
     <div className={`${classes.card} pure-menu-list ${className}`}>
-      <div className={`pure-menu-item ${classes.title}`}>{title}</div>
+      <div className={`pure-menu-item ${classes.title}`}>
+        <Link to={`/poll/${id}`}>{title}</Link>
+      </div>
       {
         topItems.map((item, index) => <TextItem index={1+index} voteDisabled={true} item={item}/>)
       }

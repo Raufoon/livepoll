@@ -58,3 +58,7 @@ body {
 .app-big-title{
   font-family: 'Nova Flat' !important;
 }
+a{
+  text-decoration: none;
+  color: inherit;
+}
