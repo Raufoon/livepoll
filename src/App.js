@@ -15,6 +15,7 @@ import ToastDisplayer from "./components/ToastDisplayer/ToastDisplayer";
 import FullScreenLoader from "./components/loaders/FullScreenLoader";
 import LPLoader from "./components/loaders/LPLoader";
 import {APP_COLOR_GRADIENT} from "./constants/livepoll-constants";
+import Responsive, {MEDIUM_AND_LARGE_SCREEN} from "./components/Responsive";
 
 const HomePage = Loadable({
   loader: ()=>import('./routes/HomePage'),
@@ -68,7 +69,12 @@ class App extends Component {
           <AppBarContents/>
         </AppBar>
 
-        <h5 style={{color: 'gray'}} className={'tac'}>Currently under a lot of architectural changes. Bugs are to be expected. Sorry for the inconvenience!</h5>
+        <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
+          <h5 style={{color: 'gray'}} className={'tac'}>
+            Currently under a lot of architectural changes. Bugs are to be expected. Sorry for the inconvenience!
+          </h5>
+        </Responsive>
+
 
         <NetworkStatus/>
 
