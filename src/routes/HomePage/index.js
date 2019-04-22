@@ -5,7 +5,12 @@ import {withStyles} from '@material-ui/core/styles/index';
 
 import styles from './styles'
 import {actionFetchHome} from "../../services/state-management/actions/home-actions";
-import Responsive, {LARGE_SCREEN, MEDIUM_AND_LARGE_SCREEN, MEDIUM_SCREEN} from "../../components/Responsive";
+import Responsive, {
+  LARGE_SCREEN,
+  MEDIUM_AND_LARGE_SCREEN,
+  MEDIUM_SCREEN,
+  PHONE_SCREEN
+} from "../../components/Responsive";
 import PollCard from "../../components/PollCard";
 
 class HomePage extends React.Component {
@@ -39,6 +44,13 @@ class HomePage extends React.Component {
 
     return (
       <div className={'pure-g'}>
+        <Responsive screen={PHONE_SCREEN}>
+          <div className={'pure-u-1-1 tac'}>TRENDING</div>
+          <div className={'pure-u-1-1'}>&nbsp;</div>
+          <div className={'pure-u-1-1'}>
+            {trendingPollListView}
+          </div>
+        </Responsive>
         <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
           <div className={'pure-u-8-24'}>
             <label>RECENT</label>

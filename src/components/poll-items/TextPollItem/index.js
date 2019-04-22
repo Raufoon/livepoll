@@ -50,7 +50,7 @@ const TextItem = props => {
       <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
         {
           !voteDisabled && (
-            <button className={`pure-u-3-24 pure-button ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
+            <button className={`pure-u-3-24 vert-cent ${classes.voteButton}`} onClick={vote} style={voteButtonStyle}>
               {isAlreadyVoted ? 'Unvote':'Vote'}
             </button>
           )

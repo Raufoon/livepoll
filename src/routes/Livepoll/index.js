@@ -119,7 +119,7 @@ class Livepoll extends React.PureComponent {
   }
 
   render () {
-    if (!this.props.livepoll) return `There's nothing here!`;
+    if (!this.props.livepoll) return '';
 
     const { livepoll, classes, authUserId, lastVotedItemId,} = this.props;
     const {

@@ -2,7 +2,8 @@ const style = {
   voteButton: {
     textTransform: 'uppercase',
     fontSize: 'small',
-    fontWeight: 'bold'
+    border: 'none',
+    backgroundColor: 'inherit'
   },
   voteCounter: {
     fontSize: 'x-small',
