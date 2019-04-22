@@ -45,13 +45,13 @@ class Index extends React.Component {
   render() {
     return (
       <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
-        <div className={'pure-u-1-1'}>
-          <h2>Create your poll</h2>
+        <div className={'pure-u-1-1 xlfont tac'}>
+          CREATE YOUR POLL
         </div>
 
         {
           LPFormField.createRequiredField({
-            className: 'pure-u-1-1',
+            className: 'pure-u-1-1 xlfont',
             name: 'title',
             type: 'text',
             label: 'Give a nice title',
@@ -73,12 +73,6 @@ class Index extends React.Component {
           defaultValue={''}
         />
 
-        <LPCheckboxInput
-          className={'pure-u-1-1'}
-          name={'isPrivate'}
-          label={'This poll is private'}
-        />
-
         {
           LPDropdownInput.createDropdownField({
             className: 'pure-u-1-1',
@@ -92,6 +86,12 @@ class Index extends React.Component {
             ]
           })
         }
+
+        <LPCheckboxInput
+          className={'pure-u-1-1'}
+          name={'isPrivate'}
+          label={'Private (Coming Soon)'}
+        />
 
         <LPCheckboxInput
           className={'pure-u-1-1'}

@@ -15,9 +15,10 @@ const CreateProfileForm = (props) => {
 
   return (
     <LPForm title={'Create your profile'} onSubmit={onSubmit}>
-      <Typography variant="subtitle1" gutterBottom>Create your profile</Typography>
+      <div className={'pure-u-1-1 lfont'}>Create your profile</div>
       {
         LPFormField.createRequiredField({
+          className: 'pure-u-1-1 pad10',
           name: 'name',
           label: 'Full Name',
           type: 'text',
@@ -25,9 +26,10 @@ const CreateProfileForm = (props) => {
           errorMsg: 'Name must have at least 6 letters'
         })
       }
-      <br/>
+
       {
         LPFormField.createRequiredField({
+          className: 'pure-u-1-1 pad10',
           name: 'dob',
           label: 'When is your birthday?',
           type: 'date',

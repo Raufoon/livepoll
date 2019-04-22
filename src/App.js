@@ -68,7 +68,7 @@ class App extends Component {
           <AppBarContents/>
         </AppBar>
 
-        <h5 style={{color: 'gray'}} className={'tac'}>Currently under a lot of architectural changes. Glitches and bugs are to be expected. Sorry for the inconvenience!</h5>
+        <h5 style={{color: 'gray'}} className={'tac'}>Currently under a lot of architectural changes. Bugs are to be expected. Sorry for the inconvenience!</h5>
 
         <NetworkStatus/>
 

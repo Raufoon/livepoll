@@ -78,14 +78,22 @@ class LPFormField extends React.Component {
 
   render() {
     return (
-      <div className={this.props.className}>
-        <TextField
-          error={!!this.state.error}
-          label={this.props.label}
+      <div className={`${this.props.className} pad10`}>
+        {/*<TextField*/}
+        {/*  error={!!this.state.error}*/}
+        {/*  label={this.props.label}*/}
+        {/*  name={this.props.name}*/}
+        {/*  type={this.props.type}*/}
+        {/*  value={this.state.value}*/}
+        {/*  onChange={this.onChange}*/}
+        {/*/>*/}
+        <input
+          placeholder={this.props.label}
           name={this.props.name}
           type={this.props.type}
           value={this.state.value}
-          onChange={this.onChange}/>
+          onChange={this.onChange}
+        />
         <br/>
         {this.state.error && <span className={'error-span'}>{this.state.error}</span>}
       </div>

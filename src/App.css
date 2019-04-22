@@ -23,9 +23,9 @@
 .w100{width: 100% !important;}
 .nomargin{margin: 0 !important;}
 .h100{height: 100%}
-.hidden-app-bar{
-  visibility: hidden;
-}
+.hidden-app-bar{visibility: hidden;}
+.lfont{font-size: large !important;}
+.xlfont{font-size: x-large !important;}
 .app-bar{
   box-shadow: none !important;
   border: none !important;

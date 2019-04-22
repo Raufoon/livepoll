@@ -15,12 +15,12 @@ class LPDropdownInput extends LPFormField {
 
   render() {
     return (
-      <div className={this.props.className}>
-        <Typography variant="subtitle1" gutterBottom>{this.props.label}</Typography>
+      <div className={`${this.props.className} pad10`}>
+        <label className={'font-comf'} >{this.props.label}</label>
+        <br/>
         <select name={this.props.name}
                 defaultValue={this.props.dropdownOptions[0]}
-                onChange={this.onChange}
-                className={'form-field-input'}>
+                onChange={this.onChange}>
           {
             this.props.dropdownOptions.map(option => (
               <option key={option.value} value={option.value}>
