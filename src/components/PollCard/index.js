@@ -6,16 +6,12 @@ import TextItem from "../poll-items/TextPollItem";
 
 const PollCard = props => {
   const {
-    title, topItems, id, isLive, classes
+    title, topItems, id, isLive, classes, className
   } = props;
 
-  const {
-    card
-  } = classes;
-
   return (
-    <div className={`${card} pure-menu-list`}>
-      <h3 className={'pure-menu-item'}>{title}</h3>
+    <div className={`${classes.card} pure-menu-list ${className}`}>
+      <div className={`pure-menu-item ${classes.title}`}>{title}</div>
       {
         topItems.map((item, index) => <TextItem index={index} voteDisabled={true} item={item}/>)
       }
