@@ -10,7 +10,7 @@ import LPDateInput from "../components/form-fields/LPDateInput/LPDateInput";
 import LPCheckboxInput from "../components/form-fields/LPCheckboxInput/LPCheckboxInput";
 import LPDropdownInput from "../components/form-fields/LPDropdownInput/LPDropdownInput";
 import {actionMakeErrorToast} from "../../../services/state-management/actions/toast-actions";
-import Typography from "@material-ui/core/Typography/Typography";
+
 
 class Index extends React.Component {
   constructor(props) {
@@ -46,7 +46,7 @@ class Index extends React.Component {
     return (
       <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
         <div className={'pure-u-1-1 xlfont tac'}>
-          CREATE YOUR POLL
+          CREATE YOUR POLL <br/>
         </div>
 
         {

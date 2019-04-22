@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import LPFormField from "../LPFormField/LPFormField";
-import Typography from "@material-ui/core/Typography/Typography";
 
 class LPDropdownInput extends LPFormField {
   static createDropdownField = options => (

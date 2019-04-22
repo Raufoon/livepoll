@@ -1,6 +1,5 @@
 import React from 'react';
 import dateFormat from 'dateformat';
-import Typography from "@material-ui/core/Typography/Typography";
 
 import LPFormField from "../LPFormField/LPFormField";
 

@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
 
@@ -51,7 +50,7 @@ class Modal extends React.Component {
 
     return ReactDOM.createPortal(
       <div className={'modal-overlay'}>
-        <Paper className='modal-container modal-container-resp' style={{zIndex: this.zIndex}}>
+        <div className='modal-container modal-container-resp' style={{zIndex: this.zIndex}}>
           {
             !modalSettings.hideCloseButton && (
               <Button className='modal-close-btn' onClick={this.props.onClose}><CloseIcon/></Button>
@@ -60,7 +59,7 @@ class Modal extends React.Component {
           <div className='modal-content'>
             { this.props.children }
           </div>
-        </Paper>
+        </div>
       </div>,
       this.modalDomParent
     )
