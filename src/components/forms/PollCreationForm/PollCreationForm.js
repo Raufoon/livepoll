@@ -70,9 +70,9 @@ class PollCreationForm extends React.Component {
             label: 'Poll format',
             dropdownOptions: [
               {label: 'Text', value: PollSettings.POLL_ITEM_FORMAT.TEXT},
-              {label: 'Text + Image', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
-              {label: 'Text + Images', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGES},
-              {label: 'Text + Video', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
+              {label: 'Text + Image (COMING SOON)', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGE},
+              {label: 'Text + Images (COMING SOON)', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_IMAGES},
+              {label: 'Text + Video (COMING SOON)', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
             ]
           })
         }<br/>

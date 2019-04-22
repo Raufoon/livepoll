@@ -29,7 +29,7 @@ const PollCreationForm = Loadable({
   loading: LPLoader,
 });
 const ProfilePage = Loadable({
-  loader: ()=>import('./routes/Profile/ProfilePage'),
+  loader: ()=>import('./routes/Profile'),
   loading: LPLoader,
 });
 const HomeNavigationPanel = Loadable({

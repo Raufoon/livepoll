@@ -10,7 +10,7 @@ import SignoutIcon from '@material-ui/icons/ExitToAppSharp';
 import EditIcon from '@material-ui/icons/Edit';
 import { withStyles } from '@material-ui/core/styles/index';
 
-import {actionSignoutRequest} from "../../../services/state-management/actions/auth-actions";
+import {actionSignoutRequest} from "../../../../services/state-management/actions/auth-actions";
 
 const styles = {
   card: {
@@ -26,7 +26,7 @@ const styles = {
   }
 };
 
-function ProfileCard(props) {
+function Index(props) {
   const { classes } = props;
   if (!props.myProfile.basicInfo) return 'loading...';
   const signOut = () => props.dispatch(actionSignoutRequest());
@@ -61,6 +61,6 @@ const s2p = state => ({
 
 export default withStyles(styles)(
   connect(s2p)(
-    ProfileCard
+    Index
   )
 );

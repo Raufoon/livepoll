@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SectionTabsMaker from "../../../../components/SectionTabsMaker/SectionTabsMaker";
+import SectionTabsMaker from "../../../../../components/SectionTabsMaker/SectionTabsMaker";
 
 const style = {
   border: 'none',
