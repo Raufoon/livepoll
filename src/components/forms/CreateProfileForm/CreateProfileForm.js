@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types'
 
-import LPForm from "../LPForm/LPForm";
-import LPFormField from "../form-fields/LPFormField/LPFormField";
+import LPForm from "../components/LPForm/LPForm";
+import LPFormField from "../components/form-fields/LPFormField/LPFormField";
 import {actionRequestUpdateBasicInfo} from "../../../services/state-management/actions/my-profile-actions";
 import Typography from "@material-ui/core/Typography/Typography";
 

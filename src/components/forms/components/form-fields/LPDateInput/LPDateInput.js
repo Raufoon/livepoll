@@ -33,7 +33,7 @@ class LPDateInput extends LPFormField{
   }
   render() {
     return (
-      <div className={`form-field ${this.props.className}`}>
+      <div className={`${this.props.className}`}>
         <Typography variant="subtitle1" gutterBottom>{this.props.label}</Typography>
         <input
           style={{border: 'none', color: 'gray'}}

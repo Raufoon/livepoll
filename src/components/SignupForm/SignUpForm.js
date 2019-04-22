@@ -1,13 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button/index';
 import Typography from "@material-ui/core/Typography/Typography";
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles/index';
 
-import LPForm from "../LPForm/LPForm";
-import LPFormField from "../form-fields/LPFormField/LPFormField";
-import {actionSigninRequest} from "../../../services/state-management/actions/auth-actions";
-import {SIGNIN_METHODS} from "../../../constants/auth-constants";
+import LPForm from "../forms/components/LPForm/LPForm";
+import LPFormField from "../forms/components/form-fields/LPFormField/LPFormField";
+import {actionSigninRequest} from "../../services/state-management/actions/auth-actions";
+import {SIGNIN_METHODS} from "../../constants/auth-constants";
 
 const styles = theme => ({
   tac: {

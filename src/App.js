@@ -25,7 +25,7 @@ const LivepollPage = Loadable({
   loading: LPLoader,
 });
 const PollCreationForm = Loadable({
-  loader: ()=>import('./components/forms/PollCreationForm/PollCreationForm'),
+  loader: ()=>import('./components/forms/PollCreationForm'),
   loading: LPLoader,
 });
 const ProfilePage = Loadable({
@@ -67,6 +67,8 @@ class App extends Component {
         <AppBar position="static" color={'default'} className={'app-bar app-bar-resp'}>
           <AppBarContents/>
         </AppBar>
+
+        <h5 style={{color: 'gray'}} className={'tac'}>Currently under a lot of architectural changes. Glitches and bugs are to be expected. Sorry for the inconvenience!</h5>
 
         <NetworkStatus/>
 

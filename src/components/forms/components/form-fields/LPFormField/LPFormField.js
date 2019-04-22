@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TextField from '@material-ui/core/TextField';
+import TextField from '@material-ui/core/TextField/index';
 
 import './LPFormField.css'
 
@@ -78,11 +78,10 @@ class LPFormField extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={this.props.className}>
         <TextField
           error={!!this.state.error}
           label={this.props.label}
-          className = {this.props.className}
           name={this.props.name}
           type={this.props.type}
           value={this.state.value}

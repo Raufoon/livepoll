@@ -7,17 +7,19 @@ import FormControlLabel from "@material-ui/core/FormControlLabel/FormControlLabe
 class LPCheckboxInput extends LPFormField {
   render() {
     return (
-      <FormControlLabel
-        className={`form-field ${this.props.className}`}
-        name={this.props.name}
-        control={
-          <Switch
-            checked={this.state.value}
-            onChange={this.onChange}
-          />
-        }
-        label={this.props.label}
-      />
+      <div className={this.props.className}>
+        <FormControlLabel
+          className={`form-field`}
+          name={this.props.name}
+          control={
+            <Switch
+              checked={this.state.value}
+              onChange={this.onChange}
+            />
+          }
+          label={this.props.label}
+        />
+      </div>
     )
   }
 }

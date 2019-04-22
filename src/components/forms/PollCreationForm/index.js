@@ -2,18 +2,17 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {withRouter} from 'react-router-dom';
 
-import './PollCreationForm.css'
-import LPForm from "../LPForm/LPForm";
-import LPFormField from "../form-fields/LPFormField/LPFormField";
+import LPForm from "../components/LPForm/LPForm";
+import LPFormField from "../components/form-fields/LPFormField/LPFormField";
 import PollSettings from "../../../services/util/poll/poll-definitions/poll-settings";
 import {requestPublishLivepoll} from "../../../services/util/cloud/livepoll";
-import LPDateInput from "../form-fields/LPDateInput/LPDateInput";
-import LPCheckboxInput from "../form-fields/LPCheckboxInput/LPCheckboxInput";
-import LPDropdownInput from "../form-fields/LPDropdownInput/LPDropdownInput";
+import LPDateInput from "../components/form-fields/LPDateInput/LPDateInput";
+import LPCheckboxInput from "../components/form-fields/LPCheckboxInput/LPCheckboxInput";
+import LPDropdownInput from "../components/form-fields/LPDropdownInput/LPDropdownInput";
 import {actionMakeErrorToast} from "../../../services/state-management/actions/toast-actions";
 import Typography from "@material-ui/core/Typography/Typography";
 
-class PollCreationForm extends React.Component {
+class Index extends React.Component {
   constructor(props) {
     super(props);
     this.publishPoll = this.publishPoll.bind(this);
@@ -46,26 +45,43 @@ class PollCreationForm extends React.Component {
   render() {
     return (
       <LPForm title={'Create a poll'} submitButtonLabel={'Publish your poll'} onSubmit={this.publishPoll}>
-        <br/>
-        <Typography className={'tac'} variant="h5" gutterBottom>Create your poll</Typography>
+        <div className={'pure-u-1-1'}>
+          <h2>Create your poll</h2>
+        </div>
+
         {
           LPFormField.createRequiredField({
-            className: 'w100',
+            className: 'pure-u-1-1',
             name: 'title',
             type: 'text',
             label: 'Give a nice title',
             defaultValue: '',
           })
         }
-        <br/>
-        <LPDateInput name={'startDatetime'}
-                     label={'When will it begin?'}
-                     defaultValue={new Date()}/>
-        <br/>
-        <LPDateInput name={'endDatetime'} label={'When will it end?'} defaultValue={''}/>
-        <LPCheckboxInput name={'isPrivate'} label={'This poll is private'}/>
+
+        <LPDateInput
+          className={'pure-u-1-1'}
+          name={'startDatetime'}
+          label={'When will it begin?'}
+          defaultValue={new Date()}
+        />
+
+        <LPDateInput
+          className={'pure-u-1-1'}
+          name={'endDatetime'}
+          label={'When will it end?'}
+          defaultValue={''}
+        />
+
+        <LPCheckboxInput
+          className={'pure-u-1-1'}
+          name={'isPrivate'}
+          label={'This poll is private'}
+        />
+
         {
           LPDropdownInput.createDropdownField({
+            className: 'pure-u-1-1',
             name: 'itemFormat',
             label: 'Poll format',
             dropdownOptions: [
@@ -75,9 +91,19 @@ class PollCreationForm extends React.Component {
               {label: 'Text + Video (COMING SOON)', value: PollSettings.POLL_ITEM_FORMAT.TEXT_WITH_VIDEO},
             ]
           })
-        }<br/>
-        <LPCheckboxInput name={'othersCanAdd'} label={'Allow others to add'}/>
-        <LPCheckboxInput name={'showVoters'} label={'Show voter list'}/>
+        }
+
+        <LPCheckboxInput
+          className={'pure-u-1-1'}
+          name={'othersCanAdd'}
+          label={'Allow others to add'}
+        />
+
+        <LPCheckboxInput
+          className={'pure-u-1-1'}
+          name={'showVoters'}
+          label={'Show voter list'}
+        />
       </LPForm>
     )
   }
@@ -89,6 +115,6 @@ const s2p = state => ({
 
 export default withRouter(
   connect(s2p)(
-    PollCreationForm
+    Index
   )
 )

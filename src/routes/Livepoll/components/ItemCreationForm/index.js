@@ -2,8 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import PropTypes from 'prop-types';
 
-import LPForm from "../../../../components/forms/LPForm/LPForm";
-import LPFormField from "../../../../components/forms/form-fields/LPFormField/LPFormField";
+import LPForm from "../../../../components/forms/components/LPForm/LPForm";
+import LPFormField from "../../../../components/forms/components/form-fields/LPFormField/LPFormField";
 import {requestAddPollitem} from "../../../../services/util/cloud/livepoll";
 import {actionRequestAddItemSuccess} from "../../../../services/state-management/actions/livepoll-actions";
 

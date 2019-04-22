@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button/index';
 
 class LPForm extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class LPForm extends React.Component {
 
   render() {
     return (
-      <form className={this.props.className} method={'post'} onSubmit={this.onSubmit}>
+      <form className={`${this.props.className} pure-g`} method={'post'} onSubmit={this.onSubmit}>
         {
           React.Children.map(
             this.props.children,
@@ -72,12 +72,14 @@ class LPForm extends React.Component {
             })
           )
         }
-        <br/>
         {
-          this.shouldShowSubmit() &&
-          <Button type='submit' variant={"contained"} color="secondary" >
-            {this.props.submitButtonLabel || 'Submit'}
-          </Button>
+          this.shouldShowSubmit() && (
+            <div className={'pure-u-1-1'}>
+              <Button type='submit' variant={"contained"} color="secondary" >
+                {this.props.submitButtonLabel || 'Submit'}
+              </Button>
+            </div>
+          )
         }
       </form>
     )

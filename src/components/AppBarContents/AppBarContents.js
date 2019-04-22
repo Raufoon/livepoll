@@ -10,7 +10,7 @@ import { withStyles } from '@material-ui/core/styles';
 import {actionSignoutRequest} from "../../services/state-management/actions/auth-actions";
 import ImageButton from "../ImageButton";
 import ModalOpenerButton from "../modal-openers/ModalOpenerButton/ModalOpenerButton";
-import PollCreationForm from "../forms/PollCreationForm/PollCreationForm";
+import PollCreationForm from "../forms/PollCreationForm";
 
 const styles = () => ({
   flexGrow10: {flexGrow: 1},
