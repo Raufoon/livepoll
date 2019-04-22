@@ -2,13 +2,9 @@ import React from "react";
 import {connect} from 'react-redux';
 import { withStyles } from '@material-ui/core/styles/index';
 
-import PollListSection from "../../components/PollListSection/PollListSection";
-import Grid from "@material-ui/core/Grid/Grid";
-import MediaQuery from "react-responsive";
 import {actionFetchTrendingPolls} from "../../services/state-management/actions/home-actions";
 import Responsive, {LARGE_SCREEN, MEDIUM_SCREEN, PHONE_SCREEN} from "../../components/Responsive";
 import PollCard from "../../components/PollCard";
-import TextPollCard from "../../components/poll-cards/TextPollCard";
 import BigRemoteDataDisplay from "../../components/BigRemoteDataDisplay/BigRemoteDataDisplay";
 
 const style = theme => ({
