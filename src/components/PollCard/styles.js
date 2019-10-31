@@ -3,7 +3,9 @@ const styles = {
     backgroundColor: 'white'
   },
   title: {
-    marginBottom: 10
+    marginBottom: 5,
+    fontSize: 'small',
+    fontWeight: 'bold',
   }
 };
 

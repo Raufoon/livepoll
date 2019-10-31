@@ -51,28 +51,21 @@ class HomePage extends React.Component {
             {trendingPollListView}
           </div>
         </Responsive>
+
         <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
           <div className={'pure-u-8-24'}>
-            <label>RECENT</label>
+            <label className={classes.homeSectionTitle}>RECENT</label>
             <br/>
-            (under construction)
+            {trendingPollListView}
           </div>
-
-          {/*<Responsive screen={MEDIUM_SCREEN}>*/}
-          {/*  <div className={'pure-u-2-24'}/>*/}
-          {/*  <div className={'pure-u-11-24'}>*/}
-          {/*    <label>TRENDING</label>*/}
-          {/*    {trendingPollListView}*/}
-          {/*  </div>*/}
-          {/*</Responsive>*/}
 
           <Responsive screen={MEDIUM_AND_LARGE_SCREEN}>
             <div className={'pure-u-8-24'}>
-              <label>TRENDING</label>
+              <label className={classes.homeSectionTitle}>TRENDING</label>
               {trendingPollListView}
             </div>
             <div className={'pure-u-8-24'}>
-              <label>MOST POPULAR</label>
+              <label className={classes.homeSectionTitle}>MOST POPULAR</label>
               {popularPollListView}
             </div>
           </Responsive>

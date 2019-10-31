@@ -14,14 +14,16 @@ const style = {
   itemSerial: {
     color: '#19564c',
     fontWeight: 'bold',
-    fontSize: 'large',
+    borderRadius: '50px',
+    border: '0px solid gray'
   },
   item: {
     fontFamily: 'Comfortaa',
     backgroundColor: '#fbfbfb',
+    padding: '2px',
+    fontSize: 'small !important'
   },
   itemText: {
-    fontSize: 'large',
     justifyContent: 'left'
   }
 };
