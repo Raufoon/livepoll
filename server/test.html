@@ -1,0 +1,89 @@
+<html>
+<body>
+  <style>
+    textarea {
+      height: 200px;
+      width: 90%;
+    }
+    .left {
+      width: 30%;
+      float: left;
+    }
+    .mid{
+      width: 30%;
+      float: left;
+    }
+    #result {
+      width: 30%;
+      float: right;
+    }
+  </style>
+
+  <form class="left">
+    <h2>
+      Mutation test
+    </h2>
+
+    <label>mutation:</label><br/>
+    <textarea id="mutation"></textarea><br/>
+
+    <label>input:</label><br/>
+    <textarea id="input"></textarea><br/>
+
+    <input type="button" value="submit" onclick="doMutation()">
+  </form>
+      
+  <form class="mid">
+    <h2>
+      Query test
+    </h2>
+    <label>query:</label><br/>
+    <textarea id="query"></textarea><br/>
+
+    <input type="button" value="submit" onclick="doQuery()">
+  </form>
+
+  <div id="result">
+    Result here
+  </div>
+
+  <script>
+    var api = "http://localhost:5000/lllivepolll/us-central1/graphql_v_2_0_0";
+
+    function doMutation() {
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("result").innerHTML = this.responseText;
+        }
+      };
+
+      xhttp.open("POST", api, true);
+      xhttp.setRequestHeader("Content-type", "application/graphql");
+      xhttp.send(`{
+        query: ${document.getElementById('mutation').value},
+        variables: ${document.getElementById('input').value},
+      }`);
+    }
+
+    function doQuery() {
+      var xhttp = new XMLHttpRequest();
+
+      xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+          document.getElementById("result").innerHTML = this.responseText;
+        }
+
+        else if (this.readyState == 4) {
+          document.getElementById("result").innerHTML = this.responseText;
+        }
+      };
+
+      xhttp.open("GET", api + `?query=${document.getElementById("query").value}`, true);
+      xhttp.send()
+    }
+  </script>
+
+</body>
+</html>
