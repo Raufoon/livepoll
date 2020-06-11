@@ -1,3 +1,5 @@
+const db = require('../../functions/realtimeDb')
+
 const Node = {
   id: obj => obj.id,
 }

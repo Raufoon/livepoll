@@ -28,4 +28,8 @@ exports.readAsList = (path) => {
       Object.values(snap.val() || {}))
 }
 
+exports.remove = (path) => {
+  return admin.database().ref(`v_2_0_0/${path}`).remove()
+}
+
 exports.getNewID = () => admin.database().ref().push().key

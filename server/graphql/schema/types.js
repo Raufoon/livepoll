@@ -62,6 +62,19 @@ type LivePoll implements Node {
   items: [Item!]!
 }
 
+input LivePollInput {
+  title: String
+  startDatetime: String!
+  endDatetime: String
+  author: ID!
+  shouldShowVoters: Boolean
+  privacy: Privacy
+  whenToAddItem: AdditionRestriction
+  votingSystem: VotingSystem
+  itemContentType: ItemContentType
+  capacity: Capacity
+}
+
 type Item {
   id: ID!
   text: String
