@@ -13,8 +13,8 @@ type User implements Node {
 }
 
 input UserInput {
-  id: ID!
   name: String
+  dob: String
 }
 
 enum Privacy {

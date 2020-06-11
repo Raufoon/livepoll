@@ -1,8 +1,9 @@
-function createUser(obj, args) {
-  return Promise.resolve({
-    id: "XXXXX",
-    name: "Neil"
-  })
+const db = require('../../functions/realtimeDb')
+
+function createUser(args) {
+  const {newUser} = args
+  const id = db.getNewID()
+  return db.write(`users/${id}`, {...newUser, id})
 }
 
 module.exports = {

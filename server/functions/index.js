@@ -3,6 +3,19 @@ const express = require('express')
 const graphqlHTTP = require('express-graphql')
 const {schema, rootResolver} = require('../graphql')
 const cors = require('cors')({origin: true})
+const admin = require('firebase-admin')
+
+if (process.env.NODE_ENV === 'production') {
+  admin.initializeApp()  
+}
+else {
+  console.log("Env: Development")
+  const serviceAccount = require("./lllivepolll-411ae6bac230.json")
+  admin.initializeApp({
+      credential: admin.credential.cert(serviceAccount),
+      databaseURL: "https://lllivepolll.firebaseio.com",
+  })
+}
 
 const app = express()
 

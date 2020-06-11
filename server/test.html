@@ -60,11 +60,11 @@
       };
 
       xhttp.open("POST", api, true);
-      xhttp.setRequestHeader("Content-type", "application/graphql");
-      xhttp.send(`{
-        query: ${document.getElementById('mutation').value},
-        variables: ${document.getElementById('input').value},
-      }`);
+      xhttp.setRequestHeader("Content-type", "application/json");
+      xhttp.send(JSON.stringify({
+        query: document.getElementById('mutation').value,
+        variables: document.getElementById('input').value
+      }));
     }
 
     function doQuery() {

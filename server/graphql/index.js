@@ -20,8 +20,6 @@ exports.schema = buildSchema(`
 
 exports.rootResolver = {
   ...typeResolvers,
-  
   ...queryResolvers,
-
   ...mutationResolvers
 }
