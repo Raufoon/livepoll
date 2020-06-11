@@ -9,14 +9,14 @@ function users() {
   return db.readAsList('users')
 }
 
-async function livepoll(args) {
+async function poll(args) {
   const {id} = args
 
   let poll, author;
 
   try {
     poll = await db.read(`polls/${id}`)
-    author = await db.read(`users/${id}`)
+    author = await db.read(`users/${poll.author}`)
   }
   catch(err) {
     return Promise.reject(500)
@@ -29,8 +29,13 @@ async function livepoll(args) {
   }
 }
 
+function polls() {
+  return db.readAsList('polls')
+}
+
 module.exports = {
   user,
   users,
-  livepoll
+  poll,
+  polls
 }

@@ -4,6 +4,8 @@ user(id: ID!): User
 
 users: [User!]
 
-livepoll(id: ID!): LivePoll
+poll(id: ID!): LivePoll
+
+polls: [LivePoll!]
 
 `
