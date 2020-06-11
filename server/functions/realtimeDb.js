@@ -15,4 +15,17 @@ exports.write = (path, object) => {
   })
 }
 
+exports.read = (path) => {
+  return admin.database().ref(`/v_2_0_0/${path}`)
+    .once('value')
+    .then(snap => snap.val())
+}
+
+exports.readAsList = (path) => {
+  return admin.database().ref(`/v_2_0_0/${path}`)
+    .once('value')
+    .then(snap => 
+      Object.values(snap.val() || {}))
+}
+
 exports.getNewID = () => admin.database().ref().push().key

@@ -9,7 +9,6 @@ if (process.env.NODE_ENV === 'production') {
   admin.initializeApp()  
 }
 else {
-  console.log("Env: Development")
   const serviceAccount = require("./lllivepolll-411ae6bac230.json")
   admin.initializeApp({
       credential: admin.credential.cert(serviceAccount),
