@@ -40,7 +40,29 @@ async function createLivePoll(args) {
   }
 }
 
+async function addItemToPoll(args) {
+  const {pollId, newItem} = args
+  const id = db.getNewID()
+  let createdItem;
+
+  try {
+    await db.write(`polls/${pollId}/items/${id}`, {
+      ...newItem, 
+      id,
+      score: 0
+    })
+    createdItem = await db.read(`polls/${pollId}/items/${id}`)
+  }
+  catch(err) {
+    return Promise.reject(500)
+  }
+  finally { 
+    return Promise.resolve(createdItem)   
+  }
+}
+
 module.exports = {
   createUser: createUser,
-  createLivePoll: createLivePoll
+  createLivePoll: createLivePoll,
+  addItemToPoll: addItemToPoll
 }

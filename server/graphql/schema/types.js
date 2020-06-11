@@ -83,4 +83,9 @@ type Item {
   voters: [User!]
 }
 
+input ItemInput {
+  text: String
+  imgUrl: String
+}
+
 `
