@@ -19,26 +19,24 @@ async function createLivePoll(args) {
   const {newPoll} = args
   const {author} = newPoll
   const id = db.getNewID()
+  let createdPoll, creator;
 
   try {
-    await Promise.all([
-      db.write(`polls/${id}`, {...newPoll, id}),
-      db.write(`users/${author}/ownPolls/${id}`, id)
-    ])
+    await db.write(`polls/${id}`, {...newPoll, id})
+    await db.write(`users/${author}/ownPolls/${id}`, id)
+    createdPoll = await db.read(`polls/${id}`)
+    creator = await db.read(`users/${author}`)
   }
   catch(err) {
-    await Promise.all([
-      db.remove(`polls/${id}`),
-      db.remove(`users/${author}/ownPolls/${id}`)
-    ])
+    await db.remove(`polls/${id}`)
+    await db.remove(`users/${author}/ownPolls/${id}`)
     return Promise.reject(500)
   }
   finally {
-    const values = await Promise.all([
-      db.read(`polls/${id}`),
-      db.read(`users/${author}`)
-    ])
-    return Promise.resolve({...values[0], author: values[1]})
+    return Promise.resolve({
+      ...createdPoll, 
+      author: creator
+    })
   }
 }
 
