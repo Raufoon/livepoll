@@ -1,25 +1,14 @@
-const {buildSchema} = require('graphql')
-const typeSchema = require('./schema/types')
-const querySchema = require('./schema/queries')
-const mutationSchema = require('./schema/mutations')
-const typeResolvers = require('./resolver/types')
-const queryResolvers = require('./resolver/queries')
-const mutationResolvers = require('./resolver/mutations')
+const graphqlHTTP = require('express-graphql')
+const types = require('./schema/types')
+const query = require('./schema/query')
+const mutation = require('./schema/mutation')
+const {GraphQLSchema} = require('graphql')
 
-exports.schema = buildSchema(`
-  ${typeSchema}
-
-  type Query {
-    ${querySchema}
-  }
-
-  type Mutation {
-    ${mutationSchema}
-  }
-`)
-
-exports.rootResolver = {
-  ...typeResolvers,
-  ...queryResolvers,
-  ...mutationResolvers
-}
+module.exports = graphqlHTTP({
+  schema: new GraphQLSchema({
+    ...types,
+    query,
+    //mutation
+  }),
+  graphiql: process.env.NODE_ENV === 'development'
+})
