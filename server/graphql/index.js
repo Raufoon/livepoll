@@ -8,7 +8,7 @@ module.exports = graphqlHTTP({
   schema: new GraphQLSchema({
     ...types,
     query,
-    //mutation
+    mutation
   }),
   graphiql: process.env.NODE_ENV === 'development'
 })

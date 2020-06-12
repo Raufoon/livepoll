@@ -107,7 +107,7 @@ exports.LivePoll = new GraphQLObjectType({
       },
       author: {
         type: User,
-        resolve(obj, args) {
+        resolve(obj) {
           return db.read(`users/${obj.author}`)
         }
       },
@@ -121,10 +121,10 @@ exports.LivePoll = new GraphQLObjectType({
       whenToAddItem: {
         type: exports.AdditionRestriction
       },
-      VotingSystem: {
+      votingSystem: {
         type: exports.VotingSystem
       },
-      ItemContentType: {
+      itemContentType: {
         type: exports.ItemContentType
       },
       capacity: {
@@ -132,8 +132,20 @@ exports.LivePoll = new GraphQLObjectType({
       },
       items: {
         type: new GraphQLList(new GraphQLNonNull(Item)),
-        resolve(obj, args) {
-          return Promise.resolve([])
+        async resolve(obj) {
+          const pollId = obj.id
+          
+          try {
+            const edges = await db.read(`edges/${pollId}`)
+
+            const myItemIds = Object.keys(edges || {})
+              .filter(key => edges[key] === 'p-i')
+            
+            return myItemIds.map(id => db.read(`items/${id}`))
+          }
+          catch(err) {
+            return Promise.reject(err)
+          }
         }
       }
     }
@@ -166,10 +178,10 @@ exports.LivePollInput = new GraphQLInputObjectType({
       whenToAddItem: {
         type: exports.AdditionRestriction
       },
-      VotingSystem: {
+      votingSystem: {
         type: exports.VotingSystem
       },
-      ItemContentType: {
+      itemContentType: {
         type: exports.ItemContentType
       },
       capacity: {

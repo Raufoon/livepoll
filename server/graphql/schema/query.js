@@ -1,5 +1,3 @@
-const db = require('../../functions/realtimeDb')
-
 const {
   GraphQLObjectType, 
   GraphQLInputObjectType,
@@ -9,6 +7,7 @@ const {
   GraphQLList
 } = require('graphql')
 
+const db = require('../../functions/realtimeDb')
 const {User} = require('./types/user')
 const {LivePoll} = require('./types/livepoll')
 

@@ -25,8 +25,21 @@ exports.User = new GraphQLObjectType({
       },
       ownPolls: {
         type: new GraphQLList(new GraphQLNonNull(LivePoll)),
-        resolve(obj) {
-          return Object.values(obj.ownPolls || {}).map(pollId => db.read(`polls/${pollId}`))
+        
+        async resolve(obj) {
+          const myId = obj.id
+
+          try {
+            const edgesWithMe = await db.read(`edges/${myId}`)
+
+            const myPollIds = Object.keys(edgesWithMe || {})
+              .filter(key => edgesWithMe[key] === 'c-p')
+            
+            return myPollIds.map(id => db.read(`polls/${id}`))
+          }
+          catch(err) {
+            return Promise.reject(err)
+          }          
         }
       },
       participations: {
@@ -38,10 +51,12 @@ exports.User = new GraphQLObjectType({
 
 exports.UserInput = new GraphQLInputObjectType({
   name: 'UserInput',
-  fields: function() {
-    return {
-      name: GraphQLString,
-      dob: GraphQLString
+  fields: {
+    name: {
+      type: GraphQLString
+    },
+    dob: {
+      type: GraphQLString
     }
   }
 })
