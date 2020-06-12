@@ -1,15 +1,3 @@
-const deleteme = `
-
-user(id: ID!): User
-
-users: [User!]
-
-poll(id: ID!): LivePoll
-
-polls: [LivePoll!]
-
-`
-
 const db = require('../../functions/realtimeDb')
 
 const {
@@ -22,6 +10,7 @@ const {
 } = require('graphql')
 
 const {User} = require('./types/user')
+const {LivePoll} = require('./types/livepoll')
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -44,6 +33,26 @@ module.exports = new GraphQLObjectType({
         const users = await db.readAsList('users')
         return users.map(user => Promise.resolve(user))
       }
-    }
+    },
+
+    poll: {
+      type: LivePoll,
+      args: {
+        id: {
+          type: new GraphQLNonNull(GraphQLID)
+        }
+      },
+      resolve(_, args) {
+        return db.read(`polls/${args.id}`)
+      }
+    },
+
+    polls: {
+      type: new GraphQLList(new GraphQLNonNull(LivePoll)),
+      async resolve() {
+        const polls = await db.readAsList('polls')
+        return polls.map(polls => Promise.resolve(polls))
+      }
+    },
   }
 })

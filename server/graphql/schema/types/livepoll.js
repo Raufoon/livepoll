@@ -9,6 +9,8 @@ const {
   GraphQLBoolean
 } = require('graphql')
 
+const db = require('../../../functions/realtimeDb')
+
 exports.Privacy = new GraphQLEnumType({
   name: 'Privacy',
   values: {
@@ -105,8 +107,8 @@ exports.LivePoll = new GraphQLObjectType({
       },
       author: {
         type: User,
-        resolve(parentValue, args) {
-          return Promise.resolve({})
+        resolve(obj, args) {
+          return db.read(`users/${obj.author}`)
         }
       },
       shouldShowVoters: {
@@ -130,7 +132,7 @@ exports.LivePoll = new GraphQLObjectType({
       },
       items: {
         type: new GraphQLList(new GraphQLNonNull(Item)),
-        resolve(parentValue, args) {
+        resolve(obj, args) {
           return Promise.resolve([])
         }
       }

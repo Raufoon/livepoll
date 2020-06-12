@@ -7,6 +7,8 @@ const {
   GraphQLList
 } = require('graphql')
 
+const db = require('../../../functions/realtimeDb')
+
 exports.User = new GraphQLObjectType({
   name: 'User', 
   fields: function() {
@@ -22,7 +24,10 @@ exports.User = new GraphQLObjectType({
         type: GraphQLString
       },
       ownPolls: {
-        type: new GraphQLList(new GraphQLNonNull(LivePoll))
+        type: new GraphQLList(new GraphQLNonNull(LivePoll)),
+        resolve(obj) {
+          return Object.values(obj.ownPolls || {}).map(pollId => db.read(`polls/${pollId}`))
+        }
       },
       participations: {
         type: new GraphQLList(new GraphQLNonNull(LivePoll))

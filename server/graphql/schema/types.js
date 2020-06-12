@@ -4,6 +4,6 @@ const itemTypes = require('./types/item')
 
 module.exports = {
   ...userTypes,
-  // ...livepollTypes,
-  //...itemTypes
+  ...livepollTypes,
+  ...itemTypes
 }
