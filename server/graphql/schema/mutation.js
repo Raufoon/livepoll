@@ -1,25 +1,5 @@
-var deleteme = `
-
-createUser(newUser: UserInput!): User
-
-createLivePoll(newPoll: LivePollInput!): LivePoll
-
-addItemToPoll(pollId: ID!, newItem: ItemInput!): Item
-
-`
-
-
-const {
-  GraphQLObjectType, 
-  GraphQLInputObjectType,
-  GraphQLNonNull, 
-  GraphQLID, 
-  GraphQLString,
-  GraphQLList
-} = require('graphql')
-
+const {GraphQLObjectType, GraphQLNonNull, GraphQLID} = require('graphql')
 const db = require('../../functions/realtimeDb')
-
 const {User, UserInput} = require('./types/user')
 const {LivePoll, LivePollInput} = require('./types/livepoll')
 const {ItemInput, Item} = require('./types/item')
@@ -27,17 +7,17 @@ const {ItemInput, Item} = require('./types/item')
 module.exports = new GraphQLObjectType({
   name: 'RootMutationType',
   fields: {
+
     createUser: {
       type: User,
       args: {
-        newUser: {
-          type: new GraphQLNonNull(UserInput)
-        }
+        newUser: {type: new GraphQLNonNull(UserInput)}
       },
       async resolve(_, args) {
         const id = db.getNewID()
+        const {newUser} = args
         try {
-          await db.write(`users/${id}`, {...args.newUser, id})
+          await db.write(`users/${id}`, {...newUser, id})
         }
         catch(err) {
           return Promise.reject(err)
@@ -51,15 +31,12 @@ module.exports = new GraphQLObjectType({
     createLivePoll: {
       type: LivePoll,
       args: {
-        newPoll: {
-          type: new GraphQLNonNull(LivePollInput)
-        }
+        newPoll: {type: new GraphQLNonNull(LivePollInput)}
       },
       async resolve(_, args) {
         const id = db.getNewID()
         const {newPoll} = args
         const {author} = newPoll
-
         try {
           await db.write(`polls/${id}`, {...newPoll, id})
           await db.write(`edges/${author}/${id}`, 'c-p')
@@ -76,12 +53,8 @@ module.exports = new GraphQLObjectType({
     addItemToPoll: {
       type: Item,
       args: {
-        pollId: {
-          type: GraphQLID
-        },
-        newItem: {
-          type: new GraphQLNonNull(ItemInput)
-        }
+        pollId: {type: GraphQLID},
+        newItem: {type: new GraphQLNonNull(ItemInput)}
       },
       async resolve(_, args) {
         const id = db.getNewID()
