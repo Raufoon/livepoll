@@ -39,7 +39,7 @@ module.exports = new GraphQLObjectType({
         const {author} = newPoll
         try {
           await db.write(`polls/${id}`, {...newPoll, id})
-          await db.write(`edges/${author}/${id}`, 'c-p')
+          await db.write(`edges/c_p/${author}/${id}`, true)
         }
         catch(err) {
           return Promise.reject(err)
@@ -62,7 +62,7 @@ module.exports = new GraphQLObjectType({
 
         try {
           await db.write(`items/${id}`, {...newItem, id})
-          await db.write(`edges/${pollId}/${id}`, 'p-i')
+          await db.write(`edges/p_i/${pollId}/${id}`, 0)
         }
         catch(err) {
           return Promise.reject(err)

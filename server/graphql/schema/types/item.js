@@ -15,6 +15,7 @@ exports.Item = new GraphQLObjectType({
     const {User} = require('./user')
     return {
       id: {type: GraphQLID},
+      creatorId: {type: GraphQLID},
       text: {type: GraphQLString},
       imgUrl: {type: GraphQLString},
       score: {type: GraphQLInt},
@@ -28,7 +29,8 @@ exports.ItemInput = new GraphQLInputObjectType({
   fields: function() {
     return {
       text: {type: GraphQLString},
-      imgUrl: {type: GraphQLString}
+      imgUrl: {type: GraphQLString},
+      creatorId: {type: GraphQLID}
     }
   }
 })
