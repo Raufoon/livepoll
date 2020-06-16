@@ -47,15 +47,6 @@ exports.ItemContentType = new GraphQLEnumType({
   }
 })
 
-exports.Capacity = new GraphQLEnumType({
-  name: 'Capacity',
-  values: {
-    A_VS_B: {value: 1},
-    SMALL: {value: 2},
-    LARGE: {value: 3}
-  }
-})
-
 exports.LivePoll = new GraphQLObjectType({
   name: 'LivePoll',
   fields: function() {
@@ -81,7 +72,6 @@ exports.LivePoll = new GraphQLObjectType({
       whenToAddItem: {type: exports.AdditionRestriction},
       votingSystem: {type: exports.VotingSystem},
       itemContentType: {type: exports.ItemContentType},
-      capacity: {type: exports.Capacity},
       
       items: {
         type: new GraphQLList(new GraphQLNonNull(Item)),
@@ -117,7 +107,6 @@ exports.LivePollInput = new GraphQLInputObjectType({
       whenToAddItem: {type: exports.AdditionRestriction},
       votingSystem: {type: exports.VotingSystem},
       itemContentType: {type: exports.ItemContentType},
-      capacity: {type: exports.Capacity}
     }
   }
 })
