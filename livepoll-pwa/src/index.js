@@ -6,6 +6,7 @@ import firebase from 'firebase/app'
 import {createStore} from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from './state-management/root-reducer'
+import {BrowserRouter} from 'react-router-dom'
 import './index.css'
 
 firebase.initializeApp({
@@ -22,7 +23,9 @@ const store = createStore(rootReducer)
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <BrowserRouter>
+        <App/>
+      </BrowserRouter>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
