@@ -1,10 +1,23 @@
-import React from 'react';
+import React from 'react'
+import AuthContext from './contexts/AuthContext'
+import WelcomePage from './routes/welcome-page/WelcomePage'
+import useFirebaseAuth from './hooks/useFirebaseAuth'
+import {Switch, Route} from 'react-router-dom'
+import HomePage from './routes/home-page/HomePage'
 
 function App() {
+  const authUser = useFirebaseAuth()
+  const {isLoggedIn} = authUser
+
   return (
-    <div>
-      <h1>Livepoll - PWA</h1>
-    </div>
+    <AuthContext.Provider value={authUser}>
+      {!isLoggedIn && <WelcomePage/>}
+      {
+        isLoggedIn && <Switch>
+          <Route component={HomePage}/>
+        </Switch>
+      }
+    </AuthContext.Provider>
   );
 }
 
