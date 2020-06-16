@@ -3,7 +3,7 @@ const admin = require('firebase-admin')
 
 exports.write = (path, object) => {
   return new Promise((resolve, reject) => {
-    admin.database().ref(`/v_2_0_0/${path}`)
+    admin.database().ref(`/${path}`)
       .set(object, (err) => {
         if (err) {
           reject(err)
@@ -16,20 +16,20 @@ exports.write = (path, object) => {
 }
 
 exports.read = (path) => {
-  return admin.database().ref(`/v_2_0_0/${path}`)
+  return admin.database().ref(`/${path}`)
     .once('value')
     .then(snap => snap.val())
 }
 
 exports.readAsList = (path) => {
-  return admin.database().ref(`/v_2_0_0/${path}`)
+  return admin.database().ref(`/${path}`)
     .once('value')
     .then(snap => 
       Object.values(snap.val() || {}))
 }
 
 exports.remove = (path) => {
-  return admin.database().ref(`v_2_0_0/${path}`).remove()
+  return admin.database().ref(`${path}`).remove()
 }
 
 exports.getNewID = () => admin.database().ref().push().key
