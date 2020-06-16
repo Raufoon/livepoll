@@ -3,10 +3,11 @@ import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import firebase from 'firebase/app'
-import {createStore} from 'redux'
+import {createStore, applyMiddleware} from 'redux'
 import {Provider} from 'react-redux'
 import rootReducer from './state-management/root-reducer'
 import {BrowserRouter} from 'react-router-dom'
+import reduxThunk from 'redux-thunk'
 import './index.css'
 
 firebase.initializeApp({
@@ -18,7 +19,7 @@ firebase.initializeApp({
   messagingSenderId: "1045079837725"
 })
 
-const store = createStore(rootReducer)
+const store = createStore(rootReducer, applyMiddleware(reduxThunk))
 
 ReactDOM.render(
   <React.StrictMode>

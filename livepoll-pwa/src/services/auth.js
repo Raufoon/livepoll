@@ -7,10 +7,20 @@ export function createAuthUser (data) {
       isLoggedIn: false
     }
   }
-  return {
-    isLoggedIn: true,
-    ...data
+
+  function AuthUser() {
+    this.isLoggedIn = true
+    this.data = data
+    this.getName = function() {
+      return this.data.displayName
+    }
   }
+
+  return new AuthUser()
+}
+
+export async function getAuthIDToken() {
+  return await firebase.auth().currentUser.getIdToken()
 }
 
 export function signInWithGoogle() {

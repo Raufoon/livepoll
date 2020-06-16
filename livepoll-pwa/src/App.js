@@ -7,13 +7,14 @@ import HomePage from './routes/home-page/HomePage'
 
 function App() {
   const authUser = useFirebaseAuth()
-  const {isLoggedIn} = authUser
+
+  if (!authUser) return "Loading..."
 
   return (
     <AuthContext.Provider value={authUser}>
-      {!isLoggedIn && <WelcomePage/>}
+      {!authUser.isLoggedIn && <WelcomePage/>}
       {
-        isLoggedIn && <Switch>
+        authUser.isLoggedIn && <Switch>
           <Route component={HomePage}/>
         </Switch>
       }
