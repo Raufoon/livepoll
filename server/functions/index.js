@@ -15,8 +15,8 @@ else {
   })
 }
 
-functions.auth.user().onCreate(newUser => {
-  const {uid, displayName} = newUser.data
+exports.setUserProfile = functions.auth.user().onCreate(newUser => {
+  const {uid, displayName} = newUser
   db.write(`/users/${uid}`, {
     name: displayName,
     id: uid
