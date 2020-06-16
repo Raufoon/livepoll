@@ -18,6 +18,6 @@ const app = express()
 
 app.use(cors)
 
-app.use('/', require('../graphql'))
+app.use('/', require('./graphql'))
 
 exports.graphql_v_2_0_0 = functions.https.onRequest(app)

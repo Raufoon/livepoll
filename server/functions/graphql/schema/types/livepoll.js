@@ -1,4 +1,4 @@
-const db = require('../../../functions/realtimeDb')
+const db = require('../../../realtimeDb')
 const {
   GraphQLObjectType, 
   GraphQLEnumType,
