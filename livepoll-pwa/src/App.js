@@ -4,20 +4,23 @@ import WelcomePage from './routes/welcome-page/WelcomePage'
 import useFirebaseAuth from './hooks/useFirebaseAuth'
 import {Switch, Route} from 'react-router-dom'
 import HomePage from './routes/home-page/HomePage'
+import ProfilePage from './routes/profile-page/ProfilePage'
+import AppHeader from './components/app-header/AppHeader'
 
 function App() {
   const authUser = useFirebaseAuth()
 
   if (!authUser) return "Loading..."
 
+  if (!authUser.isLoggedIn) return <WelcomePage/>
+
   return (
     <AuthContext.Provider value={authUser}>
-      {!authUser.isLoggedIn && <WelcomePage/>}
-      {
-        authUser.isLoggedIn && <Switch>
+      <AppHeader/>
+      <Switch>
+          <Route path='/user/:id' component={ProfilePage}/>
           <Route component={HomePage}/>
-        </Switch>
-      }
+      </Switch>
     </AuthContext.Provider>
   );
 }

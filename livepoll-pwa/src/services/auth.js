@@ -14,6 +14,9 @@ export function createAuthUser (data) {
     this.getName = function() {
       return this.data.displayName
     }
+    this.getUid = function() {
+      return this.data.uid
+    }
   }
 
   return new AuthUser()

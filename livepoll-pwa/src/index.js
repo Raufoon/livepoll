@@ -19,7 +19,17 @@ firebase.initializeApp({
   messagingSenderId: "1045079837725"
 })
 
-const store = createStore(rootReducer, applyMiddleware(reduxThunk))
+const reduxLogger = store => next => action => {
+  console.log(action)
+  next(action)
+  console.log('Updated State', store.getState())
+}
+
+const middleWaresForPro = [reduxThunk]
+const middleWaresForDev = [...middleWaresForPro, reduxLogger]
+const middleWares = process.env.NODE_ENV === 'production' ? middleWaresForPro: middleWaresForDev
+
+const store = createStore(rootReducer, applyMiddleware(...middleWares))
 
 ReactDOM.render(
   <React.StrictMode>

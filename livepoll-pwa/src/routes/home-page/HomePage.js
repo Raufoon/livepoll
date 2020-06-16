@@ -1,16 +1,9 @@
-import React, {useContext} from 'react'
-import { signOut } from '../../services/auth'
-import AuthContext from '../../contexts/AuthContext'
+import React from 'react'
 
-function HomePage () {
-  const authUser = useContext(AuthContext)
-
+export default function HomePage () {
   return (
     <div>
-      Welcome home, {authUser.getName()}
-      <button onClick={signOut}>Sign out</button>
+      Welcome home
     </div>
   )
 }
-
-export default HomePage
