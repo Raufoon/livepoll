@@ -8,22 +8,24 @@ module.exports = new GraphQLObjectType({
   name: 'RootMutationType',
   fields: {
 
-    createUser: {
+    editUserDetails: {
       type: User,
       args: {
         newUser: {type: new GraphQLNonNull(UserInput)}
       },
-      async resolve(_, args) {
-        const id = db.getNewID()
+      async resolve(_, args, context) {
+        const decodedIdToken = admin.auth().verifyIdToken(context.idToken)
+        const {uid} = decodedIdToken
         const {newUser} = args
+
         try {
-          await db.write(`users/${id}`, {...newUser, id})
+          await db.write(`users/${uid}`, {...newUser})
         }
         catch(err) {
           return Promise.reject(err)
         }
         finally {
-          return db.read(`users/${id}`)
+          return db.read(`users/${uid}`)
         }
       }
     },
