@@ -28,20 +28,21 @@ exports.setUserProfile = functions.auth.user().onCreate(newUser => {
 
 const app = express()
 app.use(cors)
-app.use('/', function(request, response) {
-  return graphqlHTTP({
+app.use('/', graphqlHTTP(function(request, response) {
+  return {
     schema: new GraphQLSchema({
       ...types,
       query,
       mutation
     }),
     context: {
-      request,
-      response,
-      verifyIdToken: () => admin.auth().verifyIdToken()
+      getAuthUserId: async function() {
+        const {uid} = await admin.auth().verifyIdToken(request.headers.authorization)
+        return uid
+      }
     },
     graphiql: process.env.NODE_ENV === 'development'
-  })
-})
+  }
+}))
 
 exports.graphql_v_2_0_0 = functions.https.onRequest(app)

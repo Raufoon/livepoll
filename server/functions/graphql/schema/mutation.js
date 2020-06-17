@@ -14,19 +14,18 @@ module.exports = new GraphQLObjectType({
         newDetails: {type: new GraphQLNonNull(UserInput)}
       },
       async resolve(_, args, context) {
-        const {verifyIdToken, request} = context
-        const decodedIdToken = verifyIdToken(request.headers.authorization)
-        const {uid} = decodedIdToken
+        const {getAuthUserId} = context
+        const id = await getAuthUserId()
         const {newDetails} = args
 
         try {
-          await db.write(`users/${uid}`, {...newDetails, id: uid})
+          await db.write(`users/${id}`, {...newDetails, id})
         }
         catch(err) {
           return Promise.reject(err)
         }
         finally {
-          return db.read(`users/${uid}`)
+          return db.read(`users/${id}`)
         }
       }
     },
