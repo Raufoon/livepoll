@@ -16,7 +16,7 @@ function LpField(props) {
     let data = value || checked
 
     if (type === 'date') {
-      data = new Date(data).getTime()
+      data = `${new Date(data).getTime()}`
     }
 
     if (validate(data)) {

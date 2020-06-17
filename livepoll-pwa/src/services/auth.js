@@ -23,7 +23,8 @@ export function createAuthUser (data) {
 }
 
 export async function getAuthIDToken() {
-  return await firebase.auth().currentUser.getIdToken()
+  const token = await firebase.auth().currentUser.getIdToken()
+  return token
 }
 
 export function signInWithGoogle() {

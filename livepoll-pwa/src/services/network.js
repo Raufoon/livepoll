@@ -7,10 +7,10 @@ export function graphQlQuery(query) {
   return get(`${GRAPHQL_SERVER}?query=${query}`)
 }
 
-export function graphQlMutation(mutation, variables) {
+export async function graphQlMutation(query, variables) {
+  const idToken = await getAuthIDToken()
   const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': getAuthIDToken()
+    'Authorization': idToken
   }
-  return post(GRAPHQL_SERVER, {variables}, {headers})
+  return post(GRAPHQL_SERVER, {query, variables}, {headers})
 }

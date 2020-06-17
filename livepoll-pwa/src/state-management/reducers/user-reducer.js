@@ -1,4 +1,4 @@
-import {ACTION_FETCH_PROFILE_DETAILS_SUCCESS} from '../actions'
+import {ACTION_FETCH_PROFILE_DETAILS_SUCCESS, ACTION_EDIT_PROFILE_DETAILS_FAILURE, ACTION_EDIT_PROFILE_DETAILS_SUCCESS} from '../actions'
 import {ACTION_FETCH_PROFILE_DETAILS_FAILURE} from '../actions'
 
 export default function userReducer(state = {}, action) {
@@ -8,10 +8,9 @@ export default function userReducer(state = {}, action) {
  
     case ACTION_FETCH_PROFILE_DETAILS_SUCCESS:
       const {user} = data
-      const {id} = user
       return {
         ...state,
-        [id]: user
+        [user.id]: user
       }
     
     case ACTION_FETCH_PROFILE_DETAILS_FAILURE:
@@ -19,6 +18,13 @@ export default function userReducer(state = {}, action) {
       return {
         ...state,
         [uid]: {hasError: true, error}
+      }
+
+    case ACTION_EDIT_PROFILE_DETAILS_SUCCESS:
+      const {newDetails} = data
+      return {
+        ...state,
+        [newDetails.id]: newDetails
       }
 
     default:

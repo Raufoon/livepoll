@@ -10,7 +10,7 @@ function LpForm(props) {
 
   function onSubmitThisForm(event) {
     event.preventDefault()
-    onSubmit()
+    onSubmit({...fieldValues.current})
   }
 
   function onChange(name, value) {
