@@ -16,10 +16,10 @@ module.exports = new GraphQLObjectType({
       async resolve(_, args, context) {
         const decodedIdToken = admin.auth().verifyIdToken(context.idToken)
         const {uid} = decodedIdToken
-        const {newUser} = args
+        const {newDetails} = args
 
         try {
-          await db.write(`users/${uid}`, {...newUser})
+          await db.write(`users/${uid}`, {...newDetails, id: uid})
         }
         catch(err) {
           return Promise.reject(err)
