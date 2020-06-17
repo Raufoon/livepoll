@@ -14,7 +14,8 @@ module.exports = new GraphQLObjectType({
         newDetails: {type: new GraphQLNonNull(UserInput)}
       },
       async resolve(_, args, context) {
-        const decodedIdToken = admin.auth().verifyIdToken(context.idToken)
+        const {verifyIdToken, request} = context
+        const decodedIdToken = verifyIdToken(request.headers.authorization)
         const {uid} = decodedIdToken
         const {newDetails} = args
 
