@@ -11,8 +11,8 @@ const {
 } = require('graphql')
 
 
-exports.Privacy = new GraphQLEnumType({
-  name: 'Privacy',
+exports.UsagePrivacy = new GraphQLEnumType({
+  name: 'UsagePrivacy',
   values: {
     PUBLIC: {value: 1},
     PROTECTED: {value: 2},
@@ -68,7 +68,7 @@ exports.LivePoll = new GraphQLObjectType({
       },
       
       shouldShowVoters: {type: GraphQLBoolean},
-      privacy: {type: exports.Privacy},
+      usagePrivacy: {type: exports.UsagePrivacy},
       whenToAddItem: {type: exports.AdditionRestriction},
       votingSystem: {type: exports.VotingSystem},
       itemContentType: {type: exports.ItemContentType},
@@ -103,7 +103,7 @@ exports.LivePollInput = new GraphQLInputObjectType({
       endDateTime: {type: GraphQLString},
       author: {type: GraphQLID},
       shouldShowVoters: {type: GraphQLBoolean},
-      privacy: {type: exports.Privacy},
+      usagePrivacy: {type: exports.UsagePrivacy},
       whenToAddItem: {type: exports.AdditionRestriction},
       votingSystem: {type: exports.VotingSystem},
       itemContentType: {type: exports.ItemContentType},
