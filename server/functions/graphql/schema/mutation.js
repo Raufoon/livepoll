@@ -35,13 +35,15 @@ module.exports = new GraphQLObjectType({
       args: {
         newPoll: {type: new GraphQLNonNull(LivePollInput)}
       },
-      async resolve(_, args) {
+      async resolve(_, args, context) {
         const id = db.getNewID()
         const {newPoll} = args
-        const {author} = newPoll
+        const {getAuthUserId} = context
+        const author = await getAuthUserId()
+
         try {
           await db.write(`polls/${id}`, {...newPoll, id})
-          await db.write(`edges/c_p/${author}/${id}`, true)
+          await db.write(`edges/author_poll/${author}/${id}`, true)
         }
         catch(err) {
           return Promise.reject(err)
