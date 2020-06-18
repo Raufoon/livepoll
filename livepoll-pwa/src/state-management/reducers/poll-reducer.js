@@ -1,6 +1,6 @@
 import { ACTION_CREATE_NEW_POLL_SUCCESS } from "../actions"
 
-export default function userReducer(state = {}, action) {
+export default function pollReducer(state = {}, action) {
   const {type, ...data} = action
   let newPoll
   
