@@ -44,6 +44,7 @@ module.exports = new GraphQLObjectType({
         try {
           await db.write(`polls/${id}`, {...newPoll, id})
           await db.write(`edges/author_poll/${author}/${id}`, true)
+          await db.write(`edges/home_poll/${id}`, true) // TODO: filter the private polls
         }
         catch(err) {
           return Promise.reject(err)
