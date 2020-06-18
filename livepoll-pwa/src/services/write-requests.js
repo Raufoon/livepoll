@@ -11,3 +11,21 @@ export function editProfile(details) {
     }
   `, {details})
 }
+
+export function createNewPoll(data) {
+  return graphQlMutation(`
+    mutation CreateNewPoll($data: LivePollInput!) {
+      newPoll: createLivePoll(newPoll: $data) {
+        id
+        title
+        startDateTime
+        endDateTime
+        shouldShowVoters
+        usagePrivacy
+        whenToAddItem
+        votingSystem
+        itemContentType
+      }
+    }
+  `, {data})
+}

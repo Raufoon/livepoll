@@ -9,10 +9,14 @@ export default function AppHeader() {
   return (
     <div style={{border: '5px solid black'}}>
       <button onClick={signOut}>Sign out</button>
+
+      <NavLink to={'/'}>Livepoll</NavLink>
       
       <NavLink to={`/user/${authUser.getUid()}`}>
         {authUser.getName()}
       </NavLink>
+
+      <NavLink to={'/create'}>Create Poll</NavLink>
     </div>
   )
 }

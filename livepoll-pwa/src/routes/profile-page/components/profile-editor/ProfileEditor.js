@@ -21,7 +21,7 @@ export default function ProfileEditor() {
         Component='input'
         type='text'
         validate={value => !!value && value.length > 6}
-        errorMsg='Name should be longer than 6 letters'/>
+        errorMsg='should be longer than 6 letters'/>
 
       <LpField
         title='Date of birth'
@@ -29,7 +29,7 @@ export default function ProfileEditor() {
         Component='input'
         type='date'
         validate={value => !!value}
-        errorMsg='Should be a valid date'/>
+        errorMsg='should be a valid date'/>
       </LpForm>
   )
 }

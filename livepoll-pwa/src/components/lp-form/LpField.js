@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 function LpField(props) {
   const {Component, className, onChange, onError} = props
   const {type, name, validate, errorMsg, title} = props
+  const {options, defaultValue} = props
   const [hasError, setError] = useState(false)
 
   function onMyError(shouldErr = true) {
@@ -13,13 +14,13 @@ function LpField(props) {
 
   function onChangeMyValue(event) {
     const {value, checked} = event.target
-    let data = value || checked
+    let data = type === 'checkbox' ? checked: value
 
-    if (type === 'date') {
+    if (type === 'date' || type === 'datetime-local') {
       data = `${new Date(data).getTime()}`
     }
 
-    if (validate(data)) {
+    if (!validate || validate(data)) {
       onMyError(false)
       onChange(name, data)
     }
@@ -27,6 +28,37 @@ function LpField(props) {
       onMyError(true)
     }
   }
+
+  if (type === 'checkbox') return (
+    <div style={{padding: 10, border: '1px solid gray'}}>
+      <input
+        type='checkbox'
+        onChange={onChangeMyValue}
+        defaultChecked={defaultValue}/>
+      <label>{title}</label>
+    </div>
+  )
+
+  if (Component === 'select') return (
+    <div style={{padding: 10, border: '1px solid gray'}}>
+      <label>{title}</label><br/>
+      <Component 
+        className={className} 
+        name={name}
+        type={type}
+        defaultValue={defaultValue}
+        onChange={onChangeMyValue}>
+          {
+            options.map(opt => {
+              const {name, value} = opt
+              return <option key={value} value={value}>
+                {name}
+              </option>
+            })
+          }
+      </Component>
+    </div>
+  )
   
   return (
     <div style={{padding: 10, border: '1px solid gray'}}>
@@ -35,10 +67,11 @@ function LpField(props) {
         className={className} 
         name={name}
         type={type}
+        defaultValue={defaultValue}
         onChange={onChangeMyValue}/>
       <br/>
       {
-        hasError && <span style={{color: 'red'}}>{errorMsg}</span>
+        hasError && <span style={{color: 'red'}}>{errorMsg || 'this is invalid'}</span>
       }
     </div>
   )
@@ -51,10 +84,11 @@ LpField.propTypes = {
   type: PropTypes.string,
   onChange: PropTypes.func,
   onError: PropTypes.func,
-  validate: PropTypes.func.isRequired,
-  errorMsg: PropTypes.string.isRequired,
+  validate: PropTypes.func,
+  errorMsg: PropTypes.string,
   defaultValue: PropTypes.any,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  options: PropTypes.array
 }
 
 export default LpField
