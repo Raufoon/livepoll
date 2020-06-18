@@ -61,7 +61,7 @@ module.exports = new GraphQLObjectType({
           return pollIds.map(id => db.read(`polls/${id}`))
         }
       }
-    }
+    },
 
     polls: {
       type: new GraphQLList(new GraphQLNonNull(LivePoll)),
