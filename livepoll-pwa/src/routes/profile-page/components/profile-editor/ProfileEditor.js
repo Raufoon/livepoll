@@ -2,7 +2,7 @@ import React, {useContext} from 'react'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../../../components/lp-form/LpForm'
 import LpField from '../../../../components/lp-form/LpField'
-import { actionEditProfileDetails } from '../../../../state-management/actions'
+import { actionEditProfileDetails } from '../../../../state-management/actions/user-actions'
 import AuthContext from '../../../../contexts/AuthContext'
 
 export default function ProfileEditor() {

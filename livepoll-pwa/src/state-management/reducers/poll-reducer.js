@@ -1,4 +1,4 @@
-import { ACTION_CREATE_NEW_POLL_SUCCESS } from "../actions"
+import { ACTION_CREATE_NEW_POLL_SUCCESS } from "../actions/poll-actions"
 
 export default function pollReducer(state = {}, action) {
   const {type, ...data} = action

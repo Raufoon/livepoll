@@ -1,4 +1,4 @@
-import { ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS } from "../actions"
+import { ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS } from "../actions/home-actions"
 
 const initialState = {
   recentPolls: []

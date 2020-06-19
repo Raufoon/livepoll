@@ -1,5 +1,5 @@
-import {ACTION_FETCH_PROFILE_DETAILS_SUCCESS, ACTION_EDIT_PROFILE_DETAILS_SUCCESS} from '../actions'
-import {ACTION_FETCH_PROFILE_DETAILS_FAILURE} from '../actions'
+import {ACTION_FETCH_PROFILE_DETAILS_SUCCESS, ACTION_EDIT_PROFILE_DETAILS_SUCCESS} from '../actions/user-actions'
+import {ACTION_FETCH_PROFILE_DETAILS_FAILURE} from '../actions/user-actions'
 
 export default function userReducer(state = {}, action) {
   const {type, ...data} = action

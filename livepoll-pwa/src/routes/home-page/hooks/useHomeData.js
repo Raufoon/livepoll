@@ -1,6 +1,6 @@
 import {useEffect} from 'react'
 import {useSelector, useDispatch} from 'react-redux'
-import { actionLoadHomeRecentPolls } from '../../../state-management/actions'
+import { actionLoadHomeRecentPolls } from '../../../state-management/actions/home-actions'
 
 export default function useHomeData () {
   const dispatch = useDispatch()

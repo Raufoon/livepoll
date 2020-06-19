@@ -2,7 +2,7 @@ import React from 'react'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../components/lp-form/LpForm'
 import LpField from '../../components/lp-form/LpField'
-import { actionCreateNewPoll } from '../../state-management/actions'
+import { actionCreateNewPoll } from '../../state-management/actions/poll-actions'
 
 export default function PollCreator() {
   const dispatch = useDispatch()
