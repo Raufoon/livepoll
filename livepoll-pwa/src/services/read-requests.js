@@ -25,3 +25,26 @@ export function loadRecentPollsForHome() {
     }
   `)
 }
+
+
+export function fetchPollDetails(id) {
+  return graphQlQuery(`
+    query FetchPollDetails {
+      poll(id: "${id}") {
+        id
+        title
+        startDateTime
+        endDateTime
+        author {
+          id
+          name
+        }
+        shouldShowVoters
+        usagePrivacy
+        whenToAddItem
+        votingSystem
+        itemContentType
+      }
+    }
+  `)
+}

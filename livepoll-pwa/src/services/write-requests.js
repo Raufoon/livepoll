@@ -20,6 +20,10 @@ export function createNewPoll(data) {
         title
         startDateTime
         endDateTime
+        author {
+          id
+          name
+        }
         shouldShowVoters
         usagePrivacy
         whenToAddItem
