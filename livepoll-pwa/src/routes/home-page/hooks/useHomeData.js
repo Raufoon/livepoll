@@ -7,7 +7,7 @@ export default function useHomeData () {
   const recentPolls = useSelector(state => state.home.recentPolls)
 
   useEffect(function() {
-    dispatch(actionLoadHomeRecentPolls())
+    if (Object.keys(recentPolls).length === 0) dispatch(actionLoadHomeRecentPolls())
   }, [])
 
   return [recentPolls]

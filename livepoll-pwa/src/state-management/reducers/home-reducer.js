@@ -12,7 +12,13 @@ export default function homeReducer(state = initialState, action) {
     case ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS:
       return {
         ...state,
-        recentPolls: [...state.recentPolls, ...home.recentPolls]
+        recentPolls: {
+          ...state.recentPolls, 
+          ...home.recentPolls.reduce(function(result, poll) {
+            result[poll.id] = poll
+            return result
+          }, {})
+        }
       }
 
     default:

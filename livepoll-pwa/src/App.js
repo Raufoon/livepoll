@@ -7,6 +7,7 @@ import HomePage from './routes/home-page/HomePage'
 import ProfilePage from './routes/profile-page/ProfilePage'
 import AppHeader from './components/app-header/AppHeader'
 import PollCreator from './routes/poll-creator/PollCreator'
+import PollPage from './routes/poll-page/PollPage'
 
 function App() {
   const authUser = useFirebaseAuth()
@@ -20,6 +21,7 @@ function App() {
       <AppHeader/>
       <Switch>
           <Route path='/user/:id' component={ProfilePage}/>
+          <Route path='/polls/:id' component={PollPage}/>
           <Route path='/create' component={PollCreator}/>
           <Route component={HomePage}/>
       </Switch>
