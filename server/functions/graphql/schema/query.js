@@ -2,7 +2,7 @@ const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLList} = require('gra
 const db = require('../../realtimeDb')
 const {User} = require('./types/user')
 const {LivePoll, UsagePrivacy} = require('./types/livepoll')
-const { Home } = require('./types/Home')
+const { Home } = require('./types/home')
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',

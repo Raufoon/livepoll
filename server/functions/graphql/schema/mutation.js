@@ -66,8 +66,8 @@ module.exports = new GraphQLObjectType({
         const {pollId, newItem} = args
 
         try {
-          await db.write(`items/${id}`, {...newItem, id})
-          await db.write(`edges/p_i/${pollId}/${id}`, 0)
+          await db.write(`items/${id}`, {...newItem, id, score: 0})
+          await db.write(`edges/poll_item/${pollId}/${id}`, 0)
         }
         catch(err) {
           return Promise.reject(err)

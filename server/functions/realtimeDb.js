@@ -21,9 +21,14 @@ exports.read = (path) => {
     .then(snap => snap.val())
 }
 
-exports.readAsList = (path) => {
-  return admin.database().ref(`/${path}`)
-    .once('value')
+exports.readAsList = (path, options={}) => {
+  let ref = admin.database().ref(`/${path}`)
+
+  if (options.sortByValue) {
+    ref = ref.orderByValue()
+  }
+
+  return ref.once('value')
     .then(snap => 
       Object.values(snap.val() || {}))
 }
