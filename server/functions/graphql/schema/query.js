@@ -2,6 +2,7 @@ const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLList} = require('gra
 const db = require('../../realtimeDb')
 const {User} = require('./types/user')
 const {LivePoll, UsagePrivacy} = require('./types/livepoll')
+const { Home } = require('./types/Home')
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -47,19 +48,9 @@ module.exports = new GraphQLObjectType({
     },
 
     home: {
-      type: new GraphQLList(new GraphQLNonNull(LivePoll)),
-      async resolve() {
-        let pollIds;
-
-        try {
-          pollIds = await db.readAsList('edges/home_poll')
-        }
-        catch(err){
-          return Promise.reject(err)
-        }
-        finally{
-          return pollIds.map(id => db.read(`polls/${id}`))
-        }
+      type: new GraphQLNonNull(Home),
+      resolve() {
+        return Promise.resolve({})
       }
     },
 

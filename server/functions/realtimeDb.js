@@ -28,6 +28,13 @@ exports.readAsList = (path) => {
       Object.values(snap.val() || {}))
 }
 
+exports.readKeysAsList = (path) => {
+  return admin.database().ref(`/${path}`)
+    .once('value')
+    .then(snap => 
+      Object.keys(snap.val() || {}))
+}
+
 exports.remove = (path) => {
   return admin.database().ref(`${path}`).remove()
 }

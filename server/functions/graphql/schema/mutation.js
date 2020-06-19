@@ -39,11 +39,11 @@ module.exports = new GraphQLObjectType({
         const id = db.getNewID()
         const {newPoll} = args
         const {getAuthUserId} = context
-        const author = await getAuthUserId()
+        const authorId = await getAuthUserId()
 
         try {
-          await db.write(`polls/${id}`, {...newPoll, id})
-          await db.write(`edges/author_poll/${author}/${id}`, true)
+          await db.write(`polls/${id}`, {...newPoll, id, author: authorId})
+          await db.write(`edges/author_poll/${authorId}/${id}`, true)
           await db.write(`edges/home_poll/${id}`, true) // TODO: filter the private polls
         }
         catch(err) {
