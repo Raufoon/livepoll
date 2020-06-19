@@ -4,11 +4,11 @@ import { actionLoadHomeRecentPolls } from '../../../state-management/actions'
 
 export default function useHomeData () {
   const dispatch = useDispatch()
-  const polls = useSelector(state => state.home.polls)
+  const recentPolls = useSelector(state => state.home.recentPolls)
 
   useEffect(function() {
     dispatch(actionLoadHomeRecentPolls())
   }, [])
 
-  return [polls]
+  return [recentPolls]
 }

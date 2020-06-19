@@ -1,12 +1,18 @@
 import React from 'react'
 import useHomeData from './hooks/useHomeData'
+import { Link } from 'react-router-dom'
 
 export default function HomePage () {
-  const [polls] = useHomeData()
+  const [recentPolls] = useHomeData()
+
+  console.log('Rendering HomePage')
 
   return (
     <div>
-      Welcome home
+      Recent Polls: <br/>
+      {
+        recentPolls.map(poll => <Link key={poll.id} to={`/polls/${poll.id}`}>{poll.title}</Link>)
+      }
     </div>
   )
 }

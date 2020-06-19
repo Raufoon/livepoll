@@ -10,6 +10,8 @@ export default function ProfilePage() {
   const authUser = useContext(AuthContext)
   const isMyProfile = authUser.getUid() === id
 
+  console.log('Rendering ProfilePage')
+
   return (
     <div>
       {
