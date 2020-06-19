@@ -6,22 +6,25 @@ const initialState = {
 
 export default function homeReducer(state = initialState, action) {
   const {type, ...data} = action
-  const {home} = data
-  
-  switch(type) {
-    case ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS:
-      return {
-        ...state,
-        recentPolls: {
-          ...state.recentPolls, 
-          ...home.recentPolls.reduce(function(result, poll) {
-            result[poll.id] = poll
-            return result
-          }, {})
-        }
-      }
 
-    default:
-      return state
+  if (type === ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS) {
+    const {home} = data
+    const {recentPolls} = home
+
+    return {
+      ...state,
+
+      recentPolls: {
+        ...state.recentPolls, 
+
+        ...recentPolls.reduce(function(result, poll) {
+          const {id} = poll
+          result[id] = poll
+          return result
+        }, {})
+      }
+    }
   }
+
+  else return state
 }
