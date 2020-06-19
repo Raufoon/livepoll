@@ -33,3 +33,16 @@ export function createNewPoll(data) {
     }
   `, {data})
 }
+
+export function createNewItem(pollId, newItem) {
+  return graphQlMutation(`
+    mutation CreateNewItem($pollId: ID!, $newItem: ItemInput!) {
+      newItem: addItemToPoll(pollId: $pollId, newItem: $newItem) {
+        text
+        imgUrl        
+      }
+    }
+  `, {
+    pollId, newItem
+  })
+}

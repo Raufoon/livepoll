@@ -1,4 +1,4 @@
-import { createNewPoll } from "../../services/write-requests"
+import { createNewPoll, createNewItem } from "../../services/write-requests"
 import { fetchPollDetails } from "../../services/read-requests"
 
 export function actionCreateNewPoll(pollData) {
@@ -60,6 +60,38 @@ export const ACTION_FETCH_POLL_DETAILS_FAILURE = 'ACTION_FETCH_POLL_DETAILS_FAIL
 export function actionFetchPollDetailsFailure(error) {
   return {
     type: ACTION_FETCH_POLL_DETAILS_FAILURE,
+    error
+  }
+}
+
+export function actionCreateNewItem(pollId, newItem) {
+  return async function(dispatch) {
+    try {
+      const {data, errors} = await createNewItem(pollId, newItem)
+      if (data) dispatch(actionCreateNewItemSuccess(pollId, data.data))
+      else if (errors) dispatch(actionCreateNewItemFailure(errors))
+    }
+    catch(err) {
+      dispatch(actionCreateNewItemFailure(err))
+    }
+  }
+}
+
+export const ACTION_CREATE_NEW_ITEM_SUCCESS = 'ACTION_CREATE_NEW_ITEM_SUCCESS'
+
+export function actionCreateNewItemSuccess(pollId, {newItem}) {
+  return {
+    type: ACTION_CREATE_NEW_ITEM_SUCCESS,
+    newItem,
+    pollId
+  }
+}
+
+export const ACTION_CREATE_NEW_ITEM_FAILURE = 'ACTION_CREATE_NEW_ITEM_FAILURE'
+
+export function actionCreateNewItemFailure(error) {
+  return {
+    type: ACTION_CREATE_NEW_ITEM_FAILURE,
     error
   }
 }
