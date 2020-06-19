@@ -11,3 +11,17 @@ export function fetchProfileDetails(uid) {
     }
   `)
 }
+
+export function loadRecentPollsForHome() {
+  return graphQlQuery(`
+    query LoadRecentPollsForHome {
+      home {
+        recentPolls{
+          id
+          title
+          startDateTime
+        }
+      }
+    }
+  `)
+}
