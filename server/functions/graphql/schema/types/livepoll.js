@@ -78,6 +78,7 @@ exports.LivePoll = new GraphQLObjectType({
         async resolve(obj) {
           const pollId = obj.id
           let itemsIdsWithVote, myItemIds;
+
           try {
             itemsIdsWithVote = await db.readAsList(`edges/poll_item/${pollId}`, {sortByValue: true})
             myItemIds = Object.keys(itemsIdsWithVote||{})

@@ -29,8 +29,7 @@ exports.ItemInput = new GraphQLInputObjectType({
   fields: function() {
     return {
       text: {type: GraphQLString},
-      imgUrl: {type: GraphQLString},
-      creatorId: {type: GraphQLID}
+      imgUrl: {type: GraphQLString}
     }
   }
 })
