@@ -1,4 +1,4 @@
-import { createNewPoll, createNewItem } from "../../services/write-requests"
+import { createNewPoll, createNewItem, voteForItem } from "../../services/write-requests"
 import { fetchPollDetails, fetchPollItems } from "../../services/read-requests"
 
 export function actionCreateNewPoll(pollData) {
@@ -48,7 +48,7 @@ export function actionFetchPollDetails(id) {
 
 export const ACTION_FETCH_POLL_DETAILS_SUCCESS = 'ACTION_FETCH_POLL_DETAILS_SUCCESS'
 
-export function actionFetchPollDetailsSuccess({poll}) {
+function actionFetchPollDetailsSuccess({poll}) {
   return {
     type: ACTION_FETCH_POLL_DETAILS_SUCCESS,
     poll
@@ -57,7 +57,7 @@ export function actionFetchPollDetailsSuccess({poll}) {
 
 export const ACTION_FETCH_POLL_DETAILS_FAILURE = 'ACTION_FETCH_POLL_DETAILS_FAILURE'
 
-export function actionFetchPollDetailsFailure(error) {
+function actionFetchPollDetailsFailure(error) {
   return {
     type: ACTION_FETCH_POLL_DETAILS_FAILURE,
     error
@@ -79,7 +79,7 @@ export function actionCreateNewItem(pollId, newItem) {
 
 export const ACTION_CREATE_NEW_ITEM_SUCCESS = 'ACTION_CREATE_NEW_ITEM_SUCCESS'
 
-export function actionCreateNewItemSuccess(pollId, {newItem}) {
+function actionCreateNewItemSuccess(pollId, {newItem}) {
   return {
     type: ACTION_CREATE_NEW_ITEM_SUCCESS,
     newItem,
@@ -89,7 +89,7 @@ export function actionCreateNewItemSuccess(pollId, {newItem}) {
 
 export const ACTION_CREATE_NEW_ITEM_FAILURE = 'ACTION_CREATE_NEW_ITEM_FAILURE'
 
-export function actionCreateNewItemFailure(error) {
+function actionCreateNewItemFailure(error) {
   return {
     type: ACTION_CREATE_NEW_ITEM_FAILURE,
     error
@@ -111,7 +111,7 @@ export function actionFetchPollItems(pollId) {
 
 export const ACTION_FETCH_POLL_ITEMS_SUCCESS = 'ACTION_FETCH_POLL_ITEMS_SUCCESS'
 
-export function actionFetchPollItemsSuccess({poll}) {
+function actionFetchPollItemsSuccess({poll}) {
   const {id, items} = poll
   return {
     type: ACTION_FETCH_POLL_ITEMS_SUCCESS,
@@ -122,9 +122,41 @@ export function actionFetchPollItemsSuccess({poll}) {
 
 export const ACTION_FETCH_POLL_ITEMS_FAILURE = 'ACTION_FETCH_POLL_ITEMS_FAILURE'
 
-export function actionFetchPollItemsFailure(error) {
+function actionFetchPollItemsFailure(error) {
   return {
     type: ACTION_FETCH_POLL_ITEMS_FAILURE,
+    error
+  }
+}
+
+export function actionVoteForItem(pollId, itemId, voteValue=1) {
+  return async function (dispatch) {
+    try {
+      const {data, errors} = await voteForItem(pollId, itemId, voteValue)
+      if (data) dispatch(actionVoteForItemSuccess(pollId, data.data))
+      else if (errors) dispatch(actionVoteForItemFailure(errors))
+    }
+    catch(err) {
+      dispatch(actionVoteForItemFailure(err))
+    }
+  }
+}
+
+export const ACTION_VOTE_FOR_ITEM_SUCCESS = 'ACTION_VOTE_FOR_ITEM_SUCCESS'
+
+function actionVoteForItemSuccess(pollId, {updatedItem}) {
+  return {
+    type: ACTION_VOTE_FOR_ITEM_SUCCESS,
+    pollId,
+    updatedItem
+  }
+}
+
+export const ACTION_VOTE_FOR_ITEM_FAILURE = 'ACTION_VOTE_FOR_ITEM_FAILURE'
+
+function actionVoteForItemFailure(error) {
+  return {
+    type: ACTION_VOTE_FOR_ITEM_FAILURE,
     error
   }
 }

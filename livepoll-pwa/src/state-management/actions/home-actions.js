@@ -19,7 +19,7 @@ export function actionLoadHomeRecentPolls() {
 
 export const ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS = 'ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS'
 
-export function actionLoadHomeRecentPollsSuccess(data) {
+function actionLoadHomeRecentPollsSuccess(data) {
   return {
     type: ACTION_LOAD_HOME_RECENT_POLLS_SUCCESS,
     ...data
@@ -28,7 +28,7 @@ export function actionLoadHomeRecentPollsSuccess(data) {
 
 export const ACTION_LOAD_HOME_RECENT_POLLS_FAILURE = 'ACTION_LOAD_HOME_RECENT_POLLS_FAILURE'
 
-export function actionLoadHomeRecentPollsFailure(error) {
+function actionLoadHomeRecentPollsFailure(error) {
   return {
     type: ACTION_LOAD_HOME_RECENT_POLLS_FAILURE,
     error

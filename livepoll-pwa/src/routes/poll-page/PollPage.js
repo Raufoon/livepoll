@@ -4,6 +4,7 @@ import usePollDetails from './hooks/usePollDetails'
 import ItemCreator from './components/item-creator/ItemCreator'
 import AuthContext from '../../contexts/AuthContext'
 import usePollItems from './hooks/usePollitems'
+import ItemsPanel from './components/items-panel/ItemsPanel'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
@@ -33,12 +34,8 @@ export default function PollPage () {
         shouldAllowAddItem && <ItemCreator pollId={id}/> 
       }
 
-      <h3>items:</h3>
       {
-        Object.values(pollItems || {}).map(item => <div key={item.id}>
-          <h3>{JSON.stringify(item)}</h3>
-          <button>vote</button>
-        </div>)
+        pollItems && <ItemsPanel pollId={id} items={Object.values(pollItems)}/>
       }
     </div>
   )  
