@@ -3,6 +3,10 @@ const db = require('../../realtimeDb')
 const {User} = require('./types/user')
 const {LivePoll, UsagePrivacy} = require('./types/livepoll')
 const { Home } = require('./types/home')
+const user = require('./resolvers/queries/user')
+const users = require('./resolvers/queries/users')
+const poll = require('./resolvers/queries/poll')
+const polls = require('./resolvers/queries/polls')
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -13,27 +17,12 @@ module.exports = new GraphQLObjectType({
       args: {
         id: {type: new GraphQLNonNull(GraphQLID)}
       },
-      resolve(_, args) {
-        const {id} = args
-        return db.read(`users/${id}`)
-      }
+      resolve: user
     },
 
     users: {
       type: new GraphQLList(new GraphQLNonNull(User)),
-      async resolve() {
-        let users;
-
-        try {
-          users = await db.readAsList('users')
-        }
-        catch(err) {
-          return Promise.reject(err)
-        }
-        finally {
-          return users.map(user => Promise.resolve(user))
-        }
-      }
+      resolve: users
     },
 
     poll: {
@@ -41,10 +30,7 @@ module.exports = new GraphQLObjectType({
       args: {
         id: {type: new GraphQLNonNull(GraphQLID)}
       },
-      resolve(_, args) {
-        const {id} = args
-        return db.read(`polls/${id}`)
-      }
+      resolve: poll
     },
 
     home: {
@@ -56,18 +42,7 @@ module.exports = new GraphQLObjectType({
 
     polls: {
       type: new GraphQLList(new GraphQLNonNull(LivePoll)),
-      async resolve() {
-        let polls;
-        try {
-          polls = await db.readAsList('polls')
-        } 
-        catch (err) {
-          return Promise.reject(err)
-        }
-        finally {
-          return polls.map(poll => Promise.resolve(poll))
-        }
-      }
+      resolve: polls
     },
   }
 })
