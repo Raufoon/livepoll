@@ -15,8 +15,14 @@ exports.write = (path, object) => {
   })
 }
 
-exports.read = (path) => {
-  return admin.database().ref(`/${path}`)
+exports.read = (path, options={}) => {
+  let ref = admin.database().ref(`/${path}`)
+
+  if (options.sortByValue) {
+    ref = ref.orderByValue()
+  }
+
+  return ref
     .once('value')
     .then(snap => snap.val())
 }
@@ -36,8 +42,9 @@ exports.readAsList = (path, options={}) => {
 exports.readKeysAsList = (path) => {
   return admin.database().ref(`/${path}`)
     .once('value')
-    .then(snap => 
-      Object.keys(snap.val() || {}))
+    .then(snap => {
+      return Object.keys(snap.val() || {})
+    })
 }
 
 exports.remove = (path) => {
