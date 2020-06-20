@@ -52,3 +52,13 @@ exports.remove = (path) => {
 }
 
 exports.getNewID = () => admin.database().ref().push().key
+
+exports.transaction = function(path, doTransaction) {
+  return admin.database().ref(path)
+    .transaction(function(data) {
+      if (data === undefined) {
+        return Promise.reject(`No data at ${path}`)
+      }
+      return doTransaction(data)
+    })
+}
