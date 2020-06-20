@@ -16,6 +16,10 @@ module.exports = async function vote(_, args, context) {
 
     await db.transaction(`edges/poll_item/${pollId}/${itemId}`, oldScore => oldScore + voteValue)
     await db.write(`edges/voter_poll_item/${voterId}/${pollId}`, itemId)
+    
+    const currentScore = await db.read(`edges/poll_item/${pollId}/${itemId}`)
+    await db.write(`items/${itemId}/score`, currentScore)
+    
     // TODO: if voter list is visible, save an edge item_voters/ITEM_ID/VOTER_ID = true
   }
   catch(err) {
