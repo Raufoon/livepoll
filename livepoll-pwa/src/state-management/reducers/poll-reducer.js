@@ -35,7 +35,7 @@ export default function pollReducer(state = {}, action) {
       [pollId]: {
         ...state[pollId] || {},
         items: {
-          ...state[pollId].items || {},
+          ...(state[pollId] || {}).items || {},
           ...items.reduce(function(result, item) {
             result[item.id] = item
             return result

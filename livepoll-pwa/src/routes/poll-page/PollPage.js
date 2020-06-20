@@ -35,7 +35,10 @@ export default function PollPage () {
 
       <h3>items:</h3>
       {
-        pollItems && <h4>{JSON.stringify(pollItems)}</h4>
+        Object.values(pollItems || {}).map(item => <div key={item.id}>
+          <h3>{JSON.stringify(item)}</h3>
+          <button>vote</button>
+        </div>)
       }
     </div>
   )  
