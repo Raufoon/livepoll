@@ -1,7 +1,6 @@
 const {GraphQLObjectType, GraphQLNonNull, GraphQLID} = require('graphql')
-const db = require('../../realtimeDb')
 const {User, UserInput} = require('./types/user')
-const {LivePoll, LivePollInput, UsagePrivacy} = require('./types/livepoll')
+const {LivePoll, LivePollInput} = require('./types/livepoll')
 const {ItemInput, Item} = require('./types/item')
 const editUserDetails = require('./resolvers/mutations/edit-user-details')
 const createLivePoll = require('./resolvers/mutations/create-live-poll')

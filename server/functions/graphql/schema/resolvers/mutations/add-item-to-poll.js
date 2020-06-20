@@ -1,4 +1,5 @@
 const db = require('../../../../realtimeDb')
+const { UsagePrivacy } = require('../../types/livepoll')
 
 module.exports = async function addItemToPoll(_, args, context) {
   const id = db.getNewID()

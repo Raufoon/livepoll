@@ -1,7 +1,6 @@
 const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLList} = require('graphql')
-const db = require('../../realtimeDb')
 const {User} = require('./types/user')
-const {LivePoll, UsagePrivacy} = require('./types/livepoll')
+const {LivePoll} = require('./types/livepoll')
 const { Home } = require('./types/home')
 const user = require('./resolvers/queries/user')
 const users = require('./resolvers/queries/users')
