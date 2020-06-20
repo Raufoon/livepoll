@@ -48,3 +48,20 @@ export function fetchPollDetails(id) {
     }
   `)
 }
+
+export function fetchPollItems(id) {
+  return graphQlQuery(`
+    query FetchPollItems {
+      poll(id: "${id}") {
+        id
+        items {
+          id
+          creatorId
+          text
+          imgUrl
+          score
+        }
+      }
+    }
+  `)
+}
