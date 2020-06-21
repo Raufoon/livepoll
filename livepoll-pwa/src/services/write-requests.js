@@ -50,7 +50,7 @@ export function createNewItem(pollId, newItem) {
 export function voteForItem(pollId, itemId, voteValue) {
   return graphQlMutation(`
     mutation vote($pollId: ID!, $itemId: ID!, $voteValue: Int!) {
-      updatedItem: vote(pollId: $pollId, itemId: $itemId, voteValue: $voteValue) {
+      updatedItems: vote(pollId: $pollId, itemId: $itemId, voteValue: $voteValue) {
         id
         score        
       }

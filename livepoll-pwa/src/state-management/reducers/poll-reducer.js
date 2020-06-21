@@ -8,7 +8,9 @@ export default function pollReducer(state = {}, action) {
     const {id} = newPoll
     return {
       ...state,
-      [id]: newPoll
+      [id]: {
+        details: newPoll
+      }
     }
   }
 
@@ -19,13 +21,26 @@ export default function pollReducer(state = {}, action) {
       ...state,
       [id]: {
         ...state[id],
-        ...poll
+        details: {
+          ...(state[id] || {}).details,
+          ...poll
+        }
       }
     }
   }
 
   else if (type === ACTION_CREATE_NEW_ITEM_SUCCESS) {
-    return state
+    const {newItem, pollId} = data
+    return {
+      ...state,
+      [pollId]: {
+        ...state[pollId],
+        items: {
+          ...state[pollId].items || {},
+          [newItem.id]: newItem
+        }
+      }
+    }
   }
 
   else if (type === ACTION_FETCH_POLL_ITEMS_SUCCESS) {
@@ -46,7 +61,25 @@ export default function pollReducer(state = {}, action) {
   }
 
   else if (type === ACTION_VOTE_FOR_ITEM_SUCCESS) {
-    return state
+    const {updatedItems, pollId} = data
+    return {
+      ...state,
+      [pollId]: {
+        ...state[pollId],
+        items: {
+          ...state[pollId].items || {},
+
+          ...updatedItems.reduce((result, item) => {
+            const {id} = item
+            result[id] = {
+             ...state[pollId].items[id],
+             ...item
+            }
+            return result
+          }, {})
+        }
+      }
+    }
   }
 
   else return state

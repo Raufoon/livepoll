@@ -144,11 +144,11 @@ export function actionVoteForItem(pollId, itemId, voteValue=1) {
 
 export const ACTION_VOTE_FOR_ITEM_SUCCESS = 'ACTION_VOTE_FOR_ITEM_SUCCESS'
 
-function actionVoteForItemSuccess(pollId, {updatedItem}) {
+function actionVoteForItemSuccess(pollId, {updatedItems}) {
   return {
     type: ACTION_VOTE_FOR_ITEM_SUCCESS,
     pollId,
-    updatedItem
+    updatedItems
   }
 }
 

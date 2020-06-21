@@ -3,7 +3,13 @@ import {useEffect} from 'react'
 import {actionFetchPollDetails} from '../../../state-management/actions/poll-actions'
 
 export default function usePollDetails(pollId) {
-  const pollDetails = useSelector(state => state.polls[pollId])
+  const pollDetails = useSelector(function(state) {
+    if (!state.polls[pollId]) {
+      return undefined
+    }
+    return state.polls[pollId].details
+  })
+
   const dispatch = useDispatch()
 
   useEffect(function() {
