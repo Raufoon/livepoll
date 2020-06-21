@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt} = require('graphql')
+const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLList} = require('graphql')
 const {User, UserInput} = require('./types/user')
 const {LivePoll, LivePollInput} = require('./types/livepoll')
 const {ItemInput, Item} = require('./types/item')
@@ -36,7 +36,7 @@ module.exports = new GraphQLObjectType({
     },
 
     vote: {
-      type: Item,
+      type: new GraphQLList(Item),
       args: {
         pollId: {type: GraphQLID},
         itemId: {type: GraphQLID},

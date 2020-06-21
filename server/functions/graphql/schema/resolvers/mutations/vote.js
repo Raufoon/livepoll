@@ -2,10 +2,11 @@ const db = require('../../../../realtimeDb')
 
 module.exports = async function vote(_, args, context) {
   const {pollId, itemId, voteValue} = args
+  let alreadyVotedItemId;
 
   try {
     const voterId = await context.getAuthUserId()
-    const alreadyVotedItemId = await db.read(`edges/voter_poll_item/${voterId}/${pollId}`)
+    alreadyVotedItemId = await db.read(`edges/voter_poll_item/${voterId}/${pollId}`)
 
     if (itemId === alreadyVotedItemId) {
       throw new Error('You have already voted for this item')
@@ -29,6 +30,12 @@ module.exports = async function vote(_, args, context) {
     return Promise.reject(err)
   }
   finally {
-    return db.read(`items/${itemId}`)
+    if (!!alreadyVotedItemId) {
+      return [
+        db.read(`items/${itemId}`),
+        db.read(`items/${alreadyVotedItemId}`)
+      ]
+    }
+    return [db.read(`items/${itemId}`)]
   }
 }
