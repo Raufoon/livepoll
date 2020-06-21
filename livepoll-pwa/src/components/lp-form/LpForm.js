@@ -18,7 +18,7 @@ function LpForm(props) {
   }
 
   function onError(name, error) {
-    if (fieldErrors.current[name] !== error) {
+    if (!!fieldErrors.current[name] !== error) {
       if (error) setErrorCount(prev => prev + 1)
       else setErrorCount(prev => prev - 1)
       fieldErrors.current[name] = error
