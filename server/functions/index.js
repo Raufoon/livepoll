@@ -6,6 +6,7 @@ const db = require('./realtimeDb')
 const {types, query, mutation} = require('./graphql')
 const graphqlHTTP = require('express-graphql')
 const {GraphQLSchema} = require('graphql')
+const fileUpload = require('./routers/file-upload')
 
 if (process.env.NODE_ENV === 'production') {
   admin.initializeApp()  
@@ -27,14 +28,14 @@ exports.setUserProfile = functions.auth.user().onCreate(newUser => {
 })
 
 const app = express()
+
 app.use(cors)
-app.use('/', graphqlHTTP(function(request, response) {
+
+app.use('/upload', fileUpload)
+
+app.use('/graphql', graphqlHTTP(function(request, response) {
   return {
-    schema: new GraphQLSchema({
-      ...types,
-      query,
-      mutation
-    }),
+    schema: new GraphQLSchema({...types, query, mutation}),
     context: {
       getAuthUserId: async function() {
         const {uid} = await admin.auth().verifyIdToken(request.headers.authorization)
@@ -45,4 +46,4 @@ app.use('/', graphqlHTTP(function(request, response) {
   }
 }))
 
-exports.graphql_v_2_0_0 = functions.https.onRequest(app)
+exports.server = functions.https.onRequest(app)
