@@ -6,6 +6,7 @@ const editUserDetails = require('./resolvers/mutations/edit-user-details')
 const createLivePoll = require('./resolvers/mutations/create-live-poll')
 const addItemToPoll = require('./resolvers/mutations/add-item-to-poll')
 const vote = require('./resolvers/mutations/vote')
+const unvote = require('./resolvers/mutations/unvote')
 
 module.exports = new GraphQLObjectType({
   name: 'RootMutationType',
@@ -43,6 +44,16 @@ module.exports = new GraphQLObjectType({
         voteValue: {type: GraphQLInt}
       },
       resolve: vote
+    },
+
+    unvote: {
+      type: Item,
+      args: {
+        pollId: {type: GraphQLID},
+        itemId: {type: GraphQLID},
+        voteValue: {type: GraphQLInt}
+      },
+      resolve: unvote
     }
   }
 })

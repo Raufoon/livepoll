@@ -27,6 +27,7 @@ module.exports = async function vote(_, args, context) {
       await db.transaction(`edges/poll_item/${pollId}/${alreadyVotedItemId}`, oldScore => oldScore - voteValue)
       const scoreOfCancelledItem = await db.read(`edges/poll_item/${pollId}/${alreadyVotedItemId}`)
       await db.write(`items/${alreadyVotedItemId}/score`, scoreOfCancelledItem)
+      // TODO: if voter list is visible, move the voter id for newly voted item from last voted item
     }
   }
   catch(err) {
