@@ -5,7 +5,7 @@ import LpForm from '../../../../components/lp-form/LpForm'
 import LpField from '../../../../components/lp-form/LpField'
 import { actionCreateNewItem } from '../../../../state-management/actions/poll-actions'
 
-function ItemCreator(props) {
+function TextItemCreator(props) {
   const {pollId} = props
   const dispatch = useDispatch()
 
@@ -14,7 +14,7 @@ function ItemCreator(props) {
   }
 
   return (
-    <LpForm onSubmit={onSubmit} submitLabel="Create new Item">
+    <LpForm onSubmit={onSubmit} submitLabel="Create new item">
       <LpField 
         type="type"
         title="Item name"
@@ -26,8 +26,8 @@ function ItemCreator(props) {
   )
 }
 
-ItemCreator.propTypes = {
+TextItemCreator.propTypes = {
   pollId: PropTypes.string.isRequired
 }
 
-export default ItemCreator
+export default TextItemCreator

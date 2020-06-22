@@ -6,7 +6,7 @@ export function actionCreateNewPoll(pollData) {
     try {
       const {data, errors} = await createNewPoll(pollData)
 
-      if (data) dispatch(actionCreateNewPollSuccess(data.data))
+      if (data) dispatch(actionCreateNewPollSuccess(data))
       else if (errors) dispatch(actionCreateNewPollFailure(errors))
     }
     catch(err) {
@@ -37,7 +37,7 @@ export function actionFetchPollDetails(id) {
   return async function(dispatch) {
     try {
       const {data, errors} = await fetchPollDetails(id)
-      if (data) dispatch(actionFetchPollDetailsSuccess(data.data))
+      if (data) dispatch(actionFetchPollDetailsSuccess(data))
       else if (errors) dispatch(actionFetchPollDetailsFailure(errors))
     }
     catch(err) {
@@ -68,7 +68,7 @@ export function actionCreateNewItem(pollId, newItem) {
   return async function(dispatch) {
     try {
       const {data, errors} = await createNewItem(pollId, newItem)
-      if (data) dispatch(actionCreateNewItemSuccess(pollId, data.data))
+      if (data) dispatch(actionCreateNewItemSuccess(pollId, data))
       else if (errors) dispatch(actionCreateNewItemFailure(errors))
     }
     catch(err) {
@@ -100,7 +100,7 @@ export function actionFetchPollItems(pollId) {
   return async function(dispatch) {
     try {
       const {data, errors} = await fetchPollItems(pollId)
-      if (data) dispatch(actionFetchPollItemsSuccess(data.data))
+      if (data) dispatch(actionFetchPollItemsSuccess(data))
       else if (errors) dispatch(actionFetchPollItemsFailure(errors))
     }
     catch(err) {
@@ -133,7 +133,7 @@ export function actionVoteForItem(pollId, itemId, voteValue=1) {
   return async function (dispatch) {
     try {
       const {data, errors} = await voteForItem(pollId, itemId, voteValue)
-      if (data) dispatch(actionVoteForItemSuccess(pollId, data.data))
+      if (data) dispatch(actionVoteForItemSuccess(pollId, data))
       else if (errors) dispatch(actionVoteForItemFailure(errors))
     }
     catch(err) {

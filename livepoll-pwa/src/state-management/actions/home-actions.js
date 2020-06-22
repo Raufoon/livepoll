@@ -5,7 +5,7 @@ export function actionLoadHomeRecentPolls() {
     try {
       const {data, errors} = await loadRecentPollsForHome()
       if (data) {
-        dispatch(actionLoadHomeRecentPollsSuccess(data.data))
+        dispatch(actionLoadHomeRecentPollsSuccess(data))
       }
       else if (errors) {
         dispatch(actionLoadHomeRecentPollsFailure(errors))  

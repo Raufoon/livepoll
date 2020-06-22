@@ -6,7 +6,7 @@ export function actionFetchProfileDetails(uid) {
     try {
       const {data, errors} = await fetchProfileDetails(uid)
 
-      if (data) dispatch(actionFetchProfileDetailsSuccess(data.data))
+      if (data) dispatch(actionFetchProfileDetailsSuccess(data))
       else if (errors) dispatch(actionFetchProfileDetailsFailure(uid, errors))
     }
     catch(err) {
@@ -38,7 +38,7 @@ export function actionEditProfileDetails(uid, details) {
   return async function(dispatch) {
     try {
       const {data, errors} = await editProfile(details)
-      if (data) dispatch(actionEditProfileDetailsSuccess(uid, data.data))
+      if (data) dispatch(actionEditProfileDetailsSuccess(uid, data))
       else if (errors) dispatch(actionEditProfileDetailsFailure(uid, errors))
     }
     catch(err) {

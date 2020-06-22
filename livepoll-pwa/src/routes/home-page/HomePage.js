@@ -11,7 +11,11 @@ export default function HomePage () {
     <div>
       Recent Polls: <br/>
       {
-        Object.values(recentPolls).map(poll => <Link key={poll.id} to={`/polls/${poll.id}`}>{poll.title}</Link>)
+        Object.values(recentPolls).map(poll => 
+          <h2 key={poll.id}>
+            <Link to={`/polls/${poll.id}`}>{poll.title}</Link>
+          </h2>
+        )
       }
     </div>
   )

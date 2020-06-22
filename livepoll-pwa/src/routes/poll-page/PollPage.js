@@ -1,7 +1,8 @@
 import React, {useContext} from 'react'
 import {useParams} from 'react-router-dom'
 import usePollDetails from './hooks/usePollDetails'
-import ItemCreator from './components/item-creator/ItemCreator'
+import TextItemCreator from './components/text-item-creator/TextItemCreator'
+import AvatarTextItemCreator from './components/avatar-text-item-creator/AvatarTextItemCreator'
 import AuthContext from '../../contexts/AuthContext'
 import usePollItems from './hooks/usePollitems'
 import ItemsPanel from './components/items-panel/ItemsPanel'
@@ -20,6 +21,20 @@ export default function PollPage () {
 
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true
 
+  let ItemCreatorForm;
+  switch(pollDetails.itemContentType) {
+    case 'TEXT':
+      ItemCreatorForm = TextItemCreator
+      break
+    
+    case 'AVATAR_TEXT':
+      ItemCreatorForm = AvatarTextItemCreator
+      break
+    
+    default:
+      throw new Error('Invalid item type')
+  }
+
   return (
     <div>
       this is a poll page <br/>
@@ -31,7 +46,7 @@ export default function PollPage () {
       <br/>
 
       {
-        shouldAllowAddItem && <ItemCreator pollId={id}/> 
+        shouldAllowAddItem && <ItemCreatorForm pollId={id}/> 
       }
 
       {

@@ -38,6 +38,7 @@ export function createNewItem(pollId, newItem) {
   return graphQlMutation(`
     mutation CreateNewItem($pollId: ID!, $newItem: ItemInput!) {
       newItem: addItemToPoll(pollId: $pollId, newItem: $newItem) {
+        id
         text
         imgUrl        
       }
