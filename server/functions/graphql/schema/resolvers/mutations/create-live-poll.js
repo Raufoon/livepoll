@@ -6,7 +6,7 @@ module.exports = async function createLivePoll(_, args, context) {
 
   try {
     const authorId = await context.getAuthUserId()
-    await db.write(`polls/${id}`, {...newPoll, id, author: authorId})
+    await db.write(`polls/${id}`, {...newPoll, id, author: authorId, totalVotes: 0})
     await db.write(`edges/author_poll/${authorId}/${id}`, true)
     await db.write(`edges/home_poll/${id}`, true) // TODO: filter the private polls
   }

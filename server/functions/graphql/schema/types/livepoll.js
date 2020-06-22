@@ -7,7 +7,8 @@ const {
   GraphQLInputObjectType,
   GraphQLString,
   GraphQLList,
-  GraphQLBoolean
+  GraphQLBoolean,
+  GraphQLInt
 } = require('graphql')
 
 
@@ -72,6 +73,7 @@ exports.LivePoll = new GraphQLObjectType({
       whenToAddItem: {type: exports.AdditionRestriction},
       votingSystem: {type: exports.VotingSystem},
       itemContentType: {type: exports.ItemContentType},
+      totalVotes: {type: GraphQLInt},
       
       items: {
         type: new GraphQLList(new GraphQLNonNull(Item)),

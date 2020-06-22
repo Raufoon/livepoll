@@ -14,6 +14,9 @@ module.exports = async function vote(_, args, context) {
 
     await db.transaction(`edges/poll_item/${pollId}/${itemId}`, oldScore => oldScore + voteValue)
     await db.write(`edges/voter_poll_item/${voterId}/${pollId}`, itemId)
+    if (!alreadyVotedItemId) {
+      await db.transaction(`polls/${pollId}/totalVotes`, count => count + 1)
+    }
     
     const currentScore = await db.read(`edges/poll_item/${pollId}/${itemId}`)
     await db.write(`items/${itemId}/score`, currentScore)
