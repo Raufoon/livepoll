@@ -1,4 +1,4 @@
-import { createNewPoll, createNewItem, voteForItem } from "../../services/write-requests"
+import { createNewPoll, createNewItem, voteForItem, unvoteItem } from "../../services/write-requests"
 import { fetchPollDetails, fetchPollItems } from "../../services/read-requests"
 
 export function actionCreateNewPoll(pollData) {
@@ -157,6 +157,38 @@ export const ACTION_VOTE_FOR_ITEM_FAILURE = 'ACTION_VOTE_FOR_ITEM_FAILURE'
 function actionVoteForItemFailure(error) {
   return {
     type: ACTION_VOTE_FOR_ITEM_FAILURE,
+    error
+  }
+}
+
+export function actionUnvoteForItem(pollId, itemId, voteValue=1) {
+  return async function (dispatch) {
+    try {
+      const {data, errors} = await unvoteItem(pollId, itemId, voteValue)
+      if (data) dispatch(actionUnvoteItemSuccess(pollId, data))
+      else if (errors) dispatch(actionUnvoteItemFailure(errors))
+    }
+    catch(err) {
+      dispatch(actionUnvoteItemFailure(err))
+    }
+  }
+}
+
+export const ACTION_UNVOTE_ITEM_SUCCESS = 'ACTION_UNVOTE_ITEM_SUCCESS'
+
+function actionUnvoteItemSuccess(pollId, {updatedItems}) {
+  return {
+    type: ACTION_UNVOTE_ITEM_SUCCESS,
+    pollId,
+    updatedItems
+  }
+}
+
+export const ACTION_UNVOTE_ITEM_FAILURE = 'ACTION_UNVOTE_ITEM_FAILURE'
+
+function actionUnvoteItemFailure(error) {
+  return {
+    type: ACTION_UNVOTE_ITEM_FAILURE,
     error
   }
 }
