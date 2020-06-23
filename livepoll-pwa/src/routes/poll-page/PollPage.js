@@ -34,7 +34,7 @@ export default function PollPage () {
       break
     
     default:
-      throw new Error('Invalid item type')
+      return "Loading..."
   }
 
   return (

@@ -1,4 +1,4 @@
-import {graphQlQuery} from './network'
+import {graphQlQuery, graphQlSecureQuery} from './network'
 
 export function fetchProfileDetails(uid) {
   return graphQlQuery(`
@@ -62,6 +62,14 @@ export function fetchPollItems(id) {
           score
         }
       }
+    }
+  `)
+}
+
+export function fetchVotedItemId(pollId) {
+  return graphQlSecureQuery(`
+    query WhichDidIVote {
+      votedItemId: whichDidIVote(pollId: "${pollId}")
     }
   `)
 }

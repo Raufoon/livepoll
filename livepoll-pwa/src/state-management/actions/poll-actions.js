@@ -1,5 +1,5 @@
 import { createNewPoll, createNewItem, voteForItem, unvoteItem } from "../../services/write-requests"
-import { fetchPollDetails, fetchPollItems } from "../../services/read-requests"
+import { fetchPollDetails, fetchPollItems, fetchVotedItemId } from "../../services/read-requests"
 
 export function actionCreateNewPoll(pollData) {
   return async function(dispatch) {
@@ -133,7 +133,10 @@ export function actionVoteForItem(pollId, itemId, voteValue=1) {
   return async function (dispatch) {
     try {
       const {data, errors} = await voteForItem(pollId, itemId, voteValue)
-      if (data) dispatch(actionVoteForItemSuccess(pollId, data))
+      if (data) {
+        dispatch(actionVoteForItemSuccess(pollId, data))
+        dispatch(actionFetchVotedItemIdSuccess(pollId, {votedItemId: itemId}))
+      }
       else if (errors) dispatch(actionVoteForItemFailure(errors))
     }
     catch(err) {
@@ -165,7 +168,10 @@ export function actionUnvoteForItem(pollId, itemId, voteValue=1) {
   return async function (dispatch) {
     try {
       const {data, errors} = await unvoteItem(pollId, itemId, voteValue)
-      if (data) dispatch(actionUnvoteItemSuccess(pollId, data))
+      if (data) {
+        dispatch(actionUnvoteItemSuccess(pollId, data))
+        dispatch(actionFetchVotedItemIdSuccess(pollId, {}))
+      }
       else if (errors) dispatch(actionUnvoteItemFailure(errors))
     }
     catch(err) {
@@ -176,11 +182,11 @@ export function actionUnvoteForItem(pollId, itemId, voteValue=1) {
 
 export const ACTION_UNVOTE_ITEM_SUCCESS = 'ACTION_UNVOTE_ITEM_SUCCESS'
 
-function actionUnvoteItemSuccess(pollId, {updatedItems}) {
+function actionUnvoteItemSuccess(pollId, {updatedItem}) {
   return {
     type: ACTION_UNVOTE_ITEM_SUCCESS,
     pollId,
-    updatedItems
+    updatedItem
   }
 }
 
@@ -189,6 +195,39 @@ export const ACTION_UNVOTE_ITEM_FAILURE = 'ACTION_UNVOTE_ITEM_FAILURE'
 function actionUnvoteItemFailure(error) {
   return {
     type: ACTION_UNVOTE_ITEM_FAILURE,
+    error
+  }
+}
+
+export function actionFetchVotedItemId(pollId) {
+  return async function (dispatch) {
+    try {
+      const {data, errors} = await fetchVotedItemId(pollId)
+      if (data) dispatch(actionFetchVotedItemIdSuccess(pollId, data))
+      else if (errors) dispatch(actionFetchVotedItemIdFailure(errors))
+    }
+    catch(err) {
+      dispatch(actionFetchVotedItemIdFailure(err))
+    }
+  }
+}
+
+export const ACTION_FETCH_VOTED_ITEM_ID_SUCCESS = 'ACTION_FETCH_VOTED_ITEM_ID_SUCCESS'
+
+function actionFetchVotedItemIdSuccess(pollId, {votedItemId}) {
+  return {
+    type: ACTION_FETCH_VOTED_ITEM_ID_SUCCESS,
+    pollId,
+    votedItemId
+  }
+}
+
+
+export const ACTION_FETCH_VOTED_ITEM_ID_FAILURE = 'ACTION_FETCH_VOTED_ITEM_ID_FAILURE'
+
+function actionFetchVotedItemIdFailure(error) {
+  return {
+    type: ACTION_FETCH_VOTED_ITEM_ID_FAILURE,
     error
   }
 }

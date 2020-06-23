@@ -4,6 +4,15 @@ import {getAuthIDToken} from './auth'
 const DEV_SERVER = 'http://localhost:5000/lllivepolll/us-central1/server'
 const SERVER = 'http://us-central1-lllivepolll.cloudfunctions.net/server'
 
+export async function graphQlSecureQuery(query) {
+  const idToken = await getAuthIDToken()
+  const headers = {
+    'Authorization': idToken
+  }
+  return get(`${SERVER}/graphql?query=${query}`, {headers})
+    .then(response => response.data)
+}
+
 export function graphQlQuery(query) {
   return get(`${SERVER}/graphql?query=${query}`).then(response => response.data)
 }

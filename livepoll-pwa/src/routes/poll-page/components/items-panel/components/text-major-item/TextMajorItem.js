@@ -4,7 +4,7 @@ import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import './style.css'
 
 export default function TextMajorItem(props) {
-  const {item, position, vote} = props
+  const {item, position, vote, isVotedByMe} = props
   const {text, imgUrl,id, score} = item
 
   let avatarImgSize = '80px';
@@ -26,12 +26,13 @@ export default function TextMajorItem(props) {
       <span className='data'>{score} votes</span>
       <span className='data'>90%</span>
       <ProgBar className='data progBar' value={90}/>
-      <input className='data' type='checkbox' onChange={() => vote(id)}/>
+      <input className='data' type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
     </div>
   )
 }
 
 TextMajorItem.propTypes = {
   item: PropTypes.object.isRequired,
-  vote: PropTypes.func.isRequired
+  vote: PropTypes.func.isRequired,
+  isVotedByMe: PropTypes.bool
 }
