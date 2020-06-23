@@ -6,6 +6,7 @@ const user = require('./resolvers/queries/user')
 const users = require('./resolvers/queries/users')
 const poll = require('./resolvers/queries/poll')
 const polls = require('./resolvers/queries/polls')
+const whichDidIVote = require('./resolvers/queries/which-did-i-vote')
 
 module.exports = new GraphQLObjectType({
   name: 'RootQueryType',
@@ -43,5 +44,13 @@ module.exports = new GraphQLObjectType({
       type: new GraphQLList(new GraphQLNonNull(LivePoll)),
       resolve: polls
     },
+
+    whichDidIVote: {
+      type: GraphQLID,
+      args: {
+        pollId: {type: new GraphQLNonNull(GraphQLID)}
+      },
+      resolve: whichDidIVote
+    }
   }
 })
