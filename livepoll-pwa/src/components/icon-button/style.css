@@ -4,6 +4,10 @@
   align-items: center;
 }
 
+.IconButton label {
+  margin-left: 10px;
+}
+
 .IconButton .icon {
-  margin-right: 10px;
+  margin: 0 auto;
 }

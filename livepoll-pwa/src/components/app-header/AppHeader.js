@@ -3,11 +3,12 @@ import AuthContext from '../../contexts/AuthContext'
 import { signOut } from '../../services/auth'
 import { NavLink } from 'react-router-dom'
 
-export default function AppHeader() {
+export default function AppSidebar(props) {
   const authUser = useContext(AuthContext)
+  const {className} = props
 
   return (
-    <div style={{border: '5px solid black'}}>
+    <div className={className}>
       <button onClick={signOut}>Sign out</button>
 
       <NavLink to={'/'}>Livepoll</NavLink>

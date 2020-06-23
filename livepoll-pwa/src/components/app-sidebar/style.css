@@ -1,0 +1,15 @@
+.AppSidebar {
+  display: flex;
+  flex-direction: column;
+}
+
+.AppSidebar .signoutIconBtn {
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.AppSidebar .signoutIcon {
+  height: 30px;
+}
