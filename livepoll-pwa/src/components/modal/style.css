@@ -1,0 +1,38 @@
+.Modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Modal .content {
+  background-color: white;
+  border: 1px solid lightgray;
+  padding: 15px;
+  border-radius: 5px;
+  position: relative;
+}
+
+.Modal .closeBtn {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  padding: 5px;
+  padding-top: 0;
+  padding-bottom: 0;
+  border: none;
+  color: black;
+  font-weight: bold;
+  background-color: transparent;
+}
+
+.Modal .closeBtn:hover{
+  color: crimson;
+  background-color: lightpink;
+}

@@ -11,16 +11,15 @@ import './style.css'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
+  const authUser = useContext(AuthContext)
+  const authUserId = authUser.getUid()
+  
   const {id} = useParams()
   const pollDetails = usePollDetails(id)
-  const authUser = useContext(AuthContext)
   const pollItems = usePollItems(id)
-
   if (!pollDetails) return "Loading..." 
 
-  const authUserId = authUser.getUid()
   const {usagePrivacy, author} = pollDetails
-
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true
 
   let ItemCreatorForm;
