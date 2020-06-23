@@ -15,3 +15,8 @@
 .AppSidebar .icon {
   height: 30px;
 }
+
+.AppSidebar .profileNavImg {
+  border: 2px solid gray;
+  border-radius: 5px;
+}

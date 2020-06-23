@@ -1,4 +1,5 @@
-import React from 'react'
+import React, {useContext} from 'react'
+import AuthContext from '../../contexts/AuthContext'
 import { signOut } from '../../services/auth'
 import IconButton from '../icon-button/IconButton'
 import signoutIcon from './images/logout.png'
@@ -8,6 +9,7 @@ import './style.css'
 
 export default function AppSidebar(props) {
   const {className} = props
+  const authUser = useContext(AuthContext)
 
   return (
     <div className={`AppSidebar ${className}`}>
@@ -17,6 +19,13 @@ export default function AppSidebar(props) {
         iconClass="icon"
         iconUrl={homeIcon}
         tooltip="Home"/>
+      
+      <IconButton 
+        to={`/user/${authUser.getUid()}`}
+        className="iconBtn"
+        iconClass="icon profileNavImg"
+        iconUrl={authUser.getAvatarUrl()}
+        tooltip="Profile"/>
       
       <IconButton 
         to={'/create'}
