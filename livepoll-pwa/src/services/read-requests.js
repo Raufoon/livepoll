@@ -44,6 +44,7 @@ export function fetchPollDetails(id) {
         whenToAddItem
         votingSystem
         itemContentType
+        totalVotes
       }
     }
   `)

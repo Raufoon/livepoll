@@ -20,7 +20,7 @@ function ItemsPanel(props) {
     }
   }
 
-  const {itemContentType, votedItemId} = details
+  const {itemContentType, votedItemId, totalVotes} = details
 
   let Component;
 
@@ -38,7 +38,8 @@ function ItemsPanel(props) {
             position={idx}
             isVotedByMe={votedItemId === item.id} 
             key={item.id} 
-            vote={giveVote} 
+            vote={giveVote}
+            totalVotes={totalVotes} 
             item={item}/>
         })
       }
