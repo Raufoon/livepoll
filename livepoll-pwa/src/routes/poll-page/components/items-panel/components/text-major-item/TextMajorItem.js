@@ -5,7 +5,7 @@ import './style.css'
 
 export default function TextMajorItem(props) {
   const {item, position, vote} = props
-  const {text, imgUrl, score} = item
+  const {text, imgUrl,id, score} = item
 
   let avatarImgSize = '80px';
   if (position === 0) avatarImgSize = '200px'
@@ -26,7 +26,7 @@ export default function TextMajorItem(props) {
       <span className='data'>{score} votes</span>
       <span className='data'>90%</span>
       <ProgBar className='data progBar' value={90}/>
-      <input className='data' type='checkbox'/>
+      <input className='data' type='checkbox' onChange={() => vote(id)}/>
     </div>
   )
 }

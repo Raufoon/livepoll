@@ -27,7 +27,8 @@ function ItemsPanel(props) {
     <div className={`ItemsPanel ${className}`}>
       <label>Results</label>
       {
-        items.map((item, idx) => <Component position={idx} key={item.id} vote={giveVote} item={item}/>)
+        items.sort((a, b) => a.score > b.score ? -1: 1)
+        .map((item, idx) => <Component position={idx} key={item.id} vote={giveVote} item={item}/>)
       }
     </div>
   )
