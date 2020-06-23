@@ -40,17 +40,22 @@ export default function PollPage () {
   return (
     <div className='PollPage'>
       <PollHeader details={pollDetails}/>
-      {
-        // shouldAllowAddItem && <ItemCreatorForm pollId={id}/> 
-      }
+      
+      <main>
+        {
+          pollItems && <ItemsPanel
+            className='itemsPanel'
+            pollId={id}
+            details={pollDetails} 
+            items={Object.values(pollItems)}/>
+        }
 
-      {
-        pollItems && <ItemsPanel
-          className='itemsPanel'
-          pollId={id}
-          details={pollDetails} 
-          items={Object.values(pollItems)}/>
-      }
+        <div className="rightPanel">
+          {
+            shouldAllowAddItem && <ItemCreatorForm pollId={id}/> 
+          }
+        </div>
+      </main>
     </div>
   )  
 }

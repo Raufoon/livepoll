@@ -2,7 +2,17 @@
   display: block;
 }
 
-.PollPage .itemsPanel{
-  width: 60%;
+.PollPage main {
+  display: flex;
+  flex-direction: row;
+}
+
+.PollPage main .itemsPanel{
+  flex-grow: 2;
   margin-top: 30px;
+}
+
+.PollPage main .rightPanel {
+  flex-grow: 1;
+  margin: 50px;
 }
