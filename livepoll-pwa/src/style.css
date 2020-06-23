@@ -12,6 +12,10 @@
 .App .appSidebar {
   width: 50px;
   border-right: 1px solid lightgray;
+  height: 100%;
+  position: fixed;
+  left: 0;
+  top: 0;
 }
 
 .App .contentWithHeader {
@@ -19,5 +23,6 @@
   display: flex;
   flex-direction: column;
   padding: 20px;
+  margin-left: 50px;
 }
 
