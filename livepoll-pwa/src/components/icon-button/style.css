@@ -1,0 +1,9 @@
+.IconButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.IconButton .icon {
+  margin-right: 10px;
+}
