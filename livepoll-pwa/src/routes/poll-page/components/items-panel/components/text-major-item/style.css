@@ -22,7 +22,8 @@
 }
 
 .TextMajorItem .avatarImg {
-  background-size: contain;
+  background-size: cover;
   border-radius: 5px;
+  background-repeat: no-repeat;
   border: 1px solid #222;
 }

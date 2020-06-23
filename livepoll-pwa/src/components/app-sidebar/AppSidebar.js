@@ -1,9 +1,9 @@
 import React from 'react'
 import { signOut } from '../../services/auth'
-import { NavLink } from 'react-router-dom'
 import IconButton from '../icon-button/IconButton'
 import signoutIcon from './images/logout.png'
 import createPollIcon from './images/create-poll.png'
+import homeIcon from './images/home.png'
 import './style.css'
 
 export default function AppSidebar(props) {
@@ -11,6 +11,13 @@ export default function AppSidebar(props) {
 
   return (
     <div className={`AppSidebar ${className}`}>
+      <IconButton 
+        to={'/'}
+        className="iconBtn"
+        iconClass="icon"
+        iconUrl={homeIcon}
+        tooltip="Home"/>
+      
       <IconButton 
         to={'/create'}
         className="iconBtn"
