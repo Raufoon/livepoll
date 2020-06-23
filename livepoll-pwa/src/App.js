@@ -23,7 +23,7 @@ function App() {
       <div className="App">
         <AppSidebar className="appSidebar"/>
         <div className="contentWithHeader">
-          <AppHeader/>
+          <AppHeader className="appHeader"/>
           <Switch>
               <Route path='/user/:id' component={ProfilePage}/>
               <Route path='/polls/:id' component={PollPage}/>

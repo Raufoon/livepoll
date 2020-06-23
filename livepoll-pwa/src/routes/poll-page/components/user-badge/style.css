@@ -1,0 +1,8 @@
+.UserBadge{
+  border-radius: 50px;
+  border: 1px solid lightgray;
+}
+
+.userBadgeIcon {
+  height: 20px;
+}

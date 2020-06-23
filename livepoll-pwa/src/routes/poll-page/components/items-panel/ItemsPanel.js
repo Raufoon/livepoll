@@ -2,26 +2,32 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { actionVoteForItem } from '../../../../state-management/actions/poll-actions'
+import TextMajorItem from './components/text-major-item/TextMajorItem'
+import './style.css'
 
 function ItemsPanel(props) {
   console.log('Rendering ItemsPanel')
   const dispath = useDispatch()
 
-  const {pollId, items} = props
+  const {pollId, items, details, className} = props
   
   function giveVote(itemId, voteValue) {
     dispath(actionVoteForItem(pollId, itemId, voteValue))
   }
 
-  return (
-    <div>
-      <h3>items:</h3>
+  const {itemContentType} = details
 
+  let Component;
+
+  if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') {
+    Component = TextMajorItem
+  }
+
+  return (
+    <div className={`ItemsPanel ${className}`}>
+      <label>Results</label>
       {
-        items.map(item => <div key={item.id}>
-          <h3>{JSON.stringify(item)}</h3>
-          <button onClick={() => giveVote(item.id, 1)}>vote</button>
-        </div>)
+        items.map((item, idx) => <Component position={idx} key={item.id} vote={giveVote} item={item}/>)
       }
     </div>
   )

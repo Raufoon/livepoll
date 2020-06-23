@@ -1,0 +1,13 @@
+.ProgBar{
+  position: relative;
+  background-color: white;
+  border: 1px solid lightgray;
+  overflow: hidden;
+}
+
+.ProgBar .inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-image: linear-gradient(to right, #0e2f44, #4ca3dd);;
+}

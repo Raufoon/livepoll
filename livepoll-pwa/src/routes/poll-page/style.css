@@ -1,0 +1,8 @@
+.PollPage {
+  display: block;
+}
+
+.PollPage .itemsPanel{
+  width: 60%;
+  margin-top: 30px;
+}

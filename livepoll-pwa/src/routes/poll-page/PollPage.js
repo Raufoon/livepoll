@@ -6,6 +6,8 @@ import AvatarTextItemCreator from './components/avatar-text-item-creator/AvatarT
 import AuthContext from '../../contexts/AuthContext'
 import usePollItems from './hooks/usePollitems'
 import ItemsPanel from './components/items-panel/ItemsPanel'
+import PollHeader from './components/poll-header/PollHeader'
+import './style.css'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
@@ -36,21 +38,18 @@ export default function PollPage () {
   }
 
   return (
-    <div>
-      this is a poll page <br/>
+    <div className='PollPage'>
+      <PollHeader details={pollDetails}/>
       {
-        JSON.stringify(pollDetails)
-      }
-      <br/>
-      <br/>
-      <br/>
-
-      {
-        shouldAllowAddItem && <ItemCreatorForm pollId={id}/> 
+        // shouldAllowAddItem && <ItemCreatorForm pollId={id}/> 
       }
 
       {
-        pollItems && <ItemsPanel pollId={id} items={Object.values(pollItems)}/>
+        pollItems && <ItemsPanel
+          className='itemsPanel'
+          pollId={id}
+          details={pollDetails} 
+          items={Object.values(pollItems)}/>
       }
     </div>
   )  

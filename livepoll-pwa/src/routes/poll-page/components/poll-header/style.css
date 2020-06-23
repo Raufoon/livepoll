@@ -1,0 +1,17 @@
+.PollHeader{
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.PollHeader .pollTitle {
+  font-size: x-large;
+  margin-bottom: 10px;
+  color: #1c2b39;
+}
+
+.PollHeader .pollDesc {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}

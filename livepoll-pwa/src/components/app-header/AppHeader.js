@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom'
 import IconButton from '../icon-button/IconButton'
 import './style.css'
 
-export default function AppSidebar(props) {
+export default function AppHeader(props) {
   const authUser = useContext(AuthContext)
   const {className} = props
 
