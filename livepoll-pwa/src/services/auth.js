@@ -17,6 +17,9 @@ export function createAuthUser (data) {
     this.getUid = function() {
       return this.data.uid
     }
+    this.getAvatarUrl = function() {
+      return this.data.photoURL
+    }
   }
 
   return new AuthUser()

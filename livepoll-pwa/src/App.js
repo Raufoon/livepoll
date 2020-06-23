@@ -22,7 +22,7 @@ function App() {
     <AuthContext.Provider value={authUser}>
       <div className="App">
         <AppSidebar className="appSidebar"/>
-        <main>
+        <div className="contentWithHeader">
           <AppHeader/>
           <Switch>
               <Route path='/user/:id' component={ProfilePage}/>
@@ -30,7 +30,7 @@ function App() {
               <Route path='/create' component={PollCreator}/>
               <Route component={HomePage}/>
           </Switch>
-        </main>
+        </div>
       </div>
     </AuthContext.Provider>
   );

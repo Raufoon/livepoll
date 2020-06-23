@@ -1,23 +1,24 @@
 import React, {useContext} from 'react'
 import AuthContext from '../../contexts/AuthContext'
-import { signOut } from '../../services/auth'
 import { NavLink } from 'react-router-dom'
+import IconButton from '../icon-button/IconButton'
+import './style.css'
 
 export default function AppSidebar(props) {
   const authUser = useContext(AuthContext)
   const {className} = props
 
   return (
-    <div className={className}>
-      <button onClick={signOut}>Sign out</button>
+    <div className={`AppHeader ${className}`}>
+      <NavLink className="appTitle" to={'/'}>Livepoll</NavLink>
 
-      <NavLink to={'/'}>Livepoll</NavLink>
-      
-      <NavLink to={`/user/${authUser.getUid()}`}>
+      <IconButton 
+        className='authUserBadge'
+        iconClass="authUserAvatar"
+        iconUrl={authUser.getAvatarUrl()}
+        to={`/user/${authUser.getUid()}`}>
         {authUser.getName()}
-      </NavLink>
-
-      <NavLink to={'/create'}>Create Poll</NavLink>
+      </IconButton>    
     </div>
   )
 }
