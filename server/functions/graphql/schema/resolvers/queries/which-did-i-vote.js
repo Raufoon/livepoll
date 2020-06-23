@@ -1,7 +1,7 @@
 const db = require('../../../../realtimeDb')
 
 module.exports = async function whichDidIVote(_, args, context) {
-  const {pollId} = context
+  const {pollId} = args
   try {
     const voterId = await context.getAuthUserId()
     const votedItemId = await db.read(`edges/voter_poll_item/${voterId}/${pollId}`)
