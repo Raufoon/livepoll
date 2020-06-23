@@ -5,7 +5,7 @@ module.exports = async function vote(_, args, context) {
   
   try {
     const unvoterId = await context.getAuthUserId()
-    const voterId = await db.read(`edges/voter_poll_item/${voterId}/${pollId}`)
+    const voterId = await db.read(`polls/${pollId}/author`)
 
     if (voterId === unvoterId) {
       await db.transaction(`edges/poll_item/${pollId}/${itemId}`, oldScore => oldScore - voteValue)
