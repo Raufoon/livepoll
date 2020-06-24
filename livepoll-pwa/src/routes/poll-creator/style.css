@@ -1,0 +1,9 @@
+.PollCreator {
+  width: 400px;
+}
+
+.PollCreator .field {
+  margin: 10px;
+  border: 1px solid lightgray;
+  border-radius: 10px;
+}

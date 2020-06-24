@@ -2,7 +2,7 @@ import React, {Children, useRef, useState, useEffect, isValidElement} from 'reac
 import PropTypes from 'prop-types'
 
 function LpForm(props) {
-  const {children, onSubmit, submitLabel} = props
+  const {children, className, onSubmit, submitLabel} = props
   const fieldValues = useRef({})
   const fieldErrors = useRef({})
   const validators = useRef({})
@@ -51,7 +51,7 @@ function LpForm(props) {
   }, [])
 
   return (
-    <form onSubmit={onSubmitThisForm}>
+    <form className={className} onSubmit={onSubmitThisForm}>
       {
         Children.map(children, element => {
           return React.cloneElement(element, {onChange, onError})

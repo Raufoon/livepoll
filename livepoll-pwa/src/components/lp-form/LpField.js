@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import PropTypes from 'prop-types'
+import './style.css'
 
 function LpField(props) {
   const {Component, className, onChange, onError} = props
@@ -30,7 +31,7 @@ function LpField(props) {
   }
 
   if (type === 'checkbox') return (
-    <div style={{padding: 10, border: '1px solid gray'}}>
+    <div className={`LpField ${className} checkbox`}>
       <input
         type='checkbox'
         onChange={onChangeMyValue}
@@ -40,10 +41,9 @@ function LpField(props) {
   )
 
   if (Component === 'select') return (
-    <div style={{padding: 10, border: '1px solid gray'}}>
+    <div className={`LpField ${className}`}>
       <label>{title}</label><br/>
       <Component 
-        className={className} 
         name={name}
         type={type}
         defaultValue={defaultValue}
@@ -61,10 +61,9 @@ function LpField(props) {
   )
   
   return (
-    <div style={{padding: 10, border: '1px solid gray'}}>
+    <div className={`LpField ${className}`}>
       <label>{title}</label><br/>
       <Component 
-        className={className} 
         name={name}
         type={type}
         defaultValue={defaultValue}

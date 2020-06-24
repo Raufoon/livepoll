@@ -10,7 +10,9 @@ export default function AppHeader(props) {
 
   return (
     <div className={`AppHeader ${className}`}>
-      <NavLink className="appTitle" to={'/'}>Livepoll</NavLink>
+      <div className="appTitle">
+        <NavLink to={'/'}>Livepoll</NavLink>
+      </div>
 
       <IconButton 
         className='authUserBadge'
