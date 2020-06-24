@@ -36,5 +36,5 @@ export function signInWithGoogle() {
 }
 
 export function signOut () {
-  firebase.auth().signOut().then(() => window.location.reload())
+  return firebase.auth().signOut()
 }

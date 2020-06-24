@@ -1,0 +1,13 @@
+.DecisionModal {
+  display: block;
+  text-align: center;
+}
+
+.DecisionModal button {
+  margin: 5px;
+  font-weight: bold;
+}
+
+.DecisionModal .confirmBtn {
+  color: #6e2020;
+}

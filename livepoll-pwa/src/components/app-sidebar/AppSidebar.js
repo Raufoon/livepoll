@@ -8,12 +8,24 @@ import PollCreator from '../poll-creator/PollCreator'
 import signoutIcon from './images/logout.png'
 import createPollIcon from './images/create-poll.png'
 import homeIcon from './images/home.png'
+import { useHistory } from "react-router-dom"
 import './style.css'
+import DecisionModal from '../decision-modal/DecisionModal'
 
 export default function AppSidebar(props) {
   const {className} = props
+  const history = useHistory()
   const authUser = useContext(AuthContext)
   const [showPollForm, openPollFormModal, closePollFormModal] = useModal()
+  const [showSignoutPrompt, openSignoutPrompt, closeSignoutPrompt] = useModal()
+
+  function doSignOut() {
+    signOut().then(() => {
+      closeSignoutPrompt()
+      history.push('/')
+      window.location.reload()
+    })
+  }
 
   return (
     <div className={`AppSidebar ${className}`}>
@@ -43,11 +55,17 @@ export default function AppSidebar(props) {
         iconClass="icon"
         iconUrl={signoutIcon}
         tooltip="Sign out" 
-        onClick={signOut}/>
+        onClick={openSignoutPrompt}/>
 
       <Modal isOpen={showPollForm} onClose={closePollFormModal} title="Poll Creation Form">
         <PollCreator className="pollFormModal" onSubmit={closePollFormModal}/>
       </Modal>
+
+      <DecisionModal 
+        isVisible={showSignoutPrompt} 
+        onNo={closeSignoutPrompt} 
+        onYes={doSignOut} 
+        title="Are you sure to sign out?"/>
     </div>
   )
 }

@@ -1,0 +1,16 @@
+.ProfilePage {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProfilePage .leftSect {
+  width: 400px;
+}
+
+.ProfilePage .rightSect {
+  flex-grow: 1;
+}
+
+.ProfilePage .profileSummary {
+  margin: 0 20px 0 20px;
+}

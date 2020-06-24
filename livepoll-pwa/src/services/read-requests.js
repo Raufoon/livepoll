@@ -7,6 +7,7 @@ export function fetchProfileDetails(uid) {
         id
         name
         dob
+        avatar
       }
     }
   `)
