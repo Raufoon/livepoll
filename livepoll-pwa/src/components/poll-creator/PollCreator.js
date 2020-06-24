@@ -5,7 +5,8 @@ import LpField from '../../components/lp-form/LpField'
 import { actionCreateNewPoll } from '../../state-management/actions/poll-actions'
 import './style.css'
 
-export default function PollCreator() {
+export default function PollCreator(props) {
+  const {className} = props
   const dispatch = useDispatch()
 
   function onSubmit(data) {
@@ -13,7 +14,7 @@ export default function PollCreator() {
   }
 
   return (
-    <LpForm className='PollCreator' submitLabel='Create New Poll' onSubmit={onSubmit}>
+    <LpForm className={`PollCreator ${className}`} submitLabel='Create New Poll' onSubmit={onSubmit}>
       <LpField
         className='field' 
         title='Give your poll a nice title'

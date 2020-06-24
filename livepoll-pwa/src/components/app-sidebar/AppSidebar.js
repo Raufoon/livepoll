@@ -46,7 +46,7 @@ export default function AppSidebar(props) {
         onClick={signOut}/>
 
       <Modal isOpen={showPollForm} onClose={closePollFormModal} title="Poll Creation Form">
-        <PollCreator onSubmit={closePollFormModal}/>
+        <PollCreator className="pollFormModal" onSubmit={closePollFormModal}/>
       </Modal>
     </div>
   )
