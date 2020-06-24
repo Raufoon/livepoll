@@ -18,6 +18,7 @@ exports.User = new GraphQLObjectType({
       id: {type: GraphQLID},
       name: {type: GraphQLString},
       dob: {type: GraphQLString},
+      avatar: {type: GraphQLString},
       
       ownPolls: {
         type: new GraphQLList(new GraphQLNonNull(LivePoll)),

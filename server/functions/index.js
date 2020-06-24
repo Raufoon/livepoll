@@ -20,10 +20,11 @@ else {
 }
 
 exports.setUserProfile = functions.auth.user().onCreate(newUser => {
-  const {uid, displayName} = newUser
+  const {uid, displayName, photoURL} = newUser
   db.write(`/users/${uid}`, {
     name: displayName,
-    id: uid
+    id: uid,
+    avatar: photoURL
   })
 })
 
