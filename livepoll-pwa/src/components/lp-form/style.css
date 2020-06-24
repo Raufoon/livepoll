@@ -6,6 +6,12 @@
 
 .LpField input, select {
   height: 30px;
+  border: 1px solid gray;
+  background-color: white;
+}
+
+.LpField label {
+  color: #444;
 }
 
 .checkbox {

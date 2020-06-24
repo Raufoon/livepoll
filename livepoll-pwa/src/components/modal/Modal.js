@@ -30,8 +30,10 @@ export default function Modal(props) {
     <div className='Modal' style={{zIndex: modalZindex}} onClick={onClose}>
       <div className={`content`} onClick={e => e.stopPropagation()}>
         <button className="closeBtn" onClick={onClose}>x</button>
+        
+        { title && <div className='label'>{title}</div> }
+        
         <div className={`children`}>
-          { title && <span className='label'>{title}</span> }
           {props.children}
         </div>
       </div>

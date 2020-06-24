@@ -26,7 +26,7 @@ export default function PollCreator(props) {
       
       <LpField 
         className='field'
-        title='Item should look like'
+        title='Items should look like this'
         Component='select'
         options={[
           {name: 'Text only', value: 'TEXT'},
@@ -39,7 +39,7 @@ export default function PollCreator(props) {
 
       <LpField 
         className='field'
-        title='When should the poll start?'
+        title='When should the poll begin?'
         Component='input'
         type='datetime-local'
         validate={value => !!value}
@@ -55,14 +55,14 @@ export default function PollCreator(props) {
       
       <LpField 
         className='field'
-        title='voter list is visible'
+        title='Make the voter list visible'
         Component='input'
         type='checkbox'
         defaultValue={false}
         name='shouldShowVoters'/>
 
       <LpField 
-        title='How to use the poll'
+        title='Set some privacy'
         className='field'
         Component='select'
         options={[
@@ -75,7 +75,7 @@ export default function PollCreator(props) {
       
       <LpField 
         className='field'
-        title='Items can be added'
+        title='When can items be added?'
         Component='select'
         options={[
           {name: 'always', value: 'ALWAYS'},
@@ -90,8 +90,8 @@ export default function PollCreator(props) {
         Component='select'
         options={[
           {name: 'ticking only one item', value: 'TICK_ONE'},
-          {name: 'ticking items', value: 'TICK_MANY'},
-          {name: 'numbering items (1 to 100)', value: 'NUMBER_MANY'},
+          {name: 'ticking many items', value: 'TICK_MANY'},
+          {name: 'numbering many items (1 - 100)', value: 'NUMBER_MANY'},
         ]}
         defaultValue={'TICK_ONE'}
         name='votingSystem'/>
