@@ -6,7 +6,7 @@ import './style.css'
 let modalZindex = 100
 
 export default function Modal(props) {
-  const {onClose, isOpen} = props
+  const {onClose, isOpen, title} = props
 
   const modalElementRef = useRef(false);
 
@@ -26,10 +26,13 @@ export default function Modal(props) {
 
 
   return isOpen && !!modalElementRef.current && ReactDOM.createPortal(
-    <div className='Modal' style={{zIndex: modalZindex}}>
-      <div className='content'>
+    <div className='Modal' style={{zIndex: modalZindex}} onClick={onClose}>
+      <div className='content' onClick={e => e.stopPropagation()}>
         <button className="closeBtn" onClick={onClose}>x</button>
-        {props.children}
+        {
+          title && <h3>{title}</h3>
+        }
+        <div className='children'>{props.children}</div>
       </div>
     </div>,
     modalElementRef.current
@@ -39,4 +42,5 @@ export default function Modal(props) {
 Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
   isOpen: PropTypes.bool.isRequired,
+  title: PropTypes.string
 }

@@ -18,6 +18,11 @@
   position: relative;
 }
 
+.Modal .children {
+  max-height: 80vh;
+  overflow: auto;
+}
+
 .Modal .closeBtn {
   position: absolute;
   top: 0;
