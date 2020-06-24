@@ -37,7 +37,10 @@ export default function pollReducer(state = {}, action) {
         ...state[pollId],
         items: {
           ...state[pollId].items || {},
-          [newItem.id]: newItem
+          [newItem.id]: {
+            ...newItem,
+            score: 0
+          }
         }
       }
     }

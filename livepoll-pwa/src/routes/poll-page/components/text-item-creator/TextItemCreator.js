@@ -6,28 +6,33 @@ import LpField from '../../../../components/lp-form/LpField'
 import { actionCreateNewItem } from '../../../../state-management/actions/poll-actions'
 
 function TextItemCreator(props) {
-  const {pollId} = props
+  const {pollId, onSubmit} = props
   const dispatch = useDispatch()
 
-  function onSubmit(data) {
+  function onSubmitForm(data) {
     dispatch(actionCreateNewItem(pollId, data))
+    if (onSubmit) onSubmit()
   }
 
   return (
-    <LpForm onSubmit={onSubmit} submitLabel="Create new item">
-      <LpField 
-        type="type"
-        title="Item name"
-        Component='input'
-        errorMsg="Should be at least 2 letters long"
-        validate={value => value && value.length >= 2}
-        name="text"/>
-    </LpForm>
+    <div>
+      <h3>Create an Item</h3>
+      <LpForm onSubmit={onSubmitForm} submitLabel="Create new item">
+        <LpField 
+          type="type"
+          title="Item name"
+          Component='input'
+          errorMsg="Should be at least 2 letters long"
+          validate={value => value && value.length >= 2}
+          name="text"/>
+      </LpForm>
+    </div>
   )
 }
 
 TextItemCreator.propTypes = {
-  pollId: PropTypes.string.isRequired
+  pollId: PropTypes.string.isRequired,
+  onSubmit: PropTypes.func
 }
 
 export default TextItemCreator

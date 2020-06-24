@@ -1,6 +1,7 @@
 .UserBadge{
   border-radius: 50px;
   border: 1px solid lightgray;
+  font-weight: bold;
 }
 
 .userBadgeIcon {

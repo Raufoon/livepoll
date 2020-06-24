@@ -12,3 +12,11 @@
 .IconButton .icon {
   margin: 0 auto;
 }
+
+.IconButton label:hover {
+  cursor: pointer;
+}
+
+.IconButton:hover {
+  cursor: pointer;
+}

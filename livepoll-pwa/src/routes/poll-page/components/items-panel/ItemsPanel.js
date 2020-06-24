@@ -27,6 +27,9 @@ function ItemsPanel(props) {
   if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') {
     Component = TextMajorItem
   }
+  else {
+    return 'Loading...'
+  }
 
   return (
     <div className={`ItemsPanel ${className}`}>

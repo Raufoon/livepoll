@@ -1,0 +1,18 @@
+.AvatarTextItemCreator {
+  display: flex;
+  flex-direction: column;
+}
+
+.AvatarTextItemCreator .row {
+  margin: 5px;
+}
+
+.AvatarTextItemCreator .err {
+  color: red;
+}
+
+.AvatarTextItemCreator .title {
+  font-size: large;
+  border-bottom: 1px solid gray;
+  margin-bottom: 15px;
+}
