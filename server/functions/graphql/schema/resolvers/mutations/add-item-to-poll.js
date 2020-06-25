@@ -11,7 +11,8 @@ module.exports = async function addItemToPoll(_, args, context) {
     
     if (pollUsagePrivacy === UsagePrivacy.getValue('PROTECTED')) {
       const pollCreatorId = await db.read(`/poll/${pollId}/author`)
-      
+    
+      // if the poll is protected, only allow the author to add item
       if (itemCreatorId !== pollCreatorId) {
         throw new Error('Protected poll: only the poll author can add items')
       }
