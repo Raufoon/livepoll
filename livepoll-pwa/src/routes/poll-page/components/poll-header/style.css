@@ -6,7 +6,7 @@
 
 .PollHeader .pollTitle {
   font-size: x-large;
-  margin-bottom: 10px;
+  margin-bottom: 1em !important;
   color: #1c2b39;
 }
 
@@ -21,7 +21,7 @@
 }
 
 .PollHeader .addItemBtnIcon {
-  width: 20px;
+  width: 2em;
 }
 
 .PollHeader .addItemBtn {

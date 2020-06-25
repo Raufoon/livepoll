@@ -1,11 +1,11 @@
 .LpField {
-  padding: 15px;
+  padding: 1em;
   display: flex;
   flex-direction: column;
 }
 
 .LpField input, select {
-  height: 30px;
+  height: 2em;
   border: 1px solid gray;
   background-color: white;
 }

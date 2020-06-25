@@ -1,16 +1,18 @@
 import React from 'react'
-import {useParams} from 'react-router-dom'
+import {useParams, Switch, Route} from 'react-router-dom'
 import useProfileDetails from './hooks/useProfileDetails'
 import ProfileEditor from './components/profile-editor/ProfileEditor'
 import ProfileSummary from './components/profile-summary/ProfileSummary'
+import ProfileSettings from './routes/profile-settings/ProfileSettings'
 import './style.css'
 
-export default function ProfilePage() {
+export default function ProfilePage(props) {
   console.log('Rendering ProfilePage')
 
   const {id} = useParams()
   const details = useProfileDetails(id)
-  
+
+  const {match} = props
 
   return (
     <div className='ProfilePage'>
@@ -19,7 +21,9 @@ export default function ProfilePage() {
       </div>
 
       <div className='rightSect'>
-        XXXXX
+        <Switch>
+          <Route path={`${match.path}/settings`} component={ProfileSettings}/>
+        </Switch>
       </div>      
     </div>
   )

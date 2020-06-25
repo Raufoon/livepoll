@@ -4,7 +4,6 @@
 }
 
 .PollCreator .field {
-  margin: 10px;
-  border: 1px solid lightgray;
+  margin: 1em;
   border-radius: 10px;
 }

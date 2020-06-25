@@ -1,7 +1,7 @@
 .AppSidebar {
   display: flex;
   flex-direction: column;
-  padding-top: 30px;
+  padding-top: 1em;
   background-color: #000a14;
 }
 
@@ -10,12 +10,12 @@
   border: none;
   margin: 0;
   padding: 0;
-  margin-bottom: 15px;
-  margin-top: 15px;
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
 }
 
 .AppSidebar .icon {
-  height: 25px;
+  height: 1.5em;
 }
 
 .AppSidebar .profileNavImg {

@@ -8,13 +8,11 @@
 }
 
 .PollPage main .itemsPanel{
-  flex-grow: 2;
   width: 65%;
   margin-top: 30px;
 }
 
 .PollPage main .rightPanel {
   flex-grow: 1;
-  width: 35%;
-  margin: 50px;
+  margin: 2em;
 }

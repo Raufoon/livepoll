@@ -1,0 +1,9 @@
+.ProfileSettings {
+  display: block;
+  border: 1px solid lightgray;
+  padding: 2em;
+}
+
+.ProfileSettings header {
+  font-size: x-large;
+}
