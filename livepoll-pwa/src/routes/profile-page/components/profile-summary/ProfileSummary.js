@@ -25,12 +25,24 @@ export default function ProfileSummary(props) {
       <label className='subtitle'>livepoll user</label>
 
       <nav>
-        <IconButton to={`${match.url}/activity`} iconClass='icon' iconUrl={activityIcon}>Activity</IconButton>
-        <IconButton to={`${match.url}/polls`} iconClass='icon' iconUrl={pollsIcon}>Polls</IconButton>
+        <IconButton 
+          to={`${match.url}/activity`} 
+          activeClassName='activeNavBtn' 
+          iconClass='icon' 
+          iconUrl={activityIcon}>Activity</IconButton>
+        
+        <IconButton 
+          to={`${match.url}/polls`} 
+          activeClassName='activeNavBtn' 
+          iconClass='icon' 
+          iconUrl={pollsIcon}>Polls</IconButton>
+        
         {
-          isMyProfile && <>
-            <IconButton to={`${match.url}/settings`} iconClass='icon' iconUrl={settingsIcon}>settings</IconButton>
-          </>
+          isMyProfile && <IconButton 
+            to={`${match.url}/settings`} 
+            iconClass='icon' 
+            activeClassName='activeNavBtn' 
+            iconUrl={settingsIcon}>Settings</IconButton>
         }
       </nav>
     </div>

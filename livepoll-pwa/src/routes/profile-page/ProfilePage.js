@@ -10,7 +10,6 @@ export default function ProfilePage(props) {
 
   const {id} = useParams()
   const details = useProfileDetails(id)
-
   const {match} = props
 
   return (

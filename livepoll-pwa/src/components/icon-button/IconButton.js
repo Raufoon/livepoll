@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom'
 import './style.css'
 
 export default function IconButton(props) {
-  const {iconUrl, tooltip, onClick, className, iconClass, to} = props
+  const {iconUrl, tooltip, onClick, className, iconClass, to, ...rest} = props
 
   let Component = 'button'
   if (to) {
     Component = NavLink
   }
 
-  return <Component to={to} className={`IconButton ${className}`} onClick={onClick}>
+  return <Component to={to} className={`IconButton ${className}`} onClick={onClick} {...rest}>
     <img className={`icon ${iconClass}`} 
       src={iconUrl} 
       title={tooltip}
