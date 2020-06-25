@@ -7,29 +7,20 @@ import './style.css'
 
 function ItemsPanel(props) {
   console.log('Rendering ItemsPanel')
+
   const dispath = useDispatch()
 
   const {pollId, items, details, className} = props
-  
-  function giveVote(itemId, voteValue) {
-    if (itemId === votedItemId) {
-      dispath(actionUnvoteForItem(pollId, itemId, voteValue))
-    }
-    else {
-      dispath(actionVoteForItem(pollId, itemId, voteValue))
-    }
-  }
-
   const {itemContentType, votedItemId, totalVotes} = details
 
+  function giveVote(itemId, voteValue) {
+    if (itemId === votedItemId) dispath(actionUnvoteForItem(pollId, itemId, voteValue));
+    else dispath(actionVoteForItem(pollId, itemId, voteValue));
+  }
+  
   let Component;
-
-  if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') {
-    Component = TextMajorItem
-  }
-  else {
-    return 'Loading...'
-  }
+  if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') Component = TextMajorItem;
+  else return 'Loading...';
 
   return (
     <div className={`ItemsPanel ${className}`}>
@@ -37,6 +28,7 @@ function ItemsPanel(props) {
       {
         items.sort((a, b) => a.score > b.score ? -1: 1)
         .map((item, idx) => {
+
           return <Component 
             position={idx}
             isVotedByMe={votedItemId === item.id} 
