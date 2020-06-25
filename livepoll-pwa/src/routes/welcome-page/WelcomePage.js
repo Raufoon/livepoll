@@ -1,9 +1,9 @@
 import React from 'react'
 import { signInWithGoogle } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
-import './style.css'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
+import './style.css'
 
 function WelcomePage () {
   return (

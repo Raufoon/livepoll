@@ -1,4 +1,4 @@
-import React, {Children, useRef, useState, useEffect, isValidElement} from 'react'
+import React, {Children, useRef, useState, useMemo, useEffect, isValidElement} from 'react'
 import PropTypes from 'prop-types'
 
 function LpForm(props) {
@@ -8,22 +8,28 @@ function LpForm(props) {
   const validators = useRef({})
   const [errorCount, setErrorCount] = useState(0)
 
-  function onSubmitThisForm(event) {
-    event.preventDefault()
-    onSubmit({...fieldValues.current})
-  }
-
-  function onChange(name, value) {
-    fieldValues.current[name] = value
-  }
-
-  function onError(name, error) {
-    if (!!fieldErrors.current[name] !== error) {
-      if (error) setErrorCount(prev => prev + 1)
-      else setErrorCount(prev => prev - 1)
-      fieldErrors.current[name] = error
+  const onSubmitThisForm = useMemo(function(){
+    return function (event) {
+      event.preventDefault()
+      onSubmit({...fieldValues.current})
     }
-  }
+  }, [onSubmit])
+
+  const onChange = useMemo(function() {
+    return function(name, value) {
+      fieldValues.current[name] = value
+    } 
+  }, [fieldValues])
+
+  const onError = useMemo(function(){
+    return function (name, error) {
+      if (!!fieldErrors.current[name] !== error) {
+        if (error) setErrorCount(prev => prev + 1)
+        else setErrorCount(prev => prev - 1)
+        fieldErrors.current[name] = error
+      }
+    }
+  }, [fieldErrors])
 
   useEffect(function() {
     function calcFormErrorCount() {

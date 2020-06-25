@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import PropTypes from 'prop-types'
 import './style.css'
 
@@ -8,27 +8,29 @@ function LpField(props) {
   const {options, defaultValue} = props
   const [hasError, setError] = useState(false)
 
-  function onMyError(shouldErr = true) {
-    setError(shouldErr)
-    onError(name, shouldErr)
-  }
-
-  function onChangeMyValue(event) {
-    const {value, checked} = event.target
-    let data = type === 'checkbox' ? checked: value
-
-    if (type === 'date' || type === 'datetime-local') {
-      data = `${new Date(data).getTime()}`
+  const onMyError = useMemo(function() {
+    return function (shouldErr = true) {
+      setError(shouldErr)
+      onError(name, shouldErr)
     }
+  }, [name, setError, onError])
 
-    if (!validate || validate(data)) {
-      onMyError(false)
-      onChange(name, data)
+  const onChangeMyValue = useMemo(function() {
+    return function(event) {
+      const {value, checked} = event.target
+      let data = type === 'checkbox' ? checked: value
+      if (type === 'date' || type === 'datetime-local') {
+        data = `${new Date(data).getTime()}`
+      }
+      if (!validate || validate(data)) {
+        onMyError(false)
+        onChange(name, data)
+      }
+      else {
+        onMyError(true)
+      }
     }
-    else {
-      onMyError(true)
-    }
-  }
+  }, [type, name, validate, onMyError, onChange])
 
   if (type === 'checkbox') return (
     <div className={`LpField ${className} checkbox`}>

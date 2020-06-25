@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../components/lp-form/LpForm'
 import LpField from '../../components/lp-form/LpField'
@@ -9,10 +9,12 @@ export default function PollCreator(props) {
   const {className, onSubmit} = props
   const dispatch = useDispatch()
 
-  function onSubmitNewPoll(data) {
-    dispatch(actionCreateNewPoll(data))
-    onSubmit()
-  }
+  const onSubmitNewPoll = useMemo(function() {
+    return function (data) {
+      dispatch(actionCreateNewPoll(data))
+      onSubmit()
+    }
+  }, [dispatch, onSubmit])
 
   return (
     <LpForm className={`PollCreator ${className}`} submitLabel='Create New Poll' onSubmit={onSubmitNewPoll}>

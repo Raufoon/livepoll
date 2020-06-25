@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../../../components/lp-form/LpForm'
@@ -9,10 +9,13 @@ function TextItemCreator(props) {
   const {pollId, onSubmit} = props
   const dispatch = useDispatch()
 
-  function onSubmitForm(data) {
-    dispatch(actionCreateNewItem(pollId, data))
-    if (onSubmit) onSubmit()
-  }
+
+  const onSubmitForm = useMemo(function(){
+    return function (data) {
+      dispatch(actionCreateNewItem(pollId, data))
+      if (onSubmit) onSubmit()
+    } 
+  }, [pollId, onSubmit, dispatch])
 
   return (
     <div>

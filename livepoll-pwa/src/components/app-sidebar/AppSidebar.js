@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useMemo} from 'react'
 import AuthContext from '../../contexts/AuthContext'
 import useModal from '../modal/hooks/useModal'
 import { signOut } from '../../services/auth'
@@ -19,13 +19,16 @@ export default function AppSidebar(props) {
   const [showPollForm, openPollFormModal, closePollFormModal] = useModal()
   const [showSignoutPrompt, openSignoutPrompt, closeSignoutPrompt] = useModal()
 
-  function doSignOut() {
-    signOut().then(() => {
-      closeSignoutPrompt()
-      history.push('/')
-      window.location.reload()
-    })
-  }
+
+  const doSignOut = useMemo(() => {
+    return function() {
+      signOut().then(() => {
+        closeSignoutPrompt()
+        history.push('/')
+        window.location.reload()
+      })
+    }
+  }, [history, closeSignoutPrompt])
 
   return (
     <div className={`AppSidebar ${className}`}>

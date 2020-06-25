@@ -26,7 +26,7 @@ function ItemsPanel(props) {
         dispath(actionVoteForItem(pollId, itemId, voteValue))
       }
     }
-  }, [pollId, votedItemId])
+  }, [pollId, votedItemId, dispath])
   
   let Component;
   if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') Component = TextMajorItem;

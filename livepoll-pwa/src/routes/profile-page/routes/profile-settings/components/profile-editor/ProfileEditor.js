@@ -1,4 +1,4 @@
-import React, {useContext} from 'react'
+import React, {useContext, useMemo} from 'react'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../../../../../components/lp-form/LpForm'
 import LpField from '../../../../../../components/lp-form/LpField'
@@ -12,9 +12,11 @@ export default function ProfileEditor(props) {
 
   const {className} = props
 
-  function onSubmitNewDetails(details) {
-    dispatch(actionEditProfileDetails(authUser.getUid(), details))    
-  }
+  const onSubmitNewDetails = useMemo(function() {
+    return function (details) {
+      dispatch(actionEditProfileDetails(authUser.getUid(), details))    
+    } 
+  }, [authUser, dispatch])
 
   return (
     <LpForm className={`ProfileEditor ${className}`} onSubmit={onSubmitNewDetails} submitLabel="Edit your profile">

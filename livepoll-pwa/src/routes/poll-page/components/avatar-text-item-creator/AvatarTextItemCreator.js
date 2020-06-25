@@ -1,4 +1,4 @@
-import React, {useState, useRef} from 'react'
+import React, {useState, useMemo, useRef} from 'react'
 import PropTypes from 'prop-types'
 import {useDispatch} from 'react-redux'
 import LpForm from '../../../../components/lp-form/LpForm'
@@ -15,13 +15,15 @@ function AvatarTextItemCreator(props) {
 
   const {pollId, onSubmit} = props
   
-  function onSubmitForm(data) {
-    dispatch(actionCreateNewItem(pollId, {
-      ...data,
-      imgUrl: avatarUrl
-    }))
-    if (onSubmit) onSubmit()
-  }
+  const onSubmitForm = useMemo(function(){
+    return function onSubmitForm(data) {
+      dispatch(actionCreateNewItem(pollId, {
+        ...data,
+        imgUrl: avatarUrl
+      }))
+      if (onSubmit) onSubmit()
+    } 
+  }, [pollId, avatarUrl, dispatch, onSubmit])
 
   async function uploadAvatar() {
     setAvatarState('UPLOADING')
