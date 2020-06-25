@@ -6,15 +6,16 @@ import { actionCreateNewPoll } from '../../state-management/actions/poll-actions
 import './style.css'
 
 export default function PollCreator(props) {
-  const {className} = props
+  const {className, onSubmit} = props
   const dispatch = useDispatch()
 
-  function onSubmit(data) {
+  function onSubmitNewPoll(data) {
     dispatch(actionCreateNewPoll(data))
+    onSubmit()
   }
 
   return (
-    <LpForm className={`PollCreator ${className}`} submitLabel='Create New Poll' onSubmit={onSubmit}>
+    <LpForm className={`PollCreator ${className}`} submitLabel='Create New Poll' onSubmit={onSubmitNewPoll}>
       <LpField
         className='field' 
         placeholder='Give your poll a nice title'

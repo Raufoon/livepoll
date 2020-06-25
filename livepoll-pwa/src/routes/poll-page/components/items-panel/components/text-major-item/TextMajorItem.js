@@ -11,7 +11,7 @@ export default function TextMajorItem(props) {
   if (position === 0) avatarImgSize = '200px'
   else if (position === 1) avatarImgSize = '128px'
 
-  const percent = Math.ceil((score *100) / totalVotes)
+  const percent = Math.ceil((score *100) / (totalVotes||1))
 
   return (
     <div className='TextMajorItem'>
