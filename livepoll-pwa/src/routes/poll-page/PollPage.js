@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useMemo} from 'react'
 import {useParams} from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 import usePollDetails from './hooks/usePollDetails'
@@ -7,8 +7,8 @@ import ItemsPanel from './components/items-panel/ItemsPanel'
 import PollHeader from './components/poll-header/PollHeader'
 import useModal from '../../components/modal/hooks/useModal'
 import Modal from '../../components/modal/Modal'
-import './style.css'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
+import './style.css'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
@@ -21,26 +21,27 @@ export default function PollPage () {
   const pollItems = usePollItems(id)
   const dispath = useDispatch()
 
-  function displayVoterList(itemId) {
-    showVotersModal()
-    if(!pollItems[itemId].voters) {
-      dispath(actionFetchVoterList(id, itemId))
-    }
-    setItemIdForVoterList(itemId)
-  }
+  const displayVoterList = useMemo(() => {
+    return function displayVoterList(itemId) {
+      showVotersModal()
+      if(!pollItems[itemId] || !pollItems[itemId].voters) {
+        dispath(actionFetchVoterList(id, itemId))
+      }
+      setItemIdForVoterList(itemId)
+    } 
+  }, [pollItems])
 
   if (!pollDetails) return "Loading..." 
   
   return (
     <div className='PollPage'>
-      <PollHeader details={pollDetails}/>
+      <PollHeader pollId={id}/>
       
       <main>
         {
           pollItems && <ItemsPanel
             className='itemsPanel'
             pollId={id}
-            details={pollDetails} 
             displayVoterList={displayVoterList}
             items={Object.values(pollItems)}/>
         }

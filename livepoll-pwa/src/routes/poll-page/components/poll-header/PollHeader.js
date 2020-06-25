@@ -7,22 +7,25 @@ import Modal from '../../../../components/modal/Modal'
 import useModal from '../../../../components/modal/hooks/useModal'
 import IconButton from '../../../../components/icon-button/IconButton'
 import createIcon from './images/create-item.png'
+import usePollDetails from '../../hooks/usePollDetails'
 import './style.css'
 
 export default function PollHeader(props) {
+  console.log('Rendering PollHeader')
+
+  const {pollId} = props
   const [showItemForm, openItemFormModal, closeItemFormModal] = useModal()
   const authUser = useContext(AuthContext)
-  
-  const {details} = props
-  if (!details) return
-  const authUserId = authUser.getUid()
 
-  const {
-    id, title, startDateTime, endDateTime, author, itemContentType,
-    shouldShowVoters, usagePrivacy, whenToAddItem, votingSystem
-  } = details
+  const details = usePollDetails(pollId)
+
+  if (!details) return "Loading.."
+
+  const authUserId = authUser.getUid()
+  const {id, title, startDateTime, author, itemContentType, usagePrivacy} = details
   
   if (!author) return "Loading..."
+
   const {name} = author
   const creationDateTime = new Date(parseInt(startDateTime, 10))
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true

@@ -1,22 +1,32 @@
-import React from 'react'
+import React, {useMemo} from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { actionVoteForItem, actionUnvoteForItem } from '../../../../state-management/actions/poll-actions'
 import TextMajorItem from './components/text-major-item/TextMajorItem'
+import usePollDetails from '../../hooks/usePollDetails'
 import './style.css'
 
 function ItemsPanel(props) {
   console.log('Rendering ItemsPanel')
 
+  const {pollId, items, className, displayVoterList} = props
+
   const dispath = useDispatch()
+
+  const details = usePollDetails(pollId) || {}
   
-  const {pollId, items, details, className, displayVoterList} = props
   const {itemContentType, votedItemId, totalVotes, shouldShowVoters} = details
 
-  function giveVote(itemId, voteValue) {
-    if (itemId === votedItemId) dispath(actionUnvoteForItem(pollId, itemId, voteValue));
-    else dispath(actionVoteForItem(pollId, itemId, voteValue));
-  }
+  const giveVote = useMemo(() => {
+    return function (itemId, voteValue) {
+      if (itemId === votedItemId) {
+        dispath(actionUnvoteForItem(pollId, itemId, voteValue))
+      }
+      else {
+        dispath(actionVoteForItem(pollId, itemId, voteValue))
+      }
+    }
+  }, [pollId, votedItemId])
   
   let Component;
   if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') Component = TextMajorItem;
