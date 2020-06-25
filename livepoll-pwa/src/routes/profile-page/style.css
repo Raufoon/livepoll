@@ -5,12 +5,13 @@
 
 .ProfilePage .leftSect {
   width: 25em;
+  padding: 1em;
 }
 
 .ProfilePage .rightSect {
   flex-grow: 1;
+  padding: 1em;
 }
 
 .ProfilePage .profileSummary {
-  margin: 1em 2em 0 2em;
 }

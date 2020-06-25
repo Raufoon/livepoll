@@ -4,6 +4,25 @@
   padding: 2em;
 }
 
-.ProfileSettings header {
+.ProfileSettings .sectionLabel {
   font-size: x-large;
+  margin-bottom: 1em;
+}
+
+.ProfileSettings .subSection {
+  margin-bottom: 1em;
+}
+
+.ProfileSettings .subSection header {
+  font-size: large;
+  text-transform: uppercase;
+  color: #133337;
+  font-weight: bold;
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 1em;
+}
+
+.ProfileSettings .detailsEditor {
+  margin-top: 1em;
+  width: 20em;
 }

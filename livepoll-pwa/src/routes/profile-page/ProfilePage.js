@@ -1,7 +1,6 @@
 import React from 'react'
 import {useParams, Switch, Route} from 'react-router-dom'
 import useProfileDetails from './hooks/useProfileDetails'
-import ProfileEditor from './components/profile-editor/ProfileEditor'
 import ProfileSummary from './components/profile-summary/ProfileSummary'
 import ProfileSettings from './routes/profile-settings/ProfileSettings'
 import './style.css'

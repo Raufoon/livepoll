@@ -4,7 +4,7 @@ import './style.css'
 
 function LpField(props) {
   const {Component, className, onChange, onError} = props
-  const {type, name, validate, errorMsg, title} = props
+  const {type, name, validate, errorMsg, title, placeholder} = props
   const {options, defaultValue} = props
   const [hasError, setError] = useState(false)
 
@@ -42,10 +42,11 @@ function LpField(props) {
 
   if (Component === 'select') return (
     <div className={`LpField ${className}`}>
-      <label>{title}</label><br/>
+      {title && <><label>{title}</label><br/></>}
       <Component 
         name={name}
         type={type}
+        placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={onChangeMyValue}>
           {
@@ -62,10 +63,11 @@ function LpField(props) {
   
   return (
     <div className={`LpField ${className}`}>
-      <label>{title}</label><br/>
+      {title && <><label>{title}</label><br/></>}
       <Component 
         name={name}
         type={type}
+        placeholder={placeholder}
         defaultValue={defaultValue}
         onChange={onChangeMyValue}/>
       <br/>
@@ -86,7 +88,8 @@ LpField.propTypes = {
   validate: PropTypes.func,
   errorMsg: PropTypes.string,
   defaultValue: PropTypes.any,
-  title: PropTypes.string.isRequired,
+  title: PropTypes.string,
+  placeholder: PropTypes.string,
   options: PropTypes.array
 }
 

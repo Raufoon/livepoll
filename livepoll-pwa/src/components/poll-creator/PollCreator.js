@@ -17,7 +17,7 @@ export default function PollCreator(props) {
     <LpForm className={`PollCreator ${className}`} submitLabel='Create New Poll' onSubmit={onSubmit}>
       <LpField
         className='field' 
-        title='Give your poll a nice title'
+        placeholder='Give your poll a nice title'
         Component='input'
         type='text'
         validate={value => value && value.length > 6}
