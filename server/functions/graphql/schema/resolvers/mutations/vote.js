@@ -47,7 +47,7 @@ module.exports = async function vote(_, args, context) {
       await db.write(`items/${alreadyVotedItemId}/score`, scoreOfCancelledItem)
       
       // if voter list is visible, delete the voter id from the voter list of the cancelled item
-      await db.remove(`edges/item_voters/${itemId}/${voterId}`)
+      await db.remove(`edges/item_voters/${alreadyVotedItemId}/${voterId}`)
     }
   }
   catch(err) {
