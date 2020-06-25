@@ -4,7 +4,7 @@ import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import './style.css'
 
 export default function TextMajorItem(props) {
-  const {item, position, vote, isVotedByMe, totalVotes} = props
+  const {item, position, vote, isVotedByMe, displayVoterList, shouldShowVoters, totalVotes} = props
   const {text, imgUrl,id, score} = item
 
   let avatarImgSize = '80px';
@@ -16,6 +16,7 @@ export default function TextMajorItem(props) {
   return (
     <div className='TextMajorItem'>
       <b className='data'>{position + 1}</b>
+      
       {
         imgUrl && <div className='data avatarImg' 
           style={{
@@ -24,10 +25,24 @@ export default function TextMajorItem(props) {
             height: avatarImgSize,
           }} />
       }
+
       <label className='data itemText'>{text}</label>
-      <span className='data'>{score} votes</span>
+      
+      {
+        shouldShowVoters && <button 
+          className='data displayVotersBtn' 
+          onClick={() => displayVoterList(item.id)}
+        >{score} votes</button>
+      }
+      
+      {
+        !shouldShowVoters && <span className='data'>{score} votes</span>
+      }
+      
       <span className='data'>{percent}%</span>
+      
       <ProgBar className='data progBar' value={percent || 1}/>
+      
       <input className='data' type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
     </div>
   )
@@ -36,5 +51,6 @@ export default function TextMajorItem(props) {
 TextMajorItem.propTypes = {
   item: PropTypes.object.isRequired,
   vote: PropTypes.func.isRequired,
-  isVotedByMe: PropTypes.bool
+  isVotedByMe: PropTypes.bool,
+  displayVoterList: PropTypes.func
 }

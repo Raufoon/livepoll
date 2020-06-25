@@ -1,4 +1,4 @@
-import { ACTION_CREATE_NEW_POLL_SUCCESS, ACTION_FETCH_POLL_DETAILS_SUCCESS, ACTION_CREATE_NEW_ITEM_SUCCESS, ACTION_FETCH_POLL_ITEMS_SUCCESS, ACTION_VOTE_FOR_ITEM_SUCCESS, ACTION_UNVOTE_ITEM_SUCCESS, ACTION_FETCH_VOTED_ITEM_ID_SUCCESS } from "../actions/poll-actions"
+import { ACTION_CREATE_NEW_POLL_SUCCESS, ACTION_FETCH_POLL_DETAILS_SUCCESS, ACTION_CREATE_NEW_ITEM_SUCCESS, ACTION_FETCH_POLL_ITEMS_SUCCESS, ACTION_VOTE_FOR_ITEM_SUCCESS, ACTION_UNVOTE_ITEM_SUCCESS, ACTION_FETCH_VOTED_ITEM_ID_SUCCESS, ACTION_FETCH_VOTER_LIST_SUCCESS } from "../actions/poll-actions"
 
 export default function pollReducer(state = {}, action) {
   const {type, ...data} = action
@@ -111,6 +111,23 @@ export default function pollReducer(state = {}, action) {
         details: {
           ...(state[pollId] || {}).details,
           votedItemId
+        }
+      }
+    }
+  }
+
+  else if (type === ACTION_FETCH_VOTER_LIST_SUCCESS) {
+    const {itemId, pollId, voterList} = data
+    return {
+      ...state,
+      [pollId]: {
+        ...state[pollId],
+        items: {
+          ...state[pollId].items || {},
+          [itemId]: {
+            ...state[pollId].items[itemId],
+            voters: voterList
+          }
         }
       }
     }

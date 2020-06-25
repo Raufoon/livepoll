@@ -9,9 +9,9 @@ function ItemsPanel(props) {
   console.log('Rendering ItemsPanel')
 
   const dispath = useDispatch()
-
-  const {pollId, items, details, className} = props
-  const {itemContentType, votedItemId, totalVotes} = details
+  
+  const {pollId, items, details, className, displayVoterList} = props
+  const {itemContentType, votedItemId, totalVotes, shouldShowVoters} = details
 
   function giveVote(itemId, voteValue) {
     if (itemId === votedItemId) dispath(actionUnvoteForItem(pollId, itemId, voteValue));
@@ -25,6 +25,7 @@ function ItemsPanel(props) {
   return (
     <div className={`ItemsPanel ${className}`}>
       <label>Results</label>
+      
       {
         items.sort((a, b) => a.score > b.score ? -1: 1)
         .map((item, idx) => {
@@ -34,6 +35,8 @@ function ItemsPanel(props) {
             isVotedByMe={votedItemId === item.id} 
             key={item.id} 
             vote={giveVote}
+            shouldShowVoters={shouldShowVoters}
+            displayVoterList={displayVoterList}
             totalVotes={totalVotes} 
             item={item}/>
         })
@@ -43,7 +46,9 @@ function ItemsPanel(props) {
 }
 
 ItemsPanel.propTypes = {
-  items: PropTypes.array.isRequired
+  items: PropTypes.array.isRequired,
+  displayVoterList: PropTypes.func,
+  pollId: PropTypes.string,
 }
 
 export default ItemsPanel

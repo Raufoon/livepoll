@@ -75,3 +75,14 @@ export function fetchVotedItemId(pollId) {
     }
   `)
 }
+
+export function fetchVoterList(itemId) {
+  return graphQlQuery(`
+    query FetchVoterList {
+      voterList(itemId: "${itemId}") {
+        id
+        name
+      }
+    }
+  `)
+}

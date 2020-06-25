@@ -1,5 +1,5 @@
 import { createNewPoll, createNewItem, voteForItem, unvoteItem } from "../../services/write-requests"
-import { fetchPollDetails, fetchPollItems, fetchVotedItemId } from "../../services/read-requests"
+import { fetchPollDetails, fetchPollItems, fetchVotedItemId, fetchVoterList } from "../../services/read-requests"
 
 export function actionCreateNewPoll(pollData) {
   return async function(dispatch) {
@@ -229,5 +229,25 @@ function actionFetchVotedItemIdFailure(error) {
   return {
     type: ACTION_FETCH_VOTED_ITEM_ID_FAILURE,
     error
+  }
+}
+
+export function actionFetchVoterList(pollId, itemId) {
+  return async function (dispatch) {
+    try {
+      const {data, errors} = await fetchVoterList(itemId)
+      if (data) dispatch(actionFetchVoterListSuccess(pollId, itemId, data.voterList))
+    }
+    catch(err) {
+    }
+  }
+}
+
+export const ACTION_FETCH_VOTER_LIST_SUCCESS = 'ACTION_FETCH_VOTER_LIST_SUCCESS'
+
+function actionFetchVoterListSuccess(pollId, itemId, voterList) {
+  return {
+    type: ACTION_FETCH_VOTER_LIST_SUCCESS,
+    pollId, itemId, voters: voterList
   }
 }

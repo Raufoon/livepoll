@@ -27,3 +27,9 @@
   background-repeat: no-repeat;
   border: 1px solid #222;
 }
+
+.TextMajorItem .displayVotersBtn{
+  border: none;
+  border-bottom: 2px solid lightgray;
+  background-color: transparent;
+}
