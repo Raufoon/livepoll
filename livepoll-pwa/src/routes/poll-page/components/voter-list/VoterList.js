@@ -5,10 +5,12 @@ import './style.css'
 
 export default function VoterList(props) {
   const {itemId, pollId} = props;
+  const itemName = useSelector(state => state.polls[pollId].items[itemId].text)
   const voters = useSelector(state => state.polls[pollId].items[itemId].voters) || []
 
   return (
     <div className='VoterList'>
+      <header>Those who voted for "{itemName}"</header>
       {
         voters.map(voter => {
           const {id, name, avatar} = voter

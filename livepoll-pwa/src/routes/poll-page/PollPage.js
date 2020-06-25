@@ -25,13 +25,10 @@ export default function PollPage () {
   const displayVoterList = useMemo(() => {
     return function (itemId) {
       showVotersModal()
-      const item = pollItems[itemId]
-      if(!item || !item.voters) {
-        dispath(actionFetchVoterList(id, itemId))
-      }
+      dispath(actionFetchVoterList(id, itemId))
       setItemIdForVoterList(itemId)
     } 
-  }, [pollItems, dispath, id, showVotersModal])
+  }, [dispath, id, showVotersModal])
 
   const hideVoterList = useMemo(() => {
     return function (itemId) {

@@ -1,7 +1,10 @@
 .VoterList {
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .VoterList * {
-  margin: 1em;
+  margin: 5px;
+  border: none;
 }
