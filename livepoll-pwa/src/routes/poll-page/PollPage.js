@@ -9,6 +9,7 @@ import useModal from '../../components/modal/hooks/useModal'
 import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
 import './style.css'
+import VoterList from './components/voter-list/VoterList'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
@@ -22,14 +23,22 @@ export default function PollPage () {
   const dispath = useDispatch()
 
   const displayVoterList = useMemo(() => {
-    return function displayVoterList(itemId) {
+    return function (itemId) {
       showVotersModal()
-      if(!pollItems[itemId] || !pollItems[itemId].voters) {
+      const item = pollItems[itemId]
+      if(!item || !item.voters) {
         dispath(actionFetchVoterList(id, itemId))
       }
       setItemIdForVoterList(itemId)
     } 
-  }, [pollItems])
+  }, [pollItems, dispath, id, showVotersModal])
+
+  const hideVoterList = useMemo(() => {
+    return function (itemId) {
+      hideVotersModal()
+      setItemIdForVoterList(false)
+    } 
+  }, [hideVotersModal])
 
   if (!pollDetails) return "Loading..." 
   
@@ -51,12 +60,8 @@ export default function PollPage () {
         </div>
       </main>
 
-      <Modal isOpen={votersVisible} onClose={hideVotersModal}>
-        <div>
-          {
-            itemIdForVoterList
-          }
-        </div>
+      <Modal isOpen={votersVisible} onClose={hideVoterList}>
+        {itemIdForVoterList && <VoterList pollId={id} itemId={itemIdForVoterList}/>}
       </Modal>
     </div>
   )  

@@ -39,6 +39,7 @@ export function fetchPollDetails(id) {
         author {
           id
           name
+          avatar
         }
         shouldShowVoters
         usagePrivacy
@@ -82,6 +83,7 @@ export function fetchVoterList(itemId) {
       voterList(itemId: "${itemId}") {
         id
         name
+        avatar
       }
     }
   `)

@@ -1,0 +1,7 @@
+.VoterList {
+  display: block;
+}
+
+.VoterList * {
+  margin: 1em;
+}

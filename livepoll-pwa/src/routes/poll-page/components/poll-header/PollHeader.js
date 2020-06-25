@@ -26,7 +26,7 @@ export default function PollHeader(props) {
   
   if (!author) return "Loading..."
 
-  const {name} = author
+  const {name, avatar} = author
   const creationDateTime = new Date(parseInt(startDateTime, 10))
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true
 
@@ -42,7 +42,7 @@ export default function PollHeader(props) {
       <div className="row pollDesc">
         <span>Created by</span>
         &nbsp;
-        <UserBadge name={name}/>
+        <UserBadge name={name} avatar={avatar}/>
         &nbsp;on&nbsp; 
         <b>{creationDateTime.toLocaleDateString()}</b> 
         &nbsp;at&nbsp;

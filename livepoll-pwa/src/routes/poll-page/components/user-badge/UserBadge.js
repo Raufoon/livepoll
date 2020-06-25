@@ -5,17 +5,17 @@ import defaultUserIcon from './images/default-user.png'
 import './style.css'
 
 export default function UserBadge(props) {
-  const {name} = props
+  const {name, avatar} = props
   return (
     <IconButton 
       className='UserBadge'
       iconClass="userBadgeIcon" 
-      iconUrl={defaultUserIcon}
+      iconUrl={avatar || defaultUserIcon}
       >{name}</IconButton>
   )
 }
 
 UserBadge.propTypes = {
   name: PropTypes.string.isRequired,
-  avatarUrl: PropTypes.string
+  avatar: PropTypes.string
 }

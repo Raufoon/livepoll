@@ -117,7 +117,7 @@ export default function pollReducer(state = {}, action) {
   }
 
   else if (type === ACTION_FETCH_VOTER_LIST_SUCCESS) {
-    const {itemId, pollId, voterList} = data
+    const {itemId, pollId, voters} = data
     return {
       ...state,
       [pollId]: {
@@ -126,7 +126,7 @@ export default function pollReducer(state = {}, action) {
           ...state[pollId].items || {},
           [itemId]: {
             ...state[pollId].items[itemId],
-            voters: voterList
+            voters
           }
         }
       }
