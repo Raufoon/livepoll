@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
+import firstMedal from './images/1st-trophy.png'
 import './style.css'
 
 export default function TextMajorItem(props) {
@@ -14,8 +15,11 @@ export default function TextMajorItem(props) {
   const percent = Math.ceil((score *100) / (totalVotes||1))
 
   return (
-    <div className='TextMajorItem'>
-      <b className='data'>{position + 1}</b>
+    <div className={`TextMajorItem ${position === 0 ? 'FirstTextItem': ''}`}>
+
+      {position === 0 && !imgUrl && <img className='firstMedal' src={firstMedal} alt="medal for first item"/>}
+
+      {(position > 0 || imgUrl) && <b className='data'>{position + 1}</b>}
       
       {
         imgUrl && <div className='data avatarImg' 
@@ -44,6 +48,7 @@ export default function TextMajorItem(props) {
       <ProgBar className='data progBar' value={percent || 1}/>
       
       <input className='data' type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
+
     </div>
   )
 }

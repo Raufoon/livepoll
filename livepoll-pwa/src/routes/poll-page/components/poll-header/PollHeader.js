@@ -22,7 +22,7 @@ export default function PollHeader(props) {
   if (!details) return "Loading.."
 
   const authUserId = authUser.getUid()
-  const {id, title, startDateTime, author, itemContentType, usagePrivacy} = details
+  const {id, title, startDateTime, author, itemContentType, shouldShowVoters, usagePrivacy} = details
   
   if (!author) return "Loading..."
 
@@ -42,11 +42,23 @@ export default function PollHeader(props) {
       <div className="row pollDesc">
         <span>Created by</span>
         &nbsp;
-        <UserBadge name={name} avatar={avatar}/>
+        <UserBadge className='pollCreator' name={name} avatar={avatar}/>
         &nbsp;on&nbsp; 
         <b>{creationDateTime.toLocaleDateString()}</b> 
         &nbsp;at&nbsp;
         <b>{creationDateTime.toLocaleTimeString()}</b>
+      </div>
+
+      <div className='row'>
+        {
+          usagePrivacy === 'PROTECTED' && <span>Only the author can create items here.</span>
+        }
+      </div>
+
+      <div className='row'>
+        {
+          shouldShowVoters && <span>Voter list is visible! Click on the vote count.</span>
+        }
       </div>
       
       <div className="row">

@@ -31,3 +31,7 @@
 .PollHeader .addItemBtn:hover{
   border: 1px solid lightgray;
 }
+
+.PollHeader .pollCreator {
+  border: none;
+}

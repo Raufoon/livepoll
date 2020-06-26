@@ -6,13 +6,17 @@
   justify-content: center;
 }
 
+.TextMajorItem .firstMedal {
+  max-height: 5em;
+}
+
 .TextMajorItem .data {
   margin: 5px;
-  margin-right: 1.5em;
+  margin-right: 15px;
 }
 
 .TextMajorItem .progBar {
-  width: 16em;
+  width: 280px;
   height: 0.6em;
   border-radius: 10px;
 }
@@ -32,4 +36,8 @@
   border: none;
   border-bottom: 2px solid lightgray;
   background-color: transparent;
+}
+
+.FirstTextItem {
+  font-weight: bold;
 }
