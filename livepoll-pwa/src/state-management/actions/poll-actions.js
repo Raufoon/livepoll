@@ -235,7 +235,7 @@ function actionFetchVotedItemIdFailure(error) {
 export function actionFetchVoterList(pollId, itemId) {
   return async function (dispatch) {
     try {
-      const {data, errors} = await fetchVoterList(itemId)
+      const {data} = await fetchVoterList(itemId)
       if (data) dispatch(actionFetchVoterListSuccess(pollId, itemId, data.voterList))
     }
     catch(err) {

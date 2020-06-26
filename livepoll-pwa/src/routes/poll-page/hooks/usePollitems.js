@@ -1,5 +1,4 @@
 import {useSelector, useDispatch} from 'react-redux'
-import {useEffect} from 'react'
 import {actionFetchPollItems, actionFetchVotedItemId} from '../../../state-management/actions/poll-actions'
 
 export default function usePollItems(pollId) {
@@ -9,12 +8,10 @@ export default function usePollItems(pollId) {
   })
   const dispatch = useDispatch()
 
-  useEffect(function() {
-    if (!pollItems) {
-      dispatch(actionFetchPollItems(pollId))
-      dispatch(actionFetchVotedItemId(pollId))
-    }
-  }, [pollId])
+  if (!pollItems) {
+    dispatch(actionFetchPollItems(pollId))
+    dispatch(actionFetchVotedItemId(pollId))
+  }
 
   return pollItems
 }

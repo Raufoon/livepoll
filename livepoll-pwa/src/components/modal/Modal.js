@@ -6,7 +6,7 @@ import './style.css'
 let modalZindex = 100
 
 export default function Modal(props) {
-  const {onClose, isOpen, title, className} = props
+  const {onClose, isOpen, title} = props
 
   const modalElementRef = useRef(false);
 

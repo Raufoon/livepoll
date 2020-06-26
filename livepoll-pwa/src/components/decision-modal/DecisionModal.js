@@ -4,7 +4,7 @@ import Modal from '../modal/Modal'
 import './style.css'
 
 export default function DecisionModal (props) {
-  const {className, title, onYes, onNo, isVisible} = props
+  const {title, onYes, onNo, isVisible} = props
 
   return (
     <Modal isOpen={isVisible} 

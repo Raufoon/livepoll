@@ -54,7 +54,7 @@ function LpForm(props) {
     })
 
     setErrorCount(calcFormErrorCount())
-  }, [])
+  }, [children])
 
   return (
     <form className={className} onSubmit={onSubmitThisForm}>
