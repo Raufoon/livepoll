@@ -8,8 +8,8 @@ import PollHeader from './components/poll-header/PollHeader'
 import useModal from '../../components/modal/hooks/useModal'
 import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
-import './style.css'
 import VoterList from './components/voter-list/VoterList'
+import './style.css'
 
 export default function PollPage () {
   console.log('Rendering PollPage')

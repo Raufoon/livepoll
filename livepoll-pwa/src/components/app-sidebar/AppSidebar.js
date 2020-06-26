@@ -1,16 +1,17 @@
-import React, {useContext, useMemo} from 'react'
+import React, {useContext, useMemo, lazy, Suspense} from 'react'
 import AuthContext from '../../contexts/AuthContext'
 import useModal from '../modal/hooks/useModal'
 import { signOut } from '../../services/auth'
 import IconButton from '../icon-button/IconButton'
 import Modal from '../modal/Modal'
-import PollCreator from '../poll-creator/PollCreator'
 import signoutIcon from './images/logout.png'
 import createPollIcon from './images/create-poll.png'
 import homeIcon from './images/home.png'
 import { useHistory } from "react-router-dom"
-import './style.css'
 import DecisionModal from '../decision-modal/DecisionModal'
+import './style.css'
+
+const PollCreator = lazy(() => import('../poll-creator/PollCreator'))
 
 export default function AppSidebar(props) {
   const {className} = props
@@ -61,7 +62,9 @@ export default function AppSidebar(props) {
         onClick={openSignoutPrompt}/>
 
       <Modal isOpen={showPollForm} onClose={closePollFormModal} title="Poll Creation Form">
-        <PollCreator className="pollFormModal" onSubmit={closePollFormModal}/>
+        <Suspense fallback='Loading form...'>
+          <PollCreator className="pollFormModal" onSubmit={closePollFormModal}/>
+        </Suspense>
       </Modal>
 
       <DecisionModal 

@@ -21,20 +21,6 @@ export default function HomePage () {
           </h2>
         )
       }
-
-      <button onClick={openModal1}>open modal 1</button>
-
-      <Modal isOpen={isOpen1} onClose={closeModal1}>
-        <div>
-          <span>Example Modal 1</span>
-          <button onClick={openModal2}>open modal 2</button>
-          <Modal isOpen={isOpen2} onClose={closeModal2}>
-            <div>
-              Example Modal 2
-            </div>
-          </Modal>
-        </div>
-      </Modal>
     </div>
   )
 }

@@ -1,14 +1,15 @@
-import React, {useContext} from 'react'
+import React, {useContext, lazy, Suspense} from 'react'
 import UserBadge from '../user-badge/UserBadge'
 import AuthContext from '../../../../contexts/AuthContext'
-import TextItemCreator from '../text-item-creator/TextItemCreator'
-import AvatarTextItemCreator from '../avatar-text-item-creator/AvatarTextItemCreator'
 import Modal from '../../../../components/modal/Modal'
 import useModal from '../../../../components/modal/hooks/useModal'
 import IconButton from '../../../../components/icon-button/IconButton'
 import createIcon from './images/create-item.png'
 import usePollDetails from '../../hooks/usePollDetails'
 import './style.css'
+
+const TextItemCreator = lazy(() => import('../text-item-creator/TextItemCreator'))
+const AvatarTextItemCreator = lazy(() => import('../avatar-text-item-creator/AvatarTextItemCreator'))
 
 export default function PollHeader(props) {
   console.log('Rendering PollHeader')
@@ -73,7 +74,9 @@ export default function PollHeader(props) {
       
       {
         shouldAllowAddItem && <Modal isOpen={showItemForm} onClose={closeItemFormModal}>
-          <ItemCreatorForm pollId={id} onSubmit={closeItemFormModal}/>
+          <Suspense fallback='Loading form...'>
+            <ItemCreatorForm pollId={id} onSubmit={closeItemFormModal}/>
+          </Suspense>
         </Modal> 
       }
     </div>
