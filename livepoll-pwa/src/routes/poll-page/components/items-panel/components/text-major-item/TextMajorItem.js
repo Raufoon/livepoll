@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import firstMedal from './images/1st-trophy.png'
 import './style.css'
+import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
 
 export default function TextMajorItem(props) {
   const {item, position, vote, isVotedByMe, displayVoterList, shouldShowVoters, totalVotes} = props
@@ -17,7 +18,7 @@ export default function TextMajorItem(props) {
   return (
     <div className={`TextMajorItem ${position === 0 ? 'FirstTextItem': ''}`}>
 
-      {position === 0 && !imgUrl && <img className='firstMedal' src={firstMedal} alt="medal for first item"/>}
+      {position === 0 && !imgUrl && <img className='data firstMedal' src={firstMedal} alt="medal for first item"/>}
 
       {(position > 0 || imgUrl) && <b className='data'>{position + 1}</b>}
       
@@ -40,7 +41,7 @@ export default function TextMajorItem(props) {
       }
       
       {
-        !shouldShowVoters && <span className='data'>{score} votes</span>
+        !shouldShowVoters && <VoteLabel className='data' count={score}/>
       }
       
       <span className='data'>{percent}%</span>

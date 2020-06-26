@@ -1,0 +1,10 @@
+.VoteLabel {
+  color: #ff4040;
+  font-weight: bold;
+  text-align: center;
+}
+
+.VoteLabel .icon{
+  height: 1em;
+  margin: 2px;
+}
