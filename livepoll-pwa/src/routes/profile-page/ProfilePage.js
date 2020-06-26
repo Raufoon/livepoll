@@ -3,6 +3,7 @@ import {useParams, Switch, Route} from 'react-router-dom'
 import useProfileDetails from './hooks/useProfileDetails'
 import ProfileSummary from './components/profile-summary/ProfileSummary'
 import ProfileSettings from './routes/profile-settings/ProfileSettings'
+import Responsive from '../../components/responsive/Responsive'
 import './style.css'
 
 export default function ProfilePage(props) {
@@ -14,15 +15,21 @@ export default function ProfilePage(props) {
 
   return (
     <div className='ProfilePage'>
-      <div className='leftSect'>
-        <ProfileSummary className='profileSummary' details={details}/>
-      </div>
+      <Responsive screens={['M', 'L']}>
+        <div className='leftSect'>
+          <ProfileSummary className='profileSummary' details={details}/>
+        </div>
 
-      <div className='rightSect'>
-        <Switch>
-          <Route path={`${match.path}/settings`} component={ProfileSettings}/>
-        </Switch>
-      </div>      
+        <div className='rightSect'>
+          <Switch>
+            <Route path={`${match.path}/settings`} component={ProfileSettings}/>
+          </Switch>
+        </div>
+      </Responsive>
+
+      <Responsive screens={['S']}>
+        mobile screen :)
+      </Responsive>      
     </div>
   )
 }
