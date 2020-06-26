@@ -1,0 +1,16 @@
+.NavHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  border-bottom: 1px solid lightgray;
+}
+
+.NavHeader .icon{
+  height: 1.2em;
+}
+
+.NavHeader .iconBtn{
+  
+}

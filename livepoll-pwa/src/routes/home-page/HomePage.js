@@ -9,7 +9,6 @@ export default function HomePage () {
 
   return (
     <div>
-      Recent Polls: <br/>
       {
         Object.values(recentPolls).map(poll => 
           <h2 key={poll.id}>
