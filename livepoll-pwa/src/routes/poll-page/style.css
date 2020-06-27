@@ -1,18 +1,12 @@
 .PollPage {
-  display: block;
 }
 
-.PollPage main {
+.PollPage .content {
   display: flex;
+  flex-direction: column;
+}
+
+.PollPage .content.multiSection{
   flex-direction: row;
 }
 
-.PollPage main .itemsPanel{
-  width: 65%;
-  margin-top: 30px;
-}
-
-.PollPage main .rightPanel {
-  flex-grow: 1;
-  margin: 2em;
-}

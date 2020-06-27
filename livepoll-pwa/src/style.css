@@ -15,6 +15,7 @@
 
 .App .navHeader{
   flex-grow: 1;
+  max-height: 3em;
 }
 
 .App .sidebar {

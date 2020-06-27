@@ -10,6 +10,7 @@ import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
 import VoterList from './components/voter-list/VoterList'
 import './style.css'
+import Responsive from '../../components/responsive/Responsive'
 
 export default function PollPage () {
   console.log('Rendering PollPage')
@@ -37,25 +38,38 @@ export default function PollPage () {
     } 
   }, [hideVotersModal])
 
-  if (!pollDetails) return "Loading..." 
+  if (!pollDetails) return "Loading..."
+  
+  // view elements
+  const pollHeader = <PollHeader pollId={id}/>
+
+  const itemsPanel = pollItems && <ItemsPanel
+    className='itemsPanel'
+    pollId={id}
+    displayVoterList={displayVoterList}
+    items={Object.values(pollItems)}/>
   
   return (
     <div className='PollPage'>
-      <PollHeader pollId={id}/>
-      
-      <main>
-        {
-          pollItems && <ItemsPanel
-            className='itemsPanel'
-            pollId={id}
-            displayVoterList={displayVoterList}
-            items={Object.values(pollItems)}/>
-        }
+      <Responsive screens={['M', 'L']}>
+        <div className="content multiSection">
+          <div style={{flexGrow: 1}}>
+            {pollHeader}
+            {itemsPanel}
+          </div>
 
-        <div className="rightPanel">    
-          <span>&nbsp;</span>  
+          <div style={{width: '30em'}}>
+            &nbsp;XXXXX
+          </div>
         </div>
-      </main>
+      </Responsive>
+
+      <Responsive screens={['S']}>
+        <div className="content">
+          {pollHeader}
+          {itemsPanel}
+        </div>
+      </Responsive>
 
       <Modal isOpen={votersVisible} onClose={hideVoterList}>
         {itemIdForVoterList && <VoterList pollId={id} itemId={itemIdForVoterList}/>}
