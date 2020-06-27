@@ -38,6 +38,20 @@
   background-color: transparent;
 }
 
-.FirstTextItem {
-  font-weight: bold;
+.TextMajorItem .mobileItem {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.TextMajorItem .mobileItem .info {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextMajorItem .mobileItem .info > * {
+  margin-right: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }

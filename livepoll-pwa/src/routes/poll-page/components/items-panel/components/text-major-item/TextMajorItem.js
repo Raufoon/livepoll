@@ -3,15 +3,16 @@ import PropTypes from 'prop-types'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import firstMedal from './images/1st-trophy.png'
 import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
+import Responsive from '../../../../../../components/responsive/Responsive'
 import './style.css'
 
 export default function TextMajorItem(props) {
   const {item, position, vote, isVotedByMe, displayVoterList, shouldShowVoters, totalVotes} = props
   const {text, imgUrl,id, score} = item
 
-  let avatarImgSize = '80px';
-  if (position === 0) avatarImgSize = '200px'
-  else if (position === 1) avatarImgSize = '128px'
+  let avatarImgSize = '6em';
+  if (position === 0) avatarImgSize = '10em'
+  else if (position === 1) avatarImgSize = '8em'
 
   const percent = Math.ceil((score *100) / (totalVotes||1))
 
@@ -41,14 +42,28 @@ export default function TextMajorItem(props) {
   const voteCheckbox = <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
 
   return (
-    <div className={`TextMajorItem ${position === 0 ? 'FirstTextItem': ''}`}>
-      {itemIndex}
-      {image}
-      {itemLabel}
-      {voteLabel}
-      {percentView}
-      {progbar}
-      {voteCheckbox}
+    <div className={`TextMajorItem`}>
+      <Responsive screens={['M', 'L']}>
+        {itemIndex}
+        {image}
+        {itemLabel}
+        {voteLabel}
+        {percentView}
+        {progbar}
+        {voteCheckbox}
+      </Responsive>
+      <Responsive screens={['S']}>
+        {
+          imgUrl && <>
+            {image}
+            <div className='mobileItem'>
+              <div className="info">{itemIndex}.&nbsp;{itemLabel}</div>
+              <div className="info">{voteLabel}{voteCheckbox}</div>
+              <div className="info">{percentView} votes</div>
+            </div>
+          </>
+        }
+      </Responsive>
     </div>
   )
 }
