@@ -6,6 +6,7 @@ import usePollDetails from '../../hooks/usePollDetails'
 import './style.css'
 
 const TextMajorItem = lazy(() => import('./components/text-major-item/TextMajorItem'))
+const itemSorter = (a, b) => a.score > b.score ? -1: 1
 
 function ItemsPanel(props) {
   console.log('Rendering ItemsPanel')
@@ -31,9 +32,7 @@ function ItemsPanel(props) {
     <div className={`ItemsPanel ${className}`}>
       <Suspense fallback='Loading...'>
         {
-          items.sort((a, b) => a.score > b.score ? -1: 1)
-          .map((item, idx) => {
-
+          items.sort(itemSorter).map((item, idx) => {
             return <Component 
               position={idx}
               isVotedByMe={votedItemId === item.id} 

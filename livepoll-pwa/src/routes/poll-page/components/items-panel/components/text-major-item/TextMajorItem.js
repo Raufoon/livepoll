@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import firstMedal from './images/1st-trophy.png'
-import './style.css'
 import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
+import './style.css'
 
 export default function TextMajorItem(props) {
   const {item, position, vote, isVotedByMe, displayVoterList, shouldShowVoters, totalVotes} = props
@@ -15,40 +15,38 @@ export default function TextMajorItem(props) {
 
   const percent = Math.ceil((score *100) / (totalVotes||1))
 
+  // views
+  const itemIndex = position === 0 && !imgUrl ? (
+    <img className='firstMedal' src={firstMedal} alt="medal for first item"/>
+  ):(
+    <b>{position + 1}</b>
+  )
+
+  const image = imgUrl && <div className='avatarImg' 
+    style={{
+      backgroundImage: `url(${imgUrl})`,
+      width: avatarImgSize,
+      height: avatarImgSize,
+    }} />
+
+  const voteLabel = shouldShowVoters ? (
+    <VoteLabel className='displayVotersBtn' count={score} onClick={() => displayVoterList(item.id)}/>
+  ):(
+    <VoteLabel count={score}/>
+  )
+
   return (
     <div className={`TextMajorItem ${position === 0 ? 'FirstTextItem': ''}`}>
+      {itemIndex}
+      {image}
 
-      {position === 0 && !imgUrl && <img className='data firstMedal' src={firstMedal} alt="medal for first item"/>}
-
-      {(position > 0 || imgUrl) && <b className='data'>{position + 1}</b>}
+      <label className='itemText'>{text}</label>
       
-      {
-        imgUrl && <div className='data avatarImg' 
-          style={{
-            backgroundImage: `url(${imgUrl})`,
-            width: avatarImgSize,
-            height: avatarImgSize,
-          }} />
-      }
-
-      <label className='data itemText'>{text}</label>
+      {voteLabel}
       
-      {
-        shouldShowVoters && <button 
-          className='data displayVotersBtn' 
-          onClick={() => displayVoterList(item.id)}
-        >{score} votes</button>
-      }
-      
-      {
-        !shouldShowVoters && <VoteLabel className='data' count={score}/>
-      }
-      
-      <span className='data'>{percent}%</span>
-      
-      <ProgBar className='data progBar' value={percent || 1}/>
-      
-      <input className='data' type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
+      <span>{percent}%</span>
+      <ProgBar className='progBar' value={percent || 1}/>
+      <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
 
     </div>
   )
