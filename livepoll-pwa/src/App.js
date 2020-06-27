@@ -19,8 +19,6 @@ function App() {
   if (!authUser) return "Loading..."
   if (!authUser.isLoggedIn) return <WelcomePage/>
 
-  // viewparts
-  const appHeader = <AppHeader className="appHeader"/>
   const routedPages = <Suspense fallback="Loading...">
     <Switch>
         <Route path='/user/:id' component={ProfilePage}/>
@@ -31,23 +29,23 @@ function App() {
 
   return (
     <AuthContext.Provider value={authUser}>
-      <Responsive screens={['M', 'L']}>
-        <div className="App">
-          <AppSidebar className="appSidebar"/>
-          <div className="lmHeaderContent">
-            {appHeader}
-            <div className='content'>{routedPages}</div>
-          </div>
-        </div>
-      </Responsive>
-
-      <Responsive screens={['S']}>
-        <div className="App AppMobile">
-          {appHeader}
-          <NavHeader/>
-          <div className='content'>{routedPages}</div>
-        </div>
-      </Responsive>
+      <div className='App'>        
+        <Responsive screens={['M', 'L']}>
+          <AppHeader className='appHeader withSidebar'/>
+          <AppSidebar className="sidebar"/>
+          <main className='withSidebar'>
+            {routedPages}
+          </main>
+        </Responsive>
+        
+        <Responsive screens={['S']}>
+        <AppHeader className='appHeader'/>
+          <NavHeader className="navHeader"/>
+          <main>
+            {routedPages}
+          </main>
+        </Responsive>
+      </div>
     </AuthContext.Provider>
   );
 }
