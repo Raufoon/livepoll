@@ -29,7 +29,6 @@ function ItemsPanel(props) {
 
   return (
     <div className={`ItemsPanel ${className}`}>
-      <label>Results</label>
       <Suspense fallback='Loading...'>
         {
           items.sort((a, b) => a.score > b.score ? -1: 1)

@@ -5,8 +5,8 @@
 }
 
 .PollHeader .pollTitle {
-  font-size: x-large;
-  margin-bottom: 1em !important;
+  font-size: 2em;
+  margin-bottom: 10px !important;
   color: #1c2b39;
 }
 
