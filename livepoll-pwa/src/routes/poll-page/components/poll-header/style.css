@@ -16,12 +16,12 @@
   align-items: center;
 }
 
-.PollHeader .row{
+.PollHeader > *{
   margin-bottom: 5px;
 }
 
 .PollHeader .addItemBtnIcon {
-  width: 2em;
+  width: 1.5em;
 }
 
 .PollHeader .addItemBtn {

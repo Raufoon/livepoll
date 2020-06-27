@@ -31,25 +31,23 @@ function App() {
 
   return (
     <AuthContext.Provider value={authUser}>
-      <div className="App">
-
-        <Responsive screens={['M', 'L']}>
+      <Responsive screens={['M', 'L']}>
+        <div className="App">
           <AppSidebar className="appSidebar"/>
-
-          <div className="lmScreenContent">
+          <div className="lmHeaderContent">
             {appHeader}
-            {routedPages}
+            <div className='content'>{routedPages}</div>
           </div>
-        </Responsive>
+        </div>
+      </Responsive>
 
-        <Responsive screens={['S']}>
-          <div className="sScreenContent">
-            {appHeader}
-            <NavHeader/>
-            {routedPages}
-          </div>
-        </Responsive>
-      </div>
+      <Responsive screens={['S']}>
+        <div className="App AppMobile">
+          {appHeader}
+          <NavHeader/>
+          <div className='content'>{routedPages}</div>
+        </div>
+      </Responsive>
     </AuthContext.Provider>
   );
 }

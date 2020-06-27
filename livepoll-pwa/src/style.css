@@ -6,7 +6,6 @@
 }
 
 .App .appHeader{
-  margin-bottom: 0.5em;
   font-size: large;
 }
 
@@ -19,18 +18,19 @@
   top: 0;
 }
 
-.App .lmScreenContent {
+.App .lmHeaderContent {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  padding: 2em;
   margin-left: 3em;
 }
 
-.App .sScreenContent{
+.App .content{
+  padding: 1em;
+}
+
+.AppMobile{
   display: flex;
   flex-direction: column;
-  margin: 1em;
-  width: 100%;
 }
 

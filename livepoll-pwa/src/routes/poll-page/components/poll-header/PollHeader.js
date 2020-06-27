@@ -6,6 +6,7 @@ import useModal from '../../../../components/modal/hooks/useModal'
 import IconButton from '../../../../components/icon-button/IconButton'
 import createIcon from './images/create-item.png'
 import usePollDetails from '../../hooks/usePollDetails'
+import Responsive from '../../../../components/responsive/Responsive'
 import './style.css'
 
 const TextItemCreator = lazy(() => import('../text-item-creator/TextItemCreator'))
@@ -38,9 +39,10 @@ export default function PollHeader(props) {
 
   return (
     <div className='PollHeader'>
-      <label className='row pollTitle'>{title}</label>
-      
-      <div className="row pollDesc">
+      <label className='pollTitle'>{title}</label>
+
+      <Responsive screens={['M', 'L']}>
+      <div className="pollDesc">
         <span>Created by</span>
         &nbsp;
         <UserBadge className='pollCreator' name={name} avatar={avatar}/>
@@ -50,19 +52,19 @@ export default function PollHeader(props) {
         <b>{creationDateTime.toLocaleTimeString()}</b>
       </div>
 
-      <div className='row'>
+      <div>
         {
           usagePrivacy === 'PROTECTED' && <span>Only the author can create items here.</span>
         }
       </div>
 
-      <div className='row'>
+      <div>
         {
           shouldShowVoters && <span>Voter list is visible! Click on the vote count.</span>
         }
       </div>
       
-      <div className="row">
+      <div>
         <IconButton
          className='addItemBtn'
          iconUrl={createIcon} 
@@ -71,6 +73,7 @@ export default function PollHeader(props) {
            Create Item
         </IconButton>
       </div>
+      </Responsive>
       
       {
         shouldAllowAddItem && <Modal isOpen={showItemForm} onClose={closeItemFormModal}>
