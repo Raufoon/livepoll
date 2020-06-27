@@ -35,19 +35,20 @@ export default function TextMajorItem(props) {
     <VoteLabel count={score}/>
   )
 
+  const itemLabel = <label className='itemText'>{text}</label>
+  const percentView = <span>{percent}%</span>
+  const progbar = <ProgBar className='progBar' value={percent || 1}/>
+  const voteCheckbox = <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
+
   return (
     <div className={`TextMajorItem ${position === 0 ? 'FirstTextItem': ''}`}>
       {itemIndex}
       {image}
-
-      <label className='itemText'>{text}</label>
-      
+      {itemLabel}
       {voteLabel}
-      
-      <span>{percent}%</span>
-      <ProgBar className='progBar' value={percent || 1}/>
-      <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
-
+      {percentView}
+      {progbar}
+      {voteCheckbox}
     </div>
   )
 }
