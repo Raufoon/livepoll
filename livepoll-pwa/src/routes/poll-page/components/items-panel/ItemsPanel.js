@@ -7,6 +7,8 @@ import './style.css'
 
 const TextItem = lazy(() => import('./components/text-item/TextItem'))
 const AvatarTextItem = lazy(() => import('./components/avatar-text-item/AvatarTextItem'))
+const ImageCaptionItem = lazy(() => import('./components/image-caption-item/ImageCaptionItem'))
+
 const itemSorter = (a, b) => a.score > b.score ? -1: 1
 
 function ItemsPanel(props) {
@@ -28,10 +30,11 @@ function ItemsPanel(props) {
   
   if (itemContentType === 'TEXT') Component = TextItem
   else if (itemContentType === 'AVATAR_TEXT') Component = AvatarTextItem
+  else if (itemContentType === 'IMAGE_CAPTION') Component = ImageCaptionItem
   else return 'Loading...';
 
   return (
-    <div className={`ItemsPanel ${className}`}>
+    <div className={`ItemsPanel ${className} ${itemContentType === 'IMAGE_CAPTION' ? 'grid':''}`}>
       <Suspense fallback='Loading...'>
         {
           items.sort(itemSorter).map((item, idx) => {

@@ -34,8 +34,8 @@ export default function PollCreator(props) {
         options={[
           {name: 'Text only', value: 'TEXT'},
           {name: 'Text with avatar', value: 'AVATAR_TEXT'},
-          {name: 'Image only', value: 'IMAGE_CAPTION'},
-          {name: 'Image with caption', value: 'IMAGE'},
+          {name: 'Image only', value: 'IMAGE'},
+          {name: 'Image with caption', value: 'IMAGE_CAPTION'},
         ]}
         defaultValue={'TEXT'}
         name='itemContentType'/>
@@ -71,7 +71,7 @@ export default function PollCreator(props) {
         options={[
           {name: 'Anyone can add item', value: 'PUBLIC'},
           {name: 'Only creator adds item', value: 'PROTECTED'},
-          {name: 'Visible with only a link', value: 'PRIVATE'},
+          {name: 'Visible with only a link (Coming Soon...)', value: 'PRIVATE'},
         ]}
         defaultValue={'PUBLIC'}
         name='usagePrivacy'/>
@@ -82,7 +82,7 @@ export default function PollCreator(props) {
         Component='select'
         options={[
           {name: 'always', value: 'ALWAYS'},
-          {name: 'before poll starts', value: 'BEFORE_START'},
+          {name: 'before poll starts (Coming Soon...)', value: 'BEFORE_START'},
         ]}
         defaultValue={'ALWAYS'}
         name='whenToAddItem'/>
@@ -93,8 +93,8 @@ export default function PollCreator(props) {
         Component='select'
         options={[
           {name: 'ticking only one item', value: 'TICK_ONE'},
-          {name: 'ticking many items', value: 'TICK_MANY'},
-          {name: 'numbering many items (1 - 100)', value: 'NUMBER_MANY'},
+          {name: 'ticking many items (Coming Soon...)', value: 'TICK_MANY'},
+          {name: 'numbering many items (1 - 100) (Coming Soon...)', value: 'NUMBER_MANY'},
         ]}
         defaultValue={'TICK_ONE'}
         name='votingSystem'/>

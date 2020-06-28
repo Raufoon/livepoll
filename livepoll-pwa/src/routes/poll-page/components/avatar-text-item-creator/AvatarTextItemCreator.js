@@ -13,7 +13,7 @@ function AvatarTextItemCreator(props) {
   const avatarInputRef = useRef() 
   const [avatarState, setAvatarState] = useState('NOT_UPLOADED')
 
-  const {pollId, onSubmit} = props
+  const {pollId, onSubmit, itemContentType} = props
   
   const onSubmitForm = useMemo(function(){
     return function onSubmitForm(data) {
@@ -31,9 +31,10 @@ function AvatarTextItemCreator(props) {
     const {files} = avatarInputRef.current
     const formData = new FormData()
     formData.append('item_avatar', files[0])
+    formData.append('shouldCompress', itemContentType === 'AVATAR_TEXT')
 
     try {
-      const {uploadedImgUrl} = await doSecurePostRequest('/upload/avatar', formData)
+      const {uploadedImgUrl} = await doSecurePostRequest('upload', formData)
       setAvatarUrl(uploadedImgUrl)
       setAvatarState('UPLOADED')
     }
@@ -66,7 +67,7 @@ function AvatarTextItemCreator(props) {
       {
         avatarUrl && avatarState === 'UPLOADED' && <>
           <label className="row">Here is your uploaded avatar:</label>
-          <img className="row" src={avatarUrl} alt='Uploaded item avatar'/>
+          <img className="row previewImg" src={avatarUrl} alt='Uploaded item avatar'/>
           <label className="row">Step 2: Add a Title for the Item</label> 
         </>
       }

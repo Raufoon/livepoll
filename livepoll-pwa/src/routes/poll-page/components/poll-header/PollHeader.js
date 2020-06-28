@@ -24,17 +24,19 @@ export default function PollHeader(props) {
   if (!details) return "Loading.."
 
   const authUserId = authUser.getUid()
-  const {id, title, startDateTime, author, itemContentType, shouldShowVoters, usagePrivacy} = details
+  const {id, title, startDateTime, endDateTime, author, itemContentType, shouldShowVoters, usagePrivacy} = details
   
   if (!author) return "Loading..."
 
   const {name, avatar} = author
   const creationDateTime = new Date(parseInt(startDateTime, 10))
+  const finishDateTime = endDateTime ? new Date(parseInt(endDateTime, 10)):null
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true
 
   let ItemCreatorForm;
   if (itemContentType === 'TEXT') ItemCreatorForm = TextItemCreator
   else if (itemContentType === 'AVATAR_TEXT') ItemCreatorForm = AvatarTextItemCreator
+  else if (itemContentType === 'IMAGE_CAPTION') ItemCreatorForm = AvatarTextItemCreator
   else return 'Loading...'
 
   return (
@@ -42,43 +44,38 @@ export default function PollHeader(props) {
       <label className='pollTitle'>{title}</label>
 
       <Responsive screens={['M', 'L']}>
-      <div className="pollDesc">
-        <span>Created by</span>
-        &nbsp;
-        <UserBadge className='pollCreator' name={name} avatar={avatar}/>
-        &nbsp;on&nbsp; 
-        <b>{creationDateTime.toLocaleDateString()}</b> 
-        &nbsp;at&nbsp;
-        <b>{creationDateTime.toLocaleTimeString()}</b>
-      </div>
+        <div className="pollDesc">
+          <span>Created by</span>&nbsp;
+          <UserBadge className='pollCreator' name={name} avatar={avatar}/>
+          &nbsp;on&nbsp; <b>{creationDateTime.toLocaleDateString()}</b> 
+          &nbsp;at&nbsp; <b>{creationDateTime.toLocaleTimeString()}</b>
+        </div>
 
-      <div>
-        {
-          usagePrivacy === 'PROTECTED' && <span>Only the author can create items here.</span>
-        }
-      </div>
-
-      <div>
-        {
-          shouldShowVoters && <span>Voter list is visible! Click on the vote count.</span>
-        }
-      </div>
-      
-      <div>
-        <IconButton
-         className='addItemBtn'
-         iconUrl={createIcon} 
-         iconClass='addItemBtnIcon' 
-         onClick={openItemFormModal}>
-           Create Item
-        </IconButton>
-      </div>
+        <div>{ usagePrivacy === 'PROTECTED' && <span>Only the author can create items here.</span>}</div>
+        <div>{shouldShowVoters && <span>Voter list is visible! Click on the vote count.</span>}</div>
+        <div>{
+          endDateTime && (
+            <span>
+              Poll ends &nbsp;on&nbsp; <b>{finishDateTime.toLocaleDateString()}</b> &nbsp;at&nbsp; <b>{finishDateTime.toLocaleTimeString()}</b>
+            </span>
+          )
+        }</div>
+        
+        <div>
+          <IconButton
+          className='addItemBtn'
+          iconUrl={createIcon} 
+          iconClass='addItemBtnIcon' 
+          onClick={openItemFormModal}>
+            Create Item
+          </IconButton>
+        </div>
       </Responsive>
       
       {
         shouldAllowAddItem && <Modal isOpen={showItemForm} onClose={closeItemFormModal}>
           <Suspense fallback='Loading form...'>
-            <ItemCreatorForm pollId={id} onSubmit={closeItemFormModal}/>
+            <ItemCreatorForm pollId={id} itemContentType={itemContentType} onSubmit={closeItemFormModal}/>
           </Suspense>
         </Modal> 
       }

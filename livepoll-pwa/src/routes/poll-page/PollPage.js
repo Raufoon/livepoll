@@ -28,7 +28,6 @@ export default function PollPage () {
 
   const displayVoterList = useMemo(() => {
     return function (itemId) {
-      console.log('XXXXXXXXXXXXXXXx')
       showVotersModal()
       dispath(actionFetchVoterList(id, itemId))
       setItemIdForVoterList(itemId)

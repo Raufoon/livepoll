@@ -1,0 +1,31 @@
+.ImageCaptionItem {
+  border: 1px solid lightgray;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  margin: 10px;
+  align-items: left;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+.ImageCaptionItem .image {
+  height: 300px;
+}
+
+.ImageCaptionItem .topRow {
+  font-size: large;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.ImageCaptionItem .topRow .caption {
+  flex-grow: 1;
+}
+
+.ImageCaptionItem .progBar {
+  height: 10px;
+  border: none;
+}

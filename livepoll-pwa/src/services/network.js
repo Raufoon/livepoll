@@ -31,6 +31,6 @@ export async function doSecurePostRequest(path, data) {
   const headers = {
     'Authorization': idToken
   }
-  return post(`${SERVER}/upload/avatar`, data, {headers})
+  return post(`${SERVER}/${path}`, data, {headers})
     .then(response => response.data)
 }
