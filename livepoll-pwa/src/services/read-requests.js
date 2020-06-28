@@ -21,6 +21,11 @@ export function loadRecentPollsForHome() {
           id
           title
           startDateTime
+          items(howMany: 3) {
+            text
+            imgUrl
+            score
+          }
         }
       }
     }
