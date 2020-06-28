@@ -1,0 +1,19 @@
+.PollNavHeader {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 10px;
+  padding: 10px 0 10px 0;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+}
+
+.PollNavHeader > * {
+  color: #444;
+  margin: 0 5px 0 5px;
+}
+
+.PollNavHeader .active {
+  font-weight: bold;
+}

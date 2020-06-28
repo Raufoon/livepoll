@@ -1,7 +1,7 @@
 .AppHeader {
   display: flex;
   flex-direction: row;
-  padding: 1em;
+  padding: 10px;
   justify-content: center;
 }
 

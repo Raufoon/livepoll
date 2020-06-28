@@ -1,6 +1,7 @@
 .VoteLabel {
   color: #e25e2d;
   text-align: center;
+  border: none;
 }
 
 .VoteLabel .icon{
