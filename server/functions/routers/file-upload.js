@@ -7,7 +7,7 @@ const os = require('os')
 const admin = require('firebase-admin')
 const sharp = require('sharp')
 
-router.post('/avatar', async function (request, response) {
+router.post('/', async function (request, response) {
   const {uid} = await admin.auth().verifyIdToken(request.headers.authorization)
   
   if (!uid) {
@@ -19,6 +19,7 @@ router.post('/avatar', async function (request, response) {
   const tmpdir = os.tmpdir()
   let rawImgPath;
   let fileWrite;
+  let shouldCompress = false
   
   busboy.on('file', (fieldname, file, filename) => {
     rawImgPath = path.join(tmpdir, filename)
@@ -33,18 +34,27 @@ router.post('/avatar', async function (request, response) {
       writeStream.on('error', reject)
     })
   })
+
+  busboy.on('field', function(fieldname, val) {
+    if (fieldname === 'shouldCompress') shouldCompress = (val === 'true')
+  });
   
   busboy.on('finish', async function() {
     await fileWrite
     const outputImgName = `${uid}_${Date.now()}.${path.extname(rawImgPath)}`
-
     const resizedImgPath = path.join(tmpdir, outputImgName)
+    let destination
 
-    await sharp(rawImgPath).resize(256, null).toFile(resizedImgPath);
-
-    const destination = `avatars/${outputImgName}`
-    await admin.storage().bucket().upload(resizedImgPath, {destination})
-
+    if (shouldCompress) {
+      destination = `avatars/${outputImgName}`
+      await sharp(rawImgPath).resize(256, null).toFile(resizedImgPath)
+      await admin.storage().bucket().upload(resizedImgPath, {destination})  
+    }
+    else {
+      destination = `images/${outputImgName}`
+      await admin.storage().bucket().upload(rawImgPath, {destination})
+    }
+    
     fs.unlinkSync(rawImgPath)
     fs.unlinkSync(resizedImgPath)
 
