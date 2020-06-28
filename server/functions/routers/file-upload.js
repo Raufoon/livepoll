@@ -42,13 +42,14 @@ router.post('/', async function (request, response) {
   busboy.on('finish', async function() {
     await fileWrite
     const outputImgName = `${uid}_${Date.now()}.${path.extname(rawImgPath)}`
-    const resizedImgPath = path.join(tmpdir, outputImgName)
     let destination
 
     if (shouldCompress) {
+      const resizedImgPath = path.join(tmpdir, outputImgName)
       destination = `avatars/${outputImgName}`
       await sharp(rawImgPath).resize(256, null).toFile(resizedImgPath)
       await admin.storage().bucket().upload(resizedImgPath, {destination})  
+      fs.unlinkSync(resizedImgPath)
     }
     else {
       destination = `images/${outputImgName}`
@@ -56,7 +57,6 @@ router.post('/', async function (request, response) {
     }
     
     fs.unlinkSync(rawImgPath)
-    fs.unlinkSync(resizedImgPath)
 
     const uploadedImgUrl = `https://storage.googleapis.com/lllivepolll.appspot.com/${destination}`;
     response.send(JSON.stringify({uploadedImgUrl}))
