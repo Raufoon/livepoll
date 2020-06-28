@@ -34,7 +34,7 @@ export default function PollCreator(props) {
         options={[
           {name: 'Text only', value: 'TEXT'},
           {name: 'Text with avatar', value: 'AVATAR_TEXT'},
-          {name: 'Image only', value: 'IMAGE'},
+          {name: 'Image only (Coming soon...)', value: 'IMAGE'},
           {name: 'Image with caption', value: 'IMAGE_CAPTION'},
         ]}
         defaultValue={'TEXT'}

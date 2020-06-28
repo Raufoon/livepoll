@@ -1,0 +1,18 @@
+.PollCard {
+  border: 1px solid lightgray;
+  border-left: 2px solid #f6546a;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.PollCard .title{
+  padding: 0;
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.PollCard .subtitle{
+  margin-bottom: 5px;
+}

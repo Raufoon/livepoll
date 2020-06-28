@@ -1,0 +1,12 @@
+.TextItemsView {
+}
+
+.TextItemsView .item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextItemsView .item label {
+  margin-right: 1em;
+}

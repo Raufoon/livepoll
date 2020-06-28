@@ -21,7 +21,10 @@ export function loadRecentPollsForHome() {
           id
           title
           startDateTime
+          author {name}
+          itemContentType
           items(howMany: 3) {
+            id
             text
             imgUrl
             score

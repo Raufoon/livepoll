@@ -1,0 +1,30 @@
+.Home {
+  width: 100%;
+}
+
+.Home.M {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+.Home.M .recent {
+  width: 40%;
+}
+
+.Home.M .sectionLabel {
+  margin-left: 10px;
+  color: gray;
+}
+
+.Home.M .trending,.popular {
+  width: 30%;
+  height: 80vh;
+  overflow-y: auto;
+}
+
+.Home.M .pollCard {
+  margin: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
