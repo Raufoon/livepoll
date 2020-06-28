@@ -8,10 +8,17 @@
   align-items: left;
   justify-content: center;
   border-radius: 5px;
+  position: relative;
 }
 
 .ImageCaptionItem .image {
   height: 300px;
+}
+
+.ImageCaptionItem .image.mobile {
+  max-height: 300px;
+  width: 100%;
+  height: unset;
 }
 
 .ImageCaptionItem .topRow {
@@ -28,4 +35,13 @@
 .ImageCaptionItem .progBar {
   height: 10px;
   border: none;
+}
+
+.ImageCaptionItem .voteLabel {
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+  background-color: #222;
+  color: white;
+  padding: 5px;
 }
