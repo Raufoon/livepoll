@@ -18,8 +18,14 @@ exports.write = (path, object) => {
 exports.read = (path, options={}) => {
   let ref = admin.database().ref(`/${path}`)
 
-  if (options.sortByValue) {
+  const {sortByValue, howMany} = options
+
+  if (sortByValue) {
     ref = ref.orderByValue()
+  }
+
+  if (howMany) {
+    ref = ref.limitToLast(howMany)
   }
 
   return ref
