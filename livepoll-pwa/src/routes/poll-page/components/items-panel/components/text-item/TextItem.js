@@ -1,10 +1,9 @@
 import React from 'react'
-import Responsive from '../../../../../../components/responsive/Responsive'
 import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import './style.css'
 
-export default function TextItem(props) {
+export default function AvatarTextItem(props) {
   const {item, position, vote, isVotedByMe, displayVoterList, shouldShowVoters, totalVotes} = props
   const {text, id, score} = item
 

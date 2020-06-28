@@ -1,0 +1,49 @@
+.AvatarTextItem {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 10px 0;
+  font-size: small;
+}
+
+.AvatarTextItem > * {
+  margin: 10px;
+}
+
+.AvatarTextItem .title {
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.AvatarTextItem .voteData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.AvatarTextItem .voteData > * {
+  margin: 5px 10px 5px 0;
+}
+
+.AvatarTextItem .index {
+  font-size: large;
+  font-weight: bold;
+}
+
+.AvatarTextItem .progBar {
+  height: 5px;
+} 
+
+.AvatarTextItem .rightColumn{
+  flex-grow: 1;
+  margin: auto;
+}
+
+.AvatarTextItem .avatarImg {
+  background-size: cover;
+  border-radius: 5px;
+  background-repeat: no-repeat;
+  border: 1px solid #222;
+  width: 100px;
+  height: 100px;
+  margin-right: 20px;
+}

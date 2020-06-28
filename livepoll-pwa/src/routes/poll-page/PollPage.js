@@ -58,7 +58,7 @@ export default function PollPage () {
             {itemsPanel}
           </div>
 
-          <div style={{width: '30em'}}>
+          <div style={{width: '40%'}}>
             &nbsp;XXXXX
           </div>
         </div>
