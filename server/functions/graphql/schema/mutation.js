@@ -1,4 +1,4 @@
-const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLList} = require('graphql')
+const {GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLList, GraphQLBoolean} = require('graphql')
 const {User, UserInput} = require('./types/user')
 const {LivePoll, LivePollInput} = require('./types/livepoll')
 const {ItemInput, Item} = require('./types/item')
@@ -7,6 +7,7 @@ const createLivePoll = require('./resolvers/mutations/create-live-poll')
 const addItemToPoll = require('./resolvers/mutations/add-item-to-poll')
 const vote = require('./resolvers/mutations/vote')
 const unvote = require('./resolvers/mutations/unvote')
+const deletePoll = require('./resolvers/mutations/delete-poll')
 
 module.exports = new GraphQLObjectType({
   name: 'RootMutationType',
@@ -54,6 +55,14 @@ module.exports = new GraphQLObjectType({
         voteValue: {type: GraphQLInt}
       },
       resolve: unvote
+    },
+
+    deletePoll: {
+      type: GraphQLBoolean,
+      args: {
+        pollId: {type: GraphQLID}
+      },
+      resolve: deletePoll
     }
   }
 })
