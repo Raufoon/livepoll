@@ -5,7 +5,8 @@ import { actionVoteForItem, actionUnvoteForItem } from '../../../../state-manage
 import usePollDetails from '../../hooks/usePollDetails'
 import './style.css'
 
-const TextMajorItem = lazy(() => import('./components/text-major-item/TextMajorItem'))
+const TextItem = lazy(() => import('./components/text-item/TextItem'))
+const AvatarTextItem = lazy(() => import('./components/avatar-text-item/AvatarTextItem'))
 const itemSorter = (a, b) => a.score > b.score ? -1: 1
 
 function ItemsPanel(props) {
@@ -25,7 +26,8 @@ function ItemsPanel(props) {
     }
   }, [pollId, votedItemId, dispath])
   
-  if (itemContentType === 'TEXT' || itemContentType === 'AVATAR_TEXT') Component = TextMajorItem;
+  if (itemContentType === 'TEXT') Component = TextItem
+  else if (itemContentType === 'AVATAR_TEXT') Component = AvatarTextItem
   else return 'Loading...';
 
   return (

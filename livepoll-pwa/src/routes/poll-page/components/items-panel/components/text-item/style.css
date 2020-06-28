@@ -1,0 +1,38 @@
+.TextItem {
+  display: flex;
+  flex-direction: row;
+  margin: 10px 0 10px 0;
+  font-size: small;
+}
+
+.TextItem > * {
+  margin: 10px;
+}
+
+.TextItem .title {
+  font-size: large;
+  margin-bottom: 10px;
+}
+
+.TextItem .voteData {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextItem .voteData > * {
+  margin: 5px 10px 5px 0;
+}
+
+.TextItem .index {
+  font-size: large;
+  font-weight: bold;
+}
+
+.TextItem .progBar {
+  height: 5px;
+} 
+
+.TextItem .rightColumn{
+  flex-grow: 1;
+}

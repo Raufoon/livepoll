@@ -17,11 +17,7 @@ export default function TextMajorItem(props) {
   const percent = Math.ceil((score *100) / (totalVotes||1))
 
   // views
-  const itemIndex = position === 0 && !imgUrl ? (
-    <img className='firstMedal' src={firstMedal} alt="medal for first item"/>
-  ):(
-    <b>{position + 1}</b>
-  )
+  const itemIndex = <b>{position + 1}</b>
 
   const image = imgUrl && <div className='avatarImg' 
     style={{
@@ -56,12 +52,24 @@ export default function TextMajorItem(props) {
         {
           imgUrl && <>
             {image}
-            <div className='mobileItem'>
+            <div className='mobileItemWithImg'>
               <div className="info">{itemIndex}.&nbsp;{itemLabel}</div>
               <div className="info">{voteLabel}{voteCheckbox}</div>
               <div className="info">{percentView} votes</div>
             </div>
           </>
+        }
+        {
+          !imgUrl && <div className="mobileItemOnlyText">
+            <div className='row'>
+              {itemIndex}.&nbsp;
+              {itemLabel}
+              {voteLabel}
+              {percentView}
+              {voteCheckbox}
+            </div>
+            {progbar}
+          </div>
         }
       </Responsive>
     </div>

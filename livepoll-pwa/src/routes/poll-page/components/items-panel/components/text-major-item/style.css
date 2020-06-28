@@ -44,14 +44,29 @@
   flex-grow: 1;
 }
 
-.TextMajorItem .mobileItem .info {
+.TextMajorItem .mobileItemWithImg .info {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
-.TextMajorItem .mobileItem .info > * {
+.TextMajorItem .mobileItemWithImg .info > * {
   margin-right: 5px;
   margin-top: 5px;
   margin-bottom: 5px;
+}
+
+.TextMajorItem .mobileItemOnlyText {
+  margin: 0;
+  padding: 0;
+}
+
+.TextMajorItem .mobileItemOnlyText .row{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.TextMajorItem .mobileItemOnlyText .row > * {
+  margin: 5px;
 }
