@@ -14,9 +14,11 @@ export default function PollCard(props) {
   
   return (
     <div className={`PollCard ${className}`}>
-      <Link className="title" to={`polls/${id}`}>{title}</Link>
+      <Link className="title" to={`/polls/${id}`}>{title}</Link>
+      
       <label className="subtitle">By {author.name} at {creationDate.toLocaleString()}</label>
-      <Suspense fallback={() => "Loading..."}>
+      
+      <Suspense fallback={"Loading..."}>
         <ItemsView items={items}/>
       </Suspense>
     </div>

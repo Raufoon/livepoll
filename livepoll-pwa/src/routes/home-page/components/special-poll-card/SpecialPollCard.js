@@ -1,4 +1,4 @@
-import React, { lazy } from 'react'
+import React, { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import TextItemsView from '../text-items-view/TextItemsView'
 import './style.css'
@@ -18,9 +18,14 @@ export default function SpecialPollCard(props) {
   return (
     <div className={`SpecialPollCard ${className}`}>
       <label className="banner">Today's Top</label>
-      <Link className="title">{title}</Link>
+      
+      <Link to={`/polls/${id}`} className="title">{title}</Link>
+      
       <label className="subtitle">By {author.name} at {creationDate.toLocaleString()}</label>
-      <ItemsView items={items}/>
+      
+      <Suspense fallback={"Loading..."}>
+        <ItemsView items={items}/>
+      </Suspense>
     </div>
   )
 }
