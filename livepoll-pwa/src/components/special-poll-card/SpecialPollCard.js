@@ -2,7 +2,6 @@ import React, { lazy, Suspense } from 'react'
 import { Link } from 'react-router-dom'
 import TextItemsView from '../text-items-view/TextItemsView'
 import './style.css'
-import Responsive from '../../../../components/responsive/Responsive'
 
 const AvatarTextItemsView = lazy(() => import('../avatar-text-items-view/AvatarTextItemsView')) 
 const CaptionImageItemsView = lazy(() => import('./components/caption-image-items-view/CaptionImageItemsView')) 

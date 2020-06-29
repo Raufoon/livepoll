@@ -1,7 +1,7 @@
 import React from 'react'
-import VoteLabel from '../../../../components/vote-label/VoteLabel'
+import VoteLabel from '../vote-label/VoteLabel'
+import Responsive from '../responsive/Responsive'
 import './style.css'
-import Responsive from '../../../../components/responsive/Responsive'
 
 export default function AvatarTextItemsView(props) {
   const {items} = props

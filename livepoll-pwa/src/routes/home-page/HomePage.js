@@ -1,10 +1,10 @@
 import React from 'react'
 import useHomeData from './hooks/useHomeData'
-import { Link, Switch, Route, NavLink } from 'react-router-dom'
+import { Switch, Route } from 'react-router-dom'
 import Responsive from '../../components/responsive/Responsive'
+import PollCard from '../../components/poll-card/PollCard'
+import SpecialPollCard from '../../components/special-poll-card/SpecialPollCard'
 import './style.css'
-import PollCard from './components/poll-card/PollCard'
-import SpecialPollCard from './components/special-poll-card/SpecialPollCard'
 
 export default function HomePage () {
   console.log('Rendering HomePage')
