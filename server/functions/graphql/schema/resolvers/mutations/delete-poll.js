@@ -14,6 +14,7 @@ module.exports = async function (_, args, context) {
     await db.remove(`edges/home_poll/${pollId}`)
 
     const itemContentType = await db.read(`polls/${pollId}/itemContentType`)
+    const shouldShowVoters = await db.read(`polls/${pollId}/shouldShowVoters`)
     await db.remove(`polls/${pollId}`)
     
     // get all the item ids of this poll
@@ -25,13 +26,15 @@ module.exports = async function (_, args, context) {
       let itemId = itemIds[i]
 
       // fetch the voter id list
-      const voterIds = await db.readAsList(`edges/item_voters/${itemId}`)
-      await db.remove(`edges/item_voters/${itemId}`)
-      
-      // delete edge between the voters and the poll
-      for(let j = 0; j < voterIds.length; j++) {
-        let voterId = voterIds[j]
-        await db.remove(`edges/voter_poll_item/${voterId}/${pollId}`)
+      if (shouldShowVoters) {
+        const voterIds = await db.readAsList(`edges/item_voters/${itemId}`)
+        await db.remove(`edges/item_voters/${itemId}`)
+        
+        // delete edge between the voters and the poll
+        for(let j = 0; j < voterIds.length; j++) {
+          let voterId = voterIds[j]
+          await db.remove(`edges/voter_poll_item/${voterId}/${pollId}`)
+        }
       }
 
       if (itemContentType === 'AVATAR_TEXT') {
