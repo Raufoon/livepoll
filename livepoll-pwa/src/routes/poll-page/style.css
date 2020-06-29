@@ -1,12 +1,42 @@
 .PollPage {
+  width: 100%;
 }
 
-.PollPage .content {
+.PollPage .poll {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  float: left;
+  height: 85vh;
+  overflow-y: auto;
+}
+
+.PollPage .poll .inner {
+  margin-right: 20px;
+}
+
+.PollPage .poll.mobile{
+  width: 100%;
+  float: none;
+}
+
+.PollPage .similarPollSection {
+  width: 30%;
+  float: left;
   display: flex;
   flex-direction: column;
 }
 
-.PollPage .content.multiSection{
-  flex-direction: row;
+.PollPage .similarPollSection .pollCard {
+  margin: 15px;
 }
 
+.PollPage .similarPollSection .sectionLabel {
+  text-align: center;
+  color: gray;
+}
+
+.PollPage .similarPollSection .content {
+  height: 85vh;
+  overflow: scroll;
+}

@@ -10,6 +10,8 @@ import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
 import Responsive from '../../components/responsive/Responsive'
 import './style.css'
+import useHomeData from '../home-page/hooks/useHomeData'
+import PollCard from '../../components/poll-card/PollCard'
 
 const NavHeader = lazy(() => import('./components/poll-nav-header/PollNavHeader'))
 const VoterList = lazy(() => import('./components/voter-list/VoterList'))
@@ -25,6 +27,13 @@ export default function PollPage () {
   const pollItems = usePollItems(id)
   const dispath = useDispatch()
   const match = useRouteMatch()
+  const [recentPolls] = useHomeData()
+  
+  const similarPolls = (
+    Object.values(recentPolls).map(function(poll) {
+      return <PollCard className='pollCard' key={poll.id} {...poll}/>
+    })
+  )
 
   const displayVoterList = useMemo(() => {
     return function (itemId) {
@@ -54,21 +63,24 @@ export default function PollPage () {
   
   return (
     <div className='PollPage'>
-      <Responsive screens={['M', 'L']}>
-        <div className="content multiSection">
-          <div style={{flexGrow: 1}}>
+      <Responsive minWidth={1450}>
+        <div className='poll'>
+          <div className="inner">
             {pollHeader}
             {itemsPanel}
           </div>
+        </div>
 
-          <div style={{width: '40%'}}>
-            &nbsp;XXXXX
+        <div className="similarPollSection">
+          <div className="sectionLabel">SIMILAR POLLS</div>
+          <div className="content">
+            {similarPolls}
           </div>
         </div>
       </Responsive>
 
-      <Responsive screens={['S']}>
-        <div className="content">
+      <Responsive maxWidth={1449}>
+        <div className="poll mobile">
           {pollHeader}
           <NavHeader/>
           <Suspense fallback="Loading items...">
