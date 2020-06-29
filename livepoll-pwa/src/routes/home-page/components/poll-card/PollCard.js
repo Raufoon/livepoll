@@ -2,7 +2,7 @@ import React, {lazy, Suspense} from 'react'
 import { Link } from 'react-router-dom'
 import './style.css'
 
-const TextItemsView = lazy(() => import('./components/text-items-view/TextItemsView'))
+const TextItemsView = lazy(() => import('../text-items-view/TextItemsView'))
 const AvatarTextItemsView = lazy(() => import('../avatar-text-items-view/AvatarTextItemsView'))
 
 export default function PollCard(props) {

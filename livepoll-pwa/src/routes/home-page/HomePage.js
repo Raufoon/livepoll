@@ -15,7 +15,7 @@ export default function HomePage () {
   if (!polls.length) return "Loading..."
 
   const pollOfTheDayIdx = parseInt(Math.random() * (polls.length - 1), 10)
-  const pollOfTheDay = polls[4]
+  const pollOfTheDay = polls[pollOfTheDayIdx]
 
   return (
     <>

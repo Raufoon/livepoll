@@ -1,5 +1,5 @@
 import React from 'react'
-import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
+import VoteLabel from '../../../../components/vote-label/VoteLabel'
 import './style.css'
 
 export default function TextItemsView(props) {
