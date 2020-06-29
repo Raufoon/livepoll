@@ -1,0 +1,30 @@
+.SpecialPollCard {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  border: 1px solid lightgray;
+  position: relative;
+}
+
+.SpecialPollCard .banner{
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #ffd700;
+  color: black;
+  padding: 5px;
+  font-size: small;
+}
+
+
+.SpecialPollCard > * {
+  margin-bottom: 15px;
+}
+
+.SpecialPollCard .title {
+  font-size: x-large;
+}
+
+.SpecialPollCard .subtitle{
+  font-size: small;
+}

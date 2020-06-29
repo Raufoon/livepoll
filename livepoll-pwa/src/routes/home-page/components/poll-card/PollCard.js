@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import './style.css'
 
 const TextItemsView = lazy(() => import('./components/text-items-view/TextItemsView'))
-const AvatarTextItemsView = lazy(() => import('./components/avatar-text-items-view/AvatarTextItemsView'))
+const AvatarTextItemsView = lazy(() => import('../avatar-text-items-view/AvatarTextItemsView'))
 
 export default function PollCard(props) {
   const {className, id, title, startDateTime, itemContentType, author, items} = props

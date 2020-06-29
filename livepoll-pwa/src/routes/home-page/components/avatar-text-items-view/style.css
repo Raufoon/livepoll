@@ -13,8 +13,8 @@
 }
 
 .AvatarTextItemsView .item .avatar {
-  width: 80px;
-  height: 80px;
+  width: 8em;
+  height: 8em;
   background-size: cover;
   margin-bottom: 5px;
   border: 1px solid lightgray;
