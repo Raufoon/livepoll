@@ -19,30 +19,36 @@ export default function HomePage () {
     <Responsive screens={['M', 'L']}>
       <div className='Home M'>
         <div className="recent">
-          <div className="sectionLabel">RECENT</div>
-          {
-            polls.map(function(poll) {
-              return <PollCard className='pollCard' key={poll.id} {...poll}/>
-            })
-          }
+          <div className="sectionLabel">TRENDING</div>
+          <div className="content">
+            {
+              polls.map(function(poll) {
+                return <PollCard className='pollCard' key={poll.id} {...poll}/>
+              })
+            }
+          </div>
         </div>
 
         <div className="trending">
-          <div className="sectionLabel">TRENDING</div>
-          {
-            polls.map(function(poll) {
-              return <PollCard className='pollCard' key={poll.id} {...poll}/>
-            })
-          }
+          <div className="sectionLabel">RECENT</div>
+          <div className="content">
+            {
+              polls.map(function(poll) {
+                return <PollCard className='pollCard' key={poll.id} {...poll}/>
+              })
+            }
+          </div>
         </div>
 
         <div className="popular">
           <div className="sectionLabel">MOST HITS</div>
-          {
-            polls.map(function(poll) {
-              return <PollCard className='pollCard' key={poll.id} {...poll}/>
-            })
-          }
+          <div className="content">
+            {
+              polls.map(function(poll) {
+                return <PollCard className='pollCard' key={poll.id} {...poll}/>
+              })
+            }
+          </div>
         </div>
       </div>
     </Responsive>
