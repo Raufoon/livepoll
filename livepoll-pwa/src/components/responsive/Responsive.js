@@ -11,7 +11,7 @@ function getScreenWidth() {
 }
 
 export default function Responsive(props) {
-  const {screens, minWidth, children} = props
+  const {screens, minWidth, maxWidth, children} = props
   const [width, setWidth] = useState(getScreenWidth)
     
   useEffect(function effect() {
@@ -26,8 +26,12 @@ export default function Responsive(props) {
     }
   }, [])
 
-  if (minWidth) {
-    if (width >= minWidth) return <>{children}</>
+  let a = minWidth, b = maxWidth;
+
+  if (a || b) {
+    a = minWidth || 0
+    b = maxWidth || 5000
+    if (a <= width && width < b) return <>{children}</>
     else return false;
   }
 
@@ -38,5 +42,6 @@ export default function Responsive(props) {
 
 Responsive.propTypes = {
   screens: PropTypes.arrayOf(PropTypes.oneOf(['S', 'M', 'L'])),
-  minWidth: PropTypes.number
+  minWidth: PropTypes.number,
+  maxWidth: PropTypes.number,
 }

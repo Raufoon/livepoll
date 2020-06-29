@@ -1,6 +1,6 @@
 import React from 'react'
 import useHomeData from './hooks/useHomeData'
-import { Link } from 'react-router-dom'
+import { Link, Switch, Route, NavLink } from 'react-router-dom'
 import Responsive from '../../components/responsive/Responsive'
 import './style.css'
 import PollCard from './components/poll-card/PollCard'
@@ -51,6 +51,15 @@ export default function HomePage () {
     </div>
   )
 
+  const routedSections = (
+    <Switch>
+      <Route exact path='/recent' render={() => recentSection}/>
+      <Route exact path='/popular' render={() => popularSection}/>
+      <Route exact path='/trending' render={() => trendingSection}/>
+      <Route exact path='/' render={() => trendingSection}/>
+    </Switch>
+  )
+
   return (
     <>
     <Responsive minWidth={1400}>
@@ -61,23 +70,23 @@ export default function HomePage () {
       </div>
     </Responsive>
 
-    <Responsive minWidth={1080}>
+    <Responsive minWidth={1080} maxWidth={1399}>
       <div className='Home S'>
         {trendingSection}
         {recentSection}
       </div>
     </Responsive>
 
-    <Responsive minWidth={870}>
+    <Responsive minWidth={870} maxWidth={1079}>
       <div className='Home XS'>
         {trendingSection}
         {recentSection}
       </div>
     </Responsive>
 
-    <Responsive minWidth={1}>
+    <Responsive minWidth={1} maxWidth={869}>
       <div className='Home XXS'>
-        {trendingSection}
+        {routedSections}
       </div>
     </Responsive>
       

@@ -20,6 +20,7 @@
   margin-bottom: 10px;
   padding: 10px;
 }
+
 .Home.M .trending {
   width: 40%;
 }
@@ -44,6 +45,6 @@
   width: 50%;
 }
 
-.Home.XXS .trending {
+.Home.XXS {
   width: 100%;
 }

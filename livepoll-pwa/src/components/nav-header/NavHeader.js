@@ -1,6 +1,8 @@
 import React from 'react'
 import IconButton from '../icon-button/IconButton'
-import homeIcon from '../app-sidebar/images/home.png'
+import trendingIcon from './images/trending.png'
+import recentIcon from './images/recent.png'
+import popularIcon from './images/popular.png'
 import './style.css'
 
 export default function NavHeader(props) {
@@ -9,25 +11,25 @@ export default function NavHeader(props) {
   return (
     <div className={`NavHeader ${className}`}>
       <IconButton
-        to={'/'}
+        to={'/trending'}
         className="iconBtn"
         iconClass="icon"
-        iconUrl={homeIcon}
-        tooltip="Home"/>
+        activeClassName="active"
+        iconUrl={trendingIcon}>Trending</IconButton>
 
       <IconButton 
-        to={'/'}
+        to={'/recent'}
         className="iconBtn"
         iconClass="icon"
-        iconUrl={homeIcon}
-        tooltip="Trending"/>
+        activeClassName="active"
+        iconUrl={recentIcon}>Recent</IconButton>
 
       <IconButton 
-        to={'/'}
+        to={'/popular'}
         className="iconBtn"
         iconClass="icon"
-        iconUrl={homeIcon}
-        tooltip="Most Popular"/>
+        activeClassName="active"
+        iconUrl={popularIcon}>Popular</IconButton>
     </div>
   )
 }

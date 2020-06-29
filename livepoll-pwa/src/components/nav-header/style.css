@@ -12,5 +12,9 @@
 }
 
 .NavHeader .iconBtn{
-  
+  margin: 0 5px 0 5px;
+}
+
+.NavHeader .active {
+  background-color: lightgray;
 }
