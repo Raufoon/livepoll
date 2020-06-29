@@ -1,33 +1,49 @@
 .Home {
   width: 100%;
-}
-
-.Home.M {
   display: flex;
   flex-direction: row;
   align-items: flex-start;
 }
 
-.Home.M .trending {
-  width: 40%;
-}
-
-.Home.M .content {
+.Home .content {
   height: 85vh;
   overflow-y: auto;
 }
 
-.Home.M .sectionLabel {
+.Home .sectionLabel {
   margin-left: 10px;
   color: gray;
+}
+
+.Home .pollCard {
+  margin: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.Home.M .trending {
+  width: 40%;
 }
 
 .Home.M .recent,.popular {
   width: 30%;
 }
 
-.Home.M .pollCard {
-  margin: 10px;
-  margin-bottom: 10px;
-  padding: 10px;
+.Home.S .trending {
+  width: 60%;
+}
+
+.Home.S .recent {
+  width: 40%;
+}
+
+.Home.XS .trending {
+  width: 50%;
+}
+
+.Home.XS .recent {
+  width: 50%;
+}
+
+.Home.XXS .trending {
+  width: 100%;
 }

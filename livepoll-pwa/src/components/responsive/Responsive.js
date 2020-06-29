@@ -31,8 +31,8 @@ export default function Responsive(props) {
     else return false;
   }
 
-  return (screens.indexOf('S') !== -1 && width < 800 && <>{children}</>)
-    || (screens.indexOf('M') !== -1 && width >= 800 && width < 1500 && <>{children}</>)
+  return (screens.indexOf('S') !== -1 && width < 640 && <>{children}</>)
+    || (screens.indexOf('M') !== -1 && width >= 640 && width < 1500 && <>{children}</>)
     || (screens.indexOf('L') !== -1 && width >= 1500 && <>{children}</>)
 }
 
