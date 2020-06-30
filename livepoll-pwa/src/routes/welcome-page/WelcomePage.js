@@ -12,23 +12,29 @@ function WelcomePage () {
       <header>
         <label className="appLabel">Livepoll</label>
 
-        <Responsive screens={['M', 'L']}>
+        <Responsive minWidth={970}>
           <nav> 
             <a className="navBtn" href="#">Features</a>
             <a className="navBtn" href="#">Downloads</a>
             <a className="navBtn" href="#">FAQ</a>
             <a className="navBtn" href="#">About us</a> 
           </nav>
+        </Responsive>
 
-          <IconButton 
+        <Responsive maxWidth={971}>
+          <nav> 
+            &nbsp;
+          </nav>
+        </Responsive>
+
+        <IconButton 
             className="googleSigninBtn"
             iconClass="googleSigninBtnIcon" 
             onClick={signInWithGoogle}
             iconUrl={googleIcon}
           >
-            Sign in with Google
+            SIGN IN WITH GOOGLE
           </IconButton>
-        </Responsive>
       </header>
 
       <main>

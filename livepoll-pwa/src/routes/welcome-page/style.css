@@ -7,7 +7,7 @@
   color: #222;
   background-repeat: no-repeat;
   background-size: contain;
-  background-position: right;
+  background-position: 100% 0;
 }
 
 .WelcomePage header {
@@ -36,9 +36,9 @@
 }
 
 .WelcomePage .googleSigninBtn {
-  background-color: white;
   border: 1px solid lightgray;
   border-radius: 10px;
+  border-radius: 50px;
 }
 
 .WelcomePage .googleSigninBtnIcon {
@@ -73,7 +73,8 @@
 .WelcomePage footer {
   position: fixed;
   bottom: 0;
-  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
   font-style: italic;
   font-size: small;
 } 
