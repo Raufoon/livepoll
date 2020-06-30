@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 1em;
-  background-color: #000a14;
+  background-color: #5b56bc;
 }
 
 .AppSidebar .iconBtn {
@@ -20,6 +20,7 @@
 
 .AppSidebar .profileNavImg {
   border-radius: 50px;
+  border: 2px solid white;
 }
 
 .pollFormModal {

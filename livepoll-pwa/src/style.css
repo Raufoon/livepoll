@@ -18,7 +18,7 @@
 }
 
 .App .sidebar {
-  width: 3em;
+  width: 50px;
   border-right: 1px solid lightgray;
   height: 100%;
   position: fixed;
@@ -33,5 +33,5 @@
 }
 
 .App main.withSidebar {
-  margin-left: 5em;
+  margin-left: 70px;
 }
