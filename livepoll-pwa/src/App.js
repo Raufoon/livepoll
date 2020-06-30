@@ -39,7 +39,7 @@ function App() {
         </Responsive>
         
         <Responsive screens={['S']}>
-        <AppHeader className='appHeader'/>
+          <AppHeader className='appHeader'/>
           <NavHeader className="navHeader"/>
           <main>
             {routedPages}

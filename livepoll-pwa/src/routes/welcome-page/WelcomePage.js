@@ -3,6 +3,7 @@ import { signInWithGoogle } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
+import Responsive from '../../components/responsive/Responsive'
 import './style.css'
 
 function WelcomePage () {
@@ -10,22 +11,24 @@ function WelcomePage () {
     <div className='WelcomePage' style={{backgroundImage: `url(${backgroundImage})`}}>
       <header>
         <label className="appLabel">Livepoll</label>
-        
-        <nav> 
-          <a className="navBtn" href="#">Features</a>
-          <a className="navBtn" href="#">Downloads</a>
-          <a className="navBtn" href="#">FAQ</a>
-          <a className="navBtn" href="#">About us</a> 
-        </nav>
 
-        <IconButton 
-          className="googleSigninBtn"
-          iconClass="googleSigninBtnIcon" 
-          onClick={signInWithGoogle}
-          iconUrl={googleIcon}
-        >
-          Sign in with Google
-        </IconButton>
+        <Responsive screens={['M', 'L']}>
+          <nav> 
+            <a className="navBtn" href="#">Features</a>
+            <a className="navBtn" href="#">Downloads</a>
+            <a className="navBtn" href="#">FAQ</a>
+            <a className="navBtn" href="#">About us</a> 
+          </nav>
+
+          <IconButton 
+            className="googleSigninBtn"
+            iconClass="googleSigninBtnIcon" 
+            onClick={signInWithGoogle}
+            iconUrl={googleIcon}
+          >
+            Sign in with Google
+          </IconButton>
+        </Responsive>
       </header>
 
       <main>
