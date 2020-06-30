@@ -45,4 +45,14 @@
 
 .Home.XXS {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Home.XXS > * {
+  width: 100%;
+}
+
+.Home.XXS .pollCard {
+  margin: 5px 0 5px 0;
 }
