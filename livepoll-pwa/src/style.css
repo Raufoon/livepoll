@@ -5,7 +5,7 @@
 
 .App .appHeader{
   font-size: large;
-  height: 2em;
+  background-color: white;
 }
 
 .App .appHeader.withSidebar{

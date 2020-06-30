@@ -1,24 +1,27 @@
 .AppHeader {
   display: flex;
   flex-direction: row;
-  padding: 10px;
   justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid lightgray;
 }
 
 .AppHeader .appTitle {
-  color: #295132;
   flex-grow: 1;
   padding: 0;
-  font-weight: bold;
+  color: #065535;
 }
 
 .AppHeader .authUserBadge {
-  border: 1px solid gray;
   border-radius: 100px;
-  font-size: medium;
+  border: none;
+  font-size: small;
+  color: #222;
+  text-transform: uppercase;
 }
 
 .AppHeader .authUserAvatar {
-  height: 1.2em;
-  border-radius: 50px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid gray;
 }
