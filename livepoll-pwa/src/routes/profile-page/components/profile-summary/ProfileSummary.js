@@ -25,7 +25,7 @@ export default function ProfileSummary(props) {
 
   return (
     <div className={`ProfileSummary ${className}`}>
-      <IconButton className="signoutBtn" iconClass="signOutIcon" iconUrl={signOutIcon} onClick={doSignOut}/>
+      <IconButton className="signoutBtn" tooltip="Sign out" iconClass="signOutIcon" iconUrl={signOutIcon} onClick={doSignOut}/>
       <div className='userPropic' style={{backgroundImage: `url(${avatar || avatarIcon})`}}/>
       <label className='userfullname'>{name}</label>
       <label className='subtitle'>livepoll user</label>

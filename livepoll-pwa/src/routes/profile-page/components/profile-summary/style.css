@@ -42,6 +42,9 @@
   position: absolute;
   font-size: small;
   border: none;
+  background-color: #d61b5d;
+  border-radius: 50px;
+  padding: 10px;
 }
 
 .ProfileSummary .signOutIcon {
