@@ -13,6 +13,7 @@ const ProfilePage = lazy(() => import('./routes/profile-page/ProfilePage'))
 const PollPage = lazy(() => import('./routes/poll-page/PollPage'))
 const WelcomePage = lazy(() => import('./routes/welcome-page/WelcomePage'))
 const MobileWelcomePage = lazy(() => import('./routes/mobile-welcome-page/MobileWelcomePage'))
+const PollCreateFloatingButton = lazy(() => import('./components/poll-create-floating-button/PollCreateFlotingButton'))
 
 function App() {
   const authUser = useFirebaseAuth()
@@ -55,6 +56,9 @@ function App() {
           <main>
             {routedPages}
           </main>
+          <Suspense fallback="">
+            <PollCreateFloatingButton/>
+          </Suspense>
         </Responsive>
       </div>
     </AuthContext.Provider>

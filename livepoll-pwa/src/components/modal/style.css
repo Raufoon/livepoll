@@ -16,6 +16,7 @@
   padding: 15px;
   border-radius: 5px;
   position: relative;
+  max-width: 80%;
 }
 
 .Modal .children {
