@@ -1,0 +1,82 @@
+.MobileWelcomePage {
+  height: 100%;
+  width: 100%;
+  background: rgba(164,133,253,.04);
+  display: flex;
+  flex-direction: column;
+  color: #222;
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: 100% 0;
+}
+
+.MobileWelcomePage header {
+  padding: 2.5em;
+  padding-left: 3em;
+  padding-right: 3em;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.MobileWelcomePage header .appLabel {
+  font-size: 40px;
+  color: #295132;
+}
+
+.MobileWelcomePage header nav {
+  flex-grow: 1;
+  text-align: center;
+  background-color: transparent;
+}
+
+.MobileWelcomePage header nav .navBtn {
+  margin-left: 1.5em;
+  margin-right: 1.5em;
+}
+
+.MobileWelcomePage .googleSigninBtn {
+  border: 1px solid lightgray;
+  border-radius: 10px;
+  border-radius: 50px;
+}
+
+.WelcomePage .googleSigninBtnIcon {
+  height: 3em;
+}
+
+.WelcomePage main {
+  display: flex;
+  flex-direction: row;
+  height: 60vh;
+  align-items: center;
+  padding: 3em;
+}
+
+.MobileWelcomePage main .leftHalf {
+}
+
+.MobileWelcomePage main .rightHalf {
+  flex-grow: 1;
+}
+
+.MobileWelcomePage .keyFeatureLabel {
+  font-size: xx-large;
+  color: #333;
+}
+
+.MobileWelcomePage .keyFeatureDesc {
+  font-size: large;
+  color: gray;
+}
+
+.MobileWelcomePage footer {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-style: italic;
+  font-size: small;
+} 
+
+

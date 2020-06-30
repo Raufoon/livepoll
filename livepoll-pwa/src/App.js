@@ -1,6 +1,5 @@
 import React, {lazy, Suspense} from 'react'
 import AuthContext from './contexts/AuthContext'
-import WelcomePage from './routes/welcome-page/WelcomePage'
 import useFirebaseAuth from './hooks/useFirebaseAuth'
 import {Switch, Route} from 'react-router-dom'
 import AppSidebar from './components/app-sidebar/AppSidebar'
@@ -12,12 +11,24 @@ import './style.css'
 const HomePage = lazy(() => import('./routes/home-page/HomePage'))
 const ProfilePage = lazy(() => import('./routes/profile-page/ProfilePage'))
 const PollPage = lazy(() => import('./routes/poll-page/PollPage'))
+const WelcomePage = lazy(() => import('./routes/welcome-page/WelcomePage'))
+const MobileWelcomePage = lazy(() => import('./routes/mobile-welcome-page/MobileWelcomePage'))
 
 function App() {
   const authUser = useFirebaseAuth()
 
   if (!authUser) return "Loading..."
-  if (!authUser.isLoggedIn) return <WelcomePage/>
+
+  if (!authUser.isLoggedIn) return <>
+    <Suspense fallback="Loading...">
+      <Responsive screens={['M', 'L']}>
+        <WelcomePage/>
+      </Responsive>
+      <Responsive screens={['S']}>
+        <MobileWelcomePage/>
+      </Responsive>
+    </Suspense>
+  </>
 
   const routedPages = <Suspense fallback="Loading...">
     <Switch>

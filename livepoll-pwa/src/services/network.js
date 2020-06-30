@@ -2,7 +2,7 @@ import {get, post} from 'axios'
 import {getAuthIDToken} from './auth'
 
 // const DEV_SERVER = 'http://localhost:5000/lllivepolll/us-central1/server'
-const SERVER = 'http://us-central1-lllivepolll.cloudfunctions.net/server'
+const SERVER = 'https://us-central1-lllivepolll.cloudfunctions.net/server'
 
 export async function graphQlSecureQuery(query) {
   const idToken = await getAuthIDToken()
