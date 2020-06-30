@@ -4,6 +4,7 @@
   font-size: large;
   border: 1px solid lightgray;
   position: relative;
+  padding: 15px;
 }
 
 .SpecialPollCard .banner{
@@ -23,6 +24,7 @@
 
 .SpecialPollCard .title {
   font-size: x-large;
+  padding: 0;
 }
 
 .SpecialPollCard .subtitle{
