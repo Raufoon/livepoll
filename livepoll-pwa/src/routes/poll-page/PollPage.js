@@ -9,9 +9,9 @@ import useModal from '../../components/modal/hooks/useModal'
 import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
 import Responsive from '../../components/responsive/Responsive'
-import './style.css'
 import useHomeData from '../home-page/hooks/useHomeData'
 import PollCard from '../../components/poll-card/PollCard'
+import './style.css'
 
 const NavHeader = lazy(() => import('./components/poll-nav-header/PollNavHeader'))
 const VoterList = lazy(() => import('./components/voter-list/VoterList'))

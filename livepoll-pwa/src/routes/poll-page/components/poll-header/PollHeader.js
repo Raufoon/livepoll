@@ -62,14 +62,22 @@ export default function PollHeader(props) {
         }</div>
         
         <div>
-          <IconButton
-          className='addItemBtn'
+          {shouldAllowAddItem && <IconButton
+            className='addItemBtn'
+            iconUrl={createIcon} 
+            iconClass='addItemBtnIcon' 
+            onClick={openItemFormModal}>
+              Create Item
+            </IconButton>}
+        </div>
+      </Responsive>
+
+      <Responsive screens={['S']}>
+        {shouldAllowAddItem && <IconButton
+          className='addItemBtnRound'
           iconUrl={createIcon} 
           iconClass='addItemBtnIcon' 
-          onClick={openItemFormModal}>
-            Create Item
-          </IconButton>
-        </div>
+          onClick={openItemFormModal}/>}
       </Responsive>
       
       {
