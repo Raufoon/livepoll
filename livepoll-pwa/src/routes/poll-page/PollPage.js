@@ -82,7 +82,9 @@ export default function PollPage () {
       <Responsive maxWidth={1449}>
         <div className="poll mobile">
           {pollHeader}
-          <NavHeader/>
+          <Responsive screens={['S']}>
+            <NavHeader/>
+          </Responsive>
           <Suspense fallback="Loading items...">
             <Switch>
               <Route exact path={`${match.path}/more`} render={() => "more"}/>

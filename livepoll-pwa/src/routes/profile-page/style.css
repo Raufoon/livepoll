@@ -57,3 +57,25 @@
 .ProfilePage .mobile .profileNav > * {
   margin: 0 10px 0 10px;
 }
+
+.ProfilePage .myPolls {
+  padding: 10px;
+  border: 1px solid lightgray;
+}
+
+.ProfilePage .myPolls .pollCard{
+  margin: 1em;
+  padding: 1em;
+}
+
+.ProfilePage .myPolls .sectionLabel {
+  text-align: center;
+  font-size: x-large;
+}
+
+.ProfilePage .myPolls .content{
+  display: flex;
+  flex-direction: column;
+  height: 85vh;
+  overflow-y: auto;
+}

@@ -9,6 +9,8 @@ import activityIcon from './images/activity.png'
 import pollsIcon from './images/polls.png'
 import settingsIcon from './images/settings.png'
 import AuthContext from '../../contexts/AuthContext'
+import useHomeData from '../home-page/hooks/useHomeData'
+import PollCard from '../../components/poll-card/PollCard'
 import './style.css'
 
 export default function ProfilePage(props) {
@@ -17,6 +19,14 @@ export default function ProfilePage(props) {
   const {id} = useParams()
   const details = useProfileDetails(id)
   const authUser = useContext(AuthContext)
+  const [recentPolls] = useHomeData()
+  
+  const myPolls = (
+    Object.values(recentPolls).map(function(poll) {
+      return <PollCard className='pollCard' key={poll.id} {...poll}/>
+    })
+  )
+
   const {match} = props
   const isMyProfile = authUser.getUid() === id
 
@@ -40,6 +50,15 @@ export default function ProfilePage(props) {
     }
   </>
 
+  function renderMyPolls() {
+    return <div className="myPolls">
+      <div className="sectionLabel">Polls by {authUser.getName()}</div>
+      <div className="content">
+        {myPolls}
+      </div>
+    </div>
+  }
+
   return (
     <div className='ProfilePage'>
       <Responsive screens={['M', 'L']}>
@@ -53,6 +72,7 @@ export default function ProfilePage(props) {
         <div className='rightSect'>
           <Switch>
             <Route path={`${match.path}/settings`} component={ProfileSettings}/>
+            <Route path={`${match.path}/polls`} render={renderMyPolls}/>
           </Switch>
         </div>
       </Responsive>
@@ -65,6 +85,7 @@ export default function ProfilePage(props) {
           </div>
           <Switch>
             <Route path={`${match.path}/settings`} component={ProfileSettings}/>
+            <Route path={`${match.path}/polls`} render={renderMyPolls}/>
           </Switch>
         </div>
       </Responsive>      
