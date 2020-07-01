@@ -9,6 +9,7 @@ import rootReducer from './state-management/root-reducer'
 import {BrowserRouter} from 'react-router-dom'
 import reduxThunk from 'redux-thunk'
 import './index.css'
+import { node } from 'prop-types'
 
 firebase.initializeApp({
   apiKey: "AIzaSyBQSHVAGfc3pCsx6VBM-I0sMiT0r17Z5Ek",
@@ -45,4 +46,4 @@ ReactDOM.render(
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // TODO: Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister()
+if (process.env.NODE_ENV === 'production') serviceWorker.register()
