@@ -41,7 +41,9 @@ function WelcomePage () {
         <div className="leftHalf">
           <p className="keyFeatureLabel">An easy way to create live polls <br/>and publish online</p>
           <p className="keyFeatureDesc">
-            Livepoll is a real-time progressive web application <br/>for poll creation, participation, and sharing.
+            Livepoll is a real-time progressive web application built<br/> with <b style={{color: 'blue'}}> React+Redux
+            </b> hosted from <b style={{color: 'orange'}}>Firebase
+            </b> equipped<br/> with <b style={{color: '#fa4d57'}}>GraphQL</b> for poll creation, participation, & sharing.
           </p>
         </div>
 
@@ -49,12 +51,6 @@ function WelcomePage () {
           &nbsp;
         </div>
       </main>
-
-      <footer>
-        This progressive web app is built with <b style={{color: 'blue'}}>
-          React+Redux</b> and hosted from <b style={{color: 'orange'}}>Firebase
-          </b> equipped with <b style={{color: '#fa4d57'}}>GraphQL</b> 
-      </footer>
     </div>
   )
 }
