@@ -50,9 +50,9 @@ module.exports = async function (_, args, context) {
     // delete images too
   }
   catch(err) {
-    return Promise.reject({isComplete: false})
+    return Promise.reject(false)
   }
   finally {
-    return Promise.resolve({isComplete: true})
+    return Promise.resolve(true)
   }
 }
