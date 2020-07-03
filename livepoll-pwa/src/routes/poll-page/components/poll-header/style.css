@@ -49,3 +49,13 @@
   background-color: black;
   border-radius: 100px;
 }
+
+.PollHeader .actionPanel {
+  display: flex;
+  flex-direction: row;
+}
+
+.PollHeader .pollDeleteBtn{
+  font-size: small;
+  border: none;
+}

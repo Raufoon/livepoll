@@ -5,6 +5,7 @@ import Modal from '../../../../components/modal/Modal'
 import useModal from '../../../../components/modal/hooks/useModal'
 import IconButton from '../../../../components/icon-button/IconButton'
 import createIcon from './images/create-item.png'
+import deleteIcon from './images/delete.png'
 import usePollDetails from '../../hooks/usePollDetails'
 import Responsive from '../../../../components/responsive/Responsive'
 import './style.css'
@@ -32,12 +33,21 @@ export default function PollHeader(props) {
   const creationDateTime = new Date(parseInt(startDateTime, 10))
   const finishDateTime = endDateTime ? new Date(parseInt(endDateTime, 10)):null
   const shouldAllowAddItem = usagePrivacy === 'PROTECTED' ? author.id === authUserId: true
+  const shouldAllowPollDelete = author.id === authUserId
 
   let ItemCreatorForm;
   if (itemContentType === 'TEXT') ItemCreatorForm = TextItemCreator
   else if (itemContentType === 'AVATAR_TEXT') ItemCreatorForm = AvatarTextItemCreator
   else if (itemContentType === 'IMAGE_CAPTION') ItemCreatorForm = AvatarTextItemCreator
   else return 'Loading...'
+
+  const pollDeletionButton = shouldAllowPollDelete && <IconButton
+    className='pollDeleteBtn'
+    iconUrl={deleteIcon} 
+    iconClass='addItemBtnIcon'
+    onClick={openItemFormModal}>
+    Delete This Poll
+  </IconButton>
 
   return (
     <div className='PollHeader'>
@@ -61,7 +71,8 @@ export default function PollHeader(props) {
           )
         }</div>
         
-        <div>
+        <div className="actionPanel">
+          {pollDeletionButton}
           {shouldAllowAddItem && <IconButton
             className='addItemBtn'
             iconUrl={createIcon} 
