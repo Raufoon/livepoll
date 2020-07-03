@@ -41,13 +41,13 @@ module.exports = async function (_, args, context) {
       if (itemContentType === 'AVATAR_TEXT' || itemContentType === 'IMAGE_CAPTION' || itemContentType === 'IMAGE_ONLY') {
         // delete the images for items
         const imageUrl = await db.read(`items/${itemId}/imgUrl`)
-        admin.storage().bucket().delete(imageUrl)
+        admin.storage().bucket().delete(`item-images/${itemId}`)
       }
 
       await db.remove(`items/${itemId}`)
     }
     
-    // delete images too
+    // delete the edge 'voter-poll-item'
   }
   catch(err) {
     return Promise.reject(false)

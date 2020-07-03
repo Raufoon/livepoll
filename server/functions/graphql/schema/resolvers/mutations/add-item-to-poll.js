@@ -2,9 +2,9 @@ const db = require('../../../../realtimeDb')
 const { UsagePrivacy } = require('../../types/livepoll')
 
 module.exports = async function addItemToPoll(_, args, context) {
-  const id = db.getNewID()
   const {pollId, newItem} = args
-
+  const id = newItem.id || db.getNewID()
+  
   try {
     const itemCreatorId = await context.getAuthUserId()
     const pollUsagePrivacy = await db.read(`/poll/${pollId}/usagePrivacy`)

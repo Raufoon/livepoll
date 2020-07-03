@@ -6,6 +6,7 @@ const path = require('path')
 const os = require('os')
 const admin = require('firebase-admin')
 const sharp = require('sharp')
+const db = require('../realtimeDb')
 
 router.post('/', async function (request, response) {
   const {uid} = await admin.auth().verifyIdToken(request.headers.authorization)
@@ -20,6 +21,7 @@ router.post('/', async function (request, response) {
   let rawImgPath;
   let fileWrite;
   let shouldCompress = false
+  let itemId = db.getNewID()
   
   busboy.on('file', (fieldname, file, filename) => {
     rawImgPath = path.join(tmpdir, filename)
@@ -41,25 +43,25 @@ router.post('/', async function (request, response) {
   
   busboy.on('finish', async function() {
     await fileWrite
-    const outputImgName = `${uid}_${Date.now()}.${path.extname(rawImgPath)}`
+    const outputImgName = `${itemId}.${path.extname(rawImgPath)}`
     let destination
+
+    destination = `images/${outputImgName}`
 
     if (shouldCompress) {
       const resizedImgPath = path.join(tmpdir, outputImgName)
-      destination = `avatars/${outputImgName}`
       await sharp(rawImgPath).resize(256, null).toFile(resizedImgPath)
       await admin.storage().bucket().upload(resizedImgPath, {destination})  
       fs.unlinkSync(resizedImgPath)
     }
     else {
-      destination = `images/${outputImgName}`
       await admin.storage().bucket().upload(rawImgPath, {destination})
     }
     
     fs.unlinkSync(rawImgPath)
 
     const uploadedImgUrl = `https://storage.googleapis.com/lllivepolll.appspot.com/${destination}`;
-    response.send(JSON.stringify({uploadedImgUrl}))
+    response.send(JSON.stringify({uploadedImgUrl, itemId}))
   })
 
   busboy.end(request.rawBody)
