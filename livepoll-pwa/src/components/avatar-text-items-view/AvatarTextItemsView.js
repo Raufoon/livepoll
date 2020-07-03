@@ -3,13 +3,15 @@ import VoteLabel from '../vote-label/VoteLabel'
 import Responsive from '../responsive/Responsive'
 import './style.css'
 
+const compare = (a, b) => a.score > b.score? -1:1
+
 export default function AvatarTextItemsView(props) {
   const {items} = props
 
   return (
     <div className="AvatarTextItemsView">
       {
-        items.map(function({id, text, imgUrl, score}, index) {
+        items.sort(compare).map(function({id, text, imgUrl, score}, index) {
           return (
             <div className="item" key={id}>
               <Responsive screens={['M', 'L']}>
