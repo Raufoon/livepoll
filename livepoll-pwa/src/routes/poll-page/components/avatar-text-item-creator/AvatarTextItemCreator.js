@@ -10,6 +10,7 @@ import './style.css'
 function AvatarTextItemCreator(props) {
   const dispatch = useDispatch()
   const [avatarUrl, setAvatarUrl] = useState(false)
+  const [id, setItemId] = useState(false)
   const avatarInputRef = useRef() 
   const [avatarState, setAvatarState] = useState('NOT_UPLOADED')
 
@@ -19,11 +20,12 @@ function AvatarTextItemCreator(props) {
     return function onSubmitForm(data) {
       dispatch(actionCreateNewItem(pollId, {
         ...data,
-        imgUrl: avatarUrl
+        imgUrl: avatarUrl,
+        id: id
       }))
       if (onSubmit) onSubmit()
     } 
-  }, [pollId, avatarUrl, dispatch, onSubmit])
+  }, [pollId, avatarUrl, id, dispatch, onSubmit])
 
   async function uploadAvatar() {
     setAvatarState('UPLOADING')
@@ -34,8 +36,9 @@ function AvatarTextItemCreator(props) {
     formData.append('shouldCompress', itemContentType === 'AVATAR_TEXT')
 
     try {
-      const {uploadedImgUrl} = await doSecurePostRequest('upload', formData)
+      const {uploadedImgUrl, itemId} = await doSecurePostRequest('upload', formData)
       setAvatarUrl(uploadedImgUrl)
+      setItemId(itemId)
       setAvatarState('UPLOADED')
     }
     catch(err) {

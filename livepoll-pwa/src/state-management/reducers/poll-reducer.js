@@ -69,6 +69,10 @@ export default function pollReducer(state = {}, action) {
       ...state,
       [pollId]: {
         ...state[pollId],
+        details: {
+          ...state[pollId].details,
+          totalVotes: updatedItems.length <= 1 ? state[pollId].details.totalVotes + 1: state[pollId].details.totalVotes
+        },
         items: {
           ...state[pollId].items || {},
 
@@ -91,6 +95,10 @@ export default function pollReducer(state = {}, action) {
       ...state,
       [pollId]: {
         ...state[pollId],
+        details: {
+          ...state[pollId].details,
+          totalVotes: state[pollId].details.totalVotes - 1
+        },
         items: {
           ...state[pollId].items || {},
           [updatedItem.id]: {
