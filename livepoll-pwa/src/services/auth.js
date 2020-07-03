@@ -35,6 +35,10 @@ export function signInWithGoogle() {
   firebase.auth().signInWithPopup(provider)
 }
 
+export function signInAsGuest() {
+  firebase.auth().signInWithEmailAndPassword('visitor@lllivepollll.com', '123456')
+}
+
 export function signOut () {
   return firebase.auth().signOut()
 }

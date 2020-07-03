@@ -44,7 +44,7 @@ export default function AppSidebar(props) {
         to={`/user/${authUser.getUid()}`}
         className="iconBtn"
         iconClass="icon profileNavImg"
-        iconUrl={authUser.getAvatarUrl()}
+        iconUrl={authUser.getAvatarUrl() || 'https://en.meming.world/images/en/thumb/6/68/Tom_Cat_Reading_a_Newspaper.jpg/300px-Tom_Cat_Reading_a_Newspaper.jpg'}
         tooltip="Profile"/>
       
       <IconButton 

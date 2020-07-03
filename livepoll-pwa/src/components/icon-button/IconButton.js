@@ -18,17 +18,17 @@ export default function IconButton(props) {
   }
 
   return <Component to={to} className={`IconButton ${className}`} onClick={onClick} {...rest}>
-    <img className={`icon ${iconClass}`} 
+    {iconUrl && <img className={`icon ${iconClass}`} 
       src={iconUrl} 
       title={tooltip}
       alt='icon related to the button'
-    />
+    />}
     {props.children !== undefined && <label>{props.children}</label>}
   </Component>
 }
 
 IconButton.propTypes = {
-  iconUrl: PropTypes.string.isRequired,
+  iconUrl: PropTypes.string,
   iconClass: PropTypes.string,
   tooltip: PropTypes.string
 }

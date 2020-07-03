@@ -17,9 +17,9 @@ export default function AppHeader(props) {
       <IconButton 
         className='authUserBadge'
         iconClass="authUserAvatar"
-        iconUrl={authUser.getAvatarUrl()}
+        iconUrl={authUser.getAvatarUrl() || 'https://en.meming.world/images/en/thumb/6/68/Tom_Cat_Reading_a_Newspaper.jpg/300px-Tom_Cat_Reading_a_Newspaper.jpg'}
         to={`/user/${authUser.getUid()}`}>
-        {authUser.getName()}
+        {authUser.getName() || 'Guest User'}
       </IconButton>    
     </div>
   )

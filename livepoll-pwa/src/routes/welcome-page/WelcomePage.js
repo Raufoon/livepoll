@@ -1,5 +1,5 @@
 import React from 'react'
-import { signInWithGoogle } from '../../services/auth'
+import { signInWithGoogle, signInAsGuest } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
@@ -45,6 +45,7 @@ function WelcomePage () {
             </b> hosted from <b style={{color: 'orange'}}>Firebase
             </b> equipped<br/> with <b style={{color: '#fa4d57'}}>GraphQL</b> for poll creation, participation, & sharing.
           </p>
+          <button className="guestSigninBtn" onClick={signInAsGuest}>Sign in as Guest</button>
         </div>
 
         <div className="rightHalf">

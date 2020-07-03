@@ -79,4 +79,9 @@
   font-size: small;
 } 
 
-
+.WelcomePage .guestSigninBtn {
+  border-radius: 50px;
+  border: 1px solid gray;
+  background-color: white;
+  padding: 10px;
+}

@@ -1,9 +1,8 @@
 import React from 'react'
-import { signInWithGoogle } from '../../services/auth'
+import { signInWithGoogle, signInAsGuest } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
-import Responsive from '../../components/responsive/Responsive'
 import './style.css'
 
 export default function MobileWelcomePage () {
@@ -26,8 +25,10 @@ export default function MobileWelcomePage () {
           iconClass="googleSigninBtnIcon" 
           onClick={signInWithGoogle}
           iconUrl={googleIcon}>
-              SIGN IN WITH GOOGLE
+              JOIN WITH GOOGLE
         </IconButton>
+
+        <button className="guestSigninBtn" onClick={signInAsGuest}>Sign in as Guest</button>
       </div>
     </div>
   )

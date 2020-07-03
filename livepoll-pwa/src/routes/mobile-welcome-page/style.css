@@ -26,10 +26,11 @@
   border: 1px solid lightgray;
   border-radius: 10px;
   border-radius: 50px;
+  margin-bottom: 10px;
 }
 
 .MobileWelcomePage .googleSigninBtnIcon {
-  height: 3em;
+  height: 20px;
   padding: 0;
 }
 
@@ -40,5 +41,12 @@
 
 .MobileWelcomePage .keyFeatureDesc {
   font-size: medium;
+  color: gray;
+}
+
+.MobileWelcomePage .guestSigninBtn {
+  border: none;
+  background-color: white;
+  text-decoration: underline;
   color: gray;
 }
