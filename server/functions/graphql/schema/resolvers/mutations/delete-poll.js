@@ -1,3 +1,4 @@
+const admin = require('firebase-admin')
 const db = require('../../../../realtimeDb')
 
 module.exports = async function (_, args, context) {
@@ -37,13 +38,10 @@ module.exports = async function (_, args, context) {
         }
       }
 
-      if (itemContentType === 'AVATAR_TEXT') {
+      if (itemContentType === 'AVATAR_TEXT' || itemContentType === 'IMAGE_CAPTION' || itemContentType === 'IMAGE_ONLY') {
         // delete the images for items
         const imageUrl = await db.read(`items/${itemId}/imgUrl`)
-      }
-      else if (itemContentType === 'IMAGE_CAPTION' || itemContentType === 'IMAGE_ONLY') {
-        // delete the images for items
-        const imageUrl = await db.read(`items/${itemId}/imgUrl`)
+        admin.storage().bucket().delete(imageUrl)
       }
 
       await db.remove(`items/${itemId}`)
