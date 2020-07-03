@@ -1,5 +1,6 @@
 import { createNewPoll, createNewItem, voteForItem, unvoteItem } from "../../services/write-requests"
 import { fetchPollDetails, fetchPollItems, fetchVotedItemId, fetchVoterList } from "../../services/read-requests"
+import {deletePoll} from '../../services/delete-requests'
 
 export function actionCreateNewPoll(pollData) {
   return async function(dispatch) {
@@ -249,5 +250,25 @@ function actionFetchVoterListSuccess(pollId, itemId, voterList) {
   return {
     type: ACTION_FETCH_VOTER_LIST_SUCCESS,
     pollId, itemId, voters: voterList
+  }
+}
+
+export function actionDeletePoll(pollId) {
+  return async function (dispatch) {
+    try {
+      const {data} = await deletePoll(pollId)
+      if (data) dispatch(actionDeletePollSuccess(pollId))
+    }
+    catch(err) {
+    }
+  }
+}
+
+export const ACTION_DELETE_POLL_SUCCESS = 'ACTION_DELETE_POLL_SUCCESS'
+
+export function actionDeletePollSuccess(pollId) {
+  return {
+    type: ACTION_DELETE_POLL_SUCCESS,
+    pollId
   }
 }

@@ -1,5 +1,6 @@
-import React, {useContext, lazy, Suspense} from 'react'
+import React, {useContext, lazy, Suspense, useMemo} from 'react'
 import UserBadge from '../user-badge/UserBadge'
+import {useDispatch} from 'react-redux'
 import AuthContext from '../../../../contexts/AuthContext'
 import Modal from '../../../../components/modal/Modal'
 import useModal from '../../../../components/modal/hooks/useModal'
@@ -9,6 +10,8 @@ import deleteIcon from './images/delete.png'
 import usePollDetails from '../../hooks/usePollDetails'
 import Responsive from '../../../../components/responsive/Responsive'
 import './style.css'
+import { actionDeletePoll } from '../../../../state-management/actions/poll-actions'
+import DecisionModal from '../../../../components/decision-modal/DecisionModal'
 
 const TextItemCreator = lazy(() => import('../text-item-creator/TextItemCreator'))
 const AvatarTextItemCreator = lazy(() => import('../avatar-text-item-creator/AvatarTextItemCreator'))
@@ -16,11 +19,19 @@ const AvatarTextItemCreator = lazy(() => import('../avatar-text-item-creator/Ava
 export default function PollHeader(props) {
   console.log('Rendering PollHeader')
 
+  const dispatch = useDispatch()
   const {pollId} = props
   const [showItemForm, openItemFormModal, closeItemFormModal] = useModal()
   const authUser = useContext(AuthContext)
-
   const details = usePollDetails(pollId)
+  
+  const deletePoll = useMemo(function() {
+    return function() {
+      dispatch(actionDeletePoll(pollId))
+    }
+  }, [dispatch, pollId])
+
+  const [showPollDelete, openPollDeletion, closePollDeletion] = useModal()
 
   if (!details) return "Loading.."
 
@@ -45,7 +56,7 @@ export default function PollHeader(props) {
     className='pollDeleteBtn'
     iconUrl={deleteIcon} 
     iconClass='addItemBtnIcon'
-    onClick={openItemFormModal}>
+    onClick={openPollDeletion}>
     Delete This Poll
   </IconButton>
 
@@ -73,6 +84,7 @@ export default function PollHeader(props) {
         
         <div className="actionPanel">
           {pollDeletionButton}
+
           {shouldAllowAddItem && <IconButton
             className='addItemBtn'
             iconUrl={createIcon} 
@@ -98,6 +110,12 @@ export default function PollHeader(props) {
           </Suspense>
         </Modal> 
       }
+
+      <DecisionModal 
+        isVisible={showPollDelete} 
+        onNo={closePollDeletion} 
+        onYes={deletePoll} 
+        title="Are you sure to delete this poll? (Cannot be undone!)"/>
     </div>
   )
 }
