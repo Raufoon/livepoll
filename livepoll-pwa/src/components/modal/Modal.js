@@ -10,8 +10,6 @@ export default function Modal(props) {
 
   const modalElementRef = useRef(false);
 
-  console.log('Rendering Modal')
-
   useEffect(function effect() {
     const modalRoot = document.getElementById('modal-root')
     modalElementRef.current = document.createElement('div')

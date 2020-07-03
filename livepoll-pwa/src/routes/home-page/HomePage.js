@@ -7,8 +7,6 @@ import SpecialPollCard from '../../components/special-poll-card/SpecialPollCard'
 import './style.css'
 
 export default function HomePage () {
-  console.log('Rendering HomePage')
-
   const [recentPolls] = useHomeData()
 
   const polls = Object.values(recentPolls)

@@ -14,8 +14,6 @@ import PollCard from '../../components/poll-card/PollCard'
 import './style.css'
 
 export default function ProfilePage(props) {
-  console.log('Rendering ProfilePage')
-
   const {id} = useParams()
   const details = useProfileDetails(id)
   const authUser = useContext(AuthContext)

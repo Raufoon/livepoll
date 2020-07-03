@@ -9,7 +9,6 @@ import rootReducer from './state-management/root-reducer'
 import {BrowserRouter} from 'react-router-dom'
 import reduxThunk from 'redux-thunk'
 import './index.css'
-import { node } from 'prop-types'
 
 firebase.initializeApp({
   apiKey: "AIzaSyBQSHVAGfc3pCsx6VBM-I0sMiT0r17Z5Ek",

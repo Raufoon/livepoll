@@ -17,8 +17,6 @@ const TextItemCreator = lazy(() => import('../text-item-creator/TextItemCreator'
 const AvatarTextItemCreator = lazy(() => import('../avatar-text-item-creator/AvatarTextItemCreator'))
 
 export default function PollHeader(props) {
-  console.log('Rendering PollHeader')
-
   const dispatch = useDispatch()
   const {pollId} = props
   const [showItemForm, openItemFormModal, closeItemFormModal] = useModal()

@@ -17,8 +17,6 @@ const NavHeader = lazy(() => import('./components/poll-nav-header/PollNavHeader'
 const VoterList = lazy(() => import('./components/voter-list/VoterList'))
 
 export default function PollPage () {
-  console.log('Rendering PollPage')
-
   const [votersVisible, showVotersModal, hideVotersModal] = useModal()
   const [itemIdForVoterList, setItemIdForVoterList] = useState(false)
   

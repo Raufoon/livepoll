@@ -12,8 +12,6 @@ const ImageCaptionItem = lazy(() => import('./components/image-caption-item/Imag
 const itemSorter = (a, b) => a.score > b.score ? -1: 1
 
 function ItemsPanel(props) {
-  console.log('Rendering ItemsPanel')
-
   const dispath = useDispatch()
 
   const {pollId, items, className, displayVoterList} = props 
