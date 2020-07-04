@@ -85,3 +85,8 @@
   background-color: white;
   padding: 10px;
 }
+
+.WelcomePage .fancyImage {
+  max-height: 80vh;
+  float: right;
+}

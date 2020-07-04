@@ -3,6 +3,7 @@ import { signInWithGoogle, signInAsGuest } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
+import fancyImage from '../welcome-page/images/fancy-image.png'
 import './style.css'
 
 export default function MobileWelcomePage () {
@@ -12,7 +13,9 @@ export default function MobileWelcomePage () {
         <label className="appLabel">Livepoll</label>
         
         <div style={{flexGrow: 1}}>&nbsp;</div>
-
+        
+        <img className="fancyImage" alt="Welcome" src={fancyImage}/>
+        
         <p className="keyFeatureLabel">An easy way to create live polls & publish online</p>
         <p className="keyFeatureDesc">
           Livepoll is a real-time progressive web application built with <b style={{color: 'blue'}}> React+Redux

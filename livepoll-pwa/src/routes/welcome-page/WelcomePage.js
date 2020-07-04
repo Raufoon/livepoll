@@ -3,6 +3,7 @@ import { signInWithGoogle, signInAsGuest } from '../../services/auth'
 import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
+import fancyImage from './images/fancy-image.png'
 import Responsive from '../../components/responsive/Responsive'
 import './style.css'
 
@@ -49,7 +50,7 @@ function WelcomePage () {
         </div>
 
         <div className="rightHalf">
-          &nbsp;
+          <img className="fancyImage" alt="Welcome" src={fancyImage}/>
         </div>
       </main>
     </div>
