@@ -8,6 +8,7 @@ const graphqlHTTP = require('express-graphql')
 const {GraphQLSchema} = require('graphql')
 const fileUpload = require('./routers/file-upload')
 const dummyServer = require('./routers/dummy-server')
+const bodyParser = require('body-parser')
 
 if (process.env.NODE_ENV === 'production') {
   admin.initializeApp()  
@@ -33,8 +34,6 @@ const app = express()
 
 app.use(cors)
 
-app.use('/dummy', dummyServer)
-
 app.use('/upload', fileUpload)
 
 app.use('/graphql', graphqlHTTP(function(request, response) {
@@ -49,5 +48,8 @@ app.use('/graphql', graphqlHTTP(function(request, response) {
     graphiql: process.env.NODE_ENV === 'development'
   }
 }))
+
+app.use(bodyParser.urlencoded({extended: true}))
+app.use('/dummy', dummyServer)
 
 exports.server = functions.https.onRequest(app)

@@ -3,12 +3,15 @@ const router = express.Router()
 const db = require('../realtimeDb')
 
 router.get('/', async function (request, response) {
-  response.end(JSON.stringify(await db.read(`/dummy/points`)))
+  const points = await db.readAsList(`dummy/points`)
+  console.log(points)
+  response.end(JSON.stringify(points))
 })
 
-router.get('/', async function (request, response) {
-  await db.write(`/dummy/points`, request.params.points)
-  response.end(JSON.stringify())
+router.post('/', async function (request, response) {
+  console.log(request.body)
+  await db.write(`dummy/points`, request.body.points)
+  response.end()
 })
 
 module.exports = router
