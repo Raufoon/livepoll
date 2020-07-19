@@ -7,6 +7,7 @@ const {types, query, mutation} = require('./graphql')
 const graphqlHTTP = require('express-graphql')
 const {GraphQLSchema} = require('graphql')
 const fileUpload = require('./routers/file-upload')
+const dummyServer = require('./routers/dummy-server')
 
 if (process.env.NODE_ENV === 'production') {
   admin.initializeApp()  
@@ -31,6 +32,8 @@ exports.setUserProfile = functions.auth.user().onCreate(newUser => {
 const app = express()
 
 app.use(cors)
+
+app.use('/dummy', dummyServer)
 
 app.use('/upload', fileUpload)
 
