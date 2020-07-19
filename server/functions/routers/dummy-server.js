@@ -7,7 +7,7 @@ router.get('/', async function (request, response) {
 })
 
 router.get('/', async function (request, response) {
-  await db.write(`/dummy/posts`, request.params.points)
+  await db.write(`/dummy/points`, request.params.points)
   response.end(JSON.stringify())
 })
 
