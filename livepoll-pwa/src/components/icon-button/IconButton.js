@@ -21,7 +21,7 @@ export default function IconButton(props) {
     {iconUrl && <img className={`icon ${iconClass}`} 
       src={iconUrl} 
       title={tooltip}
-      alt='icon related to the button'
+      alt='please refresh'
     />}
     {props.children !== undefined && <label>{props.children}</label>}
   </Component>

@@ -6,6 +6,17 @@ import PollCard from '../../components/poll-card/PollCard'
 import SpecialPollCard from '../../components/special-poll-card/SpecialPollCard'
 import './style.css'
 
+function shuffleArray(array) {
+  let shuffled = array.slice()
+  for (var i = shuffled.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var temp = shuffled[i];
+      shuffled[i] = shuffled[j];
+      shuffled[j] = temp;
+  }
+  return shuffled
+}
+
 export default function HomePage () {
   const [recentPolls] = useHomeData()
 
@@ -15,8 +26,18 @@ export default function HomePage () {
   const pollOfTheDayIdx = parseInt(Math.random() * (polls.length - 1), 10)
   const pollOfTheDay = polls[pollOfTheDayIdx]
 
-  const pollList = (
+  const trendingPollsList = (
     polls.map(function(poll) {
+      return <PollCard className='pollCard' key={poll.id} {...poll}/>
+    })
+  )
+  const topPollsList = (
+    shuffleArray(polls).map(function(poll) {
+      return <PollCard className='pollCard' key={poll.id} {...poll}/>
+    })
+  )
+  const recentPollsList = (
+    shuffleArray(polls).map(function(poll) {
       return <PollCard className='pollCard' key={poll.id} {...poll}/>
     })
   )
@@ -26,7 +47,7 @@ export default function HomePage () {
       <div className="sectionLabel">TRENDING</div>
       <div className="content">
         <SpecialPollCard className='pollCard' poll={pollOfTheDay}/>
-        {pollList}
+        {trendingPollsList}
       </div>
     </div>
   )
@@ -35,7 +56,7 @@ export default function HomePage () {
     <div className="recent">
       <div className="sectionLabel">RECENT</div>
         <div className="content">
-        {pollList}
+        {recentPollsList}
       </div>
     </div>
   )
@@ -44,7 +65,7 @@ export default function HomePage () {
     <div className="popular">
       <div className="sectionLabel">MOST HITS</div>
         <div className="content">
-        {pollList}
+        {topPollsList}
       </div>
     </div>
   )
