@@ -33,10 +33,12 @@ export async function getAuthIDToken() {
 export function signInWithGoogle() {
   const provider = new firebase.auth.GoogleAuthProvider()
   firebase.auth().signInWithPopup(provider)
+    .catch(err => window.alert("Failed to sign in!!"))
 }
 
 export function signInAsGuest() {
   firebase.auth().signInWithEmailAndPassword('visitor@lllivepollll.com', '123456')
+    .catch(err => window.alert("Failed to sign in!!"))
 }
 
 export function signOut () {
