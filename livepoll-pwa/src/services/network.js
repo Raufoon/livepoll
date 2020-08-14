@@ -9,12 +9,15 @@ export async function graphQlSecureQuery(query) {
   const headers = {
     'Authorization': idToken
   }
-  return get(`${SERVER}/graphql?query=${query}`, {headers})
-    .then(response => response.data)
+  return fetch(`${SERVER}/graphql?query=${query}`, {headers})
+    .then(response => response.json())
+  //return get(`${SERVER}/graphql?query=${query}`, {headers}).then(response => response.data)
 }
 
 export function graphQlQuery(query) {
-  return get(`${SERVER}/graphql?query=${query}`).then(response => response.data)
+  return fetch(`${SERVER}/graphql?query=${query}`)
+    .then(response => response.json())
+  //return get(`${SERVER}/graphql?query=${query}`).then(response => response.data)
 }
 
 export async function graphQlMutation(query, variables) {
