@@ -15,20 +15,30 @@ export default function ImageCaptionItem(props) {
     <VoteLabel className="voteLabel" count={score} percent={percent}/>
   )
 
-  return(
-    <div className='ImageCaptionItem'>
-      <div className="topRow">
-        <label className="caption">{1+position}. {text}</label>
-        <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
-      </div>
-      <Responsive screens={['M', 'L']}>
-        <img className='image' src={imgUrl} alt="item"/>
-      </Responsive>
-      <Responsive screens={['S']}>
-        <img className='image mobile' src={imgUrl} alt="item"/>
-      </Responsive>
-      <ProgBar className='progBar' value={percent || 1}/>
-      {voteLabel}
+  const topRow = (
+    <div className="topRow">
+      <label className="caption">{1+position}. {text}</label>
+      <input type='checkbox' checked={isVotedByMe} onChange={() => vote(id)}/>
     </div>
   )
+
+  return <>
+    <Responsive screens={['M', 'L']}>
+      <div className='ImageCaptionItem'>
+        {topRow}
+        <div style={{textAlign: 'center', backgroundColor: '#1e1e1e', padding: 5}}>
+          <img className='image' src={imgUrl} alt="item"/>
+        </div>
+        {voteLabel}
+      </div>
+    </Responsive>
+    
+    <Responsive screens={['S']}>
+      <div className='ImageCaptionItem mobile'>
+        {topRow}
+        <img className='image mobile' src={imgUrl} alt="item"/>
+        {voteLabel}
+      </div>
+    </Responsive>
+  </>
 }

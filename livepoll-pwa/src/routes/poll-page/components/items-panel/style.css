@@ -4,5 +4,7 @@
 }
 
 .ItemsPanel.grid{
-  display: inline !important;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
