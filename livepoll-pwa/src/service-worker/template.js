@@ -1,7 +1,7 @@
 self.addEventListener('fetch', function (event) {
     event.respondWith(
         caches.open('livepoll-dynamic').then(function (cache) {
-            if (!(evt.request.url.indexOf('http') === 0)) return;
+            if (!(event.request.url.indexOf('http') === 0)) return;
 
             if (event.request.method === 'GET') {
                 return cache.match(event.request).then(function (response) {
