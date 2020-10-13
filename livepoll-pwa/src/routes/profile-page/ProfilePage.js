@@ -3,7 +3,7 @@ import {useParams, Switch, Route} from 'react-router-dom'
 import useProfileDetails from './hooks/useProfileDetails'
 import ProfileSummary from './components/profile-summary/ProfileSummary'
 import ProfileSettings from './routes/profile-settings/ProfileSettings'
-import Responsive from '../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import IconButton from '../../components/icon-button/IconButton'
 import activityIcon from './images/activity.png'
 import pollsIcon from './images/polls.png'
@@ -59,7 +59,7 @@ export default function ProfilePage(props) {
 
   return (
     <div className='ProfilePage'>
-      <Responsive screens={['M', 'L']}>
+      <Reaktionsschnelle screens={['M', 'L']}>
         <div className='leftSect'>
           <ProfileSummary className='profileSummary' details={details}/>
           <div className="profileNav">
@@ -73,9 +73,9 @@ export default function ProfilePage(props) {
             <Route path={`${match.path}/polls`} render={renderMyPolls}/>
           </Switch>
         </div>
-      </Responsive>
+      </Reaktionsschnelle>
 
-      <Responsive screens={['S']}>
+      <Reaktionsschnelle screens={['S']}>
         <div className="mobile">
           <ProfileSummary className='profileSummary' details={details}/>
           <div className="profileNav">
@@ -86,7 +86,7 @@ export default function ProfilePage(props) {
             <Route path={`${match.path}/polls`} render={renderMyPolls}/>
           </Switch>
         </div>
-      </Responsive>      
+      </Reaktionsschnelle>      
     </div>
   )
 }

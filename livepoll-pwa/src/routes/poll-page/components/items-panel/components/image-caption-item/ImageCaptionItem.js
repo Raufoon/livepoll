@@ -1,5 +1,5 @@
 import React from 'react'
-import Responsive from '../../../../../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import VoteLabel from '../../../../../../components/vote-label/VoteLabel'
 import ProgBar from '../../../../../../components/prog-bar/ProgBar'
 import './style.css'
@@ -23,7 +23,7 @@ export default function ImageCaptionItem(props) {
   )
 
   return <>
-    <Responsive screens={['M', 'L']}>
+    <Reaktionsschnelle screens={['M', 'L']}>
       <div className='ImageCaptionItem'>
         {topRow}
         <div style={{textAlign: 'center', backgroundColor: '#1e1e1e', padding: 5}}>
@@ -31,14 +31,14 @@ export default function ImageCaptionItem(props) {
         </div>
         {voteLabel}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
     
-    <Responsive screens={['S']}>
+    <Reaktionsschnelle screens={['S']}>
       <div className='ImageCaptionItem mobile'>
         {topRow}
         <img className='image mobile' src={imgUrl} alt="item"/>
         {voteLabel}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
   </>
 }

@@ -4,7 +4,7 @@ import IconButton from '../../components/icon-button/IconButton'
 import googleIcon from './images/google-icon.png'
 import backgroundImage from './images/background.png'
 import fancyImage from './images/fancy-image.png'
-import Responsive from '../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import './style.css'
 
 function WelcomePage () {
@@ -13,20 +13,20 @@ function WelcomePage () {
       <header>
         <label className="appLabel">Livepoll</label>
 
-        <Responsive minWidth={970}>
+        <Reaktionsschnelle minWidth={970}>
           <nav> 
             <a className="navBtn" href="#">Features</a>
             <a className="navBtn" href="#">Downloads</a>
             <a className="navBtn" href="#">FAQ</a>
             <a className="navBtn" href="#">About us</a> 
           </nav>
-        </Responsive>
+        </Reaktionsschnelle>
 
-        <Responsive maxWidth={971}>
+        <Reaktionsschnelle maxWidth={971}>
           <nav> 
             &nbsp;
           </nav>
-        </Responsive>
+        </Reaktionsschnelle>
 
         <IconButton 
             className="googleSigninBtn"

@@ -8,7 +8,7 @@ import IconButton from '../../../../components/icon-button/IconButton'
 import createIcon from './images/create-item.png'
 import deleteIcon from './images/delete.png'
 import usePollDetails from '../../hooks/usePollDetails'
-import Responsive from '../../../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import './style.css'
 import { actionDeletePoll } from '../../../../state-management/actions/poll-actions'
 import DecisionModal from '../../../../components/decision-modal/DecisionModal'
@@ -62,7 +62,7 @@ export default function PollHeader(props) {
     <div className='PollHeader'>
       <label className='pollTitle'>{title}</label>
 
-      <Responsive screens={['M', 'L']}>
+      <Reaktionsschnelle screens={['M', 'L']}>
         <div className="pollDesc">
           <span>Created by</span>&nbsp;
           <UserBadge className='pollCreator' name={name} avatar={avatar}/>
@@ -91,15 +91,15 @@ export default function PollHeader(props) {
               Create Item
             </IconButton>}
         </div>
-      </Responsive>
+      </Reaktionsschnelle>
 
-      <Responsive screens={['S']}>
+      <Reaktionsschnelle screens={['S']}>
         {shouldAllowAddItem && <IconButton
           className='addItemBtnRound'
           iconUrl={createIcon} 
           iconClass='addItemBtnIcon' 
           onClick={openItemFormModal}/>}
-      </Responsive>
+      </Reaktionsschnelle>
       
       {
         shouldAllowAddItem && <Modal isOpen={showItemForm} onClose={closeItemFormModal}>

@@ -1,7 +1,7 @@
 import React from 'react'
 import useHomeData from './hooks/useHomeData'
 import { Switch, Route } from 'react-router-dom'
-import Responsive from '../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import PollCard from '../../components/poll-card/PollCard'
 import SpecialPollCard from '../../components/special-poll-card/SpecialPollCard'
 import './style.css'
@@ -81,33 +81,33 @@ export default function HomePage () {
 
   return (
     <>
-    <Responsive minWidth={1400}>
+    <Reaktionsschnelle minWidth={1400}>
       <div className='Home M'>
         {trendingSection}
         {recentSection}
         {popularSection}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
 
-    <Responsive minWidth={1080} maxWidth={1399}>
+    <Reaktionsschnelle minWidth={1080} maxWidth={1399}>
       <div className='Home S'>
         {trendingSection}
         {recentSection}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
 
-    <Responsive minWidth={870} maxWidth={1079}>
+    <Reaktionsschnelle minWidth={870} maxWidth={1079}>
       <div className='Home XS'>
         {trendingSection}
         {recentSection}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
 
-    <Responsive minWidth={1} maxWidth={869}>
+    <Reaktionsschnelle minWidth={1} maxWidth={869}>
       <div className='Home XXS'>
         {routedSections}
       </div>
-    </Responsive>
+    </Reaktionsschnelle>
       
     </>
   )

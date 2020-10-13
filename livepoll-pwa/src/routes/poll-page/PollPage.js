@@ -8,7 +8,7 @@ import PollHeader from './components/poll-header/PollHeader'
 import useModal from '../../components/modal/hooks/useModal'
 import Modal from '../../components/modal/Modal'
 import { actionFetchVoterList } from '../../state-management/actions/poll-actions'
-import Responsive from '../../components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import useHomeData from '../home-page/hooks/useHomeData'
 import PollCard from '../../components/poll-card/PollCard'
 import './style.css'
@@ -61,7 +61,7 @@ export default function PollPage () {
   
   return (
     <div className='PollPage'>
-      <Responsive minWidth={1450}>
+      <Reaktionsschnelle minWidth={1450}>
         <div className='poll'>
           <div className="inner">
             {pollHeader}
@@ -75,14 +75,14 @@ export default function PollPage () {
             {similarPolls}
           </div>
         </div>
-      </Responsive>
+      </Reaktionsschnelle>
 
-      <Responsive maxWidth={1449}>
+      <Reaktionsschnelle maxWidth={1449}>
         <div className="poll mobile">
           {pollHeader}
-          <Responsive screens={['S']}>
+          <Reaktionsschnelle screens={['S']}>
             <NavHeader/>
-          </Responsive>
+          </Reaktionsschnelle>
           <Suspense fallback="Loading items...">
             <Switch>
               <Route exact path={`${match.path}/more`} render={() => "more"}/>
@@ -91,7 +91,7 @@ export default function PollPage () {
             </Switch>
           </Suspense>
         </div>
-      </Responsive>
+      </Reaktionsschnelle>
 
       <Modal isOpen={votersVisible} onClose={hideVoterList}>
         {itemIdForVoterList && <VoterList pollId={id} itemId={itemIdForVoterList}/>}

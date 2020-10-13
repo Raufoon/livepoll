@@ -4,7 +4,7 @@ import useFirebaseAuth from './hooks/useFirebaseAuth'
 import {Switch, Route} from 'react-router-dom'
 import AppSidebar from './components/app-sidebar/AppSidebar'
 import AppHeader from './components/app-header/AppHeader'
-import Responsive from './components/responsive/Responsive'
+import Reaktionsschnelle from 'reaktionsschnelle'
 import NavHeader from './components/nav-header/NavHeader'
 import './style.css'
 
@@ -22,12 +22,12 @@ function App() {
 
   if (!authUser.isLoggedIn) return <>
     <Suspense fallback="Loading...">
-      <Responsive screens={['M', 'L']}>
+      <Reaktionsschnelle screens={['M', 'L']}>
         <WelcomePage/>
-      </Responsive>
-      <Responsive screens={['S']}>
+      </Reaktionsschnelle>
+      <Reaktionsschnelle screens={['S']}>
         <MobileWelcomePage/>
-      </Responsive>
+      </Reaktionsschnelle>
     </Suspense>
   </>
 
@@ -42,15 +42,15 @@ function App() {
   return (
     <AuthContext.Provider value={authUser}>
       <div className='App'>        
-        <Responsive screens={['M', 'L']}>
+        <Reaktionsschnelle screens={['M', 'L']}>
           <AppHeader className='appHeader withSidebar'/>
           <AppSidebar className="sidebar"/>
           <main className='withSidebar'>
             {routedPages}
           </main>
-        </Responsive>
+        </Reaktionsschnelle>
         
-        <Responsive screens={['S']}>
+        <Reaktionsschnelle screens={['S']}>
           <AppHeader className='appHeader'/>
           <NavHeader className="navHeader"/>
           <main>
@@ -59,7 +59,7 @@ function App() {
           <Suspense fallback="">
             <PollCreateFloatingButton/>
           </Suspense>
-        </Responsive>
+        </Reaktionsschnelle>
       </div>
     </AuthContext.Provider>
   );
