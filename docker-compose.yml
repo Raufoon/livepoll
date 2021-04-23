@@ -1,0 +1,11 @@
+version: '2'
+
+services:
+  pwa:
+    image: raufoon/livepoll-pwa:1.0.0
+    ports:
+      - '5000:80'
+  server:
+    image: raufoon/livepoll-graphql-server:1.0.0
+    ports:
+      - '9000:90'
