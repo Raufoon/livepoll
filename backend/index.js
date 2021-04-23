@@ -1,15 +1,13 @@
-const functions = require('firebase-functions')
 const express = require('express')
 const cors = require('cors')({ origin: true })
-const admin = require('firebase-admin')
-const db = require('./realtimeDb')
+const firebase = require('firebase')
 const { types, query, mutation } = require('./graphql')
 const graphqlHTTP = require('express-graphql')
 const { GraphQLSchema } = require('graphql')
-const fileUpload = require('./routers/file-upload')
+// const fileUpload = require('./routers/file-upload')
 const bodyParser = require('body-parser')
 
-admin.initializeApp({
+firebase.initializeApp({
   apiKey: 'AIzaSyBQSHVAGfc3pCsx6VBM-I0sMiT0r17Z5Ek',
   authDomain: 'lllivepolll.firebaseapp.com',
   databaseURL: 'https://lllivepolll.firebaseio.com',
@@ -18,31 +16,11 @@ admin.initializeApp({
   messagingSenderId: '1045079837725',
 })
 
-/*
-if (process.env.NODE_ENV === 'production') {
-} else {
-  const serviceAccount = require('./lllivepolll-411ae6bac230.json')
-  admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    databaseURL: 'https://lllivepolll.firebaseio.com',
-  })
-}
-*/
-
-exports.setUserProfile = functions.auth.user().onCreate((newUser) => {
-  const { uid, displayName, photoURL } = newUser
-  db.write(`/users/${uid}`, {
-    name: displayName,
-    id: uid,
-    avatar: photoURL,
-  })
-})
-
 const app = express()
 
 app.use(cors)
 
-app.use('/upload', fileUpload)
+// app.use('/upload', fileUpload)
 
 app.use(
   '/graphql',
@@ -64,7 +42,6 @@ app.use(
 
 app.use(bodyParser.urlencoded({ extended: true }))
 
-app.listen(9000, () => console.log('GraphQL server started on port 9000'))
-
-// For firebase cloud function
-//exports.server = functions.https.onRequest(app)
+app.listen(9000, () =>
+  console.log('GraphQL server started on port http://localhost:9000')
+)

@@ -1,8 +1,8 @@
-const admin = require('firebase-admin')
+const admin = require('firebase')
 const db = require('../../../../realtimeDb')
 
 module.exports = async function (_, args, context) {
-  const {pollId} = args
+  const { pollId } = args
 
   try {
     const clientId = await context.getAuthUserId()
@@ -17,11 +17,11 @@ module.exports = async function (_, args, context) {
     const itemContentType = await db.read(`polls/${pollId}/itemContentType`)
     const shouldShowVoters = await db.read(`polls/${pollId}/shouldShowVoters`)
     await db.remove(`polls/${pollId}`)
-    
+
     // get all the item ids of this poll
     const itemIds = await db.readKeysAsList(`edges/poll_item/${pollId}`)
     await db.remove(`edges/poll_item/${pollId}`)
-    
+
     // for all item ids
     for (let i = 0; i < itemIds.length; i++) {
       let itemId = itemIds[i]
@@ -30,15 +30,19 @@ module.exports = async function (_, args, context) {
       if (shouldShowVoters) {
         const voterIds = await db.readAsList(`edges/item_voters/${itemId}`)
         await db.remove(`edges/item_voters/${itemId}`)
-        
+
         // delete edge between the voters and the poll
-        for(let j = 0; j < voterIds.length; j++) {
+        for (let j = 0; j < voterIds.length; j++) {
           let voterId = voterIds[j]
           await db.remove(`edges/voter_poll_item/${voterId}/${pollId}`)
         }
       }
 
-      if (itemContentType === 'AVATAR_TEXT' || itemContentType === 'IMAGE_CAPTION' || itemContentType === 'IMAGE_ONLY') {
+      if (
+        itemContentType === 'AVATAR_TEXT' ||
+        itemContentType === 'IMAGE_CAPTION' ||
+        itemContentType === 'IMAGE_ONLY'
+      ) {
         // delete the images for items
         const imageUrl = await db.read(`items/${itemId}/imgUrl`)
         admin.storage().bucket().delete(`item-images/${itemId}`)
@@ -46,13 +50,11 @@ module.exports = async function (_, args, context) {
 
       await db.remove(`items/${itemId}`)
     }
-    
+
     // delete the edge 'voter-poll-item'
-  }
-  catch(err) {
+  } catch (err) {
     return Promise.reject(false)
-  }
-  finally {
+  } finally {
     return Promise.resolve(true)
   }
 }

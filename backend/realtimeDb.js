@@ -1,24 +1,24 @@
-const functions = require('firebase-functions')
-const admin = require('firebase-admin')
+const admin = require('firebase')
 
 exports.write = (path, object) => {
   return new Promise((resolve, reject) => {
-    admin.database().ref(`/${path}`)
+    admin
+      .database()
+      .ref(`/${path}`)
       .set(object, (err) => {
         if (err) {
           reject(err)
-        }
-        else {
+        } else {
           resolve(object)
         }
       })
   })
 }
 
-exports.read = (path, options={}) => {
+exports.read = (path, options = {}) => {
   let ref = admin.database().ref(`/${path}`)
 
-  const {sortByValue, howMany} = options
+  const { sortByValue, howMany } = options
 
   if (sortByValue) {
     ref = ref.orderByValue()
@@ -28,27 +28,25 @@ exports.read = (path, options={}) => {
     ref = ref.limitToLast(howMany)
   }
 
-  return ref
-    .once('value')
-    .then(snap => snap.val())
+  return ref.once('value').then((snap) => snap.val())
 }
 
-exports.readAsList = (path, options={}) => {
+exports.readAsList = (path, options = {}) => {
   let ref = admin.database().ref(`/${path}`)
 
   if (options.sortByValue) {
     ref = ref.orderByValue()
   }
 
-  return ref.once('value')
-    .then(snap => 
-      Object.values(snap.val() || {}))
+  return ref.once('value').then((snap) => Object.values(snap.val() || {}))
 }
 
 exports.readKeysAsList = (path) => {
-  return admin.database().ref(`/${path}`)
+  return admin
+    .database()
+    .ref(`/${path}`)
     .once('value')
-    .then(snap => {
+    .then((snap) => {
       return Object.keys(snap.val() || {})
     })
 }
@@ -59,9 +57,11 @@ exports.remove = (path) => {
 
 exports.getNewID = () => admin.database().ref().push().key
 
-exports.transaction = function(path, doTransaction) {
-  return admin.database().ref(path)
-    .transaction(function(data) {
+exports.transaction = function (path, doTransaction) {
+  return admin
+    .database()
+    .ref(path)
+    .transaction(function (data) {
       if (data === undefined) {
         return Promise.reject(`No data at ${path}`)
       }
